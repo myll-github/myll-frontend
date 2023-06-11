@@ -1,11 +1,11 @@
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
+  extends: ["next", "next/core-web-vitals", "turbo", "prettier"],
   rules: {
     "@next/next/no-html-link-for-pages": "off",
   },
-  parserOptions: {
+  parserOptions: {  
     babelOptions: {
-      presets: [require.resolve("next/babel")],
+      presets: [require.resolve('next/babel')],
     },
   },
 };
