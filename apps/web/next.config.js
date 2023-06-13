@@ -1,4 +1,11 @@
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
-};
+  transpilePackages: ['ui'],
+  sassOptions: {
+    fiber: false,
+  },
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
+}
