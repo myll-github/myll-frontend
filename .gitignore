@@ -5,6 +5,10 @@ node_modules
 .pnp
 .pnp.js
 
+.idea
+.vscode
+.DS_Store
+
 # testing
 coverage
 
