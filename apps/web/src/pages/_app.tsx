@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { ZustandContextProvider } from '@/stores'
 import '@/styles/index.scss'
 
-import { FC } from 'react'
+import { Hydrate, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import { FC, useState } from 'react'
+
+import { ZustandContextProvider } from '@/stores'
 
 interface Props {
   Component: FC
@@ -11,10 +13,16 @@ interface Props {
 }
 
 const App = ({ Component, pageProps }: Props) => {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
-    <ZustandContextProvider>
-      <Component {...pageProps} />
-    </ZustandContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ZustandContextProvider>
+          <Component {...pageProps} />
+        </ZustandContextProvider>
+      </Hydrate>
+    </QueryClientProvider>
   )
 }
 

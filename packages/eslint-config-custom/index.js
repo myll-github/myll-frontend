@@ -1,18 +1,9 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'next',
-    'plugin:jsx-a11y/strict',
-    'turbo',
-    'prettier',
-    'airbnb',
-    'plugin:prettier/recommended',
-  ],
-  plugins: ['jsx-a11y', 'prettier', 'simple-import-sort', '@typescript-eslint', 'import'],
+  extends: ['next', 'plugin:jsx-a11y/strict', 'turbo', 'prettier', 'airbnb', 'plugin:prettier/recommended'],
+  plugins: ['jsx-a11y', 'prettier', 'simple-import-sort', 'import'],
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
     '@next/next/no-html-link-for-pages': 'off',
     'import/prefer-default-export': 'warn',
     'prettier/prettier': 0,
