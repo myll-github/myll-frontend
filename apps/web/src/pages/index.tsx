@@ -8,7 +8,7 @@ const Styled = styled.div`
   background-color: red;
 `
 
-export default function Page() {
+const Page = () => {
   return (
     <>
       <Header text="Web" />
@@ -18,3 +18,5 @@ export default function Page() {
     </>
   )
 }
+
+export default Page

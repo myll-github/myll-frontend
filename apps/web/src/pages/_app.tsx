@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-// eslint-disable-next-line import/no-unresolved
+import { ZustandContextProvider } from '@/stores'
 import '@/styles/index.scss'
 
 import { FC } from 'react'
@@ -11,7 +11,11 @@ interface Props {
 }
 
 const App = ({ Component, pageProps }: Props) => {
-  return <Component {...pageProps} />
+  return (
+    <ZustandContextProvider>
+      <Component {...pageProps} />
+    </ZustandContextProvider>
+  )
 }
 
 export default App
