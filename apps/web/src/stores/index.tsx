@@ -1,6 +1,8 @@
+import { Context, createContext, useContext } from 'react'
 import createProductSlice, { ProductSlice } from './example1'
 import createCartSlice, { CartSlice } from './example2'
-import { Context, createContext, useContext } from 'react'
+
+import _ from 'lodash'
 
 const ZustandContext = createContext(null)
 
