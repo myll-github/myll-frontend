@@ -1,6 +1,6 @@
 import { StateCreator, create } from 'zustand'
 
-import { Product } from '@/common/models/interfaces'
+import { Product } from '@/common/interfaces'
 
 export interface ProductSlice {
   products: Product[]
