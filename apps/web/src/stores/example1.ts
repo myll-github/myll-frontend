@@ -3,8 +3,9 @@ import { create, StateCreator } from 'zustand'
 import { Product } from '@/common/interfaces'
 
 export interface ProductSlice {
+  setCount(arg0: number): void;
   products: Product[]
-  count: Number
+  count: number
   fetchProducts: () => void
 }
 

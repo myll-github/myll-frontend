@@ -5,8 +5,6 @@ import '@/styles/index.scss'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FC, useState } from 'react'
 
-import { ZustandContextProvider } from '@/stores'
-
 interface Props {
   Component: FC
   pageProps: Record<string, unknown>
@@ -18,9 +16,7 @@ const App = ({ Component, pageProps }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ZustandContextProvider>
           <Component {...pageProps} />
-        </ZustandContextProvider>
       </Hydrate>
     </QueryClientProvider>
   )

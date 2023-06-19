@@ -4,6 +4,7 @@ import { Product } from '@/common/interfaces'
 
 export interface CartSlice {
   cart: Product[]
+  count: number
   addToCart: (product: Product) => void
   removeFromCart: (productId: number) => void
   showCart: boolean
@@ -13,6 +14,11 @@ export interface CartSlice {
 const CartStore = create<CartSlice>()((set, get) => ({
   cart: [],
   showCart: false,
+  count: 1,
+
+  setCount: () => {
+    set({ count: get().count + 1 })
+  },
 
   addToCart: (product: Product) => {
     const { cart } = get()
