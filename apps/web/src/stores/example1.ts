@@ -1,4 +1,4 @@
-import { StateCreator, create } from 'zustand'
+import { create, StateCreator } from 'zustand'
 
 import { Product } from '@/common/interfaces'
 
@@ -8,7 +8,7 @@ export interface ProductSlice {
   fetchProducts: () => void
 }
 
-const createProductSlice = create<ProductSlice>()((set) => ({
+const ProductStore = create<ProductSlice>()((set) => ({
   products: [],
   count: 0,
 
@@ -21,4 +21,4 @@ const createProductSlice = create<ProductSlice>()((set) => ({
   setCount: (a: Number) => set({ count: a }),
 }))
 
-export default createProductSlice
+export default ProductStore

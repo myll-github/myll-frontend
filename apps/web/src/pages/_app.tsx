@@ -2,7 +2,7 @@
 
 import '@/styles/index.scss'
 
-import { Hydrate, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FC, useState } from 'react'
 
 import { ZustandContextProvider } from '@/stores'

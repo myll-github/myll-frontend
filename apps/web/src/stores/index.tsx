@@ -1,14 +1,15 @@
-import { Context, createContext, useContext } from 'react'
-import createProductSlice, { ProductSlice } from './example1'
-import createCartSlice, { CartSlice } from './example2'
-
+/* eslint-disable react/jsx-no-constructed-context-values */
 import _ from 'lodash'
+import { createContext, ReactNode, useContext } from 'react'
+
+import ProductStore from './example1'
+import CartStore from './example2'
 
 const ZustandContext = createContext(null)
 
-export const ZustandContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const ZustandContextProvider = ({ children }: { children: ReactNode }) => {
   return (
-    <ZustandContext.Provider value={{ products: createProductSlice(), carts: createCartSlice() }}>
+    <ZustandContext.Provider value={{ products: ProductStore(), carts: CartStore() }}>
       {children}
     </ZustandContext.Provider>
   )

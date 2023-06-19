@@ -10,7 +10,7 @@ export interface CartSlice {
   toggleCart: () => void
 }
 
-const createCartSlice = create<CartSlice>()((set, get) => ({
+const CartStore = create<CartSlice>()((set, get) => ({
   cart: [],
   showCart: false,
 
@@ -33,4 +33,4 @@ const createCartSlice = create<CartSlice>()((set, get) => ({
   },
 }))
 
-export default createCartSlice
+export default CartStore
