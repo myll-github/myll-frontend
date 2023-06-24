@@ -5,5 +5,6 @@ module.exports = {
   rules: {
     '@tanstack/query/exhaustive-deps': 'error',
     '@tanstack/query/prefer-query-object-syntax': 'error',
+    'import/prefer-default-export': 'off',
   },
 }
