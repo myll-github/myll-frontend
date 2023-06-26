@@ -7,13 +7,6 @@ const withPWA = require('next-pwa')({
   disable: !prod,
 })
 
-const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self';
-  style-src 'self';
-  font-src 'self';
-`
-
 module.exports = withPWA({
   reactStrictMode: true,
   transpilePackages: ['ui'],
@@ -37,11 +30,11 @@ module.exports = withPWA({
             clickjacking and other code injection attacks. 
             Content Security Policy (CSP) can specify allowed origins for content including scripts, stylesheets, 
             images, fonts, objects, media (audio, video), iframes, and more.
-          */
           {
             key: 'Content-Security-Policy',
             value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
-          },
+          }
+          */
 
           /*
              it provide protection for older web browsers that don't support CSP.

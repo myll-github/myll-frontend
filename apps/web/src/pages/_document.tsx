@@ -1,16 +1,36 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
+import { generateCSP, generateNonce } from 'shared'
 
-class _document extends Document {
+interface DocumentProps {
+  nonce: string
+}
+
+class _document extends Document<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx)
 
-    return initialProps
+    const nonce = generateNonce()
+    const additionalProps = { nonce }
+    console.log(ctx)
+
+    return { ...initialProps, ...additionalProps }
   }
 
   render() {
+    const { nonce } = this.props
+
     return (
       <Html>
-        <Head />
+        <Head>
+          <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} />
+
+          <script
+            nonce={nonce}
+            dangerouslySetInnerHTML={{
+              __html: `window.__webpack_nonce__ = "${nonce}"`,
+            }}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
