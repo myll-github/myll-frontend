@@ -19,12 +19,8 @@ export const Login: React.FC = () => {
           <Button
             onClick={() =>
               router.replace(
-                'https://kauth.kakao.com/oauth/authorize?client_id=' +
-                  'aa6a446ce59ce13350383bd1eee6eb4d' +
-                  '&redirect_uri=' +
-                  'https://localhost:3000/login' +
-                  '&response_type=code&' +
-                  'scope=profile_nickname age_range',
+                `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
+                  `scope=profile_nickname age_range`,
               )
             }
           >
