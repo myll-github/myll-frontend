@@ -1,5 +1,7 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
+import { Children, cloneElement } from 'react'
 import { generateCSP, generateNonce } from 'shared'
+import { ServerStyleSheet } from 'styled-components'
 
 interface DocumentProps {
   nonce: string
@@ -9,11 +11,18 @@ class _document extends Document<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx)
 
+    /* TO-DO // 
+      현재 nonce가 styled-components에 적용되는 방식을 
+      찾지를 못해서 nonce를 사용하고 있진 않다  
+    */
     const nonce = generateNonce()
-    const additionalProps = { nonce }
-    console.log(ctx)
 
-    return { ...initialProps, ...additionalProps }
+    const additionalProps = { nonce }
+
+    return {
+      ...initialProps,
+      ...additionalProps,
+    }
   }
 
   render() {
@@ -23,13 +32,6 @@ class _document extends Document<DocumentProps> {
       <Html>
         <Head>
           <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} />
-
-          <script
-            nonce={nonce}
-            dangerouslySetInnerHTML={{
-              __html: `window.__webpack_nonce__ = "${nonce}"`,
-            }}
-          />
         </Head>
         <body>
           <Main />
