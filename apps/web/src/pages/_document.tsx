@@ -1,16 +1,38 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
+import { Children, cloneElement } from 'react'
+import { generateCSP, generateNonce } from 'shared'
+import { ServerStyleSheet } from 'styled-components'
 
-class _document extends Document {
+interface DocumentProps {
+  nonce: string
+}
+
+class _document extends Document<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx)
 
-    return initialProps
+    /* TO-DO // 
+      현재 nonce가 styled-components에 적용되는 방식을 
+      찾지를 못해서 nonce를 사용하고 있진 않다  
+    */
+    const nonce = generateNonce()
+
+    const additionalProps = { nonce }
+
+    return {
+      ...initialProps,
+      ...additionalProps,
+    }
   }
 
   render() {
+    const { nonce } = this.props
+
     return (
       <Html>
-        <Head />
+        <Head>
+          <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} />
+        </Head>
         <body>
           <Main />
           <NextScript />

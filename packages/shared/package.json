@@ -30,6 +30,7 @@
     "jest-environment-jsdom": "29.5.0"
   },
   "dependencies": {
-    "styled-components": "6.0.0-rc.3"
+    "styled-components": "6.0.0-rc.3",
+    "crypto": "^1.0.1"
   }
 }
