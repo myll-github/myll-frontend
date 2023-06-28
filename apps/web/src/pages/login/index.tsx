@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Container, Label, Layout, Title } from './style'
 
 export const Login: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <Container>
@@ -19,7 +19,7 @@ export const Login: React.FC = () => {
           <Button
             onClick={() =>
               router.replace(
-                `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
+                `http://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
                   `scope=profile_nickname age_range`,
               )
             }
