@@ -41,6 +41,9 @@ importers:
       antd:
         specifier: ^5.6.2
         version: 5.6.2(react-dom@18.2.0)(react@18.2.0)
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -4175,6 +4178,11 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /ejs@3.1.9:
     resolution: {integrity: sha512-rC+QVNMJWv+MtPgkt0y+0rVEIdbtxVADApW9JXrUVlzHetgcyczP/E7DJmWJ4fJCZF2cPcBk0laWO9ZHMG3DmQ==}
