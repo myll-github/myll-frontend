@@ -21,8 +21,6 @@ const generateCSP = ({ nonce }: generateCSPProps = {}) => {
   // Set the default policy for all content types to 'none' (no content can be loaded)
   add('default-src', `'none'`)
 
-  add('font-src', `'https://*'`)
-
   // Only allow scripts from the same origin
   add('script-src', `'self'`)
   // Allow 'eval' function in development mode
