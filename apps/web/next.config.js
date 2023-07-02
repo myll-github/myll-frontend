@@ -6,6 +6,7 @@ const withPWA = require('next-pwa')({
   dest: './public',
   disable: !prod,
 })
+require('dotenv').config()
 
 const CSP = `
 default-src 'none'; 
@@ -24,6 +25,10 @@ frame-ancestors 'none';
 object-src 'none';
 `
 module.exports = withPWA({
+  env: {
+    KAKAO_CLIENT_KEY: process.env.KAKAO_CLIENT_KEY,
+    KAKAO_LOGIN_REDIRECT_URL: process.env.KAKAO_LOGIN_REDIRECT_URL,
+  },
   reactStrictMode: true,
   transpilePackages: ['ui'],
 
