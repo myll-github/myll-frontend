@@ -14,7 +14,7 @@
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "^1.10.7"
   },
   "packageManager": "pnpm@7.15.0",
   "name": "myll-frontend"

@@ -1,11 +1,11 @@
-import { Button } from 'antd'
+import { Button } from 'myll-ui'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { Container, Label, Layout, Title } from './style'
 
 export const Login: React.FC = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <Container>
