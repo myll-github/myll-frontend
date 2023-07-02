@@ -7,6 +7,7 @@ interface DocumentProps {
   nonce: string
 }
 
+/* <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} /> */
 class _document extends Document<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx)
@@ -31,7 +32,11 @@ class _document extends Document<DocumentProps> {
     return (
       <Html>
         <Head>
-          <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} />
+          <link
+            rel="stylesheet"
+            as="style"
+            href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.8/static/pretendard.css"
+          />
         </Head>
         <body>
           <Main />

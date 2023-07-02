@@ -1,3 +1,4 @@
+import { TYPOGRAPHY } from 'shared'
 import styled from 'styled-components'
 import { Button, Header } from 'ui'
 
@@ -6,6 +7,7 @@ const Styled = styled.div`
   height: 500px;
 
   background-color: red;
+  ${TYPOGRAPHY.HEADER.H1}
 `
 
 const Page = () => {
@@ -14,7 +16,7 @@ const Page = () => {
       <Header text="Web" />
       123
       <Button />
-      <Styled />
+      <Styled>rasdasdsads</Styled>
     </>
   )
 }

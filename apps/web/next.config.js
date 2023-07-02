@@ -7,6 +7,22 @@ const withPWA = require('next-pwa')({
   disable: !prod,
 })
 
+const CSP = `
+default-src 'none'; 
+font-src 'self' cdnjs.cloudflare.com; 
+script-src 'self' 'unsafe-eval'; 
+script-src-elem 'self'; 
+connect-src 'self'; 
+style-src 'self' 'unsafe-inline'; 
+style-src-elem 'self' 'unsafe-inline' cdnjs.cloudflare.com;
+img-src 'self'; 
+manifest-src 'self'; 
+base-uri 'self'; 
+form-action 'self';
+frame-src 'self'; 
+frame-ancestors 'none';
+object-src 'none';
+`
 module.exports = withPWA({
   reactStrictMode: true,
   transpilePackages: ['ui'],
@@ -29,12 +45,14 @@ module.exports = withPWA({
             This header helps prevent cross-site scripting (XSS), 
             clickjacking and other code injection attacks. 
             Content Security Policy (CSP) can specify allowed origins for content including scripts, stylesheets, 
-            images, fonts, objects, media (audio, video), iframes, and more.
+            images, fonts, objects, media (audio, video), iframes, and more
+          */
           {
             key: 'Content-Security-Policy',
-            value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
-          }
-          */
+            value: CSP.replace(/\n/g, '')
+              .replace(/\s{2,}/g, ' ')
+              .trim(),
+          },
 
           /*
              it provide protection for older web browsers that don't support CSP.
