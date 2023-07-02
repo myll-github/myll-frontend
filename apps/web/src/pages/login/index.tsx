@@ -17,12 +17,13 @@ export const Login: React.FC = () => {
         <Label>
           SNS 계정 회원가입
           <Button
-            onClick={() =>
-              router.replace(
-                `http://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
+            onClick={() => {
+              const response = encodeURI(
+                `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
                   `scope=profile_nickname age_range`,
               )
-            }
+              router.replace(response)
+            }}
           >
             카카오 로그인
           </Button>
