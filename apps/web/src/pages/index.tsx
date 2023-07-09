@@ -1,6 +1,6 @@
+import { Button, Header } from 'myll-ui'
 import { TYPOGRAPHY } from 'shared'
 import styled from 'styled-components'
-import { Button, Header } from 'ui'
 
 const Styled = styled.div`
   width: 500px;

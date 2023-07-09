@@ -30,7 +30,7 @@ module.exports = withPWA({
     KAKAO_LOGIN_REDIRECT_URL: process.env.KAKAO_LOGIN_REDIRECT_URL,
   },
   reactStrictMode: true,
-  transpilePackages: ['ui'],
+  transpilePackages: ['myll-ui'],
 
   sassOptions: {
     fiber: false,
