@@ -1,10 +1,12 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
@@ -17,5 +19,9 @@
     "turbo": "^1.10.7"
   },
   "packageManager": "pnpm@7.15.0",
-  "name": "myll-frontend"
+  "name": "myll-frontend",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx,md}": "prettier --write"
+  }
 }
