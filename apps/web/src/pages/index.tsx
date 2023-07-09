@@ -1,13 +1,13 @@
-import { TYPOGRAPHY } from 'shared'
 import styled from 'styled-components'
-import { Button, Header } from 'ui'
+
+import Button from '../components/Button'
+import { Header } from '../components/Header'
 
 const Styled = styled.div`
   width: 500px;
   height: 500px;
 
   background-color: red;
-  ${TYPOGRAPHY.HEADER.H1}
 `
 
 const Page = () => {

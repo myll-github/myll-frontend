@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import '@/styles/index.scss'
+import '../styles/index.scss'
 
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'

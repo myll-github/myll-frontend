@@ -1,3 +1,3 @@
 import { Button } from 'antd'
 
-export default Button
+export default Button;

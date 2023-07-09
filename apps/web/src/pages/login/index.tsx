@@ -1,7 +1,8 @@
-import { Button } from 'myll-ui'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import React from 'react'
 
+import Button from '../../components/Button'
 import { Container, Label, Layout, Title } from './style'
 
 export const Login: React.FC = () => {

@@ -18,4 +18,11 @@ const GRAY = {
   WHITE: 'var(--gray-white, #FFF)',
 }
 
-export { GRAY,PRIMARY }
+const POINT = {
+  ORANGE1: 'var(--point-orange-1, #FF8B37);',
+  ORANGE2: 'var(--point-orange-2, #FFF3C5);',
+  GREEN1: 'var(--point-green-1, #009B06);',
+  GREEN2: 'var(--point-green-2, #DDFFE6);',
+}
+
+export { GRAY, PRIMARY }

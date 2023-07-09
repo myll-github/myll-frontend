@@ -1,6 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import { Children, cloneElement } from 'react'
-import { generateCSP, generateNonce } from 'shared'
 import { ServerStyleSheet } from 'styled-components'
 
 interface DocumentProps {
@@ -16,13 +15,13 @@ class _document extends Document<DocumentProps> {
       현재 nonce가 styled-components에 적용되는 방식을 
       찾지를 못해서 nonce를 사용하고 있진 않다  
     */
-    const nonce = generateNonce()
+    // const nonce = generateNonce()
 
-    const additionalProps = { nonce }
+    // const additionalProps = { nonce }
 
     return {
       ...initialProps,
-      ...additionalProps,
+      // ...additionalProps,
     }
   }
 
