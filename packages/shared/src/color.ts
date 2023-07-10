@@ -18,4 +18,19 @@ const GRAY = {
   WHITE: 'var(--gray-white, #FFF)',
 }
 
-export { GRAY,PRIMARY }
+const POINT = {
+  ORANGE1: 'var(--point-orange-1, #FF8B37);',
+  ORANGE2: 'var(--point-orange-2, #FFF3C5);',
+  GREEN1: 'var(--point-green-1, #009B06);',
+  GREEN2: 'var(--point-green-2, #DDFFE6);',
+  PINK1: 'var(--point-green-2, #FF60AB);',
+  PINK2: 'var(--point-green-2, #FFEEF6);',
+  NAVY1: 'var(--point-green-2, #0F3E9D);',
+  NAVY2: 'var(--point-green-2, #E4EFFF);',
+}
+
+const STATE = {
+  ERROR: 'var(--state-error, #FF3141)',
+}
+
+export { GRAY, POINT, PRIMARY, STATE }
