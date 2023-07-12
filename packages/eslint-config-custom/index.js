@@ -10,10 +10,7 @@ module.exports = {
     'lines-between-class-members': 0,
     'class-methods-use-this': 0,
 
-    'import/no-extraneous-dependencies': [
-      'error',
-      { devDependencies: false, optionalDependencies: false, peerDependencies: false },
-    ],
+    'import/no-extraneous-dependencies': 0,
 
     'react/function-component-definition': [
       2,

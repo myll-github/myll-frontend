@@ -10,9 +10,7 @@ const tsConfig = {
 const aliasPathObj = {}
 
 Object.entries(tsConfig.compilerOptions.paths).forEach(([key, path]) => {
-  aliasPathObj[key.split('/*')[0] + '/' + '(.*)$'] = `<rootDir>/${String(
-    path[0],
-  ).substring(0, path[0].length - 2)}/$1`
+  aliasPathObj[key.split('/*')[0] + '/' + '(.*)$'] = `<rootDir>/${String(path[0]).substring(0, path[0].length - 2)}/$1`
 })
 
 module.exports = {
@@ -30,6 +28,7 @@ module.exports = {
     '!<rootDir>/*.config.js',
     '!<rootDir>/coverage/**',
   ],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules
@@ -49,9 +48,5 @@ module.exports = {
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
     '^.+\\.(js|[tj]sx|ts)?$': ['ts-jest', { isolatedModules: true }],
   },
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
-  ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/', '/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
 }
