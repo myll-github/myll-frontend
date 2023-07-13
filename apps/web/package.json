@@ -43,6 +43,7 @@
     "sass": "^1.63.3",
     "ts-jest": "29.0.5",
     "tsconfig": "workspace:*",
+    "jest-config": "workspace:*",
     "typescript": "^4.5.3",
     "tailwind-config": "workspace:*"
   },

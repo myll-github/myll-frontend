@@ -24,6 +24,7 @@
     "react": "^17.0.2",
     "ts-jest": "29.0.5",
     "tsconfig": "workspace:*",
+    "jest-config": "workspace:*",
     "typescript": "^4.5.2"
   },
   "resolutions": {

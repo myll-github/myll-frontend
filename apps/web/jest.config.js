@@ -4,7 +4,7 @@ const createJestConfig = nextJest({
   dir: './src',
 })
 
-const jestConfig = require('../../jest.config.js')
+const jestConfig = require('jest-config/jest.config.js')
 
 const customJestConfig = {
   ...jestConfig,
