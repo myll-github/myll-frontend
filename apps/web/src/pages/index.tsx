@@ -14,6 +14,7 @@ const Page = () => {
   return (
     <>
       <Header text="Web" />
+      <div className="w-[500px] h-[500px] bg-slate-900"> 213213</div>
       123
       <Button />
       <Styled>rasdasdsads</Styled>
