@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import { Children, cloneElement } from 'react'
 import { generateCSP, generateNonce } from 'shared'
@@ -9,20 +10,23 @@ interface DocumentProps {
 
 /* <meta httpEquiv="Content-Security-Policy" content={generateCSP({ nonce })} /> */
 class _document extends Document<DocumentProps> {
-  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
-    const initialProps = await Document.getInitialProps(ctx)
+  static async getInitialProps(ctx: DocumentContext) {
+    const sheet = new ServerStyleSheet()
+    const originalRenderPage = ctx.renderPage
 
-    /* TO-DO // 
-      현재 nonce가 styled-components에 적용되는 방식을 
-      찾지를 못해서 nonce를 사용하고 있진 않다  
-    */
-    const nonce = generateNonce()
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        })
 
-    const additionalProps = { nonce }
-
-    return {
-      ...initialProps,
-      ...additionalProps,
+      const initialProps = await Document.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: [initialProps.styles, sheet.getStyleElement()],
+      }
+    } finally {
+      sheet.seal()
     }
   }
 

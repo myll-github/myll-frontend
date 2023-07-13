@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "main": "./index.tsx",
   "license": "MIT",
-  "files": [
-    "dist/**"
-  ],
   "scripts": {
-
     "lint": "eslint \"**/*.ts*\"",
     "generate:component": "turbo gen react-component"
   },
@@ -22,7 +18,6 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "babel-jest": "29.5.0",
-    "esbuild-sass-plugin": "^2.10.0",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "jest": "29.5.0",
@@ -31,7 +26,6 @@
     "tailwind-config": "workspace:*",
     "ts-jest": "29.0.5",
     "tsconfig": "workspace:*",
-    "tsup": "^5.10.1",
     "typescript": "^4.5.2"
   },
   "resolutions": {

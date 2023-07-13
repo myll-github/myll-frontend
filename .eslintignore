@@ -4,4 +4,7 @@ node_modules
 yarn.lock
 public
 **/*.config.js
+**/dist/*
+
 package-lock.json
+

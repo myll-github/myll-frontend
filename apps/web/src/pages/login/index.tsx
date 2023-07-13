@@ -1,10 +1,11 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 import { Button } from 'myll-ui'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { Container, Label, Layout, Title } from './style'
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const router = useRouter()
 
   return (

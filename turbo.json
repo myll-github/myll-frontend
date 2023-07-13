@@ -4,12 +4,14 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
     "test": {},
 
     "dev": {
+      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
       "cache": false,
       "persistent": true
     }
