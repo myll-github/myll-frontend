@@ -4,23 +4,34 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "myll-ui": "workspace:*",
     "next": "^13.4.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "myll-ui": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.0.27",
+    "@storybook/addon-interactions": "7.0.27",
+    "@storybook/addon-links": "7.0.27",
+    "@storybook/blocks": "7.0.27",
+    "@storybook/nextjs": "7.0.27",
+    "@storybook/react": "7.0.27",
+    "@storybook/testing-library": "0.0.14-next.2",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "eslint-config-custom": "workspace:*",
-    "sass": "^1.63.3",
-    "tsconfig": "workspace:*",
+    "eslint-plugin-storybook": "^0.6.12",
     "jest-config": "workspace:*",
-    "typescript": "^4.5.3",
-    "tailwind-config": "workspace:*"
+    "sass": "^1.63.3",
+    "storybook": "7.0.27",
+    "tailwind-config": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.5.3"
   }
 }
