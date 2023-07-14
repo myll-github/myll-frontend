@@ -40,6 +40,8 @@ module.exports = withPWA({
     styledComponents: true,
   },
 
+  crossOrigin: 'anonymous',
+
   async headers() {
     return [
       {
