@@ -1,20 +1,24 @@
-const WHITE = '#fff'
-
+const WHITE = {
+  WHITE: '#fff',
+}
 const PRIMARY = {
-  BLUE: 'var(--primary-blue, #007AFF);',
-  SUB1_BLUE_LINEAR: 'var(--sub-blue-linear-1, linear-gradient(270deg, #007AFF 0%, #00BBE4 100%));',
-  SUB2_BLUE1: 'var(--sub-blue-1, #1890FF);',
-  SUB2_BLUE2: 'var(--sub-blue-2, #E3EFFF);',
-  SUB2_BLUE3: 'var(--sub-blue-3, #F0F5FF);',
+  PRIMARY_BLUE: 'var(--primary-blue, #007AFF);',
+  PRIMARY_SUB1_BLUE_LINEAR: 'var(--sub-blue-linear-1, linear-gradient(270deg, #007AFF 0%, #00BBE4 100%));',
+  PRIMARY_SUB2_BLUE1: 'var(--sub-blue-1, #1890FF);',
+  PRIMARY_SUB2_BLUE2: 'var(--sub-blue-2, #E3EFFF);',
+  PRIMARY_SUB2_BLUE3: 'var(--sub-blue-3, #F0F5FF);',
 }
 
 const GRAY = {
-  _90: 'var(--gray-gray-90, #202020);',
-  _80: 'var(--gray-gray-80, #39434F);',
-  _70: 'var(--gray-gray-70, #848E9B);',
-  _50: 'var(--gray-gray-50, #C9D0DE);',
-  _30: 'var(--gray-gray-30, #E7EAF1);',
-  _20: 'var(--gray-gray-20, #F4F5F8);',
+  GRAY_100: 'var(--gray-gray-100, #202020);',
+  GRAY_90: 'var(--gray-gray-90, #28333E);',
+  GRAY_80: 'var(--gray-gray-80, #39434F);',
+  GRAY_70: 'var(--gray-gray-70, #848E9B);',
+  GRAY_60: 'var(--gray-gray-60, #A2ADB9);',
+  GRAY_50: 'var(--gray-gray-50, #C9D0DE);',
+  GRAY_40: 'var(--gray-gray-40, #CBD1D7);',
+  GRAY_30: 'var(--gray-gray-30, #E7EAF1);',
+  GRAY_20: 'var(--gray-gray-20, #F4F5F8);',
   WHITE: 'var(--gray-white, #FFF)',
 }
 
@@ -33,4 +37,12 @@ const STATE = {
   ERROR: 'var(--state-error, #FF3141)',
 }
 
-export { GRAY, POINT, PRIMARY, STATE }
+function flattenObject(obj: any): any {
+  return Object.entries(obj)
+    .flatMap(([key, val]) => (typeof val === 'object' ? flattenObject(val) : { [key]: val }))
+    .reduce((t, v) => ({ ...t, ...v }))
+}
+
+const COLOR = flattenObject([WHITE, GRAY, POINT, PRIMARY, STATE])
+
+export default COLOR

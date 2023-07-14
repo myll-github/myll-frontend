@@ -1,6 +1,4 @@
-import TYPOGRAPHY from './src/typography'
+import COLOR from 'color'
+import TYPOGRAPHY from 'typography'
 
-// global settings exports
-export * from './src/color'
-
-export { TYPOGRAPHY }
+export { COLOR, TYPOGRAPHY }
