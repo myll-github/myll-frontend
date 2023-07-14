@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import { Children, cloneElement } from 'react'
-import { generateCSP, generateNonce } from 'shared'
 import { ServerStyleSheet } from 'styled-components'
 
 interface DocumentProps {
