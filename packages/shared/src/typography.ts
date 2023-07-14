@@ -1,172 +1,142 @@
-import { css } from 'styled-components'
-
-const HEADER = {
-  H1: css`
-    /* Header/H1 */
-    font-size: 30px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 40px;
-    letter-spacing: 0.075px;
-  `,
-
-  H2: css`
-    font-size: 24px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-  `,
-
-  H3: css`
-    font-size: 24px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-  `,
-
-  H4: css`
-    font-size: 20px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0.03px;
-  `,
-
-  H5: css`
-    font-size: 18px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.027px;
-  `,
-
-  H6: css`
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.035px;
-  `,
+const TYPOGRAPHY = {
+  '.HEADER-H1': {
+    fontSize: '30px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '40px',
+    letterSpacing: '0.075px',
+  },
+  '.HEADER-H2': {
+    fontSize: '24px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '24px',
+    letterSpacing: '0.15px',
+  },
+  '.HEADER-H3': {
+    fontSize: '24px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '24px',
+    letterSpacing: '0.15px',
+  },
+  '.HEADER-H4': {
+    fontSize: '20px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '20px',
+    letterSpacing: '0.03px',
+  },
+  '.HEADER-H5': {
+    fontSize: '18px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.027px',
+  },
+  '.HEADER-H6': {
+    fontSize: '14px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.035px',
+  },
+  '.SUBTITLE-T1': {
+    fontSize: '16px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '700',
+    lineHeight: '20px',
+    letterSpacing: '0.04px',
+  },
+  '.SUBTITLE-T2': {
+    fontSize: '16px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.04px',
+  },
+  '.SUBTITLE-T3': {
+    fontSize: '14px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '20px',
+    letterSpacing: '0.15px',
+  },
+  '.SUBTITLE-T4': {
+    fontSize: '13px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.15px',
+  },
+  '.SUBTITLE-T5': {
+    fontSize: '13px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '20px',
+    letterSpacing: '0.15px',
+  },
+  '.SUBTITLE-T6': {
+    fontSize: '13px',
+    fontFamily: 'Pretendard, sans-serif',
+    lineHeight: '20px',
+    letterSpacing: '0.15px',
+  },
+  '.SUBTITLE-T7': {
+    fontSize: '12px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.018px',
+  },
+  '.SUBTITLE-T8': {
+    fontSize: '12px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '20px',
+    letterSpacing: '0.15px',
+  },
+  '.INPUT-LABEL1': {
+    fontSize: '16px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.04px',
+  },
+  '.INPUT-LABEL2': {
+    fontSize: '16px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '500',
+    lineHeight: '20px',
+    letterSpacing: '0.04px',
+  },
+  '.INPUT-FIELD': {
+    fontSize: '16px',
+    fontFamily: 'Pretendard, sans-serif',
+    lineHeight: '20px',
+    letterSpacing: '0.04px',
+  },
+  '.BUTTON-LARGE': {
+    fontSize: '18px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '22px',
+    letterSpacing: '0.4px',
+  },
+  '.BUTTON-MEDIUM': {
+    fontSize: '14px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0.4px',
+  },
+  '.BUTTON-SMALL': {
+    fontSize: '12px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
+    lineHeight: '22px',
+    letterSpacing: '0.46px',
+  },
 }
-
-const SUBTITLE = {
-  T1: css`
-    font-size: 16px;
-    font-family: Pretendard;
-    font-weight: 700;
-    line-height: 20px;
-    letter-spacing: 0.04px;
-  `,
-
-  T2: css`
-    font-size: 16px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.04px;
-  `,
-
-  T3: css`
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-  `,
-
-  T4: css`
-    font-size: 13px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-  `,
-
-  T5: css`
-    font-size: 13px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-  `,
-
-  T6: css`
-    font-size: 13px;
-    font-family: Pretendard;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-  `,
-
-  T7: css`
-    font-size: 12px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.018px;
-  `,
-
-  T8: css`
-    font-size: 12px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-  `,
-}
-
-const INPUT = {
-  LABEL1: css`
-    font-size: 16px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.04px;
-  `,
-
-  LABEL2: css`
-    font-size: 16px;
-    font-family: Pretendard;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0.04px;
-  `,
-
-  FIELD: css`
-    font-size: 16px;
-    font-family: Pretendard;
-    line-height: 20px;
-    letter-spacing: 0.04px;
-  `,
-}
-
-const BUTTON = {
-  LARGE: css`
-    font-size: 18px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: 0.4px;
-  `,
-
-  MEDIUM: css`
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.4px;
-  `,
-
-  SMALL: css`
-    font-size: 12px;
-    font-family: Pretendard;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: 0.46px;
-  `,
-}
-
-const TYPOGRAPHY = { HEADER, INPUT, SUBTITLE, BUTTON }
 
 export default TYPOGRAPHY

@@ -1,5 +1,4 @@
 import { Button, Header } from 'myll-ui'
-import { TYPOGRAPHY } from 'shared'
 import styled from 'styled-components'
 
 const Styled = styled.div`
@@ -7,14 +6,13 @@ const Styled = styled.div`
   height: 500px;
 
   background-color: red;
-  ${TYPOGRAPHY.HEADER.H1}
 `
 
 const Page = () => {
   return (
     <>
       <Header text="Web" />
-      <div className="w-[500px] h-[500px] bg-slate-900"> 213213</div>
+      <div className="w-[500px] h-[500px] bg-slate-900 HEADER-H1"> 213213</div>
       123
       <Button />
       <Styled>rasdasdsads</Styled>
