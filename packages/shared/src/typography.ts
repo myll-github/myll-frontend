@@ -31,10 +31,17 @@ const TYPOGRAPHY = {
     fontSize: '18px',
     fontFamily: 'Pretendard, sans-serif',
     fontWeight: '600',
+    lineHeight: '26px',
+    letterSpacing: '0.15px',
+  },
+  '.HEADER-H6': {
+    fontSize: '18px',
+    fontFamily: 'Pretendard, sans-serif',
+    fontWeight: '600',
     lineHeight: '20px',
     letterSpacing: '0.027px',
   },
-  '.HEADER-H6': {
+  '.HEADER-H7': {
     fontSize: '14px',
     fontFamily: 'Pretendard, sans-serif',
     fontWeight: '600',
@@ -78,6 +85,7 @@ const TYPOGRAPHY = {
   },
   '.SUBTITLE-T6': {
     fontSize: '13px',
+    fontWeight: '400',
     fontFamily: 'Pretendard, sans-serif',
     lineHeight: '20px',
     letterSpacing: '0.15px',
@@ -114,7 +122,15 @@ const TYPOGRAPHY = {
     fontSize: '16px',
     fontFamily: 'Pretendard, sans-serif',
     lineHeight: '20px',
+    fontWeight: '400',
     letterSpacing: '0.04px',
+  },
+  '.INPUT-FIELD2': {
+    fontSize: '14px',
+    fontFamily: 'Pretendard, sans-serif',
+    lineHeight: '20px',
+    fontWeight: '400',
+    letterSpacing: '0.035px',
   },
   '.BUTTON-LARGE': {
     fontSize: '18px',
