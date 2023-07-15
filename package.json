@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "build": "turbo run build",
-    "dev": "turbo run dev storybook",
+    "build": "turbo run gen:build build",
+    "dev": "turbo run gen:dev dev storybook",
     "start": "turbo run start",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

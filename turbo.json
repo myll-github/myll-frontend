@@ -8,10 +8,15 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
-    "test": {},
-    "storybook": {
-      "outputs": ["./dist"]
+    "gen:dev": {},
+    "gen:build": {
+      "outputs": ["./dist/**"]
     },
+
+    "test": {
+      "outputs": ["./coverage/**"]
+    },
+    "storybook": {},
 
     "dev": {
       "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
