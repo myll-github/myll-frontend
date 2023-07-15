@@ -12,7 +12,8 @@ const Page = () => {
   return (
     <>
       <Header text="Web" />
-      <div className="w-[500px] h-[500px] bg-PINK1 HEADER-H1"> 213213</div>
+      <div className="w-30tvw h-30tvh bg-PINK1 HEADER-H1"> 213213</div>
+      <div className="w-180tvw h-[30px] bg-PINK1 HEADER-H1"> 213213</div>
       123
       <Button />
       <Styled>rasdasdsads</Styled>
