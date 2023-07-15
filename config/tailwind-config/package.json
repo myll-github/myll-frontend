@@ -5,6 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "sideEffects": false,
   "devDependencies": {
     "shared": "workspace:*",
     "autoprefixer": "^10.4.14",

@@ -14,6 +14,7 @@
       "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
       "cache": false,
       "persistent": true
-    }
+    },
+    "start": {}
   }
 }

@@ -3,7 +3,6 @@ import { create, StateCreator } from 'zustand'
 import { Product } from '@/common/interfaces'
 
 export interface ProductSlice {
-  setCount(arg0: number): void;
   products: Product[]
   count: number
   fetchProducts: () => void
@@ -18,8 +17,6 @@ const ProductStore = create<ProductSlice>()((set) => ({
     const res = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=20')
     set({ products: await res.json() })
   },
-
-  setCount: (a: Number) => set({ count: a }),
 }))
 
 export default ProductStore

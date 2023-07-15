@@ -25,6 +25,8 @@ frame-ancestors 'none';
 object-src 'none';
 `
 module.exports = withPWA({
+  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
+
   env: {
     KAKAO_CLIENT_KEY: process.env.KAKAO_CLIENT_KEY,
     KAKAO_LOGIN_REDIRECT_URL: process.env.KAKAO_LOGIN_REDIRECT_URL,

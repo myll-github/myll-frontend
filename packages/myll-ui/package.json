@@ -8,6 +8,7 @@
     "test": "jest --passWithNoTests",
     "generate:component": "turbo gen react-component"
   },
+  "sideEffects": false,
   "devDependencies": {
     "@babel/preset-typescript": "^7.21.0",
     "@testing-library/dom": "^9.3.1",
