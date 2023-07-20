@@ -6,17 +6,16 @@ const meta: Meta<typeof Card> = {
   title: 'Example/Card',
   component: Card,
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: {
-      control: 'color',
-    },
-  },
+  argTypes: {},
 }
 
 export default meta
 type Story = StoryObj<typeof Card>
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary = () => {
-  return <RoundCard title="Europe Street beat" description="www.instagram.com" />
+export const Round: Story = {
+  render: (args) => <RoundCard {...args} />,
+  args: {
+    mainTitle: 'Europe Street beat',
+    subTitle: 'www.instagram.com',
+  },
 }
