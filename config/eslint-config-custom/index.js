@@ -9,6 +9,7 @@ module.exports = {
     'prettier/prettier': 0,
     'lines-between-class-members': 0,
     'class-methods-use-this': 0,
+    'react/jsx-props-no-spreading': ['warn'],
 
     'import/no-extraneous-dependencies': 0,
 
@@ -19,6 +20,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
 
@@ -28,9 +30,7 @@ module.exports = {
     semi: 0,
   },
   parserOptions: {
-    babelOptions: {
-      presets: [require.resolve('next/babel')],
-    },
+    babelOptions: {},
   },
   env: {
     browser: true,

@@ -1,10 +1,9 @@
-import { createContext, ReactNode, useContext, useMemo } from 'react'
+import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
 const CompoundContext = createContext(null as unknown)
 
 interface CompoundProps {
   children: ReactNode
-  providerValues: unknown[]
 }
 
 export const CompoundProvider = ({ children, ...providerValue }: CompoundProps) => {
