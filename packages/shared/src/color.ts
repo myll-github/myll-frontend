@@ -3,10 +3,10 @@ const WHITE = {
 }
 const PRIMARY = {
   PRIMARY_BLUE: 'var(--primary-blue, #007AFF);',
-  PRIMARY_SUB1_BLUE_LINEAR: 'var(--sub-blue-linear-1, linear-gradient(270deg, #007AFF 0%, #00BBE4 100%));',
-  PRIMARY_SUB2_BLUE1: 'var(--sub-blue-1, #1890FF);',
-  PRIMARY_SUB2_BLUE2: 'var(--sub-blue-2, #E3EFFF);',
-  PRIMARY_SUB2_BLUE3: 'var(--sub-blue-3, #F0F5FF);',
+  SUB_BLUE_1: 'var(--sub-blue-1, #1890FF);',
+  SUB_BLUE_2: 'var(--sub-blue-2, #E3EFFF);',
+  SUB_BLUE_3: 'var(--sub-blue-3, #F0F5FF);',
+  SUB_BLUE_4: 'var(--sub-blue-linear-1, linear-gradient(270deg, #007AFF 0%, #00BBE4 100%));',
 }
 
 const GRAY = {
