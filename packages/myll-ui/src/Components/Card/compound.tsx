@@ -4,19 +4,18 @@ interface TitleProps {
   title: string
 }
 
-export interface ImageProps {
+interface ImageRawProps {
   src: string
   alt: string
+  width: number
+  height: number
   className: string
 }
 
-const imageStyle = {
-  width: '100%',
-  height: '100%',
-}
+export interface ImageProps extends Omit<ImageRawProps, 'width' | 'height' | 'className'> {}
 
-export const CardImage = ({ src, alt, className }: ImageProps) => {
-  return <Image src={src} width={140} height={50} alt={alt} className={className} />
+export const CardImage = ({ src, alt, width, height, className }: ImageRawProps) => {
+  return <Image sizes="250px" src={src} width={width} height={height} alt={alt} className={className} />
 }
 
 export const MainTitle = ({ title }: TitleProps) => {

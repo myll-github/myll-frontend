@@ -37,6 +37,9 @@ module.exports = {
     node: true,
     jest: true,
   },
+  globals:{
+    JSX: true
+  },
   settings: {
     'import/resolver': {
       node: {
