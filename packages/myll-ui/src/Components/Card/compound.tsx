@@ -1,14 +1,22 @@
+import Image from 'next/image'
+
 interface TitleProps {
   title: string
 }
 
-interface ImageProps {
+export interface ImageProps {
   src: string
   alt: string
+  className: string
 }
 
-export const CardImage = ({ src, alt }: ImageProps) => {
-  return <img src={src} alt={alt} className="relative object-fill mb-1 rounded-sm w-140pxr h-50pxr" />
+const imageStyle = {
+  width: '100%',
+  height: '100%',
+}
+
+export const CardImage = ({ src, alt, className }: ImageProps) => {
+  return <Image src={src} width={140} height={50} alt={alt} className={className} />
 }
 
 export const MainTitle = ({ title }: TitleProps) => {
