@@ -4,6 +4,7 @@ node_modules
 yarn.lock
 public
 **/*.config.js
+**/*.stories.*sx
 **/dist/*
 
 package-lock.json
