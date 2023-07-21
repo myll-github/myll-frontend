@@ -19,7 +19,7 @@ export default {
       },
 
       spacing: {
-        ...Array.from({ length: 300 }, (_, i) => i + 1).reduce((acc, px) => {
+        ...Array.from({ length: 900 }, (_, i) => i + 1).reduce((acc, px) => {
           acc[`${px}pxr`] = pxToRem(px)
           return acc
         }, {}),
