@@ -1,21 +1,16 @@
-import { ReactNode } from 'react'
+import { HTMLAttributes } from 'react'
+import { CompoundProvider } from 'shared'
 
-import Card from './Card'
+const Card = (props: HTMLAttributes<HTMLDivElement>) => {
+  const { children, ...rest } = props
 
-interface Props {
-  image: ReactNode
-  mainTitle: string
-  subTitle: string
-}
-
-const img = <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-
-const RoundCard = ({ image, mainTitle, subTitle }: Props) => {
   return (
-    <Card className="w-150tvw h-116tvh" cover={image ?? img}>
-      <Card.Body title={mainTitle} description={subTitle} />
-    </Card>
+    <CompoundProvider>
+      <div {...rest}>{children}</div>
+    </CompoundProvider>
   )
 }
 
-export { Card, RoundCard }
+Card.propTypes = {}
+
+export default Card

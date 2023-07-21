@@ -11,6 +11,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'react/jsx-props-no-spreading': ['warn'],
 
+    'import/no-extraneous-dependencies': ['warn'],
     'react/function-component-definition': [
       2,
       {

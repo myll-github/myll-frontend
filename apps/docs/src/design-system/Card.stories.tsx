@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Card, RoundCard } from 'myll-ui'
+import { BasicCard, Card } from 'myll-ui'
+import Image from 'next/image'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Card> = {
@@ -12,10 +13,13 @@ const meta: Meta<typeof Card> = {
 export default meta
 type Story = StoryObj<typeof Card>
 
-export const Round: Story = {
-  render: (args) => <RoundCard {...args} />,
-  args: {
-    mainTitle: 'Europe Street beat',
-    subTitle: 'www.instagram.com',
-  },
+export const BasicCardExample: Story = {
+  render: (args) => (
+    <BasicCard {...args}>
+      <BasicCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+      <BasicCard.SubTitle title="Sub Title" />
+      <BasicCard.MainTitle title="Place Title" />
+    </BasicCard>
+  ),
+  args: {},
 }

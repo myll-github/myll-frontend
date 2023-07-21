@@ -1,6 +1,7 @@
 import Button from './src/Button'
+import Card from './src/Components/Card'
+import BasicCard from './src/Components/Card/BasicCard'
 
-export * from './src/Components/Card'
 export * from './src/Header'
 
-export { Button }
+export { BasicCard, Button, Card }
