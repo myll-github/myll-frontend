@@ -17,18 +17,24 @@ export const BasicCardExample: Story = {
   render: (args) => (
     <BasicCard {...args}>
       <BasicCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-      <BasicCard.Description subTitle="Sub Title" mainTitle="Place Title" />
+      <BasicCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
     </BasicCard>
   ),
-  args: {},
+  args: {
+    subTitle: 'Sub Title',
+    mainTitle: 'Place Title',
+  },
 }
 
 export const HorizontalCardExample: Story = {
   render: (args) => (
     <HorizontalCard {...args}>
       <HorizontalCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-      <HorizontalCard.Description subTitle="Sub Title" mainTitle="Place Title" />
+      <HorizontalCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
     </HorizontalCard>
   ),
-  args: {},
+  args: {
+    subTitle: 'Sub Title',
+    mainTitle: 'Place Title',
+  },
 }

@@ -19,7 +19,7 @@ interface CompoundCard extends FC<BasicCardProps> {
 
 const BasicCard: CompoundCard = ({ children }: BasicCardProps) => {
   return (
-    <Card className="w-150pxr h-116pxr flex flex-col relative justify-center gap-0.5 items-center bg-PRIMARY_SUB2_BLUE3 rounded-lg border border-solid hover:selection:border-PRIMARY_BLUE">
+    <Card className="w-150pxr h-116pxr flex flex-col relative justify-center gap-0.5 items-center bg-PRIMARY_SUB2_BLUE3 rounded-lg border border-solid">
       {children}
     </Card>
   )
