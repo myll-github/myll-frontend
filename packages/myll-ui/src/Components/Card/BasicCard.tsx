@@ -1,23 +1,8 @@
-import { FC, ReactElement, ReactNode } from 'react'
+import Card from './components/base'
+import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
+import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
-import { CardImage, ImageProps, MainTitle, SubTitle } from './compound'
-import Card from './index'
-
-interface BasicCardProps {
-  children: ReactNode
-}
-
-interface DescriptionProps {
-  mainTitle: string
-  subTitle: string
-}
-
-interface CompoundCard extends FC<BasicCardProps> {
-  CardImage: (props: ImageProps) => JSX.Element
-  Description: (props: DescriptionProps) => JSX.Element
-}
-
-const BasicCard: CompoundCard = ({ children }: BasicCardProps) => {
+const BasicCard: CompoundCard<BasicCardProps> = ({ children }: BasicCardProps) => {
   return (
     <Card className="w-150pxr h-116pxr flex flex-col relative justify-center gap-0.5 items-center bg-PRIMARY_SUB2_BLUE3 rounded-lg border border-solid">
       {children}
