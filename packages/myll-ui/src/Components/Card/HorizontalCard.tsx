@@ -2,15 +2,13 @@ import { FC, ReactComponentElement, ReactNode } from 'react'
 
 import Card from './components/base'
 import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
-import { CompoundCard, DescriptionProps } from './type'
+import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
-interface HorizontalCardProps {
-  children: ReactNode
-}
+const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected }: BasicCardProps) => {
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
 
-const HorizontalCard: CompoundCard<HorizontalCardProps> = ({ children }: HorizontalCardProps) => {
   return (
-    <Card className="w-320pxr h-115pxr gap-3pxr flex p-7pxr items-center bg-PRIMARY_SUB2_BLUE3 rounded-lg border border-solid ">
+    <Card className={`${BG_COLOR} w-320pxr h-115pxr gap-3pxr flex p-7pxr items-center rounded-lg border border-solid`}>
       {children}
     </Card>
   )

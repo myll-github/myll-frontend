@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
-const CompoundContext = createContext(null as unknown)
+const CompoundContext = createContext(null as any)
 
 interface CompoundProps {
   children: ReactNode
@@ -19,5 +19,5 @@ export const useCompound = () => {
     throw new Error('no Context provider!')
   }
 
-  return context
+  return context.providerValue
 }

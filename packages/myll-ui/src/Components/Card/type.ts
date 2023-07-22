@@ -4,6 +4,7 @@ import { ImageProps } from './components/compound'
 
 export interface BasicCardProps {
   children: ReactNode
+  isSelected?: boolean
 }
 
 export interface DescriptionProps {

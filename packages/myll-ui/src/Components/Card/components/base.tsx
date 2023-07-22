@@ -1,8 +1,16 @@
-import { HTMLAttributes } from 'react'
+import { Children, cloneElement, HTMLAttributes, MouseEvent, MouseEventHandler, ReactNode, useId } from 'react'
 import { CompoundProvider } from 'shared'
 
-const Card = (props: HTMLAttributes<HTMLDivElement>) => {
-  const { children, ...rest } = props
+interface CardProps extends HTMLAttributes<HTMLDivElement> {}
+
+const Card = (props: CardProps) => {
+  const { children, onClick: handleClick, ...rest } = props
+  const userId = useId()
+  const isSelected = true
+
+  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+    handleClick?.(e)
+  }
 
   return (
     <CompoundProvider>
