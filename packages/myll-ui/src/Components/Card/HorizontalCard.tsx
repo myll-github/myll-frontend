@@ -1,14 +1,22 @@
-import { FC, ReactComponentElement, ReactNode } from 'react'
+import { FC, MouseEventHandler, ReactComponentElement, ReactNode, useId } from 'react'
 
 import Card from './components/base'
 import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected }: BasicCardProps) => {
+  const userId = useId()
   const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
 
+  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    console.log(userId)
+  }
+
   return (
-    <Card className={`${BG_COLOR} w-320pxr h-115pxr gap-3pxr flex p-7pxr items-center rounded-lg border border-solid`}>
+    <Card
+      onClick={onClick}
+      className={`${BG_COLOR} w-320pxr h-115pxr gap-3pxr flex p-7pxr items-center rounded-lg border border-solid`}
+    >
       {children}
     </Card>
   )

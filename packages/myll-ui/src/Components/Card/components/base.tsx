@@ -4,13 +4,7 @@ import { CompoundProvider } from 'shared'
 interface CardProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Card = (props: CardProps) => {
-  const { children, onClick: handleClick, ...rest } = props
-  const userId = useId()
-  const isSelected = true
-
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
-    handleClick?.(e)
-  }
+  const { children, ...rest } = props
 
   return (
     <CompoundProvider>
