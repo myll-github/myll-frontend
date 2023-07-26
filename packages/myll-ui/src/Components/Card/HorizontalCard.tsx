@@ -1,25 +1,22 @@
-import { FC, ReactComponentElement, ReactNode } from 'react'
+import { FC, MouseEventHandler, ReactComponentElement, ReactNode, useId } from 'react'
 
-import { CardImage, ImageProps, MainTitle, SubTitle } from './compound'
-import Card from './index'
+import Card from './components/base'
+import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
+import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
-interface HorizontalCardProps {
-  children: ReactNode
-}
+const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected }: BasicCardProps) => {
+  const userId = useId()
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
 
-interface DescriptionProps {
-  mainTitle: string
-  subTitle: string
-}
+  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    console.log(userId)
+  }
 
-interface CompoundCard extends FC<HorizontalCardProps> {
-  CardImage: (props: ImageProps) => JSX.Element
-  Description: (props: DescriptionProps) => JSX.Element
-}
-
-const HorizontalCard: CompoundCard = ({ children }: HorizontalCardProps) => {
   return (
-    <Card className="w-320pxr h-115pxr flex justify-between gap-0.5 items-center bg-PRIMARY_SUB2_BLUE3 rounded-lg border border-solid hover:border-PRIMARY_BLUE">
+    <Card
+      onClick={onClick}
+      className={`${BG_COLOR} w-320pxr h-115pxr gap-3pxr flex p-7pxr items-center rounded-lg border border-solid`}
+    >
       {children}
     </Card>
   )
@@ -32,16 +29,16 @@ HorizontalCard.CardImage = ({ src, alt }: ImageProps) => {
       alt={alt}
       width={120}
       height={90}
-      className="relative object-fill mb-1 rounded-sm w-190pxr h-90pxr"
+      className="relative object-fill rounded-sm w-120pxr h-90pxr mr-27pxr"
     />
   )
 }
 
 const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
   return (
-    <div>
-      <SubTitle title={subTitle} />
-      <MainTitle title={mainTitle} />
+    <div className="flex flex-col w-150pxr h-72pxr mt-15pxr">
+      <SubTitle title={subTitle} className="h-50pxr flex flex-col justify-end" />
+      <MainTitle className="-mt-2pxr" title={mainTitle} />
     </div>
   )
 }
