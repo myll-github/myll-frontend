@@ -6,74 +6,80 @@ interface ButtonVariantProps {
   padding: string
   font: string
   borderRadius: string
+  disabled: string
 }
 
 interface ButtonColorProps {
   color: string
   backgroundColor: string
+  hover?: string
+  border?: string
 }
 
 const buttonVariantMap: { [key in ButtonVariant]: ButtonVariantProps } = {
-  Large: {
+  large: {
     width: 'w-300pxr',
     height: 'h-54pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-LARGE',
     borderRadius: 'rounded-8pxr',
+    disabled: 'disabled:text-DISABLED disabled:bg-[#EBF0F8]',
   },
-  Regular: {
+  regular: {
     width: 'w-120pxr',
     height: 'h-54pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-LARGE',
     borderRadius: 'rounded-10pxr',
+    disabled: 'disabled:text-DISABLED disabled:bg-[#EBF0F8]',
   },
-  Medium: {
+  medium: {
     width: 'w-80pxr',
     height: 'h-40pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-MEDIUM',
     borderRadius: 'rounded-8pxr',
+    disabled: 'disabled:text-DISABLED disabled:bg-[#EBF0F8]',
   },
-  Small: {
+  small: {
     width: 'w-50pxr',
     height: 'h-26pxr',
     padding: 'px-10pxr',
     font: 'BUTTON-SMALL',
     borderRadius: 'rounded-6pxr',
+    disabled: 'disabled:text-DISABLED disabled:bg-[#EBF0F8]',
   },
-  Link: {
+  link: {
     width: 'w-60pxr',
     height: 'h-30pxr',
     padding: 'px-10pxr',
     font: 'BUTTON-MEDIUM',
     borderRadius: 'border-0',
+    disabled: 'disabled:text-GRAY_30 disabled:bg-WHITE',
   },
 }
 
 export const buttonColorMap: { [key in ButtonColor]: ButtonColorProps } = {
-  Primary: {
-    backgroundColor:
-      'bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 disabled:bg-gradient-to-l disabled:from-slate-100 disabled:to-slate-100',
-    color: 'text-WHITE disabled:text-DISABLED',
+  primary: {
+    backgroundColor: `bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 disabled:from-slate-100 disabled:to-slate-100 `,
+    color: 'text-WHITE hover:text-WHITE focus-within:text-WHITE focus:text-WHITE',
   },
 
-  Secondary: {
-    backgroundColor:
-      'bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 disabled:bg-gradient-to-l disabled:from-slate-100 disabled:to-slate-100',
-    color: 'text-WHITE disabled:text-DISABLED',
+  secondary: {
+    backgroundColor: `bg-SUB_BLUE_2 hover:bg-[#BCD9FF]`,
+    color: 'text-PRIMARY_BLUE',
   },
 
-  Outlined: {
-    backgroundColor:
-      'bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 disabled:bg-gradient-to-l disabled:from-slate-100 disabled:to-slate-100',
-    color: 'text-WHITE disabled:text-DISABLED',
+  outlined: {
+    backgroundColor: 'bg-WHITE',
+    hover: 'hover:bg-GRAY_20',
+    color: 'text-GRAY_70',
+    border: 'border border-GRAY_30',
   },
 
-  Link: {
-    backgroundColor:
-      'bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 disabled:bg-gradient-to-l disabled:from-slate-100 disabled:to-slate-100',
-    color: 'text-WHITE disabled:text-DISABLED',
+  link: {
+    backgroundColor: ``,
+    color: 'text-GRAY_70',
   },
 }
 
