@@ -6,20 +6,17 @@ const meta: Meta<typeof Button> = {
   title: 'Example/Button',
   component: Button,
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: {
-      control: 'color',
-    },
-  },
+  argTypes: {},
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: Story = {
+export const Large: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    variant: 'Large',
+    children: 'Button',
+    disabled: false,
   },
 }

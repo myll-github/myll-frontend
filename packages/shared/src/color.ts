@@ -20,6 +20,7 @@ const GRAY = {
   GRAY_30: 'var(--gray-gray-30, #E7EAF1);',
   GRAY_20: 'var(--gray-gray-20, #F4F5F8);',
   WHITE: 'var(--gray-white, #FFF)',
+  DISABLED: 'var(--disabled, #C9D6EB)',
 }
 
 const POINT = {
