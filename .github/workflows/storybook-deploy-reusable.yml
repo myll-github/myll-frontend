@@ -1,21 +1,15 @@
-name: Run Tests
-
+name: 'Storybook Deploy Reusable Workflow'
 on:
-  push:
-    branches:
-      - main
-      - dev
-  pull_request:
-    branches:
-      - main
-      - dev
+  workflow_call:
 
 jobs:
-  test:
+  chromatic-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v2
@@ -36,5 +30,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run tests
-        run: pnpm test
+      - name: build repositories
+        run: pnpm build
+
+      - name: Set PUBLIC_URL
+        run: |
+          PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^.+\/(.+)$/\/\1\//')
+          echo PUBLIC_URL=$PUBLIC_URL > .env
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apps/docs/
