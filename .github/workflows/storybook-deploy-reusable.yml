@@ -31,7 +31,7 @@ jobs:
         run: pnpm install
 
       - name: build repositories
-        run: pnpm build
+        run: pnpm build --filter=\!web
 
       - name: Set PUBLIC_URL
         run: |
@@ -41,5 +41,5 @@ jobs:
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./apps/docs/
+          github_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./apps/docs/storybook-static

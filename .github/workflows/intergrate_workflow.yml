@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/test-reusable.yml
     secrets: inherit
 
-  chromatic-deploy:
+  storybook-deploy:
     needs: test
     uses: ./.github/workflows/storybook-deploy-reusable.yml
     secrets: inherit
