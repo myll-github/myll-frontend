@@ -31,6 +31,7 @@
     "eslint-plugin-storybook": "^0.6.12",
     "jest-config": "workspace:*",
     "sass": "^1.63.3",
+    "shared": "workspace:*",
     "storybook": "7.0.27",
     "tailwind-config": "workspace:*",
     "tsconfig": "workspace:*",

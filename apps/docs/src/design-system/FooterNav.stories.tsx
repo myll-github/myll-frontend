@@ -17,3 +17,10 @@ type Story = StoryObj<typeof FooterNav>
 export const BasicFooterNavExample: Story = {
   args: {},
 }
+
+export const BasicCardExample: Story = {
+  args: {
+    subTitle: 'Sub Title',
+    mainTitle: 'Place Title',
+  },
+}
