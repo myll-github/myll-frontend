@@ -1,9 +1,45 @@
-import { ICON_VISIBILITYOFF_ACCTIVE } from 'shared'
+import { FC, SVGProps, useState } from 'react'
+import {
+  ICON_BOOK_ACTIVE,
+  ICON_BOOK_INACTIVE,
+  ICON_HOME_ACTIVE,
+  ICON_HOME_INACTIVE,
+  ICON_MAP_ACTIVE,
+  ICON_MAP_INACTIVE,
+  ICON_MYLL_ACTIVE,
+  ICON_MYLL_INACTIVE,
+} from 'shared'
+
+interface ToggleIconProps {
+  IconActive: FC<SVGProps<SVGSVGElement>>
+  IconInactive: FC<SVGProps<SVGSVGElement>>
+}
+
+const ToggleIcon = ({ IconActive, IconInactive }: ToggleIconProps) => {
+  const [hover, setHover] = useState(false)
+
+  return (
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+      {hover ? (
+        <IconActive width="30px" height="30px" className="text-GRAY_90" />
+      ) : (
+        <IconInactive width="30px" height="30px" className="text-GRAY_70" />
+      )}
+    </div>
+  )
+}
+/* 
+  안타깝게도 시안대로 svg 색 반전 시킬수가
+  없어서 2개 import해서 씀 
+*/
 
 const FooterNav = () => {
   return (
     <nav>
-      <ICON_VISIBILITYOFF_ACCTIVE />
+      <ToggleIcon IconActive={ICON_HOME_ACTIVE} IconInactive={ICON_HOME_INACTIVE} />
+      <ToggleIcon IconActive={ICON_MAP_ACTIVE} IconInactive={ICON_MAP_INACTIVE} />
+      <ToggleIcon IconActive={ICON_BOOK_ACTIVE} IconInactive={ICON_BOOK_INACTIVE} />
+      <ToggleIcon IconActive={ICON_MYLL_ACTIVE} IconInactive={ICON_MYLL_INACTIVE} />
     </nav>
   )
 }

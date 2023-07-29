@@ -15,8 +15,5 @@ export default meta
 type Story = StoryObj<typeof FooterNav>
 
 export const BasicFooterNavExample: Story = {
-  args: {
-    subTitle: 'Sub Title',
-    mainTitle: 'Place Title',
-  },
+  args: {},
 }

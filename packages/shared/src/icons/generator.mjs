@@ -30,7 +30,7 @@ const getComponentsFromNode = (node) => {
   return []
 }
 
-const formatIconsSVG = (svg) => svg.replace(/fill="#[a-f0–9]{6}"/gm, 'fill="currentColor"')
+const formatIconsSVG = (svg) => svg.replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
 
 const formatName = (name) =>
   name
@@ -48,11 +48,17 @@ const generateFiles = (ele) => {
   if (!ele) return ''
 
   const { name, fileName, svg } = ele
+  const component = `
+  import * as React from "react";
 
-  writeFileSync(
-    `./src/icons/${name}.tsx`,
-    `import * as React from "react";\n\n const SvgCheck12 = () => ${svg}\n export default SvgCheck12;`,
-  )
+  const ${name} = (props: React.SVGProps<SVGSVGElement>) => {
+    return (${svg.replace(/<svg /, '<svg {...props} ')});
+  }
+
+  export default ${name};
+  `
+
+  writeFileSync(`./src/icons/${name}.tsx`, component)
   return `${name}`
 }
 
