@@ -3,8 +3,11 @@
   https://medium.com/iadvize-engineering/using-figma-api-to-extract-illustrations-and-icons-34e0c7c230fa
 */
 
+import dotenv from 'dotenv'
 import { writeFileSync } from 'fs'
 import fetch from 'node-fetch'
+
+dotenv.config()
 
 const TOKEN = process.env.FIGMA_WEBHOOK
 const FILE_KEY = 'v2LAIwRuECBSb24aIFDKwB'
