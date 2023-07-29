@@ -7,5 +7,7 @@
     "lib": ["ES2015", "DOM", "ES2019"],
     "module": "ESNext",
     "target": "es6"
-  }
+  },
+
+  "include": ["custom.d.ts"]
 }

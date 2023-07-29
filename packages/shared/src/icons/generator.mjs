@@ -4,7 +4,7 @@
 */
 
 import dotenv from 'dotenv'
-import { writeFileSync } from 'fs'
+import { appendFileSync, writeFileSync } from 'fs'
 import fetch from 'node-fetch'
 
 dotenv.config()
@@ -37,23 +37,29 @@ const formatName = (name) =>
     ?.toUpperCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '') // removes diacritics
-    .replace(/\//g, '_') // replaces '/' by '_'
+    .replace(/\/-/g, '_') // replaces '/' by '_'
     .replace(/[^a-zA-Z0–9_]/g, '') // removes non alphanumeric or '_' characters
 
 const hash = (path) => path.replace(/^.*\/img\//g, '').replace(/\//g, '_')
 
+const nameSt = []
+
 const generateFiles = (ele) => {
-  if (!ele) return
+  if (!ele) return ''
 
   const { name, fileName, svg } = ele
 
-  console.log(`${name}.svg is generated`)
-  writeFileSync(`./src/icons/${name}.svg`, svg)
+  writeFileSync(
+    `./src/icons/${name}.tsx`,
+    `import * as React from "react";\n\n const SvgCheck12 = () => ${svg}\n export default SvgCheck12;`,
+  )
+  return `${name}`
 }
 
 const getSVGsFromComponents = (components) => {
   const key = FILE_KEY
-  const ids = components.filter(({ name }) => name?.toUpperCase().startsWith('ICON')).map(({ id }) => id)
+  const filteredComponent = components.filter(({ name }) => name?.toUpperCase().startsWith('ICON'))
+  const ids = filteredComponent.map(({ id }) => id)
 
   return fetch(`https://api.figma.com/v1/images/${key}?ids=${ids.join()}&format=svg`, {
     headers: { 'X-Figma-Token': TOKEN },
@@ -61,13 +67,13 @@ const getSVGsFromComponents = (components) => {
     .then((response) => response.json())
     .then(({ images }) =>
       Promise.all(
-        components.map(
+        filteredComponent.map(
           ({ id, name, type }) =>
             images[id] &&
             fetch(images[id])
               .then((response) => response.text())
               .then((svg) => ({
-                name,
+                name: formatName(name),
                 fileName: hash(images[id]),
                 svg: formatIconsSVG(svg),
               })),
@@ -87,6 +93,17 @@ async function run() {
     .then((data) => getComponentsFromNode(data.document))
     .then(getSVGsFromComponents)
     .then((dataArray) => dataArray.map(generateFiles))
+    .then((ele) => Array.from(new Set(ele)))
+    .then((texts) => {
+      writeFileSync(
+        './src/icons/index.ts',
+        texts.reduce((t, v) => `${t}\n import ${v} from './${v}'`, ''),
+      )
+
+      appendFileSync('./src/icons/index.ts', texts.reduce((t, v) => `${t} ${v},`, '\n\n export {').slice(0, -1))
+
+      appendFileSync('./src/icons/index.ts', '}')
+    })
 }
 
 run()
