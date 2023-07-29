@@ -14,20 +14,22 @@
     "gen:dev": "tsup ./index.tsx --format esm,cjs --watch --dts --external react",
     "lint": "eslint \"**/*.ts*\"",
     "test": "jest --passWithNoTests",
-    "generate:component": "turbo gen react-component"
+    "generate:component": "turbo gen react-component",
+    "generate:icon": "node ./src/icons/generator.mjs"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.21.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/testing-library__jest-dom": "^5.14.8",
-    "@babel/preset-typescript": "^7.21.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@types/testing-library__jest-dom": "^5.14.8",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "jest-config": "workspace:*",
+    "node-fetch": "^3.3.2",
     "react": "^18.0.2",
     "tsconfig": "workspace:*",
-    "jest-config": "workspace:*",
     "tsup": "^5.10.1",
     "typescript": "^4.5.2"
   },
