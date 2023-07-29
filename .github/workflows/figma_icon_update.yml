@@ -2,13 +2,17 @@ name: Run Figma Icon update Script
 
 on:
   schedule:
-    - cron: '0 0 * * *' # This will run the action every day at midnight
+    # 수동 업데이트 권장
+    - cron: '0 0 1 1 *'
 
 jobs:
   run-js:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
@@ -29,16 +33,17 @@ jobs:
         run: pnpm install
 
       - name: Run the script
-        run: node your-script.js
-        env:
-          FIGMA_WEBHOOK: ${{ secrets.FIGMA_WEBHOOK }}
+        run: |
+          cd ./packages/shared
+          pnpm generate:icon
+          FIGMA_WEBHOOK=${{ secrets.FIGMA_WEBHOOK }} node your-script.js
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        commit-message: "Update files after successful script run"
-        title: "Update files"
-        body: "Script run was successful, updating files."
-        branch: "figma_update"
-        delete-branch: true
-        base: 'main'
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: 'Update files after successful script run'
+          title: 'Update files'
+          body: 'Script run was successful, updating files.'
+          branch: 'figma_update'
+          delete-branch: true
+          base: 'main'
