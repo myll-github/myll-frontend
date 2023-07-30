@@ -13,9 +13,9 @@ export interface InputProps extends AntdInputProps {
    */
   label?: string
   /**
-   * label below the input field.
+   * error message below the input field.
    */
-  helperText?: string
+  errorMessage?: string
   /**
    * input field type (default, password), It is unrelated to inputMode.
    */
@@ -30,7 +30,7 @@ export interface InputProps extends AntdInputProps {
 }
 
 const Input: FC<InputProps> = (props) => {
-  const { value, label, helperText, inputType = 'default', onValidation, ...inputProps } = props
+  const { value, label, errorMessage, inputType = 'default', theme = 'default', onValidation, ...inputProps } = props
 
   const [isError, setIsError] = useState<boolean>(false)
 
@@ -45,11 +45,18 @@ const Input: FC<InputProps> = (props) => {
     <div className="flex flex-col gap-[8px]">
       <div className="INPUT-LABEL2">{label}</div>
       {inputType === 'default' ? (
-        <AntdInput status={isError ? 'error' : undefined} {...inputProps} />
+        <AntdInput bordered={!(theme === 'bottom-border')} status={isError ? 'error' : undefined} {...inputProps} />
       ) : (
-        <AntdInput.Password status={isError ? 'error' : undefined} {...inputProps} />
+        <AntdInput.Password
+          bordered={!(theme === 'bottom-border')}
+          status={isError ? 'error' : undefined}
+          {...inputProps}
+        />
       )}
-      <div className="min-h-24 flex items-center justify-start SUBTITLE-T8">{isError && helperText}</div>
+      {theme === 'bottom-border' && (
+        <hr className={`${isError ? 'border-ERROR focus:border-ERROR' : 'border-GRAY_50'}`} />
+      )}
+      <div className="min-h-24 flex items-center text-ERROR justify-start SUBTITLE-T8">{isError && errorMessage}</div>
     </div>
   )
 }
