@@ -32,17 +32,9 @@ const getComponentsFromNode = (node) => {
 
 const formatIconsSVG = (svg) => svg.replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
 
-const formatName = (name) =>
-  name
-    ?.toUpperCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // removes diacritics
-    .replace(/\/-/g, '_') // replaces '/' by '_'
-    .replace(/[^a-zA-Z0–9_]/g, '') // removes non alphanumeric or '_' characters
+const formatName = (name) => name?.toUpperCase().replace(/-/g, '_') // replaces '/' by '_'
 
 const hash = (path) => path.replace(/^.*\/img\//g, '').replace(/\//g, '_')
-
-const nameSt = []
 
 const generateFiles = (ele) => {
   if (!ele) return ''
