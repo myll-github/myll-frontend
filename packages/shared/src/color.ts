@@ -24,18 +24,20 @@ const GRAY = {
 }
 
 const POINT = {
-  ORANGE1: 'var(--point-orange-1, #FF8B37);',
-  ORANGE2: 'var(--point-orange-2, #FFF3C5);',
-  GREEN1: 'var(--point-green-1, #009B06);',
-  GREEN2: 'var(--point-green-2, #DDFFE6);',
-  PINK1: 'var(--point-pink-1, #FF60AB);',
-  PINK2: 'var(--point-pink-2, #FFEEF6);',
-  NAVY1: 'var(--point-navy-2, #0F3E9D);',
-  NAVY2: 'var(--point-navy-2, #E4EFFF);',
+  ORANGE_1: 'var(--point-orange-1, #FF8B37);',
+  ORANGE_2: 'var(--point-orange-2, #FFF3C5);',
+  GREEN_1: 'var(--point-green-1, #009B06);',
+  GREEN_2: 'var(--point-green-2, #DDFFE6);',
+  PINK_1: 'var(--point-pink-1, #FF60AB);',
+  PINK_2: 'var(--point-pink-2, #FFEEF6);',
+  NAVY_1: 'var(--point-navy-2, #0F3E9D);',
+  NAVY_2: 'var(--point-navy-2, #E4EFFF);',
 }
 
 const STATE = {
   ERROR: 'var(--state-error, #FF3141)',
+  WARNING_1: 'var(--btn-warning-1, #FF395D)',
+  WARNING_2: 'var(--btn-warning-2, #FFD3D9)',
 }
 
 function flattenObject(obj: any): any {

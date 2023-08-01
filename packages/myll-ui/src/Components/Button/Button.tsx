@@ -1,19 +1,15 @@
 import { Button as AntdButton, ButtonProps as AntdButtonProps } from 'antd'
 
-import { ButtonProps } from './type'
-import buttonVariantMap, { applyClassName, buttonColorMap } from './util'
+import { ButtonColor, ButtonProps, ButtonVariant } from './type'
+import buttonVariantMap, { applyClassName, buttonColorMap, getAntdButtonType } from './util'
 
 const Button = ({ variant, type = 'button', color = 'primary', ...rest }: ButtonProps) => {
   const variantJSON = buttonVariantMap[variant]
-
-  const convertedColor = variant === 'link' ? 'link' : color
-  const colorJSON = buttonColorMap[convertedColor]
-
-  console.log(variant, variantJSON, colorJSON)
+  const colorJSON = buttonColorMap[color]
 
   return (
     <AntdButton
-      type={variant === 'link' ? 'link' : ('' as any)}
+      {...getAntdButtonType(variant, color)}
       htmlType={type}
       className={`flex justify-center items-center ${applyClassName(colorJSON)} ${applyClassName(variantJSON)}`}
       {...rest}

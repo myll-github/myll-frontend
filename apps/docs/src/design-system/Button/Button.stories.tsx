@@ -48,6 +48,6 @@ export const Small: Story = {
 
 export const Link: Story = {
   args: {
-    variant: 'link',
+    variant: 'mini',
   },
 }
