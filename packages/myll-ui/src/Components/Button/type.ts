@@ -1,6 +1,6 @@
 import { ButtonProps as AntdButtonProps } from 'antd'
 
-export type ButtonVariant = 'large' | 'regular' | 'medium' | 'small' | 'mini'
+export type ButtonVariant = 'block' | 'large' | 'medium' | 'small' | 'mini'
 export type ButtonColor = 'primary' | 'secondary' | 'outlined' | 'text' | 'gradient' | 'warning'
 
 export interface ButtonProps extends Omit<AntdButtonProps, 'type'> {

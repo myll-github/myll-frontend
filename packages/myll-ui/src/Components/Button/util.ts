@@ -13,53 +13,54 @@ interface ButtonVariantProps {
 interface ButtonColorProps {
   color: string
   backgroundColor: string
-  hover?: string
   border?: string
+  transition?: string
 }
 
 const buttonVariantMap: { [key in ButtonVariant]: ButtonVariantProps } = {
-  large: {
+  block: {
     width: 'w-300pxr',
     height: 'h-54pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-LARGE',
-    borderRadius: 'rounded-8pxr',
+    borderRadius: 'rounded-[8px]',
   },
-  regular: {
-    width: 'w-120pxr',
+  large: {
+    width: 'min-w-120pxr',
     height: 'h-54pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-LARGE',
-    borderRadius: 'rounded-10pxr',
+    borderRadius: 'rounded-[10px]',
   },
   medium: {
-    width: 'w-80pxr',
+    width: 'min-w-80pxr',
     height: 'h-40pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-MEDIUM',
-    borderRadius: 'rounded-8pxr',
+    borderRadius: 'rounded-[8px]',
   },
   small: {
-    width: 'min-w-50pxr',
-    height: 'h-26pxr',
+    width: 'min-w-60pxr',
+    height: 'h-32pxr',
     padding: 'px-10pxr',
     font: 'BUTTON-SMALL',
-    borderRadius: 'rounded-6pxr',
+    borderRadius: 'rounded-[6px]',
   },
   mini: {
-    width: 'w-60pxr',
-    height: 'h-30pxr',
+    width: 'min-w-50pxr',
+    height: 'h-24pxr',
     padding: 'px-10pxr',
     font: 'BUTTON-MEDIUM',
-    borderRadius: 'border-0',
+    borderRadius: 'rounded-[6px]',
   },
 }
 
 export const buttonColorMap: { [key in ButtonColor]: ButtonColorProps } = {
   gradient: {
-    backgroundColor: `bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 active:from-PRIMARY_BLUE active:to-PRIMARY_BLUE disabled:opacity-40 `,
-    color: 'text-WHITE hover:text-WHITE focus-within:text-WHITE active:text-WHITE',
+    backgroundColor: `bg-gradient-to-l from-PRIMARY_BLUE to-cyan-500 enabled:active:from-PRIMARY_BLUE enabled:active:to-PRIMARY_BLUE disabled:opacity-40 `,
+    color: 'text-WHITE enabled:hover:text-WHITE focus-within:text-WHITE enabled:active:text-WHITE',
     border: 'border-0',
+    transition: 'transition-all duration-500',
   },
 
   primary: {
@@ -68,24 +69,24 @@ export const buttonColorMap: { [key in ButtonColor]: ButtonColorProps } = {
   },
 
   secondary: {
-    backgroundColor: `bg-SUB_BLUE_2 hover:bg-[#BCD9FF] active:bg-[#D1DCEB] disabled:opacity-40`,
+    backgroundColor: `bg-SUB_BLUE_2 enabled:hover:bg-[#BCD9FF] enabled:active:bg-[#D1DCEB] disabled:opacity-40`,
     color: 'text-PRIMARY_BLUE disabled:text-PRIMARY_BLUE',
   },
 
   outlined: {
-    backgroundColor: 'bg-WHITE disabled:opacity-40 active:bg-GRAY_20',
+    backgroundColor: 'bg-WHITE disabled:opacity-40 enabled:active:bg-GRAY_20',
     color: 'text-GRAY_90',
     border: 'border border-GRAY_30',
   },
 
   warning: {
-    backgroundColor: `bg-[#FFEFF1] active:bg-WARNING_2 disabled:opacity-40`,
-    color: 'text-WARNING_1 hover:text-WARNING_1 disabled:text-WARNING_1 disabled:bg-[#FFEFF1]',
+    backgroundColor: `bg-[#FFEFF1] enabled:active:bg-WARNING_2 disabled:opacity-40`,
+    color: 'text-WARNING_1 enabled:hover:text-WARNING_1 disabled:text-WARNING_1 disabled:bg-[#FFEFF1]',
     border: 'border-0',
   },
 
   text: {
-    backgroundColor: 'disabled:text-GRAY_30 active:bg-GRAY_20 disabled:opacity-40',
+    backgroundColor: 'disabled:text-GRAY_30 enabled:active:bg-GRAY_20 disabled:opacity-40',
     color: 'text-PRIMARY_BLUE disabled:text-PRIMARY_BLUE disabled:bg-WHITE',
     border: 'border-0',
   },

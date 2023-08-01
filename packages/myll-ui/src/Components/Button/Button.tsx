@@ -11,7 +11,9 @@ const Button = ({ variant, type = 'button', color = 'primary', ...rest }: Button
     <AntdButton
       {...getAntdButtonType(variant, color)}
       htmlType={type}
-      className={`flex justify-center items-center ${applyClassName(colorJSON)} ${applyClassName(variantJSON)}`}
+      className={`flex justify-center items-center disabled:cursor-not-allowed ${applyClassName(
+        colorJSON,
+      )} ${applyClassName(variantJSON)}`}
       {...rest}
     />
   )
