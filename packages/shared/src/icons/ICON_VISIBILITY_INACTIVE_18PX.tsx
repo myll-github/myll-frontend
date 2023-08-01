@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const ICON_VISIBILITY_INACTIVE = (props: React.SVGProps<SVGSVGElement>) => {
+const ICON_VISIBILITY_INACTIVE_18PX = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg {...props} width="18" height="18" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,4 +11,4 @@ const ICON_VISIBILITY_INACTIVE = (props: React.SVGProps<SVGSVGElement>) => {
   )
 }
 
-export default ICON_VISIBILITY_INACTIVE
+export default ICON_VISIBILITY_INACTIVE_18PX

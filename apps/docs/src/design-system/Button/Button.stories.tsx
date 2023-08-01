@@ -25,6 +25,13 @@ export const Primary: Story = {
   },
 }
 
+export const Block: Story = {
+  render: (args) => <ExampleButton {...args} />,
+  args: {
+    variant: 'block',
+  },
+}
+
 export const Large: Story = {
   render: (args) => <ExampleButton {...args} />,
   args: {
@@ -46,8 +53,10 @@ export const Small: Story = {
   },
 }
 
-export const Link: Story = {
+export const Mini: Story = {
+  render: (args) => <ExampleButton {...args} />,
+
   args: {
-    variant: 'link',
+    variant: 'mini',
   },
 }
