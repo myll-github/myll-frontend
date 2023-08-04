@@ -1,5 +1,5 @@
-import COLOR from 'color'
-import TYPOGRAPHY from 'typography'
+import COLOR from './src/color'
+import TYPOGRAPHY from './src/typography'
 
 export { COLOR, TYPOGRAPHY }
 export * from './src/icons'

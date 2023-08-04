@@ -11,7 +11,7 @@ const pxToRem = (px, base = 16) => `${px / base}rem`
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['../../packages/myll-ui/**/*.{ts,tsx}', './**/*.{ts,tsx}'],
+  content: [ './**/*.{ts,tsx}'],
 
   variants: {
     extend: {
