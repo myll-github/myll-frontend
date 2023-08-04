@@ -8,7 +8,10 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
-    "gen:dev": {},
+    "gen:dev": {
+      "dependsOn": ["^gen:dev"],
+      "outputs": ["./dist/**"]
+    },
     "gen:build": {
       "outputs": ["./dist/**"]
     },
