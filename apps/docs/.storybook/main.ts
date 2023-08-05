@@ -23,5 +23,25 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+
+  async webpackFinal(config, { configType }) {
+    if (configType === 'DEVELOPMENT') {
+      // Modify config for development
+    }
+    if (configType === 'PRODUCTION') {
+      // Modify config for production
+    }
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          '@': './src',
+        },
+      },
+    }
+  },
 }
+
 export default config
