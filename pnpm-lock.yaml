@@ -111,6 +111,9 @@ importers:
       typescript:
         specifier: ^4.5.3
         version: 4.9.5
+      web:
+        specifier: workspace:*
+        version: link:../web
 
   apps/web:
     dependencies:

@@ -15,5 +15,16 @@ export default meta
 type Story = StoryObj<typeof FooterNav>
 
 export const BasicFooterNavExample: Story = {
+  render: () => {
+    return (
+      <FooterNav>
+        <FooterNav.BookIcon isActive />
+        <FooterNav.HomeIcon isActive={false} />
+        <FooterNav.LocalIcon isActive={false} />
+        <FooterNav.MapIcon isActive={false} />
+        <FooterNav.MyllIcon isActive={false} />
+      </FooterNav>
+    )
+  },
   args: {},
 }

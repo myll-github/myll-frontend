@@ -33,6 +33,7 @@
     "sass": "^1.63.3",
     "shared": "workspace:*",
     "storybook": "7.0.27",
+    "web": "workspace:*",
     "tailwind-config": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"
