@@ -15,7 +15,9 @@ const Page = () => {
       <div className="w-30tvw h-30tvh bg-PINK1 HEADER-H1"> 213213</div>
       <div className="w-180tvw h-[30px] bg-PINK1 HEADER-H1"> 213213</div>
       123
-      <Button />
+      <Button type="button" variant="small">
+        asd
+      </Button>
       <Styled>rasdasdsads</Styled>
     </>
   )

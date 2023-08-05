@@ -1,6 +1,7 @@
-import { FooterNav } from 'myll-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import FooterNav from './FooterNav'
 
 const Navigation = () => {
   const router = useRouter()

@@ -31,6 +31,7 @@ const config: StorybookConfig = {
     if (configType === 'PRODUCTION') {
       // Modify config for production
     }
+
     return {
       ...config,
       resolve: {
@@ -38,6 +39,9 @@ const config: StorybookConfig = {
         alias: {
           ...config.resolve?.alias,
           '@': './src',
+          'next/router': require.resolve('./__mocks__/next/router.tsx'),
+          'next/link': require.resolve('./__mocks__/next/link.tsx'),
+          'next/image': require.resolve('./__mocks__/next/image.tsx'),
         },
       },
     }
