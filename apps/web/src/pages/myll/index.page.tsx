@@ -1,14 +1,10 @@
-import { Button } from 'myll-ui'
-import Image from 'next/image'
-
-import Navigation from '@/common/components/Navigation'
+import NavLayout from '@/common/components/Layout/NavLayout'
 
 export const Login = () => {
   return (
-    <>
+    <NavLayout>
       <main>123</main>
-      <Navigation />
-    </>
+    </NavLayout>
   )
 }
 
