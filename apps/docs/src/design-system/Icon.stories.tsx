@@ -17,8 +17,6 @@ const ICONS = Object.entries(Icons)
     return { key, IconComponent: value }
   })
 
-console.log(ICONS)
-
 export const IconExamples = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>

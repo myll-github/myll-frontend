@@ -38,6 +38,7 @@ class _document extends Document<DocumentProps> {
           <link
             rel="stylesheet"
             as="style"
+            crossOrigin="anonymous"
             href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.8/static/pretendard.css"
           />
         </Head>

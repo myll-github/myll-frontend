@@ -23,5 +23,29 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+
+  async webpackFinal(config, { configType }) {
+    if (configType === 'DEVELOPMENT') {
+      // Modify config for development
+    }
+    if (configType === 'PRODUCTION') {
+      // Modify config for production
+    }
+
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          '@': './src',
+          'next/router': require.resolve('./__mocks__/next/router.tsx'),
+          'next/link': require.resolve('./__mocks__/next/link.tsx'),
+          'next/image': require.resolve('./__mocks__/next/image.tsx'),
+        },
+      },
+    }
+  },
 }
+
 export default config

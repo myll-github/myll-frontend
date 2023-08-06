@@ -18,7 +18,7 @@ coverage
 out/
 build
 **/dist/*
-workbox*.js
+workbox*.js*
 
 # misc
 .DS_Store
