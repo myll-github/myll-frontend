@@ -10,6 +10,7 @@ module.exports = {
     'lines-between-class-members': 0,
     'class-methods-use-this': 0,
     'react/jsx-props-no-spreading': ['warn'],
+    'import/no-unresolved': ['warn'],
 
     'import/no-extraneous-dependencies': ['warn'],
     'react/function-component-definition': [
@@ -37,8 +38,8 @@ module.exports = {
     node: true,
     jest: true,
   },
-  globals:{
-    JSX: true
+  globals: {
+    JSX: true,
   },
   settings: {
     'import/resolver': {
@@ -46,6 +47,7 @@ module.exports = {
         extensions: ['.ts', '.tsx'],
         moduleDirectory: ['src', 'node_modules'],
         project: ['**/tsconfig.json'],
+        paths: ['src'],
       },
     },
   },

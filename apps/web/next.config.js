@@ -4,7 +4,6 @@ const prod = process.env.NODE_ENV === 'production'
 /** @type {import('next').NextConfig} */
 const withPWA = require('next-pwa')({
   dest: './public',
-  disable: !prod,
 })
 require('dotenv').config()
 
@@ -13,7 +12,7 @@ default-src 'none';
 font-src 'self' cdnjs.cloudflare.com; 
 script-src 'self' 'unsafe-eval'; 
 script-src-elem 'self'; 
-connect-src 'self'; 
+connect-src 'self' cdnjs.cloudflare.com; 
 style-src 'self' 'unsafe-inline'; 
 style-src-elem 'self' 'unsafe-inline' cdnjs.cloudflare.com;
 img-src 'self'; 
@@ -32,7 +31,7 @@ module.exports = withPWA({
     KAKAO_LOGIN_REDIRECT_URL: process.env.KAKAO_LOGIN_REDIRECT_URL,
   },
   reactStrictMode: true,
-  transpilePackages: ['myll-ui'],
+  transpilePackages: ['myll-ui', 'shared'],
 
   sassOptions: {
     fiber: false,

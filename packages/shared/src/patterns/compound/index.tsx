@@ -4,6 +4,7 @@ const CompoundContext = createContext(null as any)
 
 interface CompoundProps {
   children: ReactNode
+  [key: string]: any
 }
 
 export const CompoundProvider = ({ children, ...providerValue }: CompoundProps) => {

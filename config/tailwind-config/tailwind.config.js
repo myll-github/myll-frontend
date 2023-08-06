@@ -11,12 +11,16 @@ const pxToRem = (px, base = 16) => `${px / base}rem`
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [ './**/*.{ts,tsx}'],
+  content: ['./**/*.{ts,tsx}'],
+
+  extend: {
+    fontFamily: {
+      pretendard: ['Pretendard', 'sans'],
+    },
+  },
 
   variants: {
-    extend: {
-
-    },
+    extend: {},
   },
 
   theme: {

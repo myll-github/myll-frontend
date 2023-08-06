@@ -7,4 +7,16 @@ module.exports = {
     '@tanstack/query/prefer-query-object-syntax': 'error',
     'import/prefer-default-export': 'off',
   },
+
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx'],
+        moduleDirectory: ['src', 'node_modules'],
+        project: ['**/tsconfig.json'],
+        paths: ['src'],
+      },
+    },
+  },
+
 }
