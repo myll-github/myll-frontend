@@ -3,7 +3,7 @@ import NavLayout from '@/common/components/Layout/NavLayout'
 export const Login = () => {
   return (
     <NavLayout>
-      <main>123</main>
+      <main>123 </main>
     </NavLayout>
   )
 }
