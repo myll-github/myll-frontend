@@ -3,6 +3,7 @@
 import '@/styles/index.scss'
 
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AntdConfigProvider } from 'myll-ui'
 import Head from 'next/head'
 import { FC, useState } from 'react'
 
@@ -35,7 +36,9 @@ const App = ({ Component, pageProps }: Props) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
+          <AntdConfigProvider>
+            <Component {...pageProps} />
+          </AntdConfigProvider>
         </Hydrate>
       </QueryClientProvider>
     </>
