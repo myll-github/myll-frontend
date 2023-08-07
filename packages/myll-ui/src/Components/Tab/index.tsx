@@ -7,7 +7,14 @@ interface Props {
 }
 
 const Tab = ({ defaultActiveKey, items, onChange }: Props) => (
-  <AntTabs defaultActiveKey={defaultActiveKey} items={items} onChange={onChange} />
+  <AntTabs
+    centered
+    size="large"
+    className="w-full h-44pxr text-GRAY_60"
+    defaultActiveKey={defaultActiveKey}
+    items={items}
+    onChange={onChange}
+  />
 )
 
 export default Tab
