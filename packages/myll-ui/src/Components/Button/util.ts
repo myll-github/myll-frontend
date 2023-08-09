@@ -93,7 +93,7 @@ export const buttonColorMap: { [key in ButtonColor]: ButtonColorProps } = {
 }
 
 export const applyClassName = (obj: ButtonVariantProps | ButtonColorProps) => {
-  return Object.values(obj).reduce((total, value) => `${total} ${value}`, '')
+  return Object.values(obj!).reduce((total, value) => `${total} ${value}`, '')
 }
 
 export const getAntdButtonType = (varinant: ButtonVariant, color: ButtonColor) => {
