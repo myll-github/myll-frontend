@@ -1,4 +1,5 @@
 import ConfigProvider from 'antd/es/config-provider'
+import { Divider } from 'antd'
 
 import Button from './src/Components/Button/Button'
 import Input from './src/Components/Input'
@@ -11,4 +12,4 @@ const AntdConfigProvider = (props: any) => {
   return <ConfigProvider {...props} theme={{ hashed: false }} />
 }
 
-export { AntdConfigProvider, Button, Input, Tab }
+export { AntdConfigProvider, Divider, Button, Input, Tab }
