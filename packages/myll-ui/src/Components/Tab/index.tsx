@@ -36,7 +36,7 @@ const Tab = ({ defaultActiveKey, className, activeKey, items, onChange }: Props)
           {(node) => (
             <>
               {cloneElement(node, {
-                className: `${node.props.className} justify-center w-98pxr min-w-[40px]`,
+                className: `${node.props.className} justify-center sm:w-98pxr m-0 min-w-[40px] GNB_ACTIVE`,
               })}
             </>
           )}
