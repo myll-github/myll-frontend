@@ -3,6 +3,12 @@ import { cloneElement } from 'react'
 
 // Define the prop types for the Tab component.
 interface Props {
+  /** className for style */
+  className?: string
+
+  /** The key of the tab pane to be active  */
+  activeKey?: string
+
   /** The key of the tab pane to be active by default.  */
   defaultActiveKey: string
 
@@ -15,12 +21,13 @@ interface Props {
 
 const { TabPane } = AntTabs
 
-const Tab = ({ defaultActiveKey, items, onChange }: Props) => (
+const Tab = ({ defaultActiveKey, className, activeKey, items, onChange }: Props) => (
   <AntTabs
     centered
     size="large"
-    className="flex justify-center w-full h-44pxr"
+    className={`flex justify-center w-full h-44pxr ${className}`}
     defaultActiveKey={defaultActiveKey}
+    activeKey={activeKey}
     items={items}
     onChange={onChange}
     renderTabBar={(props, DefaultTabBar) => {
@@ -29,7 +36,7 @@ const Tab = ({ defaultActiveKey, items, onChange }: Props) => (
           {(node) => (
             <>
               {cloneElement(node, {
-                className: `${node.props.className} justify-center min-w-[98px]`,
+                className: `${node.props.className} justify-center w-98pxr min-w-[40px]`,
               })}
             </>
           )}
@@ -38,5 +45,10 @@ const Tab = ({ defaultActiveKey, items, onChange }: Props) => (
     }}
   />
 )
+
+Tab.defaultProps = {
+  activeKey: undefined,
+  className: '',
+}
 
 export default Tab
