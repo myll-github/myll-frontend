@@ -29,7 +29,7 @@ export const BasicCardExample: Story = {
 export const HorizontalCardExample: Story = {
   render: (args) => (
     <HorizontalCard {...args}>
-      <HorizontalCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+      <HorizontalCard.CardImage alt="example" src="http://tong.visitkorea.or.kr/cms/resource/34/2869134_image2_1.jpg" />
       <HorizontalCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
     </HorizontalCard>
   ),
