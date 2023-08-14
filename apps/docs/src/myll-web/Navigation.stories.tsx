@@ -5,7 +5,6 @@ import { Navigation } from 'web'
 const meta: Meta<typeof Navigation> = {
   title: 'Example/Navigation',
   component: Navigation,
-  tags: ['autodocs'],
   argTypes: {},
 }
 
