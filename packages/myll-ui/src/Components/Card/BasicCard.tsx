@@ -20,7 +20,11 @@ const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick
 }
 
 BasicCard.CardImage = ({ src, alt }: ImageProps) => {
-  return <CardImage src={src} alt={alt} className="relative object-fill mb-1 rounded-sm w-140pxr h-50pxr" />
+  return (
+    <div className="w-140pxr h-50pxr">
+      <CardImage src={src} alt={alt} className="relative object-scale-down mb-1 rounded-sm w-140pxr h-50pxr" />
+    </div>
+  )
 }
 
 const Description = ({ mainTitle, subTitle }: DescriptionProps) => {

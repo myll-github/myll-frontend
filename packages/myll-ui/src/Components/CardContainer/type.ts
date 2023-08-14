@@ -8,7 +8,11 @@ export interface CardDataProps {
 
 export type CardType = 'basic' | 'horizontal' | 'round'
 
+export type OnToggleCardStatusType = (checkList: Map<number, CardDataProps>) => void
+
 export interface CardContainerProps {
   data: CardDataProps[]
   cardType: CardType
+  className: string
+  onChange: OnToggleCardStatusType
 }

@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { BasicCard, HorizontalCard, RoundCard } from '../Card'
-import { CardType } from './type'
+import { CardDataProps, CardType, OnToggleCardStatusType } from './type'
 
 interface useCardContainerProps {
   cardType: CardType
@@ -23,21 +23,29 @@ export const useCardContainerHook = ({ cardType }: useCardContainerProps) => {
   return { Card }
 }
 
-export const useCheckCardList = () => {
-  const [checkList, setCheckList] = useState(new Set())
+export interface useCheckCardListProps {
+  onChange: OnToggleCardStatusType
+}
 
-  const ToggleCardStatusByClick = (cardId: number) => {
-    setCheckList((prevCheckList) => {
-      const newCheckList = new Set(prevCheckList)
-      if (newCheckList.has(cardId)) {
-        newCheckList.delete(cardId)
+export const useCheckCardList = ({ onChange }: useCheckCardListProps) => {
+  const [checkMap, setCheckMap] = useState(new Map<number, CardDataProps>())
+
+  const ToggleCardStatusByClick = (card: CardDataProps) => {
+    setCheckMap((prevCheckMap) => {
+      const newCheckMap = new Map(prevCheckMap)
+      if (newCheckMap.has(card.id)) {
+        newCheckMap.delete(card.id)
       } else {
-        newCheckList.add(cardId)
+        newCheckMap.set(card.id, card)
       }
 
-      return newCheckList
+      return newCheckMap
     })
   }
 
-  return { checkList, ToggleCardStatusByClick }
+  useEffect(() => {
+    onChange(checkMap)
+  }, [checkMap, onChange])
+
+  return { checkMap, ToggleCardStatusByClick }
 }
