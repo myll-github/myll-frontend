@@ -1,53 +1,58 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { BasicCard, Card, HorizontalCard, RoundCard } from 'myll-ui'
-import Image from 'next/image'
+import { CardContainer } from 'myll-ui'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof Card> = {
-  title: 'Example/Card',
-  component: Card,
+const meta: Meta<typeof CardContainer> = {
+  title: 'Example/CardContainer',
+  component: CardContainer,
   tags: ['autodocs'],
   argTypes: {},
 }
 
+const ExampleData = [
+  {
+    id: 1,
+    subTitle: 'apple',
+    mainTitle: 'apple',
+    alt: '1',
+    url: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+  },
+  {
+    id: 2,
+    subTitle: 'apple2',
+    mainTitle: 'apple2',
+    alt: '1',
+    url: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+  },
+  {
+    id: 3,
+    subTitle: 'apple3',
+    mainTitle: 'apple3',
+    alt: '1',
+    url: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+  },
+]
+
 export default meta
-type Story = StoryObj<typeof Card>
+type Story = StoryObj<typeof CardContainer>
 
-export const BasicCardExample: Story = {
-  render: (args) => (
-    <BasicCard {...args}>
-      <BasicCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-      <BasicCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
-    </BasicCard>
-  ),
+export const BasicCardContainer: Story = {
   args: {
-    subTitle: 'Sub Title',
-    mainTitle: 'Place Title',
+    data: ExampleData,
+    cardType: 'basic',
   },
 }
 
-export const HorizontalCardExample: Story = {
-  render: (args) => (
-    <HorizontalCard {...args}>
-      <HorizontalCard.CardImage alt="example" src="http://tong.visitkorea.or.kr/cms/resource/34/2869134_image2_1.jpg" />
-      <HorizontalCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
-    </HorizontalCard>
-  ),
+export const HorizontalCardContainer: Story = {
   args: {
-    subTitle: 'Sub Title',
-    mainTitle: 'Place Title',
+    data: ExampleData,
+    cardType: 'horizontal',
   },
 }
 
-export const RoundCardExample: Story = {
-  render: (args) => (
-    <RoundCard {...args}>
-      <RoundCard.CardImage alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-      <RoundCard.Description subTitle={args.subTitle} mainTitle={args.mainTitle} />
-    </RoundCard>
-  ),
+export const RoundCardContainer: Story = {
   args: {
-    subTitle: 'Sub Title',
-    mainTitle: 'Place Title',
+    data: ExampleData,
+    cardType: 'round',
   },
 }

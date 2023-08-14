@@ -4,13 +4,9 @@ import Card from './components/base'
 import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
-const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected }: BasicCardProps) => {
+const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
   const userId = useId()
   const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
-
-  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    console.log(userId)
-  }
 
   return (
     <Card
@@ -24,15 +20,7 @@ const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected }: Basic
 }
 
 BasicCard.CardImage = ({ src, alt }: ImageProps) => {
-  return (
-    <CardImage
-      src={src}
-      alt={alt}
-      width={150}
-      height={50}
-      className="relative object-fill mb-1 rounded-sm w-140pxr h-50pxr"
-    />
-  )
+  return <CardImage src={src} alt={alt} className="relative object-fill mb-1 rounded-sm w-140pxr h-50pxr" />
 }
 
 const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
