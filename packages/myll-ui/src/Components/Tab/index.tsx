@@ -1,4 +1,5 @@
 import { Tabs as AntTabs, TabsProps } from 'antd'
+import { cloneElement } from 'react'
 
 // Define the prop types for the Tab component.
 interface Props {
@@ -12,14 +13,29 @@ interface Props {
   onChange: (key: string) => void
 }
 
+const { TabPane } = AntTabs
+
 const Tab = ({ defaultActiveKey, items, onChange }: Props) => (
   <AntTabs
     centered
     size="large"
-    className="w-full h-44pxr text-GRAY_60"
+    className="flex justify-center w-full h-44pxr"
     defaultActiveKey={defaultActiveKey}
     items={items}
     onChange={onChange}
+    renderTabBar={(props, DefaultTabBar) => {
+      return (
+        <DefaultTabBar {...props} className="text-GRAY_60">
+          {(node) => (
+            <>
+              {cloneElement(node, {
+                className: `${node.props.className} justify-center min-w-[98px]`,
+              })}
+            </>
+          )}
+        </DefaultTabBar>
+      )
+    }}
   />
 )
 
