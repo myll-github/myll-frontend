@@ -1,4 +1,3 @@
-import useProductStore from './example1'
-import useCartStore from './example2'
+import useCountStore from './example1'
 
-export { useCartStore, useProductStore }
+export { useCountStore }
