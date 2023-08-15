@@ -45,10 +45,16 @@ const Input: FC<InputProps> = (props) => {
     <div className="flex flex-col gap-[8px]">
       <div className="INPUT-LABEL2">{label}</div>
       {inputType === 'default' ? (
-        <AntdInput bordered={!(theme === 'bottom-border')} status={isError ? 'error' : undefined} {...inputProps} />
+        <AntdInput
+          bordered={!(theme === 'bottom-border')}
+          status={isError ? 'error' : undefined}
+          value={value}
+          {...inputProps}
+        />
       ) : (
         <AntdInput.Password
           bordered={!(theme === 'bottom-border')}
+          value={value}
           status={isError ? 'error' : undefined}
           {...inputProps}
         />
