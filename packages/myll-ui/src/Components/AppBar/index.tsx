@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-import { ICON_FIRST_PAGE } from 'shared'
+import { ICON_ARROW_LEFT } from 'shared'
 
 interface AppBarProps {
   children: ReactNode
@@ -48,7 +48,7 @@ const FallbackButton = () => {
 
   return (
     <button type="button" onClick={handleGoBack}>
-      <ICON_FIRST_PAGE className="fill-GRAY_80" />
+      <ICON_ARROW_LEFT className="fill-GRAY_80" />
     </button>
   )
 }
