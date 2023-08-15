@@ -83,7 +83,7 @@ const getSVGsFromComponents = (components) => {
 async function run() {
   if (!TOKEN) {
     console.error(
-      'The Figma API token is not defined, you need to set an environment variable `FIGMA_API_TOKEN` to run the script',
+      'The Figma API token is not defined, you need to set an environment variable `FIGMA_WEBHOOK` to run the script',
     )
     return
   }
