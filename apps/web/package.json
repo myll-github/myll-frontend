@@ -22,7 +22,8 @@
     "react-dom": "^18.2.0",
     "shared": "workspace:*",
     "styled-components": "6.0.0-rc.3",
-    "zustand": "^4.3.8"
+    "zustand": "^4.3.8",
+    "sass": "^1.63.3"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.21.0",
@@ -40,7 +41,6 @@
     "@types/testing-library__jest-dom": "^5.14.8",
     "eslint-config-custom": "workspace:*",
     "jest-config": "workspace:*",
-    "sass": "^1.63.3",
     "tailwind-config": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"

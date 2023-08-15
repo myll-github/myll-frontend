@@ -144,6 +144,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      sass:
+        specifier: ^1.63.3
+        version: 1.63.3
       shared:
         specifier: workspace:*
         version: link:../../packages/shared
@@ -199,9 +202,6 @@ importers:
       jest-config:
         specifier: workspace:*
         version: link:../../config/jest-config
-      sass:
-        specifier: ^1.63.3
-        version: 1.63.3
       tailwind-config:
         specifier: workspace:*
         version: link:../../config/tailwind-config

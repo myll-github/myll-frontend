@@ -1,7 +1,6 @@
 name: Run Figma Icon update Script
 
 on:
-  schedule:
   workflow_dispatch:
 
 jobs:

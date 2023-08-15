@@ -3,7 +3,7 @@ import { Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import DefaultLayout from '@/common/components/layout/DefaultLayout'
+import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 export const Login = () => {
   return (
