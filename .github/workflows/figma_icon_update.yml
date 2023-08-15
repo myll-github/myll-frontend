@@ -2,8 +2,7 @@ name: Run Figma Icon update Script
 
 on:
   schedule:
-    # 수동 업데이트 권장
-    - cron: '0 0 1 1 *'
+  workflow_dispatch:
 
 jobs:
   run-js:
@@ -33,10 +32,11 @@ jobs:
         run: pnpm install
 
       - name: Run the script
+        env:
+          FIGMA_WEBHOOK: ${{ secrets.FIGMA_WEBHOOK }}
         run: |
           cd ./packages/shared
           pnpm generate:icon
-          FIGMA_WEBHOOK=${{ secrets.FIGMA_WEBHOOK }} node your-script.js
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
