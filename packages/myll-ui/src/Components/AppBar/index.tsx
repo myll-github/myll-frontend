@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { ICON_FIRST_PAGE } from 'shared'
 
-interface TopNavigationBarProps {
+interface AppBarProps {
   children: ReactNode
 }
 
@@ -11,7 +11,7 @@ interface SectionProps {
   className?: string
 }
 
-const TopNavigationBar = ({ children }: TopNavigationBarProps) => {
+const AppBar = ({ children }: AppBarProps) => {
   return <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr">{children}</nav>
 }
 
@@ -53,10 +53,10 @@ const FallbackButton = () => {
   )
 }
 
-TopNavigationBar.LeftSection = LeftSection
-TopNavigationBar.MiddleSection = MiddleSection
-TopNavigationBar.RightSection = RightSection
+AppBar.LeftSection = LeftSection
+AppBar.MiddleSection = MiddleSection
+AppBar.RightSection = RightSection
 
-TopNavigationBar.FallbackButton = FallbackButton
+AppBar.FallbackButton = FallbackButton
 
-export default TopNavigationBar
+export default AppBar
