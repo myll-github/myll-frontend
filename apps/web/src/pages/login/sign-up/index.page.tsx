@@ -2,10 +2,16 @@
 import { Button, Divider, Input, Space } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import DefaultLayout from '@/common/components/layout/DefaultLayout'
 
 export const SignUp = () => {
+  // @TODO debounce 적용 및 text state 관리 로직 추가
+  const handleValidateUsername = (text: string) => {
+    if (text.length <= 15 && !/[^a-zA-Z가-힣]/.test(text)) return true
+    return false
+  }
   return (
     <DefaultLayout>
       <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr">
@@ -14,7 +20,13 @@ export const SignUp = () => {
         </div>
 
         <div className="flex flex-col gap-20pxr">
-          <Input label="사용자 이름" size="large" placeholder="한/영 15자 이내" />
+          <Input
+            label="사용자 이름"
+            size="large"
+            placeholder="한/영 15자 이내"
+            onValidation={handleValidateUsername}
+            errorMessage="한글, 영문 대소문자 15자 이내로 입력해주세요"
+          />
           <Input label="이메일" size="large" placeholder="이메일을 입력해주세요" inputMode="email" />
           <Space.Compact block size="large" className="w-full flex justify-center items-center">
             <Input size="large" placeholder="인증번호" addonBefore={<div className="INPUT-LABEL2">인증코드</div>} />
