@@ -8,15 +8,17 @@ interface TitleProps {
 interface ImageRawProps {
   src: string
   alt: string
-  width: number
-  height: number
   className: string
 }
 
-export interface ImageProps extends Omit<ImageRawProps, 'width' | 'height' | 'className'> {}
+export interface ImageProps extends Omit<ImageRawProps, 'className'> {}
 
-export const CardImage = ({ src, alt, width, height, className }: ImageRawProps) => {
-  return <Image sizes="250px" src={src} width={width} height={height} alt={alt} className={className} />
+export const CardImage = ({ src, alt, className }: ImageRawProps) => {
+  return (
+    <div className={`${className} overflow-hidden`}>
+      <Image src={src} alt={alt} fill style={{ height: '100%', width: '100%' }} />
+    </div>
+  )
 }
 
 export const MainTitle = ({ title, className }: TitleProps) => {

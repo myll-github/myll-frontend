@@ -153,6 +153,13 @@ const TYPOGRAPHY = {
     lineHeight: '22px',
     letterSpacing: '0.46px',
   },
+
+  '.GNB_ACTIVE': {
+    fontFamily: 'Pretendard, sans-serif',
+    fontSize: '11px',
+    fontWeight: 600,
+    lineHeight: '14px',
+  },
 }
 
 export default TYPOGRAPHY
