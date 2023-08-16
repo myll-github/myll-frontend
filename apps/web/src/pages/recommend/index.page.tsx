@@ -1,4 +1,5 @@
 import { Tab } from 'myll-ui'
+import { GetServerSideProps } from 'next'
 import { CompoundProvider, noop } from 'shared'
 
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
@@ -35,6 +36,12 @@ export const Recommend = () => {
       </DefaultLayout>
     </CompoundProvider>
   )
+}
+
+export const getServerSideProps = async () => {
+  const res = await fetch('https://api.github.com/repos/vercelnext.j/s')
+  const repo = await res.json()
+  return { props: { repo } }
 }
 
 export default Recommend
