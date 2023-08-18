@@ -1,5 +1,4 @@
-import { Alert as AntdAlert, Space, Switch } from 'antd'
-import { useState } from 'react'
+import { Alert as AntdAlert, Space } from 'antd'
 
 interface AlertProps {
   /**
@@ -11,6 +10,11 @@ interface AlertProps {
    * - `'error'`: Indicates a failed action or a negative message.
    */
   type?: 'success' | 'info' | 'warning' | 'error'
+
+  /**
+   * Determines whether the close button is visible or not.
+   */
+  closable?: boolean
 
   /**
     Determines whether the alert is visible or not.
@@ -28,20 +32,30 @@ interface AlertProps {
   onVisibleChange: (flag: boolean) => void
 }
 
-const Alert = ({ type, isVisible, message, onVisibleChange }: AlertProps) => {
+const Alert = ({ type, isVisible, closable, message, onVisibleChange }: AlertProps) => {
   const handleClose = () => {
     onVisibleChange(false)
   }
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      {isVisible && <AntdAlert showIcon message={message} type={type} closable afterClose={handleClose} />}
+      {isVisible && (
+        <AntdAlert
+          className="flex justify-center SUBTITLE-T8 text-GRAY_100"
+          showIcon
+          message={message}
+          type={type}
+          closable={closable}
+          afterClose={handleClose}
+        />
+      )}
     </Space>
   )
 }
 
 Alert.defaultProps = {
   type: 'success' as 'success' | 'info' | 'warning' | 'error',
+  closable: true,
 }
 
 export default Alert
