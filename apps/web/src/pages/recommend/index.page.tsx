@@ -1,7 +1,9 @@
 import { Tab } from 'myll-ui'
 import { GetServerSideProps } from 'next'
+import { useState } from 'react'
 import { CompoundProvider, noop } from 'shared'
 
+import { getFavoritePlace } from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 import FavoriteActivity from './FavoriteActivity'
@@ -26,11 +28,11 @@ const getTabItems = () => [
   },
 ]
 
-export const Recommend = () => {
-  const a = 1
+export const Recommend = ({ favoritePlace }: any) => {
+  const [{ favoritePlace: fav }, setFavorite] = useState({ favoritePlace })
 
   return (
-    <CompoundProvider providerValue={a}>
+    <CompoundProvider providerValue={{ fav }}>
       <DefaultLayout>
         <Tab className="mt-30pxr" defaultActiveKey="1" items={getTabItems()} onChange={noop} />
       </DefaultLayout>
@@ -39,9 +41,8 @@ export const Recommend = () => {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch('https://api.github.com/repos/vercelnext.j/s')
-  const repo = await res.json()
-  return { props: { repo } }
+  const favoritePlace = await getFavoritePlace()
+  return { props: { favoritePlace } }
 }
 
 export default Recommend
