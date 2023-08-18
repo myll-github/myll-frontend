@@ -1,4 +1,5 @@
 import { Button, DatePicker as AntdDatePicker, DatePickerProps } from 'antd'
+import koKR from 'antd/es/locale/ko_KR'
 import { useEffect, useState } from 'react'
 
 const DatePicker = (props: DatePickerProps) => {
@@ -15,15 +16,15 @@ const DatePicker = (props: DatePickerProps) => {
 
   return (
     <>
-      {open && (
-        <div className="fixed top-0 left-0 z-10 w-screen h-screen pointer-events-none backdrop-blur-md background-GRAY_80" />
-      )}
+      {open && <div className="fixed top-0 left-0 z-10 w-screen h-screen pointer-events-none bg-GRAY_100" />}
       <AntdDatePicker
         open={open}
         onOpenChange={setOpen}
         value={selectedDate}
         onChange={setSelectedDate}
+        locale={koKR}
         renderExtraFooter={renderExtraFooter}
+        popupClassName="fixed inset-0 flex justify-center items-center z-50"
         {...props}
       />
     </>
