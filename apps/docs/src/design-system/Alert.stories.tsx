@@ -7,7 +7,7 @@ const meta: Meta<typeof Alert> = {
   component: Alert,
   tags: ['autodocs'],
   argTypes: {},
-  args: { message: 'example' },
+  args: { message: 'example', isVisible: true },
 }
 
 export default meta
