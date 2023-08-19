@@ -1,9 +1,10 @@
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Tab } from 'myll-ui'
 import { GetServerSideProps } from 'next'
-import { useState } from 'react'
+import { Suspense } from 'react'
 import { CompoundProvider, noop } from 'shared'
 
-import { getFavoritePlace } from '@/common/api/recommend'
+import { FavoritePlaceQueryFn, FavoritePlaceQueryKey } from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 import FavoriteActivity from './FavoriteActivity'
@@ -14,7 +15,7 @@ const getTabItems = () => [
   {
     key: '1',
     label: `좋아하는 지역`,
-    children: <FavoriteActivity />,
+    children: <FavoritePlace />,
   },
   {
     key: '2',
@@ -24,7 +25,7 @@ const getTabItems = () => [
   {
     key: '3',
     label: `하고싶은 활동`,
-    children: <FavoritePlace />,
+    children: <FavoriteActivity />,
   },
 ]
 
@@ -41,8 +42,20 @@ export const Recommend = ({ favoritePlace }: any) => {
 }
 
 export const getServerSideProps = async () => {
-  const favoritePlace = await getFavoritePlace()
-  return { props: { favoritePlace } }
+  const queryClient = new QueryClient()
+
+  await queryClient.fetchQuery({
+    queryKey: FavoritePlaceQueryKey,
+    queryFn: FavoritePlaceQueryFn,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  })
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
 }
 
 export default Recommend

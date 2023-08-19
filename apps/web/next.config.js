@@ -42,6 +42,9 @@ module.exports = withPWA({
   },
 
   crossOrigin: 'anonymous',
+  images: {
+    domains: ['tong.visitkorea.or.kr', 'localhost'],
+  },
 
   async headers() {
     return [
