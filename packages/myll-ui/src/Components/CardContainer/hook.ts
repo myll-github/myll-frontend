@@ -23,14 +23,14 @@ export const useCardContainerHook = ({ cardType }: useCardContainerProps) => {
   return { Card }
 }
 
-export interface useCheckCardListProps {
-  onChange: OnToggleCardStatusType
+export interface useCheckListProps<T extends { id: number }> {
+  onChange: OnToggleCardStatusType<T>
 }
 
-export const useCheckCardList = ({ onChange }: useCheckCardListProps) => {
-  const [checkMap, setCheckMap] = useState(new Map<number, CardDataProps>())
+export const useCheckList = <T extends { id: number }>({ onChange }: useCheckListProps<T>) => {
+  const [checkMap, setCheckMap] = useState(new Map<number, T>())
 
-  const ToggleCardStatusByClick = (card: CardDataProps) => {
+  const ToggleCardStatusByClick = (card: T) => {
     setCheckMap((prevCheckMap) => {
       const newCheckMap = new Map(prevCheckMap)
       if (newCheckMap.has(card.id)) {

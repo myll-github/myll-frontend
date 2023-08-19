@@ -9,10 +9,12 @@ module.exports = {
     'prettier/prettier': 0,
     'lines-between-class-members': 0,
     'class-methods-use-this': 0,
+
+    'react/jsx-no-useless-fragment': 'off',
     'react/jsx-props-no-spreading': ['warn'],
     'import/no-unresolved': ['warn'],
-
     'import/no-extraneous-dependencies': ['warn'],
+
     'react/function-component-definition': [
       2,
       {
