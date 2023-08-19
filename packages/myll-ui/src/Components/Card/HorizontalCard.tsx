@@ -1,8 +1,9 @@
 import { FC, MouseEventHandler, ReactComponentElement, ReactNode, useId } from 'react'
 import { ICON_CHECKED, ICON_DEFAULT } from 'shared'
 
+import { ImageProps } from '../Image'
 import Card from './components/base'
-import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
+import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
