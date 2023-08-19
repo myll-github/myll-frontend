@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
-import { noop } from 'shared'
+import { noop, useCheckList } from 'shared'
 
-import { useCardContainerHook, useCheckList } from './hook'
+import { useCardContainerHook } from './hook'
 import { CardContainerProps } from './type'
 
 const CardContainer = ({ cardType, data, className, onChange = noop }: CardContainerProps) => {

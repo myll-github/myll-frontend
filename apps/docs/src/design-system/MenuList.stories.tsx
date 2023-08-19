@@ -14,7 +14,9 @@ const meta: Meta<typeof MenuList> = {
   title: 'Example/MenuList',
   component: MenuList,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    size: ['advanced', 'default'],
+  },
   args: { data },
 }
 
@@ -23,4 +25,16 @@ type Story = StoryObj<typeof MenuList>
 
 export const BasicMenuList: Story = {
   args: {},
+}
+
+export const SelectedMenuList: Story = {
+  args: {
+    isSelectedButtonNeeded: true,
+  },
+}
+
+export const AdvancedMenuList: Story = {
+  args: {
+    size: 'advanced',
+  },
 }
