@@ -11,7 +11,7 @@ const CardContainer = ({ cardType, data, className, onChange = noop }: CardConta
   return (
     <div className={`select-none ${className}`}>
       {data.map((cardData) => {
-        const { id, subTitle, mainTitle, url, alt, svg } = cardData
+        const { id, subTitle, mainTitle, url, alt } = cardData
 
         return (
           <Card key={id} isSelected={checkMap.has(id)} onClick={() => ToggleCardStatusByClick(cardData)}>

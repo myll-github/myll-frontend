@@ -37,8 +37,8 @@ const getTabItems = () => [
 ]
 
 export const Recommend = ({ favoritePlace }: any) => {
+  const a = 1
 
-    
   return (
     <CompoundProvider providerValue={a}>
       <DefaultLayout>
