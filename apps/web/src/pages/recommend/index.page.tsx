@@ -4,7 +4,14 @@ import { GetServerSideProps } from 'next'
 import { Suspense } from 'react'
 import { CompoundProvider, noop } from 'shared'
 
-import { FavoritePlaceQueryFn, FavoritePlaceQueryKey } from '@/common/api/recommend'
+import {
+  FavoriteActivityFn,
+  FavoriteActivityKey,
+  FavoritePlaceQueryFn,
+  FavoritePlaceQueryKey,
+  TravelThemeQueryFn,
+  TravelThemeQueryKey,
+} from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 import FavoriteActivity from './FavoriteActivity'
@@ -30,12 +37,14 @@ const getTabItems = () => [
 ]
 
 export const Recommend = ({ favoritePlace }: any) => {
-  const [{ favoritePlace: fav }, setFavorite] = useState({ favoritePlace })
 
+    
   return (
-    <CompoundProvider providerValue={{ fav }}>
+    <CompoundProvider providerValue={a}>
       <DefaultLayout>
-        <Tab className="mt-30pxr" defaultActiveKey="1" items={getTabItems()} onChange={noop} />
+        <Suspense fallback={<div />}>
+          <Tab className="mt-30pxr" defaultActiveKey="1" items={getTabItems()} onChange={noop} />
+        </Suspense>
       </DefaultLayout>
     </CompoundProvider>
   )
@@ -44,12 +53,27 @@ export const Recommend = ({ favoritePlace }: any) => {
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient()
 
-  await queryClient.fetchQuery({
-    queryKey: FavoritePlaceQueryKey,
-    queryFn: FavoritePlaceQueryFn,
-    staleTime: Infinity,
-    cacheTime: Infinity,
-  })
+  await Promise.all([
+    queryClient.fetchQuery({
+      queryKey: FavoritePlaceQueryKey,
+      queryFn: FavoritePlaceQueryFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+    queryClient.fetchQuery({
+      queryKey: TravelThemeQueryKey,
+      queryFn: TravelThemeQueryFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+
+    queryClient.fetchQuery({
+      queryKey: FavoriteActivityKey,
+      queryFn: FavoriteActivityFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+  ])
 
   return {
     props: {

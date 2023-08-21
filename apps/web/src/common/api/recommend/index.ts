@@ -30,3 +30,58 @@ export const useFavoritePlaceQuery = () => {
     suspense: true,
   })
 }
+
+export const getTravelTheme = async () => {
+  const data = await axios(`${ROOT_URL}/tour-theme`)
+
+  return data.data.map((ele, id) => {
+    return {
+      id,
+      mainTitle: ele.title,
+      subTitle: ele.subTitle,
+      alt: ele.title,
+      svg: ele.svg,
+      ...ele,
+    }
+  })
+}
+
+export const TravelThemeQueryKey = ['tour-theme']
+export const TravelThemeQueryFn = () => getTravelTheme()
+
+export const useTravelThemeQuery = () => {
+  return useQuery({
+    queryKey: TravelThemeQueryKey,
+    queryFn: TravelThemeQueryFn,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    suspense: true,
+  })
+}
+
+export const getFavoriteActivity = async () => {
+  const data = await axios(`${ROOT_URL}/tour-category`)
+
+  return data.data.map((ele, id) => {
+    return {
+      id,
+      mainTitle: ele.title,
+      subTitle: ele.subTitle,
+      alt: ele.title,
+      svg: ele.svg,
+      ...ele,
+    }
+  })
+}
+export const FavoriteActivityKey = ['tour-category']
+export const FavoriteActivityFn = () => getFavoriteActivity()
+
+export const useFavoriteActivityQuery = () => {
+  return useQuery({
+    queryKey: FavoriteActivityKey,
+    queryFn: FavoriteActivityFn,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    suspense: true,
+  })
+}

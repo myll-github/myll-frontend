@@ -11,11 +11,11 @@ const CardContainer = ({ cardType, data, className, onChange = noop }: CardConta
   return (
     <div className={`select-none ${className}`}>
       {data.map((cardData) => {
-        const { id, subTitle, mainTitle, url, alt } = cardData
+        const { id, subTitle, mainTitle, url, alt, svg } = cardData
 
         return (
           <Card key={id} isSelected={checkMap.has(id)} onClick={() => ToggleCardStatusByClick(cardData)}>
-            <Card.CardImage alt={alt} src={url} />
+            <Card.CardImage alt={alt} src={url ?? ''} />
             <Card.Description subTitle={subTitle} mainTitle={mainTitle} />
           </Card>
         )
