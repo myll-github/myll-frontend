@@ -2,10 +2,13 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useFavoriteActivityQuery, useTravelThemeQuery } from '@/common/api/recommend'
+import useRecommendPageStore from '@/stores/useRecommendPageStore'
 
 const FavoriteActivity = () => {
   const context = useCompound()
   const { data } = useFavoriteActivityQuery()
+
+  const { setFavoriteActivityMap } = useRecommendPageStore()
 
   return (
     <main>
