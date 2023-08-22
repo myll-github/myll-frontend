@@ -2,10 +2,12 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useFavoritePlaceQuery } from '@/common/api/recommend'
+import { useRecommendPageStore } from '@/stores'
 
 const FavoritePlace = () => {
   const context = useCompound()
   const { data } = useFavoritePlaceQuery()
+  const { FavoritePlaceMap, setFavoritePlaceMap } = useRecommendPageStore()
 
   return (
     <main>
@@ -21,7 +23,7 @@ const FavoritePlace = () => {
           className="flex flex-row flex-wrap gap-5 w-320pxr"
           data={data}
           cardType="round"
-          onChange={() => {}}
+          onChange={setFavoritePlaceMap}
         />
       </div>
 

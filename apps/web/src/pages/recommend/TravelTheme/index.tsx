@@ -2,10 +2,13 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useTravelThemeQuery } from '@/common/api/recommend'
+import { useRecommendPageStore } from '@/stores'
 
 const TravelTheme = () => {
   const context = useCompound()
   const { data } = useTravelThemeQuery()
+
+  const { TravelThemeMap, setTravelThemeMap } = useRecommendPageStore()
 
   return (
     <main>
@@ -21,7 +24,7 @@ const TravelTheme = () => {
           className="flex flex-col items-center gap-5"
           data={data}
           cardType="horizontal"
-          onChange={() => {}}
+          onChange={setTravelThemeMap}
         />
       </div>
 

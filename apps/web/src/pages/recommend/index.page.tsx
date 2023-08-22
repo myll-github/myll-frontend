@@ -13,6 +13,7 @@ import {
   TravelThemeQueryKey,
 } from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { useRecommendPageStore } from '@/stores'
 
 import FavoriteActivity from './FavoriteActivity'
 import FavoritePlace from './FavoritePlace'

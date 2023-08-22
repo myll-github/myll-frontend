@@ -2,13 +2,12 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useFavoriteActivityQuery, useTravelThemeQuery } from '@/common/api/recommend'
-import useRecommendPageStore from '@/stores/useRecommendPageStore'
+import { useRecommendPageStore } from '@/stores'
 
 const FavoriteActivity = () => {
   const context = useCompound()
   const { data } = useFavoriteActivityQuery()
-
-  const { setFavoriteActivityMap } = useRecommendPageStore()
+  const { FavoriteActivityMap, TravelThemeMap, FavoritePlaceMap, setFavoriteActivityMap } = useRecommendPageStore()
 
   return (
     <main>
@@ -22,12 +21,19 @@ const FavoriteActivity = () => {
           className="flex flex-row flex-wrap gap-x-5 gap-y-[30px] w-320pxr"
           data={data}
           cardType="basic"
-          onChange={() => {}}
+          onChange={setFavoriteActivityMap}
         />
       </div>
 
       <div className="w-full h-84pxr flex flex-col items-center justify-start">
-        <Button type="button" variant="block" color="primary">
+        <Button
+          type="button"
+          variant="block"
+          color="primary"
+          onClick={() => {
+            console.log(FavoriteActivityMap, TravelThemeMap, FavoritePlaceMap)
+          }}
+        >
           선택 완료
         </Button>
       </div>

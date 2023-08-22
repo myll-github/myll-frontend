@@ -15,28 +15,28 @@ type Actions = {
   setFavoriteActivityMap: (newFavoriteActivityMap: Map<number, RecommandMapType>) => void
 }
 
-const useRecommendPageStore = create(
+const useRawRecommendPageStore = create(
   immer<State & Actions>((set) => ({
     FavoritePlaceMap: new Map<number, RecommandMapType>(),
     TravelThemeMap: new Map<number, RecommandMapType>(),
     FavoriteActivityMap: new Map<number, RecommandMapType>(),
 
     setFavoritePlaceMap: (newFavoritePlaceMap: Map<number, RecommandMapType>) => {
-      set(({ FavoritePlaceMap }) => {
-        FavoritePlaceMap = newFavoritePlaceMap
+      set((state) => {
+        state.FavoritePlaceMap = newFavoritePlaceMap
       })
     },
     setTravelThemeMap: (newTravelThemeMap: Map<number, RecommandMapType>) => {
-      set(({ TravelThemeMap }) => {
-        TravelThemeMap = newTravelThemeMap
+      set((state) => {
+        state.TravelThemeMap = newTravelThemeMap
       })
     },
     setFavoriteActivityMap: (newFavoriteActivityMap: Map<number, RecommandMapType>) => {
-      set(({ FavoriteActivityMap }) => {
-        FavoriteActivityMap = newFavoriteActivityMap
+      set((state) => {
+        state.FavoriteActivityMap = newFavoriteActivityMap
       })
     },
   })),
 )
 
-export default useRecommendPageStore
+export default useRawRecommendPageStore
