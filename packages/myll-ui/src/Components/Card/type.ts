@@ -1,10 +1,11 @@
 import { FC, ReactNode } from 'react'
 
-import { ImageProps } from './components/compound'
+import { ImageProps } from '../Image'
 
 export interface BasicCardProps {
   children: ReactNode
   isSelected?: boolean
+  onClick: () => void
 }
 
 export interface DescriptionProps {
