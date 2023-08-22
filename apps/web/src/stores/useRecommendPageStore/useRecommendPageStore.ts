@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { RECOMMEND_ACTIVITY_KEY_ENUM } from '@/common/constants'
+import { RECOMMEND_ACTIVITY_KEY, RECOMMEND_ACTIVITY_KEY_TYPE } from '@/common/constants'
 
 type RecommandMapType = unknown & { id: number }
 
 interface State {
-  tabIndex: (typeof RECOMMEND_ACTIVITY_KEY_ENUM)[keyof typeof RECOMMEND_ACTIVITY_KEY_ENUM]
+  tabIndex: RECOMMEND_ACTIVITY_KEY_TYPE
 
   FavoritePlaceMap: Map<number, RecommandMapType>
   TravelThemeMap: Map<number, RecommandMapType>
@@ -14,9 +14,7 @@ interface State {
 }
 
 interface Actions {
-  handleChangeTabIndex: (
-    newTabIndex: (typeof RECOMMEND_ACTIVITY_KEY_ENUM)[keyof typeof RECOMMEND_ACTIVITY_KEY_ENUM],
-  ) => void
+  handleChangeTabIndex: (newTabIndex: RECOMMEND_ACTIVITY_KEY_TYPE) => void
 
   setFavoritePlaceMap: (newFavoritePlaceMap: Map<number, RecommandMapType>) => void
   setTravelThemeMap: (newTravelThemeMap: Map<number, RecommandMapType>) => void
@@ -25,15 +23,13 @@ interface Actions {
 
 const useRawRecommendPageStore = create(
   immer<State & Actions>((set) => ({
-    tabIndex: RECOMMEND_ACTIVITY_KEY_ENUM.FAVORITE_PLACE_KEY_INDEX,
+    tabIndex: RECOMMEND_ACTIVITY_KEY.FAVORITE_PLACE_KEY_INDEX,
 
     FavoritePlaceMap: new Map<number, RecommandMapType>(),
     TravelThemeMap: new Map<number, RecommandMapType>(),
     FavoriteActivityMap: new Map<number, RecommandMapType>(),
 
-    handleChangeTabIndex: (
-      newTabIndex: (typeof RECOMMEND_ACTIVITY_KEY_ENUM)[keyof typeof RECOMMEND_ACTIVITY_KEY_ENUM],
-    ) => {
+    handleChangeTabIndex: (newTabIndex: RECOMMEND_ACTIVITY_KEY_TYPE) => {
       set((state) => {
         state.tabIndex = newTabIndex
       })

@@ -15,7 +15,7 @@ const FavoriteActivity = () => {
         <h2 className="SUBTITLE-T3 w-320pxr text-left text-GRAY_80 ">여행지에서 선호하는 활동을 선택해주세요.</h2>
       </section>
 
-      <div className="flex flex-col justify-center items-center w-full px-20pxr mt-20pxr mb-18pxr">
+      <div className="flex flex-col justify-center items-center w-full px-20pxr mt-33pxr mb-18pxr">
         <CardContainer
           className="flex flex-row flex-wrap gap-x-5 gap-y-[30px] w-320pxr"
           data={data}

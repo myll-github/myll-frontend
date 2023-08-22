@@ -1,7 +1,7 @@
 import { enableMapSet } from 'immer'
 
 import useCountStore from './example1'
-import useRawRecommendPageStore from './useRecommendPageStore'
+import useRawRecommendPageStore from './useRecommendPageStore/useRecommendPageStore'
 
 enableMapSet()
 

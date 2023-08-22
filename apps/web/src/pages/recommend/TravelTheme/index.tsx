@@ -2,7 +2,7 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useTravelThemeQuery } from '@/common/api/recommend'
-import { RECOMMEND_ACTIVITY_KEY_ENUM } from '@/common/constants'
+import { RECOMMEND_ACTIVITY_KEY } from '@/common/constants'
 import { useRecommendPageStore } from '@/stores'
 
 const TravelTheme = () => {
@@ -33,7 +33,7 @@ const TravelTheme = () => {
           variant="block"
           color="primary"
           onClick={() => {
-            handleChangeTabIndex(RECOMMEND_ACTIVITY_KEY_ENUM.FAVORTIE_ACTIVITY_KEY_INDEX)
+            handleChangeTabIndex(RECOMMEND_ACTIVITY_KEY.FAVORTIE_ACTIVITY_KEY_INDEX)
           }}
         >
           선택 완료
