@@ -13,6 +13,7 @@ import {
   TravelThemeQueryKey,
 } from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { RECOMMEND_ACTIVITY_KEY_ENUM } from '@/common/constants'
 import { useRecommendPageStore } from '@/stores'
 
 import FavoriteActivity from './FavoriteActivity'
@@ -21,33 +22,39 @@ import TravelTheme from './TravelTheme'
 
 const getTabItems = () => [
   {
-    key: '1',
+    key: RECOMMEND_ACTIVITY_KEY_ENUM.FAVORITE_PLACE_KEY_INDEX,
     label: `좋아하는 지역`,
     children: <FavoritePlace />,
   },
   {
-    key: '2',
+    key: RECOMMEND_ACTIVITY_KEY_ENUM.TRAVEL_THEME_KEY_INDEX,
     label: `여행테마`,
     children: <TravelTheme />,
   },
   {
-    key: '3',
+    key: RECOMMEND_ACTIVITY_KEY_ENUM.FAVORTIE_ACTIVITY_KEY_INDEX,
     label: `하고싶은 활동`,
     children: <FavoriteActivity />,
   },
 ]
 
 export const Recommend = ({ favoritePlace }: any) => {
-  const a = 1
+  const { tabIndex, handleChangeTabIndex } = useRecommendPageStore()
 
   return (
-    <CompoundProvider providerValue={a}>
-      <DefaultLayout>
-        <Suspense fallback={<div />}>
-          <Tab className="mt-30pxr" defaultActiveKey="1" items={getTabItems()} onChange={noop} />
-        </Suspense>
-      </DefaultLayout>
-    </CompoundProvider>
+    <DefaultLayout>
+      <Suspense fallback={<div />}>
+        <Tab
+          activeKey={tabIndex}
+          onChange={(key) =>
+            handleChangeTabIndex(key as (typeof RECOMMEND_ACTIVITY_KEY_ENUM)[keyof typeof RECOMMEND_ACTIVITY_KEY_ENUM])
+          }
+          className="mt-30pxr"
+          defaultActiveKey="1"
+          items={getTabItems()}
+        />
+      </Suspense>
+    </DefaultLayout>
   )
 }
 

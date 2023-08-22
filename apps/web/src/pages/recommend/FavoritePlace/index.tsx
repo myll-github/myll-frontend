@@ -2,12 +2,12 @@ import { Button, CardContainer } from 'myll-ui'
 import { useCompound } from 'shared'
 
 import { useFavoritePlaceQuery } from '@/common/api/recommend'
+import { RECOMMEND_ACTIVITY_KEY_ENUM } from '@/common/constants'
 import { useRecommendPageStore } from '@/stores'
 
 const FavoritePlace = () => {
-  const context = useCompound()
   const { data } = useFavoritePlaceQuery()
-  const { FavoritePlaceMap, setFavoritePlaceMap } = useRecommendPageStore()
+  const { FavoritePlaceMap, setFavoritePlaceMap, handleChangeTabIndex } = useRecommendPageStore()
 
   return (
     <main>
@@ -28,7 +28,12 @@ const FavoritePlace = () => {
       </div>
 
       <div className="w-full h-84pxr flex flex-col items-center justify-start">
-        <Button type="button" variant="block" color="primary">
+        <Button
+          type="button"
+          variant="block"
+          color="primary"
+          onClick={() => handleChangeTabIndex(RECOMMEND_ACTIVITY_KEY_ENUM.TRAVEL_THEME_KEY_INDEX)}
+        >
           선택 완료
         </Button>
       </div>

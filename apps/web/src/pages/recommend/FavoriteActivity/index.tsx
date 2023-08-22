@@ -5,7 +5,6 @@ import { useFavoriteActivityQuery, useTravelThemeQuery } from '@/common/api/reco
 import { useRecommendPageStore } from '@/stores'
 
 const FavoriteActivity = () => {
-  const context = useCompound()
   const { data } = useFavoriteActivityQuery()
   const { FavoriteActivityMap, TravelThemeMap, FavoritePlaceMap, setFavoriteActivityMap } = useRecommendPageStore()
 
