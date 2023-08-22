@@ -40,7 +40,7 @@ export const getTravelTheme = async () => {
       mainTitle: ele.title,
       subTitle: ele.subTitle,
       alt: ele.title,
-      svg: ele.svg,
+      url: ele.image,
       ...ele,
     }
   })
@@ -68,7 +68,7 @@ export const getFavoriteActivity = async () => {
       mainTitle: ele.title,
       subTitle: ele.subTitle,
       alt: ele.title,
-      svg: ele.svg,
+      url: ele.image,
       ...ele,
     }
   })

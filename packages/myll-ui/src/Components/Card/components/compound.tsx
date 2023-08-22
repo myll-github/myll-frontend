@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import CustomImage, { ImageRawProps } from '../../Image'
 
 interface TitleProps {
@@ -8,9 +6,12 @@ interface TitleProps {
 }
 
 export const CardImage = CustomImage
+interface MainTitleProps extends TitleProps {
+  typography?: string
+}
 
-export const MainTitle = ({ title, className }: TitleProps) => {
-  return <p className={`text-GRAY_100 SUBTITLE-T2 ${className}`}>{title}</p>
+export const MainTitle = ({ title, className, typography }: MainTitleProps) => {
+  return <p className={`w-full pb-4pxr text-GRAY_100 ${typography} line-clamp-2 ${className}`}>{title}</p>
 }
 
 export const SubTitle = ({ title, className }: TitleProps) => {
@@ -19,6 +20,7 @@ export const SubTitle = ({ title, className }: TitleProps) => {
 
 MainTitle.defaultProps = {
   className: '',
+  typography: 'SUBTITLE-T2',
 }
 
 SubTitle.defaultProps = {
