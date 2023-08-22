@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
-import { noop } from 'shared'
+import { noop, useCheckList } from 'shared'
 
-import { useCardContainerHook, useCheckCardList } from './hook'
+import { useCardContainerHook } from './hook'
 import { CardContainerProps } from './type'
 
 const CardContainer = ({ cardType, data, className, onChange = noop }: CardContainerProps) => {
   const { Card } = useCardContainerHook({ cardType })
-  const { checkMap, ToggleCardStatusByClick } = useCheckCardList({ onChange })
+  const { checkMap, ToggleCardStatusByClick } = useCheckList({ onChange })
 
   return (
     <div className={`select-none ${className}`}>

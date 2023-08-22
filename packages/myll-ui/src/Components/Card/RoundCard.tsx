@@ -1,6 +1,7 @@
+import { ImageProps } from '../Image'
 import BasicCard from './BasicCard'
 import Card from './components/base'
-import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
+import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const RoundCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {

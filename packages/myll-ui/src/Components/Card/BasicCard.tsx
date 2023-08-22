@@ -1,7 +1,8 @@
 import { MouseEvent, MouseEventHandler, ReactEventHandler, TouchEventHandler, useId } from 'react'
 
+import { ImageProps } from '../Image'
 import Card from './components/base'
-import { CardImage, ImageProps, MainTitle, SubTitle } from './components/compound'
+import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
