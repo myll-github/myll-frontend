@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.14",
+    "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "immer": "^10.0.2",
     "lodash": "^4.17.21",
