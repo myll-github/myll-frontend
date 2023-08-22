@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
+      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL", "NEXT_PUBLIC_API_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
@@ -22,7 +22,7 @@
     "storybook": {},
 
     "dev": {
-      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL"],
+      "env": ["KAKAO_CLIENT_KEY", "KAKAO_LOGIN_REDIRECT_URL", "NEXT_PUBLIC_API_URL"],
       "cache": false,
       "persistent": true
     },
