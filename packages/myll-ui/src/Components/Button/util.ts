@@ -19,7 +19,7 @@ interface ButtonColorProps {
 
 const buttonVariantMap: { [key in ButtonVariant]: ButtonVariantProps } = {
   block: {
-    width: 'w-300pxr',
+    width: 'w-full max-w-[360px]',
     height: 'h-54pxr',
     padding: 'px-20pxr',
     font: 'BUTTON-LARGE',

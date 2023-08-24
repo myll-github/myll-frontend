@@ -14,6 +14,8 @@ const DatePicker = (props: DatePickerProps) => {
 
   const renderExtraFooter = () => <Button onClick={handleTodayClick}>오늘</Button>
 
+  /*
+  return <div>1</div>
   return (
     <>
       {open && <div className="fixed top-0 left-0 z-10 w-screen h-screen pointer-events-none bg-GRAY_100" />}
@@ -29,6 +31,8 @@ const DatePicker = (props: DatePickerProps) => {
       />
     </>
   )
+
+  */
 }
 
 DatePicker.propTypes = {}
