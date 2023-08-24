@@ -39,14 +39,16 @@ const getTabItems = () => [
 ]
 
 export const Recommend = ({ favoritePlace }: any) => {
-  const { tabIndex, handleChangeTabIndex } = useRecommendPageStore()
+  const { tabIndex, tabIndexFlag, handleChangeTabIndex } = useRecommendPageStore()
 
   return (
     <DefaultLayout>
       <Suspense fallback={<div />}>
         <Tab
           activeKey={tabIndex}
-          onChange={(key) => handleChangeTabIndex(key as RECOMMEND_ACTIVITY_KEY_TYPE)}
+          onChange={(key) => {
+            handleChangeTabIndex(key as RECOMMEND_ACTIVITY_KEY_TYPE)
+          }}
           className="mt-30pxr"
           defaultActiveKey="1"
           items={getTabItems()}
