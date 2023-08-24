@@ -26,11 +26,11 @@ BasicCard.CardImage = ({ src, alt }: ImageProps) => {
   )
 }
 
-const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
+const Description = ({ mainTitle, subTitle, isSelected }: DescriptionProps) => {
   return (
     <>
       <SubTitle title={subTitle} />
-      <MainTitle title={mainTitle} className="text-center" />
+      <MainTitle title={mainTitle} className="text-center" isSelected={isSelected} />
     </>
   )
 }

@@ -28,11 +28,16 @@ RoundCard.CardImage = ({ src, alt }: ImageProps) => {
   return <CardImage src={src} alt={alt} className="relative object-fill rounded-full w-50pxr h-50pxr mb-6pxr" />
 }
 
-const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
+const Description = ({ mainTitle, subTitle, isSelected }: DescriptionProps) => {
   return (
     <>
       <SubTitle title={subTitle} />
-      <MainTitle title={mainTitle} typography="SUBTITLE-T7" className="text-center px-10pxr max-h-30pxr" />
+      <MainTitle
+        title={mainTitle}
+        typography="SUBTITLE-T7"
+        className="text-center px-10pxr max-h-30pxr"
+        isSelected={isSelected}
+      />
     </>
   )
 }

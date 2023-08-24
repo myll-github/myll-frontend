@@ -8,10 +8,19 @@ interface TitleProps {
 export const CardImage = CustomImage
 interface MainTitleProps extends TitleProps {
   typography?: string
+  isSelected: boolean
 }
 
-export const MainTitle = ({ title, className, typography }: MainTitleProps) => {
-  return <p className={`w-full pb-4pxr text-GRAY_100 ${typography} line-clamp-2 ${className}`}>{title}</p>
+export const MainTitle = ({ title, className, typography, isSelected }: MainTitleProps) => {
+  return (
+    <p
+      className={`w-full pb-4pxr ${
+        isSelected ? 'text-PRIMARY_BLUE' : 'text-GRAY_100'
+      } ${typography} line-clamp-2 ${className}`}
+    >
+      {title}
+    </p>
+  )
 }
 
 export const SubTitle = ({ title, className }: TitleProps) => {

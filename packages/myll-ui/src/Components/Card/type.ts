@@ -11,6 +11,7 @@ export interface BasicCardProps {
 export interface DescriptionProps {
   mainTitle: string
   subTitle: string
+  isSelected: boolean
 }
 
 export interface CompoundCard<T> extends FC<T> {

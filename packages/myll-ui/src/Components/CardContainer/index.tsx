@@ -16,7 +16,7 @@ const CardContainer = ({ cardType, data, className, onChange = noop }: CardConta
         return (
           <Card key={id} isSelected={checkMap.has(id)} onClick={() => ToggleCardStatusByClick(cardData)}>
             <Card.CardImage alt={alt} src={url ?? ''} />
-            <Card.Description subTitle={subTitle} mainTitle={mainTitle} />
+            <Card.Description subTitle={subTitle} mainTitle={mainTitle} isSelected={checkMap.has(id)} />
           </Card>
         )
       })}

@@ -26,11 +26,11 @@ HorizontalCard.CardImage = ({ src, alt }: ImageProps) => {
   return <CardImage src={src} alt={alt} className="relative object-fill rounded-sm w-120pxr h-95pxr mx-10pxr" />
 }
 
-const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
+const Description = ({ mainTitle, subTitle, isSelected }: DescriptionProps) => {
   return (
     <div className="flex flex-col w-150pxr h-72pxr mt-15pxr">
       <SubTitle title={subTitle} className="flex flex-col justify-end h-50pxr " />
-      <MainTitle className="text-left" title={mainTitle} />
+      <MainTitle className="text-left" title={mainTitle} isSelected={isSelected} />
     </div>
   )
 }
