@@ -1,56 +1,91 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { Button, Input, Space } from 'myll-ui'
-import { useEffect, useState } from 'react'
+import { Alert, Button, Input } from 'myll-ui'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 
 import { SendEmail } from '@/common/api/send-email/SendEmail'
 import { UserSignUp } from '@/common/api/signup/UserSignUp'
 import { Verify } from '@/common/api/verify/Verify'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
+// @TODO debounce, useCallback 적용 및 text state 관리 로직 추가
 export const SignUp = () => {
-  const [openValidation, setOpenValidation] = useState<boolean>(false)
+  const router = useRouter()
 
-  const [name, setName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [emailCode, setEmailCode] = useState<string>('')
+  const [openValidation, setOpenValidation] = useState<boolean>(false) // 인증 필드 open
+  const [emailCode, setEmailCode] = useState<string>('') // 인증 코드
+  const [isEmailValidated, setIsEmailValidated] = useState<boolean>(false) // 인증 완료 state
 
-  const [isEmailValidated, setIsEmailValidated] = useState<boolean>(false)
+  const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
+    isVisible: false,
+  })
 
+  // @TODO 객체로 관리
+  const [name, setName] = useState<string>('') // name
+  const [email, setEmail] = useState<string>('') // email
+  const [password, setPassword] = useState<string>('') // password
+
+  const [nameErrorMessage, setNameErrorMessage] = useState<string>('')
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string>('')
+  const [validationErrorMessage, setValidationErrorMessage] = useState<string>('')
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('')
+
+  // 카카오 정보 자동완성
   useEffect(() => {
     const kakaoName = sessionStorage.getItem('nickname')
     const kakaoEmail = sessionStorage.getItem('email')
     setName(kakaoName)
 
-    if (kakaoEmail !== 'null') setEmail(kakaoEmail)
+    if (kakaoEmail !== 'undefined') setEmail(kakaoEmail)
   }, [])
 
+  const handleVerifyEmail = useCallback(async () => {
+    try {
+      await Verify(email, emailCode)
+      setIsEmailValidated(true)
+      setValidationErrorMessage('')
+    } catch (error) {
+      setValidationErrorMessage(error.response.data.message)
+    }
+  }, [email, emailCode])
+
+  // 이메일 자동 인증
   useEffect(() => {
     if (emailCode.length === 6) {
-      Verify(email, emailCode)
-        .then(() => {
-          setIsEmailValidated(true)
-        })
-        .catch(console.log)
+      handleVerifyEmail()
     }
   }, [emailCode])
 
-  const sendEmail = async () => {
+  const handleValidateEmail = async () => {
     try {
+      if (!email.length) throw new Error('이메일을 입력해주세요.')
+      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) throw new Error('잘못된 이메일 형식입니다.')
+
+      setEmailErrorMessage('')
+      setIsEmailValidated(false)
       await SendEmail(email)
+      setOpenValidation(true)
     } catch (error) {
-      console.error(error)
+      setEmailErrorMessage(error.response.data.message)
     }
   }
 
-  // @TODO debounce, useCallback 적용 및 text state 관리 로직 추가
-  const handleValidateUsername = (text: string) => {
-    if (text.length <= 15 && !/[^a-zA-Z가-힣]/.test(text)) return true
-    return false
+  const handleResendEmail = async () => {
+    try {
+      await SendEmail(email)
+      setEmailErrorMessage('')
+    } catch (error) {
+      setEmailErrorMessage(error.response.data.message)
+    }
   }
 
   const handleClickSignUp = async () => {
-    await UserSignUp(email, password, name)
+    try {
+      await UserSignUp(email, password, name)
+      router.replace('/login')
+    } catch (error) {
+      setOpenAlert((prev) => ({ ...prev, isVisible: true, type: 'error', message: error.response.data.message }))
+    }
   }
 
   return (
@@ -66,9 +101,16 @@ export const SignUp = () => {
             size="large"
             value={name}
             placeholder="한/영 15자 이내"
-            onValidation={handleValidateUsername}
-            onChange={(e) => setName(e.target.value)}
-            errorMessage="한글, 영문 대소문자 15자 이내로 입력해주세요"
+            onChange={(e) => {
+              if (e.target.value.length > 15) {
+                setNameErrorMessage('한글, 영문 대소문자 15자 이내로 입력해주세요')
+              } else {
+                setNameErrorMessage('')
+              }
+
+              setName(e.target.value)
+            }}
+            errorMessage={nameErrorMessage}
           />
           <Input
             label="이메일"
@@ -77,42 +119,36 @@ export const SignUp = () => {
             placeholder="이메일을 입력해주세요"
             inputMode="email"
             onChange={(e) => setEmail(e.target.value)}
+            errorMessage={emailErrorMessage}
             addonAfter={
-              <Button
-                type="button"
-                variant="small"
-                color="text"
-                onClick={() => {
-                  setOpenValidation(true)
-                  sendEmail()
-                }}
-              >
+              <Button type="button" variant="small" color="text" onClick={handleValidateEmail}>
                 인증
               </Button>
             }
           />
           {openValidation && (
-            <Space.Compact block size="large" className="w-full flex justify-center items-center">
-              <Input
-                size="large"
-                placeholder="인증번호"
-                value={emailCode}
-                disabled={isEmailValidated}
-                onChange={(e) => {
-                  if (e.target.value.length <= 6) setEmailCode(e.target.value)
-                }}
-                addonBefore={<div className="INPUT-LABEL2">인증코드</div>}
-              />
-              <Button
-                className="border-1 border-l-0 border-solid border-GRAY_40 text-PRIMARY_BLUE BUTTON-MEDIUM"
-                type="button"
-                variant="medium"
-                color="text"
-                disabled={isEmailValidated}
-              >
-                재전송
-              </Button>
-            </Space.Compact>
+            <Input
+              size="large"
+              placeholder="인증번호"
+              value={emailCode}
+              disabled={isEmailValidated}
+              onChange={(e) => {
+                if (e.target.value.length <= 6) setEmailCode(e.target.value)
+              }}
+              errorMessage={validationErrorMessage}
+              addonBefore={<div className="INPUT-LABEL2">인증코드</div>}
+              addonAfter={
+                <Button
+                  type="button"
+                  variant="small"
+                  color="text"
+                  disabled={isEmailValidated}
+                  onClick={handleResendEmail}
+                >
+                  재전송
+                </Button>
+              }
+            />
           )}
           <Input
             label="비밀번호"
@@ -120,14 +156,39 @@ export const SignUp = () => {
             placeholder="8자 이상 비밀번호"
             inputType="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            errorMessage={passwordErrorMessage}
+            onChange={(e) => {
+              if (e.target.value.length < 8) setPasswordErrorMessage('8글자 이상 입력하세요.')
+              else setPasswordErrorMessage('')
+              setPassword(e.target.value)
+            }}
           />
         </div>
         <div className="flex flex-col mt-auto mb-60pxr">
-          <Button type="button" variant="medium" color="primary" onClick={handleClickSignUp}>
+          <Button
+            type="button"
+            variant="medium"
+            color="primary"
+            disabled={Boolean(
+              nameErrorMessage.length ||
+                emailErrorMessage.length ||
+                validationErrorMessage.length ||
+                passwordErrorMessage.length,
+            )}
+            onClick={handleClickSignUp}
+          >
             회원가입
           </Button>
         </div>
+        <Alert
+          isVisible={openAlert.isVisible}
+          onVisibleChange={(flag) => {
+            if (!flag) setOpenAlert({ isVisible: false, message: '' })
+          }}
+          closable
+          type={openAlert.type}
+          message={openAlert.message}
+        />
       </div>
     </DefaultLayout>
   )
