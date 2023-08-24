@@ -6,7 +6,7 @@ import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
-  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE shadow-SM' : 'bg-SUB_BLUE_3'
 
   return (
     <Card
@@ -21,7 +21,7 @@ const BasicCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick
 BasicCard.CardImage = ({ src, alt }: ImageProps) => {
   return (
     <div className="w-150pxr h-50pxr">
-      <CardImage src={src} alt={alt} className="relative rounded-sm object-contain w-150pxr h-50pxr mb-6pxr" />
+      <CardImage src={src} alt={alt} className="relative object-contain rounded-sm w-150pxr h-50pxr mb-6pxr" />
     </div>
   )
 }

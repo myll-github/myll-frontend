@@ -7,7 +7,7 @@ import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
-  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE shadow-SM' : 'bg-SUB_BLUE_3'
 
   return (
     <Card

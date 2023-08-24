@@ -7,7 +7,7 @@ import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const RoundCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
-  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE shadow-SM' : 'bg-SUB_BLUE_3'
 
   return (
     <Card
@@ -32,7 +32,7 @@ const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
   return (
     <>
       <SubTitle title={subTitle} />
-      <MainTitle title={mainTitle} typography="SUBTITLE-T7" className="px-10pxr max-h-30pxr text-center" />
+      <MainTitle title={mainTitle} typography="SUBTITLE-T7" className="text-center px-10pxr max-h-30pxr" />
     </>
   )
 }
