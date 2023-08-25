@@ -21,7 +21,11 @@ interface ToggleIconProps {
 }
 
 const ToggleIcon = ({ isActive, IconActive, IconInactive }: ToggleIconProps) => {
-  return isActive ? <IconActive width="30px" height="30px" /> : <IconInactive width="30px" height="30px" />
+  return isActive ? (
+    <IconActive width="30px" height="30px" className="mb-3pxr" />
+  ) : (
+    <IconInactive width="30px" height="30px" className="mb-3pxr" />
+  )
 }
 /* 
   안타깝게도 시안대로 svg 색 반전 시킬수가
@@ -30,13 +34,13 @@ const ToggleIcon = ({ isActive, IconActive, IconInactive }: ToggleIconProps) => 
 
 const FooterNav = ({ children }: { children: ReactNode }) => {
   return (
-    <nav className="fixed left-1/2 -translate-x-1/2 bottom-0 flex w-screen md:w-[768px] h-98px flex-row justify-around border border-solid border-GRAY_30 transform">
+    <nav className="fixed left-1/2 -translate-x-1/2 bottom-0 flex w-screen md:w-[768px] max-h-98px flex-row justify-around border border-solid border-GRAY_30 p-l-24pxr p-r-24pxr transform">
       {children}
     </nav>
   )
 }
 
-const BaseIconStyle = 'w-full h-full flex flex-col justify-center items-center'
+const BaseIconStyle = 'w-full h-full flex flex-col justify-center leading-[14px] items-center pt-20pxr pb-30pxr'
 
 FooterNav.HomeIcon = ({ isActive = false }: { isActive: boolean }) => (
   <div className={`${BaseIconStyle} ${isActive ? 'text-GRAY_90' : 'text-GRAY_70'}`}>

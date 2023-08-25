@@ -9,19 +9,19 @@ const Navigation = () => {
 
   return (
     <FooterNav>
-      <Link href="book">
+      <Link href="book" className="flex-shrink-0">
         <FooterNav.BookIcon isActive={pathName === '/book'} />
       </Link>
-      <Link href="home">
+      <Link href="home" className="flex-shrink-0">
         <FooterNav.HomeIcon isActive={pathName === '/home'} />
       </Link>
-      <Link href="local">
+      <Link href="local" className="flex-shrink-0">
         <FooterNav.LocalIcon isActive={pathName === '/local'} />
       </Link>
-      <Link href="map">
+      <Link href="map" className="flex-shrink-0">
         <FooterNav.MapIcon isActive={pathName === '/map'} />
       </Link>
-      <Link href="myll">
+      <Link href="myll" className="flex-shrink-0">
         <FooterNav.MyllIcon isActive={pathName === '/myll'} />
       </Link>
     </FooterNav>
