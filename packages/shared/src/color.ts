@@ -40,12 +40,23 @@ const STATE = {
   WARNING_2: 'var(--btn-warning-2, #FFD3D9)',
 }
 
+const ALERT = {
+  ALERT_WARNING_1: 'var(--alert-warning-1, #FFFBE6)',
+  ALERT_WARNING_2: 'var(--alert-warning-2, #FAAD14)',
+  ALERT_SUCCESS_1: 'var(--alert-success-1, #F6FFED)',
+  ALERT_SUCCESS_2: 'var(--alert-success-2, #52C41A)',
+  ALERT_ERROR_1: 'var(--alert-error-1, #FFF1F0)',
+  ALERT_ERROR_2: 'var(--alert-error-2, #FF4D4F)',
+  ALERT_INFO_1: 'var(--alert-info-1, #F0F5FF)',
+  ALERT_INFO_2: 'var(--alert-info-2, #1890FF)',
+}
+
 function flattenObject(obj: any): any {
   return Object.entries(obj)
     .flatMap(([key, val]) => (typeof val === 'object' ? flattenObject(val) : { [key]: val }))
     .reduce((t, v) => ({ ...t, ...v }))
 }
 
-const COLOR = flattenObject([WHITE, GRAY, POINT, PRIMARY, STATE])
+const COLOR = flattenObject([WHITE, GRAY, POINT, PRIMARY, STATE, ALERT])
 
 export default COLOR
