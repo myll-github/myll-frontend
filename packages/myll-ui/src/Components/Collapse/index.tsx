@@ -26,10 +26,16 @@ interface ItemProps {
 }
 
 interface CustomCollapseProps extends Omit<CollapseProps, 'items'> {
+  /**
+   * Array of items.
+   */
   items: ItemProps[]
+
+  /**
+   * Event handler for extra button click.
+   */
   onExtraButtonClick: MouseEventHandler<HTMLButtonElement>
 }
-
 /*
   tailwind css가 안먹음
 */
