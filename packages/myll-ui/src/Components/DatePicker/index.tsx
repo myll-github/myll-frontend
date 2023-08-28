@@ -34,28 +34,11 @@ const DatePicker = (props: DatePickerProps) => {
 
   const renderExtraFooter = () => <Button>오늘</Button>
 
-  const handleOpenChange = (isOpen) => {
-    setOpen(true)
-  }
-
-  const handleDateChange = (date) => {
-    // Add your code to handle date selection here
-    // ...
-  }
-
   return (
     <>
       {open && <div className="fixed top-0 left-0 z-10 w-screen h-screen pointer-events-none bg-GRAY_100" />}
 
-      <RangePicker
-        open={open}
-        onOpenChange={setOpen}
-        cellRender={customCell}
-        locale={locale}
-        renderExtraFooter={renderExtraFooter}
-        popupClassName="fixed inset-0 flex justify-center items-center z-50"
-        {...props}
-      />
+      <></>
     </>
   )
 }

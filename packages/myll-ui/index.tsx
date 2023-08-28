@@ -10,6 +10,7 @@ import DatePicker from './src/Components/DatePicker'
 import Input from './src/Components/Input'
 import MenuList from './src/Components/MenuList'
 import Tab from './src/Components/Tab'
+import Tag from './src/Components/Tag'
 import UploadCard from './src/Components/UploadCard'
 
 export * from './src/Components/Card'
@@ -30,5 +31,6 @@ export {
   Input,
   MenuList,
   Tab,
+  Tag,
   UploadCard,
 }
