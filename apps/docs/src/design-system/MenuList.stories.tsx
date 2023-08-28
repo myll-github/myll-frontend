@@ -15,7 +15,7 @@ const meta: Meta<typeof MenuList> = {
   component: MenuList,
   tags: ['autodocs'],
   argTypes: {
-    size: ['advanced', 'default'],
+    size: ['medium', 'default'],
   },
   args: { data },
 }
@@ -33,8 +33,19 @@ export const SelectedMenuList: Story = {
   },
 }
 
-export const AdvancedMenuList: Story = {
+const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
+  id: i,
+  href: 'https://ant.design',
+  img: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
+  mainTitle: `ant design part ${i}`,
+  subTitle: 'Ant Design',
+  isRecommend: true,
+  recommendCount: 3,
+}))
+
+export const MediumnMenuList: Story = {
   args: {
-    size: 'advanced',
+    data: dataWithRecommend,
+    size: 'medium',
   },
 }

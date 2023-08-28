@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import { Avatar, List } from 'antd'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import { noop, OnToggleStatusType, useCheckList } from 'shared'
 
 import Button from '../Button/Button'
@@ -26,6 +26,9 @@ interface ItemType {
 
   /** Whether the item is currently selected or not */
   isSelectedButtonNeeded?: boolean
+
+  isRecommend?: boolean
+  recommendCount?: number
 }
 
 interface MenuListProps {
@@ -38,8 +41,8 @@ interface MenuListProps {
   /** Whether the list need button or not */
   isSelectedButtonNeeded?: boolean
 
-  /** Size of the list, either 'advanced' or 'default' */
-  size?: 'advanced' | 'default'
+  /** Size of the list, either 'medium' or 'default' */
+  size?: 'medium' | 'default'
 }
 const ButtonCondition = memo(({ isSelected }: { isSelected: boolean | undefined }) => {
   switch (isSelected) {
@@ -65,7 +68,8 @@ const ButtonCondition = memo(({ isSelected }: { isSelected: boolean | undefined 
 const MenuList = ({ data, onChange, isSelectedButtonNeeded, size }: MenuListProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCheckList({ onChange: onChange! })
 
-  const isAdvanced = size === 'advanced'
+  const isMedium = size === 'medium'
+  const hasHeart = useCallback((item: ItemType) => item.isRecommend !== undefined, [])
 
   return (
     <List
@@ -74,19 +78,22 @@ const MenuList = ({ data, onChange, isSelectedButtonNeeded, size }: MenuListProp
       renderItem={(item: ItemType) => (
         <li
           key={item.id}
-          className={`flex flex-row border-none w-full h-${isAdvanced ? '110pxr' : '70pxr'} px-20pxr py-10pxr`}
+          className={`flex flex-row border-none w-full h-${isMedium ? '110pxr' : '70pxr'} px-20pxr py-10pxr`}
           onClick={() => isSelectedButtonNeeded && ToggleCardStatusByClick(item)}
         >
           <CustomImage
-            className={`${isAdvanced ? 'w-90pxr h-90pxr' : 'w-50pxr h-50pxr'} mr-14pxr rounded-md bg-GRAY_30`}
+            className={`${isMedium ? 'w-90pxr h-90pxr' : 'w-50pxr h-50pxr'} mr-14pxr rounded-md bg-GRAY_30`}
             src={item.img}
             alt={item.mainTitle}
           />
-          <div className="relative flex w-full flex-col justify-center py-4pxr">
+          <div className="relative flex flex-col justify-center w-full py-4pxr">
             <span className="SUBTITLE-T2 text-GRAY_80">{item.mainTitle}</span>
             <span className="SUBTITLE-T8 text-GRAY_70">{item.subTitle}</span>
+
+            {hasHeart(item) && <div>heart</div>}
+
             {isSelectedButtonNeeded && (
-              <div className="absolute top-1/2 transform -translate-y-1/2 right-0">
+              <div className="absolute right-0 transform -translate-y-1/2 top-1/2">
                 <ButtonCondition isSelected={checkMap.has(item.id)} />
               </div>
             )}
@@ -100,7 +107,7 @@ const MenuList = ({ data, onChange, isSelectedButtonNeeded, size }: MenuListProp
 MenuList.defaultProps = {
   isSelectedButtonNeeded: false,
   onChange: noop,
-  size: 'default' as 'advanced' | 'default',
+  size: 'default' as 'medium' | 'default',
 }
 
 export default MenuList
