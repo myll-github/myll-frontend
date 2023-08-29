@@ -6,7 +6,7 @@ const ICON_ARROW_DOWN = (props: React.SVGProps<SVGSVGElement>) => {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M10.8332 14.844L14.713 10.9642L15.8916 12.1427L9.999 18.0353L4.10645 12.1427L5.28496 10.9642L9.16653 14.8458V2.0835H10.8332V14.844Z"
+        d="M10.8342 14.844L14.714 10.9642L15.8925 12.1427L9.99998 18.0353L4.10742 12.1427L5.28593 10.9642L9.16751 14.8458V2.0835H10.8342V14.844Z"
         fill="currentColor"
       />
     </svg>

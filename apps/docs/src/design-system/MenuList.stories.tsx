@@ -14,9 +14,6 @@ const meta: Meta<typeof MenuList> = {
   title: 'Example/MenuList',
   component: MenuList,
   tags: ['autodocs'],
-  argTypes: {
-    size: ['advanced', 'default'],
-  },
   args: { data },
 }
 
@@ -24,17 +21,50 @@ export default meta
 type Story = StoryObj<typeof MenuList>
 
 export const BasicMenuList: Story = {
-  args: {},
+  args: {
+    children: <MenuList.DefaultMenuItem />,
+  },
 }
 
 export const SelectedMenuList: Story = {
   args: {
-    isSelectedButtonNeeded: true,
+    children: <MenuList.DefaultMenuItem isSelectedButtonNeeded />,
   },
 }
 
-export const AdvancedMenuList: Story = {
+const COLOR_MAP = Object.keys({
+  관광지: 'processing',
+  문화시설: '',
+  축제공연행사: 'cyan',
+  여행코스: 'magenta',
+  레포츠: 'blue',
+  쇼핑: 'purple',
+  음식점: 'gold',
+  카페: 'green',
+})
+
+const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
+  id: i,
+  href: 'https://ant.design',
+  img: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
+  mainTitle: `ant design part ${i}`,
+  subTitle: 'Ant Design',
+  isRecommend: i % 2 === 0,
+  recommendCount: i,
+  contenttype: COLOR_MAP[i % COLOR_MAP.length],
+}))
+
+export const MediumnMenuList: Story = {
   args: {
-    size: 'advanced',
+    data: dataWithRecommend,
+    children: <MenuList.MediumMenuItem onRecommendButtonClicked={(id: number) => {}} />,
+  },
+}
+
+export const LargeMenuList: Story = {
+  args: {
+    itemLayout: 'vertical',
+    data: dataWithRecommend,
+    children: <MenuList.LargeMenuItem onRecommendButtonClicked={(id: number) => {}} />,
   },
 }
