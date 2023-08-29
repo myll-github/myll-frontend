@@ -38,3 +38,7 @@ export interface MenuListProps extends RawMenuListProps {
   /** Size of the list, either 'medium' or 'default' */
   size?: 'medium' | 'default'
 }
+
+export interface MediumMenuListProps extends RawMenuListProps {
+  onRecommendButtonClick: (id: number) => void
+}
