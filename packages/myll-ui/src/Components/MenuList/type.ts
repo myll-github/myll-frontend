@@ -32,6 +32,8 @@ export interface MenuListProps {
   onChange?: OnToggleStatusType<ItemType>
 
   children: ReactElement
+
+  itemLayout?: 'horizontal' | 'grid'
 }
 
 export interface MenuItemProps {

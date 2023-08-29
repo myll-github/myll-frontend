@@ -22,13 +22,13 @@ type Story = StoryObj<typeof MenuList>
 
 export const BasicMenuList: Story = {
   args: {
-    children: <MenuList.DefaultMenuList />,
+    children: <MenuList.DefaultMenuItem />,
   },
 }
 
 export const SelectedMenuList: Story = {
   args: {
-    children: <MenuList.DefaultMenuList isSelectedButtonNeeded />,
+    children: <MenuList.DefaultMenuItem isSelectedButtonNeeded />,
   },
 }
 
@@ -45,6 +45,14 @@ const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
 export const MediumnMenuList: Story = {
   args: {
     data: dataWithRecommend,
-    children: <MenuList.MediumMenuList onRecommendButtonClicked={(id: number) => {}} />,
+    children: <MenuList.MediumMenuItem onRecommendButtonClicked={(id: number) => {}} />,
+  },
+}
+
+export const LargeMenuList: Story = {
+  args: {
+    data: dataWithRecommend,
+    itemLayout: 'grid',
+    children: <MenuList.LargeMenuItem onRecommendButtonClicked={(id: number) => {}} />,
   },
 }
