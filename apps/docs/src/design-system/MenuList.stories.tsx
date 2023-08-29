@@ -14,9 +14,6 @@ const meta: Meta<typeof MenuList> = {
   title: 'Example/MenuList',
   component: MenuList,
   tags: ['autodocs'],
-  argTypes: {
-    size: ['medium', 'default'],
-  },
   args: { data },
 }
 
@@ -24,12 +21,14 @@ export default meta
 type Story = StoryObj<typeof MenuList>
 
 export const BasicMenuList: Story = {
-  args: {},
+  args: {
+    children: <MenuList.DefaultMenuList />,
+  },
 }
 
 export const SelectedMenuList: Story = {
   args: {
-    isSelectedButtonNeeded: true,
+    children: <MenuList.DefaultMenuList isSelectedButtonNeeded />,
   },
 }
 
@@ -39,13 +38,13 @@ const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
   img: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
   mainTitle: `ant design part ${i}`,
   subTitle: 'Ant Design',
-  isRecommend: true,
-  recommendCount: 3,
+  isRecommend: i % 2 === 0,
+  recommendCount: i,
 }))
 
 export const MediumnMenuList: Story = {
   args: {
     data: dataWithRecommend,
-    size: 'medium',
+    children: <MenuList.MediumMenuList onRecommendButtonClicked={(id: number) => {}} />,
   },
 }

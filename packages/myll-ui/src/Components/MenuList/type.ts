@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { OnToggleStatusType } from 'shared'
 
 export interface ItemType {
@@ -23,22 +24,21 @@ export interface ItemType {
   recommendCount?: number
 }
 
-export interface RawMenuListProps {
+export interface MenuListProps {
   /** Array of items to be rendered in the list */
   data: ItemType[]
 
   /** Callback function that is fired when an item's selection status changes */
   onChange?: OnToggleStatusType<ItemType>
 
-  /** Whether the list need button or not */
+  children: ReactElement
+}
+
+export interface MenuItemProps {
+  item?: any
   isSelectedButtonNeeded?: boolean
 }
 
-export interface MenuListProps extends RawMenuListProps {
-  /** Size of the list, either 'medium' or 'default' */
-  size?: 'medium' | 'default'
-}
-
-export interface MediumMenuListProps extends RawMenuListProps {
-  onRecommendButtonClick: (id: number) => void
+export interface MediumMenuItemProps extends MenuItemProps {
+  onRecommendButtonClicked: (id: number) => void
 }

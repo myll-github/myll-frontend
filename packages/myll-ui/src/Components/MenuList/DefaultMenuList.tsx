@@ -4,17 +4,16 @@ import { useContext } from 'react'
 import { noop, OnToggleStatusType, useCompound } from 'shared'
 
 import CustomImage from '../Image'
-import RawMenuList from './components/base'
-import { ButtonCondition } from './components/compound'
-import { ItemType, RawMenuListProps } from './type'
+import { ButtonCondition } from './components/ButtonCondition'
+import { ItemType, MenuItemProps } from './type'
 
-const MenuItem = ({ item, isSelectedButtonNeeded }: any) => {
+const DefaultMenuItem = ({ item, isSelectedButtonNeeded }: MenuItemProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCompound()
 
   return (
     <li
       className="relative flex flex-row w-full border-none h-70pxr px-20pxr py-10pxr"
-      onClick={() => ToggleCardStatusByClick(item)}
+      onClick={() => isSelectedButtonNeeded && ToggleCardStatusByClick(item)}
     >
       <CustomImage className="rounded-md w-50pxr h-50pxr mr-14pxr bg-GRAY_30" src={item.img} alt={item.mainTitle} />
 
@@ -32,19 +31,8 @@ const MenuItem = ({ item, isSelectedButtonNeeded }: any) => {
   )
 }
 
-const DefaultMenuList = ({ data, isSelectedButtonNeeded, onChange }: RawMenuListProps) => {
-  return (
-    <RawMenuList
-      data={data}
-      onChange={onChange!}
-      MenuList={<MenuItem isSelectedButtonNeeded={isSelectedButtonNeeded} />}
-    />
-  )
-}
-
-DefaultMenuList.defaultProps = {
-  onChange: noop as OnToggleStatusType<ItemType>,
+DefaultMenuItem.defaultProps = {
   isSelectedButtonNeeded: false,
 }
 
-export default DefaultMenuList
+export default DefaultMenuItem
