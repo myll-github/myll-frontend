@@ -32,6 +32,17 @@ export const SelectedMenuList: Story = {
   },
 }
 
+const COLOR_MAP = Object.keys({
+  관광지: 'processing',
+  문화시설: '',
+  축제공연행사: 'cyan',
+  여행코스: 'magenta',
+  레포츠: 'blue',
+  쇼핑: 'purple',
+  음식점: 'gold',
+  카페: 'green',
+})
+
 const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
   id: i,
   href: 'https://ant.design',
@@ -40,6 +51,7 @@ const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
   subTitle: 'Ant Design',
   isRecommend: i % 2 === 0,
   recommendCount: i,
+  contenttype: COLOR_MAP[i % COLOR_MAP.length],
 }))
 
 export const MediumnMenuList: Story = {
@@ -51,8 +63,8 @@ export const MediumnMenuList: Story = {
 
 export const LargeMenuList: Story = {
   args: {
+    itemLayout: 'vertical',
     data: dataWithRecommend,
-    itemLayout: 'grid',
     children: <MenuList.LargeMenuItem onRecommendButtonClicked={(id: number) => {}} />,
   },
 }

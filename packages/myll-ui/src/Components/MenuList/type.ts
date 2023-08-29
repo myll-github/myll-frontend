@@ -22,6 +22,8 @@ export interface ItemType {
 
   isRecommend?: boolean
   recommendCount?: number
+
+  contenttype?: string
 }
 
 export interface MenuListProps {
@@ -33,7 +35,7 @@ export interface MenuListProps {
 
   children: ReactElement
 
-  itemLayout?: 'horizontal' | 'grid'
+  itemLayout?: 'horizontal' | 'vertical'
 }
 
 export interface MenuItemProps {

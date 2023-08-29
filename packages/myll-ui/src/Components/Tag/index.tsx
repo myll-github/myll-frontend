@@ -17,7 +17,7 @@ const COLOR_MAP: { [id in string]: string } = {
 
 const Tag = ({ contenttype }: TagProps) => {
   return (
-    <AntdTag className="SUBTITLE-T8" color={COLOR_MAP[contenttype]} bordered={false}>
+    <AntdTag className="w-max SUBTITLE-T8" color={COLOR_MAP[contenttype]} bordered={false}>
       {contenttype}
     </AntdTag>
   )

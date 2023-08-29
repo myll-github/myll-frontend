@@ -12,30 +12,17 @@ import { ItemType, MenuListProps } from './type'
 const MenuList = ({ data, itemLayout, onChange, children }: MenuListProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCheckList({ onChange: onChange! })
 
-  const getItemLayout = itemLayout === 'horizontal' ? 'horizontal' : ('' as 'horizontal')
-  const isGrid =
-    itemLayout === 'grid'
-      ? {
-          gutter: 2,
-          xs: 2,
-          sm: 2,
-          md: 2,
-          lg: 2,
-          xl: 2,
-          xxl: 2,
-        }
-      : undefined
-
   return (
     <CompoundProvider providerValue={{ checkMap, ToggleCardStatusByClick }}>
-      <List
-        grid={isGrid}
-        itemLayout={getItemLayout}
-        dataSource={data}
-        renderItem={(item: ItemType) => {
+      <ul
+        className={`list-none ${
+          itemLayout === 'vertical' ? 'flex flex-row flex-wrap gap-10 justify-center' : 'flex flex-col'
+        }`}
+      >
+        {data.map((item: ItemType) => {
           return <>{cloneElement(children, { key: item.id, item })}</>
-        }}
-      />
+        })}
+      </ul>
     </CompoundProvider>
   )
 }
