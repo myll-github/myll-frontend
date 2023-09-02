@@ -15,7 +15,7 @@ const AppBar = ({ children }: AppBarProps) => {
   return (
     <>
       <nav className="relative flex flex-row fixed w-full md:w-[768px] h-76pxr pt-30pxr bg-WHITE z-10">{children}</nav>
-      <div role="none" className="h-76pxr" />
+      <div role="none" className="h-46pxr" />
     </>
   )
 }

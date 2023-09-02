@@ -14,33 +14,27 @@ const LocalRecommendSection = () => {
         size="small"
         tabBarGutter={20}
         className="w-full mt-24pxr h-600pxr"
-        defaultActiveKey="1"
+        defaultActiveKey="15"
         items={[
           {
             children: <div className="w-full h-500pxr">Content of Tab Pane 1</div>,
-            key: '1',
+            key: '15',
             label: '축제•공연',
           },
           {
             children: 'Content of Tab Pane 2',
-            key: '2',
+            key: '12',
             label: '관광지',
           },
           {
             children: <div>test</div>,
-            key: '3',
+            key: '39',
             label: '음식점',
           },
 
           {
             children: <div>caft</div>,
-            key: '4',
-            label: '카페',
-          },
-
-          {
-            children: <div>caft</div>,
-            key: '5',
+            key: '14',
             label: '문화시설',
           },
         ]}
