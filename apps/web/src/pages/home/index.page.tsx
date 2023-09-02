@@ -5,7 +5,7 @@ import NavLayout from '@/common/components/Layout/NavLayout'
 export const Login = () => {
   return (
     <>
-      <NavLayout className="px-20pxr">
+      <NavLayout>
         <header>
           <AppBar>
             <AppBar.LeftSection>
@@ -17,10 +17,10 @@ export const Login = () => {
         </header>
 
         <main className="flex flex-col gap-10">
-          <section className="w-full flex flex-col items-center">
+          <section className="flex flex-col items-center w-full px-20pxr">
             <h2 className="w-full HEADER-H5 text-GRAY_100">나의 마일 플랜</h2>
 
-            <div className="flex flex-col items-center mt-20pxr w-full px-10pxr gap-5">
+            <div className="flex flex-col items-center w-full gap-5 mt-20pxr px-10pxr">
               <Alert
                 isVisible
                 message="예정된 여행계획이 없어요!"
@@ -35,7 +35,7 @@ export const Login = () => {
             </div>
           </section>
 
-          <section className="my-10pxr">
+          <section className="my-10pxr px-20pxr">
             <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100">
               <h2>다른 여행자들의 Myll</h2>
               <Button color="secondary" onClick={() => {}} type="button" variant="small">
@@ -49,7 +49,7 @@ export const Login = () => {
           </section>
 
           <section className="my-10pxr">
-            <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100">
+            <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
               <h2>로컬이 추천하는 여행지</h2>
               <Button color="secondary" onClick={() => {}} type="button" variant="small">
                 다른 추천 보기
@@ -57,7 +57,9 @@ export const Login = () => {
             </div>
 
             <Tab
-              className="mt-24pxr w-full h-600pxr"
+              size="small"
+              tabBarGutter={20}
+              className="w-full mt-24pxr h-600pxr"
               defaultActiveKey="1"
               items={[
                 {
@@ -93,11 +95,13 @@ export const Login = () => {
           </section>
 
           <section className="my-10pxr">
-            <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100">
+            <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
               <h2>오늘은 어디로 갈까요?</h2>
             </div>
 
             <Tab
+              tabBarGutter={20}
+              size="small"
               className="mt-24pxr h-600pxr"
               defaultActiveKey="1"
               items={[
