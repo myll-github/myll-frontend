@@ -6,7 +6,7 @@ import { HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 import { ROOT_URL } from '../..'
 
 interface randomTourListApiType {
-  contentTypeId: HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE
+  contentTypeId: string
   count: number
 }
 
@@ -22,7 +22,7 @@ export const getRandomTourList = async ({ contentTypeId, count }: randomTourList
 
 export const randomTourListQueryKey = ({ contentTypeId }) => ['tour-theme', contentTypeId]
 export const randomTourListQueryFn =
-  ({ contentTypeId, count }: randomTourListApiType) =>
+  ({ contentTypeId, count = 5 }: randomTourListApiType) =>
   () =>
     getRandomTourList({ contentTypeId, count })
 
