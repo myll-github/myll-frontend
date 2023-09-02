@@ -32,9 +32,11 @@ const ToggleIcon = ({ isActive, IconActive, IconInactive }: ToggleIconProps) => 
   없어서 2개 import해서 씀 
 */
 
-const FooterNav = ({ children }: { children: ReactNode }) => {
+const FooterNav = ({ children, className }: { children: ReactNode; className: string }) => {
   return (
-    <nav className="fixed left-1/2 -translate-x-1/2 bottom-0 flex w-screen md:w-[768px] max-h-98px flex-row justify-around border border-solid border-GRAY_30 p-l-24pxr p-r-24pxr transform">
+    <nav
+      className={`fixed left-1/2 -translate-x-1/2 bottom-0 bg-WHITE flex w-screen md:w-[768px] max-h-98px flex-row justify-around border border-solid border-GRAY_30 p-l-24pxr p-r-24pxr transform ${className}`}
+    >
       {children}
     </nav>
   )

@@ -12,7 +12,7 @@ interface SectionProps {
 }
 
 const AppBar = ({ children }: AppBarProps) => {
-  return <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr">{children}</nav>
+  return <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr bg-WHITE">{children}</nav>
 }
 
 const LeftSection = ({ className, children }: SectionProps) => {

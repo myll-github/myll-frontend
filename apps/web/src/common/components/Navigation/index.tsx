@@ -3,12 +3,16 @@ import { useRouter } from 'next/router'
 
 import FooterNav from './FooterNav'
 
-const Navigation = () => {
+interface NavigationProps {
+  className?: string
+}
+
+const Navigation = ({ className }: NavigationProps) => {
   const router = useRouter()
   const pathName = router.pathname
 
   return (
-    <FooterNav>
+    <FooterNav className={className}>
       <Link href="book" className="flex-shrink-0">
         <FooterNav.BookIcon isActive={pathName === '/book'} />
       </Link>
@@ -26,6 +30,10 @@ const Navigation = () => {
       </Link>
     </FooterNav>
   )
+}
+
+Navigation.defaultProps = {
+  className: '',
 }
 
 export default Navigation
