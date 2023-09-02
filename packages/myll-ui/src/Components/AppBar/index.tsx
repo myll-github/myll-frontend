@@ -12,11 +12,16 @@ interface SectionProps {
 }
 
 const AppBar = ({ children }: AppBarProps) => {
-  return <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr bg-WHITE">{children}</nav>
+  return (
+    <>
+      <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr pt-30pxr bg-WHITE z-10">{children}</nav>
+      <div role="none" className="h-76pxr" />
+    </>
+  )
 }
 
 const LeftSection = ({ className, children }: SectionProps) => {
-  return <div className={`absolute top-0 left-20pxr ${className}`}>{children}</div>
+  return <div className={`absolute top-30pxr left-20pxr ${className}`}>{children}</div>
 }
 
 LeftSection.defaultProps = {
@@ -24,7 +29,7 @@ LeftSection.defaultProps = {
 }
 
 const MiddleSection = ({ className, children }: SectionProps) => {
-  return <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 ${className}`}>{children}</div>
+  return <div className={`absolute top-30pxr left-1/2 transform -translate-x-1/2 ${className}`}>{children}</div>
 }
 
 MiddleSection.defaultProps = {
@@ -32,7 +37,7 @@ MiddleSection.defaultProps = {
 }
 
 const RightSection = ({ className, children }: SectionProps) => {
-  return <div className={`absolute top-0 right-20pxr ${className}`}>{children}</div>
+  return <div className={`absolute top-30pxr right-20pxr ${className}`}>{children}</div>
 }
 
 RightSection.defaultProps = {

@@ -7,7 +7,7 @@ const NavLayout = ({ children, className }: { children: ReactNode; className?: s
   return (
     <>
       <DefaultLayout className={`${className} mb-98pxr`}>{children}</DefaultLayout>
-      <div role="none" className="h-98xpr" />
+
       <Navigation />
     </>
   )
