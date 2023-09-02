@@ -1,21 +1,21 @@
-import { Alert, AppBar, Button } from 'myll-ui'
+import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 export const Login = () => {
   return (
     <>
-      <header className="">
-        <AppBar>
-          <AppBar.LeftSection>
-            <AppBar.FallbackButton />
-          </AppBar.LeftSection>
-          <AppBar.MiddleSection>example</AppBar.MiddleSection>
-          <AppBar.RightSection>example</AppBar.RightSection>
-        </AppBar>
-      </header>
-
       <NavLayout className="px-20pxr">
+        <header>
+          <AppBar>
+            <AppBar.LeftSection>
+              <AppBar.FallbackButton />
+            </AppBar.LeftSection>
+            <AppBar.MiddleSection>example</AppBar.MiddleSection>
+            <AppBar.RightSection>example</AppBar.RightSection>
+          </AppBar>
+        </header>
+
         <main className="flex flex-col gap-10">
           <section className="w-full flex flex-col items-center">
             <h2 className="w-full HEADER-H5 text-GRAY_100">나의 마일 플랜</h2>
@@ -55,6 +55,70 @@ export const Login = () => {
                 다른 추천 보기
               </Button>
             </div>
+
+            <Tab
+              className="mt-24pxr w-full h-600pxr"
+              defaultActiveKey="1"
+              items={[
+                {
+                  children: <div className="w-full h-500pxr">Content of Tab Pane 1</div>,
+                  key: '1',
+                  label: '축제•공연',
+                },
+                {
+                  children: 'Content of Tab Pane 2',
+                  key: '2',
+                  label: '관광지',
+                },
+                {
+                  children: <div>test</div>,
+                  key: '3',
+                  label: '음식점',
+                },
+
+                {
+                  children: <div>caft</div>,
+                  key: '4',
+                  label: '카페',
+                },
+
+                {
+                  children: <div>caft</div>,
+                  key: '5',
+                  label: '문화시설',
+                },
+              ]}
+              onChange={() => {}}
+            />
+          </section>
+
+          <section className="my-10pxr">
+            <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100">
+              <h2>오늘은 어디로 갈까요?</h2>
+            </div>
+
+            <Tab
+              className="mt-24pxr h-600pxr"
+              defaultActiveKey="1"
+              items={[
+                {
+                  children: <div className="w-full h-500pxr">Content of Tab Pane 1</div>,
+                  key: '1',
+                  label: '부산 인기장소',
+                },
+                {
+                  children: 'Content of Tab Pane 2',
+                  key: '2',
+                  label: '찜한곳',
+                },
+                {
+                  children: <div>test</div>,
+                  key: '3',
+                  label: '마일이 추천해요',
+                },
+              ]}
+              onChange={() => {}}
+            />
           </section>
         </main>
         <footer>123</footer>

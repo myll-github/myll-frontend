@@ -14,7 +14,7 @@ interface SectionProps {
 const AppBar = ({ children }: AppBarProps) => {
   return (
     <>
-      <nav className="flex flex-row fixed w-full md:w-[768px] h-76pxr px-20pxr pt-30pxr bg-WHITE z-10">{children}</nav>
+      <nav className="relative flex flex-row fixed w-full md:w-[768px] h-76pxr pt-30pxr bg-WHITE z-10">{children}</nav>
       <div role="none" className="h-76pxr" />
     </>
   )
