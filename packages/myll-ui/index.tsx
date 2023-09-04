@@ -7,6 +7,7 @@ import Button from './src/Components/Button/Button'
 import CardContainer from './src/Components/CardContainer'
 import Collapse from './src/Components/Collapse'
 import DatePicker from './src/Components/DatePicker'
+import Dropdown from './src/Components/Dropdown'
 import Input from './src/Components/Input'
 import MenuList from './src/Components/MenuList'
 import Modal from './src/Components/Modal'
@@ -30,6 +31,7 @@ export {
   Collapse,
   DatePicker,
   Divider,
+  Dropdown,
   Input,
   MenuList,
   Modal,
