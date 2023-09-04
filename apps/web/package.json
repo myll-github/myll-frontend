@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.14",
+    "@types/js-cookie": "^3.0.3",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "immer": "^10.0.2",
+    "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "myll-ui": "workspace:*",
     "next": "^13.4.11",

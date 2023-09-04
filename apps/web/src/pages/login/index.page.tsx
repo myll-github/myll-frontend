@@ -1,5 +1,6 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,8 +8,6 @@ import { useEffect, useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
-
-const EXPIRED_TIME_FOR_LOGIN_TOKEN = 86400000
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('')
@@ -20,17 +19,14 @@ export const Login = () => {
 
   // 토큰 만료 전일 경우
   useEffect(() => {
-    const loginToken = localStorage.getItem('token')
+    const accessToken = Cookies.get('accessToken')
 
-    if (loginToken !== null && loginToken !== undefined) {
-      const loginData = JSON.parse(loginToken)
-
-      if (loginData.expired < Date.now()) {
-        localStorage.removeItem('token')
-      } else {
-        // 홈페이지로 이동해야 함.
-      }
+    if (accessToken) {
+      // 홈페이지로 이동
+    } else {
+      // 로그인 페이지로 이동
     }
+
     // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -39,16 +35,12 @@ export const Login = () => {
     try {
       const response = await UserLogin(email, password)
 
-      // token이 API Header에 자동으로 담겨 전송 되도록 하기.
-      axios.defaults.headers.common['x-access-token'] = `Bearer ${response.data.token}`
-
-      // 토큰 local storage 저장, 만기 기한 24시간, refresh 토큰 관리 안함
-      // @TODO refresh 토큰 관리는 2차 개발 기간에
-      const loginData = JSON.stringify({
-        token: response.data.token,
-        expired: Date.now() + EXPIRED_TIME_FOR_LOGIN_TOKEN,
+      // HTTP-only 쿠키에 토큰 저장
+      Cookies.set('accessToken', response.data.accessToken, {
+        path: '/', // 쿠키 경로
+        expires: 7, // 만료 시간 (일)
+        httpOnly: true,
       })
-      localStorage.setItem('token', loginData)
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.response.data.message })
     }
