@@ -1,9 +1,8 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import axios from 'axios'
-import Cookies from 'js-cookie'
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
+import { parseCookies, setCookie } from 'nookies'
 import { useEffect, useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
@@ -19,12 +18,14 @@ export const Login = () => {
 
   // 토큰 만료 전일 경우
   useEffect(() => {
-    const accessToken = Cookies.get('accessToken')
+    const { accessToken } = parseCookies()
 
     if (accessToken) {
       // 홈페이지로 이동
+      console.log('There is token')
     } else {
       // 로그인 페이지로 이동
+      console.log('There is not token')
     }
 
     // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
@@ -34,11 +35,9 @@ export const Login = () => {
   const handleEmailLogin = async () => {
     try {
       const response = await UserLogin(email, password)
-
-      // HTTP-only 쿠키에 토큰 저장
-      Cookies.set('accessToken', response.data.accessToken, {
-        path: '/', // 쿠키 경로
-        expires: 7, // 만료 시간 (일)
+      setCookie(null, 'accessToken', response.data.accessToken, {
+        path: '/',
+        maxAge: 72000, // ms
         httpOnly: true,
       })
     } catch (error) {
