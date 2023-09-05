@@ -24,21 +24,18 @@ export const BasicDropdownExample: Story = {
   args: {
     items: [
       {
-        label: `Dropdown 1`,
-        isSelected: false,
+        children: <div>1</div>,
         onClick: noop,
         key: '1',
       },
       {
         key: '2',
-        label: `Dropdown 2`,
-        isSelected: false,
+        children: <div>2</div>,
         onClick: noop,
       },
       {
         key: '3',
-        label: `Dropdown 3`,
-        isSelected: false,
+        children: <div>3</div>,
         onClick: noop,
       },
     ],

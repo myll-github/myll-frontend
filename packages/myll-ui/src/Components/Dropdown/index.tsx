@@ -1,11 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dropdown as AntdDropdown, Menu } from 'antd'
 import { ReactNode } from 'react'
 import { noop } from 'shared'
 
 interface MenuProps {
   key: string
-  label: ReactNode
-  isSelected: boolean
+  children: ReactNode
   onClick: () => void
 }
 
@@ -15,17 +15,16 @@ interface DropdownProps {
 
 const Overlay = ({ items }: DropdownProps) => (
   <Menu mode="inline" className="relative">
-    {items.map(({ key, label, isSelected, onClick }) => {
+    {items.map(({ key, children, onClick }) => {
       return (
-        <Menu.Item
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+        <li
           key={key}
-          className={`w-full h-26pxr px-3 py-1 ${
-            isSelected ? 'bg-sky-100' : 'bg-WHITE'
-          }  rounded justify-start items-center gap-2 inline-flex`}
+          className="inline-flex items-center justify-start w-full gap-2 px-3 py-1 rounded h-26pxr"
           onClick={onClick ?? noop}
         >
-          <span className="SUBTITLE-T8">{label}</span>
-        </Menu.Item>
+          <span className="SUBTITLE-T8">{children}</span>
+        </li>
       )
     })}
   </Menu>
