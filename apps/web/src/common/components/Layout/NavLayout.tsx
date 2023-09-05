@@ -3,13 +3,18 @@ import { ReactNode } from 'react'
 import Navigation from '../Navigation'
 import DefaultLayout from './DefaultLayout'
 
-const NavLayout = ({ children }: { children: ReactNode }) => {
+const NavLayout = ({ children, className }: { children: ReactNode; className?: string }) => {
   return (
-    <DefaultLayout>
-      {children}
+    <>
+      <DefaultLayout className={`${className} mb-98pxr`}>{children}</DefaultLayout>
+
       <Navigation />
-    </DefaultLayout>
+    </>
   )
+}
+
+NavLayout.defaultProps = {
+  className: '',
 }
 
 export default NavLayout

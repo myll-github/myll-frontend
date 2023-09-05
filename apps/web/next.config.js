@@ -42,7 +42,10 @@ module.exports = withPWA({
     styledComponents: true,
   },
 
-  // crossOrigin: 'anonymous',
+  crossOrigin: 'anonymous',
+  images: {
+    domains: ['', 'xsgames.co', 'tong.visitkorea.or.kr', 'localhost'],
+  },
 
   // async headers() {
   //   return [

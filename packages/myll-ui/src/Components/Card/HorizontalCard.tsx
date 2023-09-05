@@ -7,12 +7,12 @@ import { CardImage, MainTitle, SubTitle } from './components/compound'
 import { BasicCardProps, CompoundCard, DescriptionProps } from './type'
 
 const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected, onClick }: BasicCardProps) => {
-  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE' : 'bg-SUB_BLUE_3'
+  const BG_COLOR = isSelected ? 'bg-WHITE border-PRIMARY_BLUE shadow-SM' : 'bg-SUB_BLUE_3'
 
   return (
     <Card
       onClick={onClick}
-      className={`${BG_COLOR} relative w-320pxr h-115pxr flex p-10pxr items-center rounded-lg border border-solid`}
+      className={`${BG_COLOR} relative w-320pxr h-115pxr flex p-10pxr items-center rounded-lg border-[1.5px] border-solid`}
     >
       {children}
       <div className="absolute top-2.5 right-2.5">
@@ -23,14 +23,14 @@ const HorizontalCard: CompoundCard<BasicCardProps> = ({ children, isSelected, on
 }
 
 HorizontalCard.CardImage = ({ src, alt }: ImageProps) => {
-  return <CardImage src={src} alt={alt} className="relative object-fill rounded-sm w-120pxr h-90pxr mx-10pxr" />
+  return <CardImage src={src} alt={alt} className="relative object-fill rounded-sm w-120pxr h-95pxr mx-10pxr" />
 }
 
-const Description = ({ mainTitle, subTitle }: DescriptionProps) => {
+const Description = ({ mainTitle, subTitle, isSelected }: DescriptionProps) => {
   return (
     <div className="flex flex-col w-150pxr h-72pxr mt-15pxr">
-      <SubTitle title={subTitle} className="flex flex-col justify-end h-50pxr" />
-      <MainTitle className="" title={mainTitle} />
+      <SubTitle title={subTitle} className="flex flex-col justify-end h-50pxr " />
+      <MainTitle className="text-left" title={mainTitle} isSelected={isSelected} />
     </div>
   )
 }

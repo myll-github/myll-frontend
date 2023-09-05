@@ -41,7 +41,7 @@ const Alert = ({ type, isVisible, closable, message, onVisibleChange }: AlertPro
     <Space direction="vertical" style={{ width: '100%' }}>
       {isVisible && (
         <AntdAlert
-          className="flex justify-center SUBTITLE-T8 text-GRAY_100"
+          className="flex justify-center SUBTITLE-T8 text-GRAY_100 border-0"
           showIcon
           message={message}
           type={type}

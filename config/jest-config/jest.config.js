@@ -14,6 +14,10 @@ Object.entries(tsConfig.compilerOptions.paths).forEach(([key, path]) => {
 })
 
 module.exports = {
+  globals: {
+    __DEV__: true,
+  },
+
   preset: 'ts-jest',
   collectCoverage: true,
   // on node 14.x coverage provider v8 offers good speed and more or less good report

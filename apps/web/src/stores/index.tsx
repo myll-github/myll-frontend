@@ -1,3 +1,8 @@
-import useCountStore from './example1'
+import { enableMapSet } from 'immer'
 
-export { useCountStore }
+import useCountStore from './example1'
+import useRawRecommendPageStore from './useRecommendPageStore'
+
+enableMapSet()
+
+export { useCountStore, useRawRecommendPageStore as useRecommendPageStore }
