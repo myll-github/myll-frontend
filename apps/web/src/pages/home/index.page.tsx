@@ -31,6 +31,8 @@ export const Home = () => {
   )
 }
 
+/*
+
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient()
 
@@ -51,5 +53,7 @@ export const getServerSideProps = async () => {
     },
   }
 }
+
+*/
 
 export default Home
