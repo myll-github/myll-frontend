@@ -14,9 +14,8 @@ import MyllRecommendSection from './section/MyllRecommendSection'
 export const Home = () => {
   return (
     <>
+      <HomeHeader />
       <NavLayout>
-        <HomeHeader />
-
         <main className="flex flex-col gap-10">
           <MyllPlanSection />
           <AnotherUserPlanSection />

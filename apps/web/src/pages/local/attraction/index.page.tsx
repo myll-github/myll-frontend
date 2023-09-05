@@ -9,9 +9,8 @@ import LocalPlaceSection from './section/LocalPlaceSection'
 export const Home = () => {
   return (
     <>
+      <HomeHeader />
       <NavLayout>
-        <HomeHeader />
-
         <main className="flex flex-col gap-10">
           <LocalPlaceSection />
         </main>
