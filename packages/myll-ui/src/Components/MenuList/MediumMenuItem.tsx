@@ -14,7 +14,8 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked
 
   return (
     <li
-      className="relative flex flex-row w-full border-none h-110pxr px-20pxr py-10pxr"
+      key={item.key}
+      className="relative flex flex-row w-full border-none h-110pxr px-20pxr py-10pxr mt-10pxr"
       onClick={() => isSelectedButtonNeeded && ToggleCardStatusByClick(item)}
     >
       <CustomImage className="rounded-md w-90pxr h-90pxr mr-14pxr bg-GRAY_30" src={item.img} alt={item.mainTitle} />
@@ -30,7 +31,12 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked
               onClick={() => onRecommendButtonClicked(item.id)}
               icon={<ICON_HEART_AC className={`text-${item.isRecommend ? 'PRIMARY_BLUE' : 'GRAY_50'}`} />}
             />
-            {item.recommendCount}
+            <span
+              className="text-GRAY_70"
+              style={{ fontSize: 12, fontFamily: 'Pretendard', fontWeight: '400', wordWrap: 'break-word' }}
+            >
+              {item.recommendCount}
+            </span>
           </div>
         )}
       </div>

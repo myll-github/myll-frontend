@@ -1,15 +1,10 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
-import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { HOME_LOCALRECOMMANDSECTION_MAP, HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 
-import AnotherUserPlanSection from './section/AnotherUserPlanSection'
-import HomeHeader from './section/HomeHeader'
-import LocalRecommendSection from './section/LocalRecommendSection'
-import MyllPlanSection from './section/MyllPlanSection'
-import MyllRecommendSection from './section/MyllRecommendSection'
+import HomeHeader from '../section/HomeHeader'
+import LocalPlaceSection from './section/LocalPlaceSection'
 
 export const Home = () => {
   return (
@@ -17,14 +12,8 @@ export const Home = () => {
       <HomeHeader />
       <NavLayout>
         <main className="flex flex-col gap-10">
-          <MyllPlanSection />
-          <AnotherUserPlanSection />
-
-          <LocalRecommendSection />
-          <MyllRecommendSection />
+          <LocalPlaceSection />
         </main>
-
-        <footer>123</footer>
       </NavLayout>
     </>
   )

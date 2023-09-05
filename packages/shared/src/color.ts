@@ -10,6 +10,7 @@ const PRIMARY = {
 }
 
 const GRAY = {
+  GRAY_110: 'var(--gray-gray-110, #1c1c1c)',
   GRAY_100: 'var(--gray-gray-100, #202020)',
   GRAY_90: 'var(--gray-gray-90, #28333E)',
   GRAY_80: 'var(--gray-gray-80, #39434F)',

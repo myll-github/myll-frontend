@@ -43,7 +43,7 @@ module.exports = withPWA({
 
   crossOrigin: 'anonymous',
   images: {
-    domains: ['', 'tong.visitkorea.or.kr', 'localhost'],
+    domains: ['', 'xsgames.co', 'tong.visitkorea.or.kr', 'localhost'],
   },
 
   async headers() {
