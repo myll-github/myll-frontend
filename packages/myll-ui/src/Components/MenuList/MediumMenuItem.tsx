@@ -15,7 +15,7 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked
   return (
     <li
       key={item.key}
-      className="relative flex flex-row w-full border-none h-110pxr px-20pxr py-10pxr mb-10pxr"
+      className="relative flex flex-row w-full border-none h-110pxr px-20pxr py-10pxr mt-10pxr"
       onClick={() => isSelectedButtonNeeded && ToggleCardStatusByClick(item)}
     >
       <CustomImage className="rounded-md w-90pxr h-90pxr mr-14pxr bg-GRAY_30" src={item.img} alt={item.mainTitle} />
