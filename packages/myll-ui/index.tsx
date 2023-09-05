@@ -1,4 +1,4 @@
-import { Divider } from 'antd'
+import { Divider, Space } from 'antd'
 import ConfigProvider from 'antd/es/config-provider'
 
 import Alert from './src/Components/Alert'

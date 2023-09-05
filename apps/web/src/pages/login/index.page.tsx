@@ -1,11 +1,50 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { Button, Divider, Input } from 'myll-ui'
+import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
+import { parseCookies, setCookie } from 'nookies'
+import { useEffect, useState } from 'react'
 
+import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 export const Login = () => {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
+    isVisible: false,
+  })
+
+  // 토큰 만료 전일 경우
+  useEffect(() => {
+    const { accessToken } = parseCookies()
+
+    if (accessToken) {
+      // 홈페이지로 이동
+      console.log('There is token')
+    } else {
+      // 로그인 페이지로 이동
+      console.log('There is not token')
+    }
+
+    // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleEmailLogin = async () => {
+    try {
+      const response = await UserLogin(email, password)
+      setCookie(null, 'accessToken', response.data.accessToken, {
+        path: '/',
+        maxAge: 72000, // ms
+        httpOnly: true,
+      })
+    } catch (error) {
+      setOpenAlert({ isVisible: true, type: 'error', message: error.response.data.message })
+    }
+  }
+
   return (
     <DefaultLayout>
       <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr">
@@ -13,11 +52,23 @@ export const Login = () => {
           마일 여행자이시라면 <span className="text-PRIMARY_BLUE">로그인</span> 해주세요
         </div>
 
-        <Input size="large" placeholder="이메일을 입력해주세요" inputMode="email" />
-        <Input size="large" placeholder="비밀번호를 입력해주세요" inputType="password" />
+        <Input
+          size="large"
+          value={email}
+          placeholder="이메일을 입력해주세요"
+          inputMode="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          size="large"
+          value={password}
+          placeholder="비밀번호를 입력해주세요"
+          inputType="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <div className="flex flex-col gap-10pxr mt-30pxr">
-          <Button variant="large" color="primary" type="button">
+          <Button variant="large" color="primary" type="button" onClick={handleEmailLogin}>
             이메일로 로그인
           </Button>
           <div className="w-full flex justify-center items-center h-30pxr">
@@ -47,6 +98,14 @@ export const Login = () => {
           <Button type="button" variant="medium" color="secondary">
             초보 여행자에요
           </Button>
+          <Alert
+            isVisible={openAlert.isVisible}
+            onVisibleChange={(flag) => {
+              if (!flag) setOpenAlert({ isVisible: false, message: '' })
+            }}
+            type={openAlert.type}
+            message={openAlert.message}
+          />
         </div>
       </div>
     </DefaultLayout>
