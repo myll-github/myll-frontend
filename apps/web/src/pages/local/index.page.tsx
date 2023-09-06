@@ -4,14 +4,14 @@ import { Alert, AppBar, Button, Tab } from 'myll-ui'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import LocalAttractionMenuList from './components/LocalAttractionMenuList'
-import HomeHeader from './section/HomeHeader'
+import LocalHeader from './section/LocalHeader'
 import LocalIntroduceSection from './section/LocalIntroduceSection'
 import LocalPlaceSection from './section/LocalPlaceSection'
 
 export const Local = () => {
   return (
     <>
-      <HomeHeader />
+      <LocalHeader />
       <NavLayout>
         <main className="flex flex-col gap-10">
           <LocalIntroduceSection />

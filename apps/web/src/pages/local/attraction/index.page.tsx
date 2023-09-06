@@ -3,13 +3,13 @@ import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
 import NavLayout from '@/common/components/Layout/NavLayout'
 
-import HomeHeader from '../section/HomeHeader'
+import LocalHeader from '../section/LocalHeader'
 import LocalPlaceSection from './section/LocalPlaceSection'
 
 export const Home = () => {
   return (
     <>
-      <HomeHeader />
+      <LocalHeader />
       <NavLayout>
         <main className="flex flex-col gap-10">
           <LocalPlaceSection />
