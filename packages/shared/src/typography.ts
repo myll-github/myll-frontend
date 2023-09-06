@@ -93,14 +93,14 @@ const TYPOGRAPHY = {
   '.SUBTITLE-T7': {
     fontSize: '12px',
     fontFamily: 'Pretendard, sans-serif',
-    fontWeight: '700',
+    fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0.018px',
   },
   '.SUBTITLE-T8': {
     fontSize: '12px',
     fontFamily: 'Pretendard, sans-serif',
-    fontWeight: '700',
+    fontWeight: '500',
     lineHeight: '16px',
     letterSpacing: '0.15px',
   },
