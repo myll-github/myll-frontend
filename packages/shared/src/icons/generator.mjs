@@ -30,7 +30,12 @@ const getComponentsFromNode = (node) => {
   return []
 }
 
-const formatIconsSVG = (svg) => svg.replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
+const formatIconsSVG = (svg) =>
+  svg
+    .replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
+    .replace('fill-rule', 'fillRule')
+    .replace('clip-rule', 'clipRule')
+    .replace('clip-path', 'clipPath')
 
 const formatName = (name) => name?.toUpperCase().replace(/-/g, '_') // replaces '/' by '_'
 
@@ -56,7 +61,9 @@ const generateFiles = (ele) => {
 
 const getSVGsFromComponents = (components) => {
   const key = FILE_KEY
-  const filteredComponent = components.filter(({ name }) => name?.toUpperCase().startsWith('ICON'))
+  const filteredComponent = components.filter(
+    ({ name }) => name?.toUpperCase().startsWith('ICON') && !name?.toUpperCase().startsWith('ICON='),
+  )
   const ids = filteredComponent.map(({ id }) => id)
 
   return fetch(`https://api.figma.com/v1/images/${key}?ids=${ids.join()}&format=svg`, {
