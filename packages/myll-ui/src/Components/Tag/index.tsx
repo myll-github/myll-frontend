@@ -2,6 +2,7 @@ import { Tag as AntdTag } from 'antd'
 
 interface TagProps {
   contenttype: string
+  className?: string
 }
 
 const COLOR_MAP: { [id in string]: string } = {
@@ -15,12 +16,16 @@ const COLOR_MAP: { [id in string]: string } = {
   카페: 'green',
 }
 
-const Tag = ({ contenttype }: TagProps) => {
+const Tag = ({ contenttype, className }: TagProps) => {
   return (
-    <AntdTag className="w-max SUBTITLE-T8" color={COLOR_MAP[contenttype]} bordered={false}>
+    <AntdTag className={`w-max SUBTITLE-T8 ${className}`} color={COLOR_MAP[contenttype]} bordered={false}>
       {contenttype}
     </AntdTag>
   )
+}
+
+Tag.defaultProps = {
+  className: '',
 }
 
 export default Tag
