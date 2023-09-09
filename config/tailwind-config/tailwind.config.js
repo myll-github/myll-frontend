@@ -29,6 +29,13 @@ export default {
         ...COLOR,
       },
 
+      boxShadow: {
+        SM: '0px 1px 3px 0px rgba(0, 0, 0, 0.20)',
+        MD: '0px 4px 10px 0px rgba(0, 0, 0, 0.20)',
+        LG: '0px 4px 16px 0px rgba(0, 0, 0, 0.20)',
+        XL: '0px 16px 32px 0px rgba(0, 0, 0, 0.20)',
+      },
+
       spacing: {
         ...Array.from({ length: 900 }, (_, i) => i + 1).reduce((acc, px) => {
           acc[`${px}pxr`] = pxToRem(px)

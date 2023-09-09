@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-type State = {
+interface State {
   count: number
 }
 
-type Actions = {
+interface Actions {
   increment: (qty: number) => void
   decrement: (qty: number) => void
 }

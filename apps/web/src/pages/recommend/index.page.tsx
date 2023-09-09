@@ -1,10 +1,20 @@
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Tab } from 'myll-ui'
 import { GetServerSideProps } from 'next'
-import { useState } from 'react'
+import { Suspense } from 'react'
 import { CompoundProvider, noop } from 'shared'
 
-import { getFavoritePlace } from '@/common/api/recommend'
+import {
+  FavoriteActivityFn,
+  FavoriteActivityKey,
+  FavoritePlaceQueryFn,
+  FavoritePlaceQueryKey,
+  TravelThemeQueryFn,
+  TravelThemeQueryKey,
+} from '@/common/api/recommend'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { RECOMMEND_ACTIVITY_KEY, RECOMMEND_ACTIVITY_KEY_TYPE } from '@/common/constants'
+import { useRecommendPageStore } from '@/stores'
 
 import FavoriteActivity from './FavoriteActivity'
 import FavoritePlace from './FavoritePlace'
@@ -12,37 +22,72 @@ import TravelTheme from './TravelTheme'
 
 const getTabItems = () => [
   {
-    key: '1',
+    key: RECOMMEND_ACTIVITY_KEY.FAVORITE_PLACE_KEY_INDEX,
     label: `좋아하는 지역`,
-    children: <FavoriteActivity />,
+    children: <FavoritePlace />,
   },
   {
-    key: '2',
+    key: RECOMMEND_ACTIVITY_KEY.TRAVEL_THEME_KEY_INDEX,
     label: `여행테마`,
     children: <TravelTheme />,
   },
   {
-    key: '3',
+    key: RECOMMEND_ACTIVITY_KEY.FAVORTIE_ACTIVITY_KEY_INDEX,
     label: `하고싶은 활동`,
-    children: <FavoritePlace />,
+    children: <FavoriteActivity />,
   },
 ]
 
 export const Recommend = ({ favoritePlace }: any) => {
-  const [{ favoritePlace: fav }, setFavorite] = useState({ favoritePlace })
+  const { tabIndex, tabIndexFlag, handleChangeTabIndex } = useRecommendPageStore()
 
   return (
-    <CompoundProvider providerValue={{ fav }}>
-      <DefaultLayout>
-        <Tab className="mt-30pxr" defaultActiveKey="1" items={getTabItems()} onChange={noop} />
-      </DefaultLayout>
-    </CompoundProvider>
+    <DefaultLayout>
+      <Suspense fallback={<div />}>
+        <Tab
+          activeKey={tabIndex}
+          onChange={(key) => {
+            handleChangeTabIndex(key as RECOMMEND_ACTIVITY_KEY_TYPE)
+          }}
+          className="mt-30pxr"
+          defaultActiveKey="1"
+          items={getTabItems()}
+        />
+      </Suspense>
+    </DefaultLayout>
   )
 }
 
 export const getServerSideProps = async () => {
-  const favoritePlace = await getFavoritePlace()
-  return { props: { favoritePlace } }
+  const queryClient = new QueryClient()
+
+  await Promise.all([
+    queryClient.fetchQuery({
+      queryKey: FavoritePlaceQueryKey,
+      queryFn: FavoritePlaceQueryFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+    queryClient.fetchQuery({
+      queryKey: TravelThemeQueryKey,
+      queryFn: TravelThemeQueryFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+
+    queryClient.fetchQuery({
+      queryKey: FavoriteActivityKey,
+      queryFn: FavoriteActivityFn,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+  ])
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
 }
 
 export default Recommend
