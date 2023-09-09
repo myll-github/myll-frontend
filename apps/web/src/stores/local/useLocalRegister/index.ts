@@ -2,6 +2,8 @@ import { SyntheticEvent } from 'react'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
+import { DEFAULT_TAG_COLOR_MAP } from '@/common/constants'
+
 interface State {
   registerTitle: string
   registerLocation: string
@@ -17,15 +19,21 @@ interface Actions {
 
   handleTag: (tagName: string) => (e: SyntheticEvent) => void
   isThisTagSelected: (currentTagName: string) => boolean
+
+  resetState: () => void
 }
 
-const useRegister = create(
+const initState = {
+  registerTitle: '',
+  registerLocation: '',
+  registerDescription: '',
+  selectedTagName: DEFAULT_TAG_COLOR_MAP,
+}
+
+const useLocalRegister = create(
   immer<State & Actions>((set, get) => ({
     // Initial state
-    registerTitle: '',
-    registerLocation: '',
-    registerDescription: '',
-    selectedTagName: '',
+    ...initState,
 
     // Actions
     handleRegisterTitle: (newTitle) => {
@@ -56,7 +64,11 @@ const useRegister = create(
     isThisTagSelected: (currentTagName: string) => {
       return get().selectedTagName === currentTagName
     },
+
+    resetState: () => {
+      set(initState)
+    },
   })),
 )
 
-export default useRegister
+export default useLocalRegister

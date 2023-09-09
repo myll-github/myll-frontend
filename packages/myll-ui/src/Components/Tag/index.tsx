@@ -1,6 +1,6 @@
-import { Tag as AntdTag } from 'antd'
+import { Tag as AntdTag, TagProps as AntdTagProps } from 'antd'
 
-interface TagProps {
+interface TagProps extends AntdTagProps {
   contenttype: string
   className?: string
 }
@@ -12,13 +12,12 @@ const COLOR_MAP: { [id in string]: string } = {
   여행코스: 'magenta',
   레포츠: 'blue',
   쇼핑: 'purple',
-  음식점: 'gold',
-  카페: 'green',
+  '음식점•카페': 'gold',
 }
 
-const Tag = ({ contenttype, className }: TagProps) => {
+const Tag = ({ contenttype, className, ...rest }: TagProps) => {
   return (
-    <AntdTag className={`w-max SUBTITLE-T8 ${className}`} color={COLOR_MAP[contenttype]} bordered={false}>
+    <AntdTag className={`w-max SUBTITLE-T8 ${className}`} color={COLOR_MAP[contenttype]} bordered={false} {...rest}>
       {contenttype}
     </AntdTag>
   )

@@ -7,3 +7,5 @@ export const TAG_COLOR_MAP: { [id in string]: string } = {
   쇼핑: 'purple',
   '음식점•카페': 'gold',
 }
+
+export const DEFAULT_TAG_COLOR_MAP = '관광지'
