@@ -38,10 +38,9 @@ export const Login = () => {
       setCookie(null, 'accessToken', response.data.accessToken, {
         path: '/',
         maxAge: 72000, // ms
-        httpOnly: true,
       })
     } catch (error) {
-      setOpenAlert({ isVisible: true, type: 'error', message: error.response.data.message })
+      setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
   }
 
