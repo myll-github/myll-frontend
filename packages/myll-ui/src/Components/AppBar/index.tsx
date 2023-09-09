@@ -59,13 +59,13 @@ const FallbackButton = ({ Icon }: { Icon?: ReactElement }) => {
 
   return (
     <button type="button" onClick={handleGoBack}>
-      {cloneElement(Icon!, { className: 'fill-GRAY_80' })}
+      {cloneElement(Icon, { className: 'fill-GRAY_80' })}
     </button>
   )
 }
 
 FallbackButton.defaultProps = {
-  Icon: ICON_ARROW_LEFT,
+  Icon: <ICON_ARROW_LEFT />,
 }
 
 AppBar.LeftSection = LeftSection
