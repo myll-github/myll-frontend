@@ -45,7 +45,7 @@ export const SignUp = () => {
       setIsEmailValidated(true)
       setValidationErrorMessage('')
     } catch (error) {
-      setValidationErrorMessage(error.response.data.message)
+      setValidationErrorMessage(error.message)
     }
   }, [email, emailCode])
 
@@ -66,7 +66,7 @@ export const SignUp = () => {
       await SendEmail(email)
       setOpenValidation(true)
     } catch (error) {
-      setEmailErrorMessage(error.response.data.message)
+      setEmailErrorMessage(error.message)
     }
   }
 
@@ -75,7 +75,7 @@ export const SignUp = () => {
       await SendEmail(email)
       setEmailErrorMessage('')
     } catch (error) {
-      setEmailErrorMessage(error.response.data.message)
+      setEmailErrorMessage(error.message)
     }
   }
 
