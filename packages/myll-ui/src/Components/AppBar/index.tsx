@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import { cloneElement, ReactElement, ReactNode } from 'react'
 import { ICON_ARROW_LEFT } from 'shared'
 
 interface AppBarProps {
@@ -50,7 +50,7 @@ RightSection.defaultProps = {
   className: '',
 }
 
-const FallbackButton = () => {
+const FallbackButton = ({ Icon }: { Icon?: ReactElement }) => {
   const router = useRouter()
 
   const handleGoBack = () => {
@@ -59,9 +59,13 @@ const FallbackButton = () => {
 
   return (
     <button type="button" onClick={handleGoBack}>
-      <ICON_ARROW_LEFT className="fill-GRAY_80" />
+      {cloneElement(Icon!, { className: 'fill-GRAY_80' })}
     </button>
   )
+}
+
+FallbackButton.defaultProps = {
+  Icon: ICON_ARROW_LEFT,
 }
 
 AppBar.LeftSection = LeftSection
