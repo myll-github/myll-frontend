@@ -1,6 +1,7 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
+import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import LocalAttractionMenuList from './components/LocalAttractionMenuList'
@@ -22,11 +23,10 @@ export const Local = () => {
   )
 }
 
-/*
-
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient()
 
+  /*
   await Promise.all(
     Object.keys(HOME_LOCALRECOMMANDSECTION_MAP).map((contentTypeId: string) => {
       return queryClient.fetchQuery({
@@ -37,6 +37,7 @@ export const getServerSideProps = async () => {
       })
     }),
   )
+  */
 
   return {
     props: {
@@ -44,7 +45,5 @@ export const getServerSideProps = async () => {
     },
   }
 }
-
-*/
 
 export default Local

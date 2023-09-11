@@ -1,6 +1,12 @@
-import { Tab } from 'myll-ui'
+import { MenuList, Tab } from 'myll-ui'
+import { ItemType } from 'myll-ui/src/Components/MenuList/type'
+
+import { useRandomTourListQuery } from '@/common/api/home/localRecommend'
 
 const MyllRecommendSection = () => {
+  const { data: data1 } = useRandomTourListQuery({ key: 1 })
+  const { data: data2 } = useRandomTourListQuery({ key: 2 })
+
   return (
     <section className="my-10pxr">
       <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
@@ -10,21 +16,33 @@ const MyllRecommendSection = () => {
       <Tab
         tabBarGutter={20}
         size="small"
-        className="mt-24pxr h-600pxr"
+        className="mt-24pxr"
         defaultActiveKey="1"
         items={[
           {
-            children: <div className="w-full h-500pxr">Content of Tab Pane 1</div>,
+            children: (
+              <MenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
+                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+              </MenuList>
+            ),
             key: '1',
             label: '부산 인기장소',
           },
           {
-            children: 'Content of Tab Pane 2',
+            children: (
+              <MenuList itemLayout="vertical" onChange={() => {}} data={[]}>
+                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+              </MenuList>
+            ),
             key: '2',
             label: '찜한곳',
           },
           {
-            children: <div>test</div>,
+            children: (
+              <MenuList itemLayout="vertical" onChange={() => {}} data={data2 as ItemType[]}>
+                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+              </MenuList>
+            ),
             key: '3',
             label: '마일이 추천해요',
           },
