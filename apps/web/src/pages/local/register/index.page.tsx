@@ -13,8 +13,16 @@ import LocalRegisterHeader from './section/LocalRegisterHeader'
 import RegisterTagSection from './section/RegisterTagSection'
 
 export const Register = () => {
-  const { registerTitle, handleRegisterTitle, handleRegisterLocation, isThisTagSelected, resetState } =
-    useLocalRegister()
+  const {
+    registerTitle,
+    handleRegisterTitle,
+    handleRegisterDescription,
+    handleRegisterLocation,
+    handleRegisterFileList,
+    isThisTagSelected,
+    resetState,
+    handleSubmit,
+  } = useLocalRegister()
 
   useEffect(() => {
     return () => {
@@ -28,7 +36,12 @@ export const Register = () => {
         <LocalRegisterHeader />
         <main className="relative flex flex-col gap-5 mt-20pxr">
           <section className="px-20pxr ">
-            <UploadCard itemList={[]} onChange={() => {}} />
+            <UploadCard
+              itemList={[]}
+              onChange={(data) => {
+                handleRegisterFileList(data)
+              }}
+            />
             <Separator />
           </section>
 
@@ -69,13 +82,22 @@ export const Register = () => {
                 className="mt-6pxr"
                 size="large"
                 placeholder="제목을 작성해주세요."
-                onChange={() => {}}
+                onChange={(e) => {
+                  handleRegisterDescription(e.target.value)
+                }}
                 autoSize={{ minRows: 5, maxRows: 8 }}
               />
             </label>
           </section>
           <div className="flex flex-row justify-center m-30pxr">
-            <Button color="primary" onClick={() => {}} type="button" variant="block">
+            <Button
+              color="primary"
+              onClick={() => {
+                handleSubmit()
+              }}
+              type="button"
+              variant="block"
+            >
               작성 완료
             </Button>
           </div>
