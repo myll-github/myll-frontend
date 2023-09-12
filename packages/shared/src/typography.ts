@@ -85,7 +85,7 @@ const TYPOGRAPHY = {
   },
   '.SUBTITLE-T6': {
     fontSize: '13px',
-    fontWeight: '700',
+    fontWeight: '400',
     fontFamily: 'Pretendard, sans-serif',
     lineHeight: '20px',
     letterSpacing: '0.15px',
@@ -93,14 +93,14 @@ const TYPOGRAPHY = {
   '.SUBTITLE-T7': {
     fontSize: '12px',
     fontFamily: 'Pretendard, sans-serif',
-    fontWeight: '700',
+    fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0.018px',
   },
   '.SUBTITLE-T8': {
     fontSize: '12px',
     fontFamily: 'Pretendard, sans-serif',
-    fontWeight: '700',
+    fontWeight: '500',
     lineHeight: '16px',
     letterSpacing: '0.15px',
   },
