@@ -2,7 +2,8 @@ import { SyntheticEvent } from 'react'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { DEFAULT_TAG_COLOR_MAP } from '@/common/constants'
+import { updateLocal } from '@/common/api/local'
+import { DEFAULT_TAG_COLOR_MAP, TAG_COLOR_MAP_REVERSE } from '@/common/constants'
 
 interface State {
   registerTitle: string
@@ -80,14 +81,14 @@ const useLocalRegister = create(
 
       const requestBody = {
         title: state.registerTitle,
-        contentImage: state.registerFileList,
-        contentTypeId: state.selectedTagName,
+        contentImage: 'stsr',
+        contentTypeId: TAG_COLOR_MAP_REVERSE[state.selectedTagName],
         address: state.registerLocation,
         introduction: state.registerDescription,
-        createAt: '111',
+        createAt: new Date().getTime(),
       }
 
-      console.log(requestBody)
+      await updateLocal(requestBody)
     },
 
     resetState: () => {
