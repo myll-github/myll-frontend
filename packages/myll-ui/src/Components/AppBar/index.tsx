@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import { cloneElement, ReactElement, ReactNode } from 'react'
 import { ICON_ARROW_LEFT } from 'shared'
 
 interface AppBarProps {
@@ -14,8 +14,8 @@ interface SectionProps {
 const AppBar = ({ children }: AppBarProps) => {
   return (
     <>
-      <nav className="flex flex-row items-center fixed w-full md:w-[768px] h-76pxr pt-30pxr bg-WHITE top-0 z-10">
-        <div className="relative flex flex-col justify-center w-full h-full">{children}</div>
+      <nav className="fixed top-0 z-10 flex flex-row items-center justify-center w-full h-76pxr pt-30pxr bg-WHITE">
+        <div className="relative flex flex-col justify-center w-full h-full md:w-[768px]">{children}</div>
       </nav>
       <div role="none" className="h-76pxr" />
     </>
@@ -50,7 +50,7 @@ RightSection.defaultProps = {
   className: '',
 }
 
-const FallbackButton = () => {
+const FallbackButton = ({ Icon }: { Icon?: ReactElement }) => {
   const router = useRouter()
 
   const handleGoBack = () => {
@@ -59,9 +59,13 @@ const FallbackButton = () => {
 
   return (
     <button type="button" onClick={handleGoBack}>
-      <ICON_ARROW_LEFT className="fill-GRAY_80" />
+      {cloneElement(Icon!, { className: 'fill-GRAY_80' })}
     </button>
   )
+}
+
+FallbackButton.defaultProps = {
+  Icon: <ICON_ARROW_LEFT />,
 }
 
 AppBar.LeftSection = LeftSection

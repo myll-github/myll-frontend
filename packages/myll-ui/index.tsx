@@ -13,6 +13,7 @@ import MenuList from './src/Components/MenuList'
 import Modal from './src/Components/Modal'
 import Tab from './src/Components/Tab'
 import Tag from './src/Components/Tag'
+import TextArea from './src/Components/TextArea'
 import UploadCard from './src/Components/UploadCard'
 
 export * from './src/Components/Card'
@@ -37,5 +38,6 @@ export {
   Modal,
   Tab,
   Tag,
+  TextArea,
   UploadCard,
 }

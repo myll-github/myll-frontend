@@ -46,7 +46,7 @@ const UploadCard = ({ itemList, onChange = noop }: UploadCardProps) => {
     setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1))
   }
 
-  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => setFileList(newFileList)
+  const handleChange = ({ fileList: newFileList }: any) => setFileList(newFileList)
 
   useEffect(() => {
     onChange(fileList)
