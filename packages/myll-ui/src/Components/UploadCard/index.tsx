@@ -54,13 +54,7 @@ const UploadCard = ({ itemList, onChange = noop }: UploadCardProps) => {
 
   return (
     <>
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
+      <Upload listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>

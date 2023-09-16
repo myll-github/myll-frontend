@@ -13,13 +13,21 @@ interface updateDataType {
 
 export const updateLocal = async (data: updateDataType) => {
   const headers = getCookieHeader()
+  const formData = new FormData()
 
-  console.log(headers)
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value)
+  })
 
   await axios.post(
     `${ROOT_URL}/local-tour
   `,
-    data,
-    { headers },
+    formData,
+    {
+      headers: {
+        ...headers,
+        'Content-Type': 'multipart/form-data',
+      },
+    },
   )
 }

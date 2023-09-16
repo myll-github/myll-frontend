@@ -3,17 +3,24 @@ import axios from 'axios'
 
 import { HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 
-import { ROOT_URL } from '../..'
+import { getCookieHeader, ROOT_URL } from '../..'
 
 interface randomTourListApiType {
   contentTypeId?: string
   count?: number
   key?: string | number
+
+  initHeaders?: {
+    authorization: string
+  }
 }
 
-export const getRandomTourList = async ({ contentTypeId, count }: randomTourListApiType) => {
+export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: randomTourListApiType) => {
+  const headers = initHeaders ?? getCookieHeader()
+
   const data = await axios(
     `${ROOT_URL}/random-tour-list?${contentTypeId ? `contentTypeId=${contentTypeId}&` : ''}count=${count}`,
+    { headers },
   )
 
   return data.data.map((ele, id) => {
@@ -34,15 +41,15 @@ export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) =>
   contentTypeId ?? 'all',
 ]
 export const randomTourListQueryFn =
-  ({ contentTypeId, count = 6 }: randomTourListApiType) =>
+  ({ initHeaders, contentTypeId, count = 6 }: randomTourListApiType) =>
   () =>
-    getRandomTourList({ contentTypeId, count })
+    getRandomTourList({ initHeaders, contentTypeId, count })
 
 export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = '' }: randomTourListApiType) => {
   return useQuery({
     // @ts-ignore
     queryKey: randomTourListQueryKey({ contentTypeId, key }),
-    queryFn: randomTourListQueryFn({ contentTypeId, count })(),
+    queryFn: randomTourListQueryFn({ contentTypeId, key, count })(),
     staleTime: Infinity,
     cacheTime: Infinity,
   })

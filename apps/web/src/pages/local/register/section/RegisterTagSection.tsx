@@ -14,7 +14,7 @@ const RegisterTagSection = () => {
 
       <ul className="flex flex-row flex-wrap w-full">
         {Object.keys(TAG_COLOR_MAP).map((contentId) => (
-          <li>
+          <li key={`${contentId}`}>
             <Tag
               className={isThisTagSelected(contentId) ? '' : 'opacity-40'}
               contenttype={contentId}
