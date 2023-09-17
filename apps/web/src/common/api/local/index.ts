@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
+import { TAG_COLOR_MAP } from '@/common/constants'
+
 import { getCookieHeader, InitHeaders, ROOT_URL } from '..'
 
 interface updateDataType {
@@ -16,7 +18,19 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   const data = await axios(`${ROOT_URL}/local-tour-list`, { headers })
 
-  return data.data
+  return data.data.map((ele, index) => {
+    return {
+      ...ele,
+      id: index,
+      img: '',
+      href: '',
+      mainTitle: ele.title,
+      subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
+      contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
+      isRecommend: ele.isRecommend ?? false,
+      recommendCount: ele.recommendCount ?? 0,
+    }
+  })
 }
 
 export const updateLocal = async (data: updateDataType) => {

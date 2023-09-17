@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { ICON_EDIT } from 'shared'
 
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { TAG_COLOR_MAP } from '@/common/constants'
+import { TAG_STRING_TO_COLOR } from '@/common/constants'
 import useLocalRegister from '@/stores/local/useLocalRegister'
 
 import Separator from './components/Separator'
