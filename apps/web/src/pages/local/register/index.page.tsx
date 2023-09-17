@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Button, Input, Tag, TextArea, UploadCard } from 'myll-ui'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { ICON_EDIT } from 'shared'
 
@@ -23,6 +24,7 @@ export const Register = () => {
     resetState,
     handleSubmit,
   } = useLocalRegister()
+  const router = useRouter()
 
   useEffect(() => {
     return () => {
@@ -92,8 +94,9 @@ export const Register = () => {
           <div className="flex flex-row justify-center m-30pxr">
             <Button
               color="primary"
-              onClick={() => {
-                handleSubmit()
+              onClick={async () => {
+                await handleSubmit()
+                router.push('/local/attraction')
               }}
               type="button"
               variant="block"

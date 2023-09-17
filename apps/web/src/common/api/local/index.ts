@@ -65,7 +65,9 @@ export const useLocalMenuListQuery = () => {
   return useQuery({
     queryKey: getLocalMenuListQueryKey(),
     queryFn: getLocalMenuListFn({}),
-    staleTime: Infinity,
+    staleTime: 0,
     cacheTime: Infinity,
+
+    refetchOnMount: true,
   })
 }
