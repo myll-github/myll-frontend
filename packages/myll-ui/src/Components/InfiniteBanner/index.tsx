@@ -21,7 +21,7 @@ const InfiniteBanner = ({ data }: InfiniteBannerProps) => {
             <li
               key={ele.id}
               className={`relative z-10 cursor-pointer transition-transform duration-300 transform 
-  w-70pxr h-70pxr hover:scale-98 hover:after:bg-black/20`}
+  w-60pxr h-60pxr hover:scale-98 hover:after:bg-black/20`}
             >
               <CustomImage key={ele.id} className="object-cover w-full h-full shrink-0" alt={ele.img} src={ele.img} />
             </li>
@@ -37,9 +37,14 @@ const InfiniteBanner = ({ data }: InfiniteBannerProps) => {
             <li
               key={ele.id}
               className={`relative z-10 cursor-pointer transition-transform duration-300 transform 
-  w-70pxr h-70pxr hover:scale-98 hover:after:bg-black/20`}
+  w-60pxr h-60pxr hover:scale-98 hover:after:bg-black/20`}
             >
-              <CustomImage key={ele.id} className="object-cover w-full h-full shrink-0" alt={ele.img} src={ele.img} />
+              <CustomImage
+                key={ele.id}
+                className="object-cover w-full h-full rounded-full shrink-0"
+                alt={ele.img}
+                src={ele.img}
+              />
             </li>
           )
         })}

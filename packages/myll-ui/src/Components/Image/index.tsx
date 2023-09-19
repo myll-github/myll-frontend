@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { CardViewDefaultImg } from 'shared'
 
 export interface ImageRawProps {
   src: string
@@ -11,7 +12,11 @@ export interface ImageProps extends Omit<ImageRawProps, 'className'> {}
 const CustomImage = ({ src, alt, className }: any) => {
   return (
     <div className={`${className} relative overflow-hidden`}>
-      <Image src={src} alt={alt} fill style={{ height: '100%', width: '100%' }} />
+      {!src ? (
+        <CardViewDefaultImg style={{ height: '100%', width: '100%' }} />
+      ) : (
+        <Image src={src} alt={alt} fill style={{ height: '100%', width: '100%' }} />
+      )}
     </div>
   )
 }
