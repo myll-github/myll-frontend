@@ -6,8 +6,10 @@ import AppBar from './src/Components/AppBar'
 import Button from './src/Components/Button/Button'
 import CardContainer from './src/Components/CardContainer'
 import Collapse from './src/Components/Collapse'
+import CustomCarosel from './src/Components/CustomCarosel'
 import DatePicker from './src/Components/DatePicker'
 import Dropdown from './src/Components/Dropdown'
+import InfiniteBanner from './src/Components/InfiniteBanner'
 import Input from './src/Components/Input'
 import MenuList from './src/Components/MenuList'
 import Modal from './src/Components/Modal'
@@ -30,9 +32,11 @@ export {
   Button,
   CardContainer,
   Collapse,
+  CustomCarosel,
   DatePicker,
   Divider,
   Dropdown,
+  InfiniteBanner,
   Input,
   MenuList,
   Modal,
