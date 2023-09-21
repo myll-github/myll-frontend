@@ -14,19 +14,19 @@ const Navigation = ({ className }: NavigationProps) => {
   return (
     <FooterNav className={className}>
       <Link href="/book" className="flex-shrink-0">
-        <FooterNav.BookIcon isActive={pathName === '/book'} />
+        <FooterNav.BookIcon isActive={pathName.startsWith('/book')} />
       </Link>
       <Link href="/home" className="flex-shrink-0">
-        <FooterNav.HomeIcon isActive={pathName === '/home'} />
+        <FooterNav.HomeIcon isActive={pathName.startsWith('/home')} />
       </Link>
       <Link href="/local" className="flex-shrink-0">
-        <FooterNav.LocalIcon isActive={pathName === '/local'} />
+        <FooterNav.LocalIcon isActive={pathName.startsWith('/local')} />
       </Link>
       <Link href="/map" className="flex-shrink-0">
-        <FooterNav.MapIcon isActive={pathName === '/map'} />
+        <FooterNav.MapIcon isActive={pathName.startsWith('/map')} />
       </Link>
       <Link href="/myll" className="flex-shrink-0">
-        <FooterNav.MyllIcon isActive={pathName === '/myll'} />
+        <FooterNav.MyllIcon isActive={pathName.startsWith('/myll')} />
       </Link>
     </FooterNav>
   )

@@ -35,14 +35,15 @@ const ToggleIcon = ({ isActive, IconActive, IconInactive }: ToggleIconProps) => 
 const FooterNav = ({ children, className }: { children: ReactNode; className: string }) => {
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 bottom-0 bg-WHITE flex w-screen md:w-[768px] max-h-98px flex-row justify-around border border-solid border-GRAY_30 p-l-24pxr p-r-24pxr transform ${className}`}
+      className={`fixed left-1/2 -translate-x-1/2 bottom-0 bg-WHITE flex w-screen md:w-[768px] max-h-98px flex-row justify-around border-t border-solid border-GRAY_30 p-l-24pxr p-r-24pxr transform ${className}`}
     >
       {children}
     </nav>
   )
 }
 
-const BaseIconStyle = 'w-full h-full flex flex-col justify-center leading-[14px] items-center pt-20pxr pb-30pxr'
+const BaseIconStyle =
+  'w-full h-full flex flex-col justify-center leading-[14px] items-center pt-20pxr pb-30pxr GNB_ACTIVE'
 
 FooterNav.HomeIcon = ({ isActive = false }: { isActive: boolean }) => (
   <div className={`${BaseIconStyle} ${isActive ? 'text-GRAY_90' : 'text-GRAY_70'}`}>

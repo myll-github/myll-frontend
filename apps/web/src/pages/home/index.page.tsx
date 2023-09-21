@@ -23,28 +23,28 @@ export const Home = () => {
           <LocalRecommendSection />
           <MyllRecommendSection />
         </main>
-
-        <footer>123</footer>
       </NavLayout>
     </>
   )
 }
 
-/*
-
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient()
 
-  await Promise.all(
-    Object.keys(HOME_LOCALRECOMMANDSECTION_MAP).map((contentTypeId: string) => {
-      return queryClient.fetchQuery({
-        queryKey: randomTourListQueryKey({ contentTypeId }),
-        queryFn: randomTourListQueryFn({ contentTypeId, count: 5 }),
-        staleTime: Infinity,
-        cacheTime: Infinity,
-      })
+  await Promise.all([
+    queryClient.fetchQuery({
+      queryKey: randomTourListQueryKey({ key: 1 }),
+      queryFn: randomTourListQueryFn({ count: 5 }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
     }),
-  )
+    queryClient.fetchQuery({
+      queryKey: randomTourListQueryKey({ key: 2 }),
+      queryFn: randomTourListQueryFn({ count: 5 }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+  ])
 
   return {
     props: {
@@ -52,7 +52,5 @@ export const getServerSideProps = async () => {
     },
   }
 }
-
-*/
 
 export default Home

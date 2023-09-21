@@ -3,7 +3,7 @@ import { Button as AntdButton, ButtonProps as AntdButtonProps } from 'antd'
 import { ButtonColor, ButtonProps, ButtonVariant } from './type'
 import buttonVariantMap, { applyClassName, buttonColorMap, getAntdButtonType } from './util'
 
-const Button = ({ variant = 'medium', type = 'button', color = 'primary', ...rest }: ButtonProps) => {
+const Button = ({ variant = 'medium', type = 'button', color = 'primary', className = '', ...rest }: ButtonProps) => {
   const variantJSON = buttonVariantMap[variant]
   const colorJSON = buttonColorMap[color]
 
@@ -13,7 +13,7 @@ const Button = ({ variant = 'medium', type = 'button', color = 'primary', ...res
       htmlType={type}
       className={`flex justify-center items-center disabled:cursor-not-allowed ${applyClassName(
         colorJSON,
-      )} ${applyClassName(variantJSON)}`}
+      )} ${applyClassName(variantJSON)} ${className}`}
       {...rest}
     />
   )

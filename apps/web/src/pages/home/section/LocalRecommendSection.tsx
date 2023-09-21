@@ -13,11 +13,11 @@ const LocalRecommendSection = () => {
       <Tab
         size="small"
         tabBarGutter={20}
-        className="w-full mt-24pxr h-600pxr"
+        className="w-full mt-24pxr h-400pxr"
         defaultActiveKey="15"
         items={[
           {
-            children: <div className="w-full h-500pxr">Content of Tab Pane 1</div>,
+            children: <div className="w-full h-400pxr">Content of Tab Pane 1</div>,
             key: '15',
             label: '축제•공연',
           },

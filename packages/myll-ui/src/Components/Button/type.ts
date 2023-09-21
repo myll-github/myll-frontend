@@ -1,4 +1,5 @@
 import { ButtonProps as AntdButtonProps } from 'antd'
+import { CSSProperties, ReactNode } from 'react'
 
 /**
  * This type defines the size of the button.
@@ -10,7 +11,7 @@ export type ButtonVariant = 'block' | 'large' | 'medium' | 'small' | 'mini'
  */
 export type ButtonColor = 'primary' | 'secondary' | 'outlined' | 'text' | 'gradient' | 'warning'
 
-export interface ButtonProps extends Omit<AntdButtonProps, 'type'> {
+export interface ButtonProps extends Omit<AntdButtonProps, 'type' | 'className'> {
   /**
    * Defines the type of the button.
    */
@@ -24,7 +25,7 @@ export interface ButtonProps extends Omit<AntdButtonProps, 'type'> {
   /**
    * Determines the text displayed on the button.
    */
-  children: string
+  children: ReactNode
 
   /**
    * Determines the color of the button. default is 'primary'
@@ -35,4 +36,6 @@ export interface ButtonProps extends Omit<AntdButtonProps, 'type'> {
    * Determines the enable/disable state of the button. default is 'false'
    */
   disabled?: boolean
+
+  className?: CSSProperties | string
 }
