@@ -12,10 +12,14 @@ const DefaultMenuItem = ({ item, isSelectedButtonNeeded }: MenuItemProps) => {
 
   return (
     <li
-      className="relative flex flex-row w-full border-none h-70pxr px-20pxr py-10pxr"
+      className="relative flex-shrink-0 flex flex-row w-full border-none h-70pxr px-20pxr py-10pxr"
       onClick={() => isSelectedButtonNeeded && ToggleCardStatusByClick(item)}
     >
-      <CustomImage className="rounded-md w-50pxr h-50pxr mr-14pxr bg-GRAY_30" src={item.img} alt={item.mainTitle} />
+      <CustomImage
+        className="rounded-md flex-shrink-0 w-50pxr h-50pxr mr-14pxr bg-GRAY_30"
+        src={item.img}
+        alt={item.mainTitle}
+      />
 
       <div className="relative flex flex-col justify-center w-full py-4pxr">
         <span className="SUBTITLE-T2 text-GRAY_80">{item.mainTitle}</span>

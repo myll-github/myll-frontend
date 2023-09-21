@@ -1,0 +1,53 @@
+import { Modal } from 'myll-ui'
+import { useState } from 'react'
+
+import useBookPageStore from '@/stores/useBookPageStore'
+
+interface SetPlanMemoModalProps {
+  id: number
+  open: boolean
+  onClose: () => void
+}
+
+const SetPlanMemoModal = (props: SetPlanMemoModalProps) => {
+  const { id, open, onClose } = props
+
+  const { planDetail, setPlanDetail } = useBookPageStore()
+
+  const [text, setText] = useState<string>('')
+
+  const handleSubmit = () => {
+    onClose()
+    setPlanDetail({
+      ...planDetail,
+      memos: planDetail.memos.map((memo) => {
+        if (memo.id === id) {
+          return {
+            ...memo,
+            memo: text,
+          }
+        }
+
+        return memo
+      }),
+    })
+  }
+
+  return (
+    <Modal open={open} onCancel={onClose} cancelButtonText="취소" submitButtonText="저장" onSubmit={handleSubmit}>
+      <div className="INPUT-LABEL2 mb-10pxr">메모</div>
+      <div className="w-full h-150pxr">
+        <textarea
+          className="w-full h-full pl-10pxr pr-10pxr resize-none rounded-[2px] border-[1px] border-solid border-GRAY_30 focus:ring-0 focus:outline-none"
+          value={text}
+          placeholder="메모는 300자 이내로 작성되어야 합니다."
+          onChange={(e) => {
+            setText(e.target.value)
+          }}
+        />
+      </div>
+    </Modal>
+  )
+}
+
+export default SetPlanMemoModal

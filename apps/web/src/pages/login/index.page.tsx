@@ -2,7 +2,8 @@
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
-import { parseCookies, setCookie } from 'nookies'
+import { useRouter } from 'next/router'
+import nookies, { setCookie } from 'nookies'
 import { useEffect, useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
@@ -16,16 +17,16 @@ export const Login = () => {
     isVisible: false,
   })
 
+  const router = useRouter()
+
   // 토큰 만료 전일 경우
   useEffect(() => {
-    const { accessToken } = parseCookies()
+    const { accessToken } = nookies.get()
 
     if (accessToken) {
       // 홈페이지로 이동
       console.log('There is token')
-    } else {
-      // 로그인 페이지로 이동
-      console.log('There is not token')
+      router.push('/home')
     }
 
     // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
@@ -38,6 +39,10 @@ export const Login = () => {
       setCookie(null, 'accessToken', response.data.accessToken, {
         path: '/',
         maxAge: 72000, // ms
+      })
+      setCookie(null, 'userEmail', email, {
+        path: '/',
+        maxAge: 72000,
       })
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })

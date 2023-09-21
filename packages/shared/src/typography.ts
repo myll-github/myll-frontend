@@ -85,7 +85,7 @@ const TYPOGRAPHY = {
   },
   '.SUBTITLE-T6': {
     fontSize: '13px',
-    fontWeight: '700',
+    fontWeight: '400',
     fontFamily: 'Pretendard, sans-serif',
     lineHeight: '20px',
     letterSpacing: '0.15px',

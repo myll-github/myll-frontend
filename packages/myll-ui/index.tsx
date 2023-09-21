@@ -1,4 +1,4 @@
-import { Divider, Space } from 'antd'
+import { DatePicker, Divider } from 'antd'
 import ConfigProvider from 'antd/es/config-provider'
 
 import Alert from './src/Components/Alert'
@@ -6,7 +6,6 @@ import AppBar from './src/Components/AppBar'
 import Button from './src/Components/Button/Button'
 import CardContainer from './src/Components/CardContainer'
 import Collapse from './src/Components/Collapse'
-import DatePicker from './src/Components/DatePicker'
 import Dropdown from './src/Components/Dropdown'
 import Input from './src/Components/Input'
 import MenuList from './src/Components/MenuList'

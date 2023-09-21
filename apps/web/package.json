@@ -18,6 +18,7 @@
     "dotenv": "^16.3.1",
     "immer": "^10.0.2",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "myll-ui": "workspace:*",
     "next": "^13.4.11",
     "next-pwa": "^5.6.0",

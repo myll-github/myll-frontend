@@ -1,6 +1,7 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Tab } from 'myll-ui'
 import { GetServerSideProps } from 'next'
+import nookies from 'nookies'
 import { Suspense } from 'react'
 import { CompoundProvider, noop } from 'shared'
 
@@ -58,13 +59,18 @@ export const Recommend = ({ favoritePlace }: any) => {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
 
+  const cookies = nookies.get(context)
+  const token = cookies.accessToken || ''
+
+  const headers = {
+    Authorization: `${token}`,
+  }
+
   await Promise.all([
-    queryClient.fetchQuery({
-      queryKey: FavoritePlaceQueryKey,
-      queryFn: FavoritePlaceQueryFn,
+    queryClient.fetchQuery(FavoritePlaceQueryKey, () => FavoritePlaceQueryFn(headers), {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
@@ -74,7 +80,6 @@ export const getServerSideProps = async () => {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
-
     queryClient.fetchQuery({
       queryKey: FavoriteActivityKey,
       queryFn: FavoriteActivityFn,
