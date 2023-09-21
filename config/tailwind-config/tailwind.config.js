@@ -1,6 +1,7 @@
 const shared = require('shared')
-const TYPOGRAPHY = shared.TYPOGRAPHY
-const COLOR = shared.COLOR
+
+const { TYPOGRAPHY } = shared
+const { COLOR } = shared
 
 const plugin = require('tailwindcss/plugin')
 
@@ -27,6 +28,17 @@ export default {
     extend: {
       colors: {
         ...COLOR,
+      },
+
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+      },
+
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
       },
 
       boxShadow: {
