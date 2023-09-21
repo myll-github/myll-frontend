@@ -2,7 +2,7 @@
   "name": "web",
   "version": "1.0.0",
   "private": true,
-  "main": "./index.tsx",
+  "main": "./src/pages/index.page.tsx",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
