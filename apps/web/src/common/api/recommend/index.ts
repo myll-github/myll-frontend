@@ -3,8 +3,10 @@ import axios from 'axios'
 
 import { ROOT_URL } from '../index'
 
-export const getFavoritePlace = async () => {
-  const data = await axios(`${ROOT_URL}/random-tour`)
+export const getFavoritePlace = async (header: any) => {
+  const data = await axios(`${ROOT_URL}/random-tour-list`, {
+    headers: header,
+  })
 
   return data.data.map((ele, id) => {
     return {
@@ -19,7 +21,7 @@ export const getFavoritePlace = async () => {
 }
 
 export const FavoritePlaceQueryKey = ['favoritePlace']
-export const FavoritePlaceQueryFn = () => getFavoritePlace()
+export const FavoritePlaceQueryFn = (header: any) => getFavoritePlace(header)
 
 export const useFavoritePlaceQuery = () => {
   return useQuery({
@@ -27,7 +29,6 @@ export const useFavoritePlaceQuery = () => {
     queryFn: FavoritePlaceQueryFn,
     staleTime: Infinity,
     cacheTime: Infinity,
-    suspense: true,
   })
 }
 
