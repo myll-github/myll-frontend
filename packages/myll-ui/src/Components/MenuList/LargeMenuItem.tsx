@@ -21,9 +21,13 @@ const LargeMenuItem = ({ item, onRecommendButtonClicked }: MediumMenuItemProps) 
   return (
     <li
       style={centerAlignStyle}
-      className="relative flex flex-col items-center justify-center border-none w-130pxr h-267pxr"
+      className="relative flex-shrink-0 flex flex-col items-center justify-center border-none w-130pxr h-267pxr"
     >
-      <CustomImage className="rounded-md w-139pxr h-130pxr bg-GRAY_30" src={item.img} alt={item.mainTitle} />
+      <CustomImage
+        className="rounded-md flex-shrink-0 w-139pxr h-130pxr bg-GRAY_30"
+        src={item.img}
+        alt={item.mainTitle}
+      />
 
       <div className="relative flex flex-col justify-center w-full gap-y-2 py-4pxr">
         <span className="w-full SUBTITLE-T4 h-40pxr min-h-[40px] line-clamp-2 text-GRAY_80">{item.mainTitle}</span>
