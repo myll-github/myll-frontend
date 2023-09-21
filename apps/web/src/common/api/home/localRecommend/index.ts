@@ -11,7 +11,7 @@ interface randomTourListApiType {
   key?: string | number
 
   initHeaders?: {
-    authorization: string
+    Authorization: string
   }
 }
 
