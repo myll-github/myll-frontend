@@ -11,7 +11,7 @@ interface randomTourListApiType {
   key?: string | number
 
   initHeaders?: {
-    authorization: string
+    Authorization: string
   }
 }
 
@@ -30,7 +30,7 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
       img: ele.firstimage,
       mainTitle: ele.title,
       subTitle: ele.addr1,
-      conttenttype: ele.conttenttype,
+      conttenttype: ele.contenttypeid,
     }
   })
 }
