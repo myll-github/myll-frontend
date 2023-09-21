@@ -1,5 +1,7 @@
 import { MenuList } from 'myll-ui'
 
+import { useLocalMenuListQuery } from '@/common/api/local'
+
 const COLOR_MAP = Object.keys({
   관광지: 'processing',
   문화시설: '',
@@ -23,6 +25,10 @@ const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
 }))
 
 const LocalAttractionMenuList = () => {
+  const { data } = useLocalMenuListQuery()
+
+  console.log(data)
+
   return (
     <MenuList data={dataWithRecommend}>
       <MenuList.MediumMenuItem onRecommendButtonClicked={(id: number) => {}} />

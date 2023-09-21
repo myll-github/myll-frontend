@@ -1,7 +1,8 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
+import { getCookieHeader } from '@/common/api'
 import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
+import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import LocalAttractionMenuList from './components/LocalAttractionMenuList'
@@ -23,21 +24,16 @@ export const Local = () => {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
+  const initHeaders = getCookieHeader(context)
 
-  /*
-  await Promise.all(
-    Object.keys(HOME_LOCALRECOMMANDSECTION_MAP).map((contentTypeId: string) => {
-      return queryClient.fetchQuery({
-        queryKey: randomTourListQueryKey({ contentTypeId }),
-        queryFn: randomTourListQueryFn({ contentTypeId, count: 5 }),
-        staleTime: Infinity,
-        cacheTime: Infinity,
-      })
-    }),
-  )
-  */
+  await queryClient.fetchQuery({
+    queryKey: getLocalMenuListQueryKey(),
+    queryFn: getLocalMenuListFn({ initHeaders }),
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  })
 
   return {
     props: {

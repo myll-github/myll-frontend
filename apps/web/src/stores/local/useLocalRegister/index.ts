@@ -81,7 +81,7 @@ const useLocalRegister = create(
 
       const requestBody = {
         title: state.registerTitle,
-        contentImage: 'stsr',
+        contentImage: state.registerFileList,
         contentTypeId: TAG_COLOR_MAP_REVERSE[state.selectedTagName],
         address: state.registerLocation,
         introduction: state.registerDescription,
