@@ -35,14 +35,14 @@ export const getServerSideProps = async (context) => {
 
   await Promise.all([
     queryClient.fetchQuery({
-      queryKey: randomTourListQueryKey({ key: 1 }),
-      queryFn: randomTourListQueryFn({ initHeaders, count: 5 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
+      queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
     queryClient.fetchQuery({
-      queryKey: randomTourListQueryKey({ key: 2 }),
-      queryFn: randomTourListQueryFn({ initHeaders, count: 5 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
+      queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),

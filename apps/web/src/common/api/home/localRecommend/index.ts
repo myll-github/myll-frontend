@@ -41,7 +41,7 @@ export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) =>
   contentTypeId ?? 'all',
 ]
 export const randomTourListQueryFn =
-  ({ initHeaders, contentTypeId, count = 6 }: randomTourListApiType) =>
+  ({ initHeaders, contentTypeId = '', count = 6 }: randomTourListApiType) =>
   () =>
     getRandomTourList({ initHeaders, contentTypeId, count })
 
