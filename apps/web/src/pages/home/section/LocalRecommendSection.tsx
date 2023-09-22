@@ -6,8 +6,6 @@ import { useRandomLocalTourListQuery } from '@/common/api/home/localRecommend/lo
 const LocalRecommendSection = () => {
   const { data } = useRandomLocalTourListQuery()
 
-  console.log(data, 'wtf?')
-
   return (
     <section className="my-10pxr">
       <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
