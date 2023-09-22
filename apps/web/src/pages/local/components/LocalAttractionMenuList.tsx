@@ -13,24 +13,11 @@ const COLOR_MAP = Object.keys({
   카페: 'green',
 })
 
-const dataWithRecommend = Array.from({ length: 23 }).map((_, i) => ({
-  id: i,
-  href: 'https://ant.design',
-  img: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
-  mainTitle: `ant design part ${i}`,
-  subTitle: 'Ant Design',
-  isRecommend: i % 2 === 0,
-  recommendCount: i,
-  contenttype: COLOR_MAP[i % COLOR_MAP.length],
-}))
-
 const LocalAttractionMenuList = () => {
   const { data } = useLocalMenuListQuery()
 
-  console.log(data)
-
   return (
-    <MenuList data={dataWithRecommend}>
+    <MenuList data={data}>
       <MenuList.MediumMenuItem onRecommendButtonClicked={(id: number) => {}} />
     </MenuList>
   )
