@@ -1,4 +1,4 @@
-export const TAG_COLOR_MAP: { [id in string]: string } = {
+export const TAG_STRING_TO_COLOR: { [id in string]: string } = {
   관광지: 'processing',
   문화시설: '',
   축제공연행사: 'cyan',
@@ -6,6 +6,17 @@ export const TAG_COLOR_MAP: { [id in string]: string } = {
   레포츠: 'blue',
   쇼핑: 'purple',
   '음식점•카페': 'gold',
+}
+
+export const TAG_COLOR_MAP = {
+  12: '관광지',
+  14: '문화시설',
+  15: '축제공연행사',
+  25: '여행코스',
+  28: '레포츠',
+  32: '숙박',
+  38: '쇼핑',
+  39: '음식점•카페',
 }
 
 export const TAG_COLOR_MAP_REVERSE = {

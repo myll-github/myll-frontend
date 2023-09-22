@@ -1,6 +1,6 @@
 import { Tag } from 'myll-ui'
 
-import { TAG_COLOR_MAP } from '@/common/constants'
+import { TAG_STRING_TO_COLOR } from '@/common/constants'
 import useLocalRegister from '@/stores/local/useLocalRegister'
 
 import Separator from '../components/Separator'
@@ -13,7 +13,7 @@ const RegisterTagSection = () => {
       <span className="INPUT-LABEL2">이 장소를 설명할 수 있는 태그는?</span>
 
       <ul className="flex flex-row flex-wrap w-full">
-        {Object.keys(TAG_COLOR_MAP).map((contentId) => (
+        {Object.keys(TAG_STRING_TO_COLOR).map((contentId) => (
           <li key={`${contentId}`}>
             <Tag
               className={isThisTagSelected(contentId) ? '' : 'opacity-40'}

@@ -4,8 +4,8 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { useRandomTourListQuery } from '@/common/api/home/localRecommend'
 
 const MyllRecommendSection = () => {
-  const { data: data1 } = useRandomTourListQuery({ key: 1 })
-  const { data: data2 } = useRandomTourListQuery({ key: 2 })
+  const { data: data1 } = useRandomTourListQuery({ contentTypeId: 'all', key: 1, count: 6 })
+  const { data: data2 } = useRandomTourListQuery({ contentTypeId: 'all', key: 2, count: 6 })
 
   return (
     <section className="my-10pxr">

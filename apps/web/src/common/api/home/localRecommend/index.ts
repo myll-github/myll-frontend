@@ -30,7 +30,7 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
       img: ele.firstimage,
       mainTitle: ele.title,
       subTitle: ele.addr1,
-      conttenttype: ele.conttenttype,
+      conttenttype: ele.contenttypeid,
     }
   })
 }
@@ -41,7 +41,7 @@ export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) =>
   contentTypeId ?? 'all',
 ]
 export const randomTourListQueryFn =
-  ({ initHeaders, contentTypeId, count = 6 }: randomTourListApiType) =>
+  ({ initHeaders, contentTypeId = '', count = 6 }: randomTourListApiType) =>
   () =>
     getRandomTourList({ initHeaders, contentTypeId, count })
 
