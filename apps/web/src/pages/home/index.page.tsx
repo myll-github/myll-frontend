@@ -38,16 +38,16 @@ export const getServerSideProps = async (context) => {
   const initHeaders = getCookieHeader(context)
 
   await Promise.all([
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
     }),
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
     }),
 
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: getRandomLocalTourListQueryKey(),
       queryFn: getRandomLocalTourListFn({ initHeaders }),
       staleTime: Infinity,

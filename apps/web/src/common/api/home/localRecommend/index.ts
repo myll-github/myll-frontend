@@ -35,21 +35,20 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
   })
 }
 
-export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) => [
-  'tour-theme',
-  key,
-  contentTypeId ?? 'all',
-]
+export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) => {
+  return ['randomTourListQuery', key, contentTypeId ?? 'all']
+}
 export const randomTourListQueryFn =
   ({ initHeaders, contentTypeId = '', count = 6 }: randomTourListApiType) =>
-  () =>
-    getRandomTourList({ initHeaders, contentTypeId, count })
+  () => {
+    return getRandomTourList({ initHeaders, contentTypeId, count })
+  }
 
 export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = '' }: randomTourListApiType) => {
   return useQuery({
     // @ts-ignore
     queryKey: randomTourListQueryKey({ contentTypeId, key }),
-    queryFn: randomTourListQueryFn({ contentTypeId, key, count })(),
+    queryFn: randomTourListQueryFn({ contentTypeId, key, count }),
     staleTime: Infinity,
     cacheTime: Infinity,
   })
