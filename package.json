@@ -1,5 +1,6 @@
 {
   "private": true,
+  "main": "./apps/web/src/pages/index.page.tsx",
   "scripts": {
     "prepare": "husky install",
     "build": "turbo run gen:build build",
