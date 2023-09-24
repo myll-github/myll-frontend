@@ -1,5 +1,5 @@
 {
-  "private": false,
+  "private": true,
   "scripts": {
     "prepare": "husky install",
     "build": "turbo run gen:build build",
