@@ -33,7 +33,7 @@ module.exports = withPWA({
   },
   reactStrictMode: true,
   transpilePackages: ['myll-ui', 'shared'],
-
+  distDir: '.next',
   sassOptions: {
     fiber: false,
   },
