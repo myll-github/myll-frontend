@@ -1,6 +1,8 @@
 {
   "name": "web",
   "version": "1.0.0",
+  "main": "./src/pages/index.page.tsx",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
