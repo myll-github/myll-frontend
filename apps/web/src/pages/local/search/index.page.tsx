@@ -23,6 +23,9 @@ export const Local = () => {
     setSearchValue(tagName)
   }
 
+  // TO-DO - 가라친건데;; 전용 api 구현되면 연결
+  const FilteredData = data.filter(({ contentTypeId }) => TAG_COLOR_MAP[contentTypeId] === searchValue).slice(0, 5)
+
   return (
     <>
       <LocalHeader />
@@ -53,9 +56,7 @@ export const Local = () => {
           </section>
 
           <section>
-            <MenuList
-              data={data.filter(({ contentTypeId }) => TAG_COLOR_MAP[contentTypeId] === searchValue).slice(0, 6)}
-            >
+            <MenuList data={FilteredData}>
               <MenuList.DefaultMenuItem />
             </MenuList>
           </section>
