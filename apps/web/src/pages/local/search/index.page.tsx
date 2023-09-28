@@ -8,7 +8,7 @@ import { getLocalMenuListFn, getLocalMenuListQueryKey, useLocalMenuListQuery } f
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { TAG_COLOR_MAP, TAG_STRING_TO_COLOR } from '@/common/constants'
 
-import LocalHeader from '../section/LocalHeader'
+import LocalHeader from '../components/LocalHeader'
 
 export const Local = () => {
   const [searchValue, setSearchValue] = useState('')

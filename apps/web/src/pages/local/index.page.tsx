@@ -5,7 +5,7 @@ import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home
 import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
-import LocalHeader from './section/LocalHeader'
+import LocalHeader from './components/LocalHeader'
 import LocalIntroduceSection from './section/LocalIntroduceSection'
 import LocalPlaceSection from './section/LocalPlaceSection'
 

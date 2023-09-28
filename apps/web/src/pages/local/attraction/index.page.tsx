@@ -7,7 +7,7 @@ import { getCookieHeader } from '@/common/api'
 import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
-import LocalHeader from '../section/LocalHeader'
+import LocalHeader from '../components/LocalHeader'
 import LocalPlaceSection from './section/LocalPlaceSection'
 
 export const Home = () => {
