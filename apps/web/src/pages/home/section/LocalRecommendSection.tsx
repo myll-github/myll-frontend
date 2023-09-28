@@ -4,13 +4,20 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { useRandomLocalTourListQuery } from '@/common/api/home/localRecommend/localUserRegistered'
 
 const LocalRecommendSection = () => {
-  const { data } = useRandomLocalTourListQuery()
+  const { data, refetch } = useRandomLocalTourListQuery()
 
   return (
     <section className="my-10pxr">
       <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
         <h2>로컬이 추천하는 여행지</h2>
-        <Button color="secondary" onClick={() => {}} type="button" variant="small">
+        <Button
+          color="secondary"
+          onClick={() => {
+            refetch()
+          }}
+          type="button"
+          variant="small"
+        >
           다른 추천 보기
         </Button>
       </div>

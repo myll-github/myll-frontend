@@ -6,7 +6,7 @@ import { TAG_COLOR_MAP } from '@/common/constants'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await axios(`${ROOT_URL}/random-local-tour-list`, { headers })
+  const data = await axios(`${ROOT_URL}/random-local-tour-list?count=1000`, { headers })
 
   return data.data.map((ele, index) => {
     return {
