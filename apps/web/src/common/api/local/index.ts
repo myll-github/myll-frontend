@@ -72,7 +72,7 @@ export const useLocalMenuListQuery = () => {
     refetchOnMount: true,
   })
 
-  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({ QueryFn: getLocalMenuListQueryKey() })
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({ queryKey: getLocalMenuListQueryKey() })
 
   return { ...query, handleOptimisticRecommendToggle }
 }
