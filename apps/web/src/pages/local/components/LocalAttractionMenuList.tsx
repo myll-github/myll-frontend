@@ -14,11 +14,15 @@ const COLOR_MAP = Object.keys({
 })
 
 const LocalAttractionMenuList = () => {
-  const { data } = useLocalMenuListQuery()
+  const { data, handleOptimisticRecommendToggle } = useLocalMenuListQuery()
 
   return (
     <MenuList data={data}>
-      <MenuList.MediumMenuItem onRecommendButtonClicked={(id: number) => {}} />
+      <MenuList.MediumMenuItem
+        onRecommendButtonClicked={(id: number) => {
+          handleOptimisticRecommendToggle({ id })
+        }}
+      />
     </MenuList>
   )
 }
