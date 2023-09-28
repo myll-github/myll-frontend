@@ -24,7 +24,10 @@ export const Local = () => {
   }
 
   // TO-DO - 가라친건데;; 전용 api 구현되면 연결
-  const FilteredData = data.filter(({ contentTypeId }) => TAG_COLOR_MAP[contentTypeId] === searchValue)
+  const FilteredData = data.filter(
+    ({ contentTypeId, mainTitle }) =>
+      (searchValue && mainTitle.includes(searchValue)) || TAG_COLOR_MAP[contentTypeId] === searchValue,
+  )
 
   return (
     <>
@@ -38,7 +41,9 @@ export const Local = () => {
               label=""
               placeholder="테마나 장소를 검색해보세요."
               value={searchValue}
-              onChange={(e) => {}}
+              onChange={(e) => {
+                handleTag(e.target.value)(e)
+              }}
               onValidation={(text) => true}
             />
 
