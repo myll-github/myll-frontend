@@ -30,6 +30,19 @@
   min-height: 660px;
 }
 
+.home-myllrecommend {
+  
+  & .ant-tabs-content-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & .ant-tabs-content {
+    max-width: 610px;
+  }
+}
+
 .ant-tabs-content-holder {
   display: flex;
 }

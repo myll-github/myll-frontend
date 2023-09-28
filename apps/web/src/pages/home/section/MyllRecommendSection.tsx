@@ -24,7 +24,7 @@ const MyllRecommendSection = () => {
       <Tab
         tabBarGutter={20}
         size="small"
-        className="mt-24pxr"
+        className="home-myllrecommend mt-24pxr"
         defaultActiveKey="1"
         items={[
           {
