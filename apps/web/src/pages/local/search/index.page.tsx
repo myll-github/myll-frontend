@@ -36,7 +36,7 @@ export const Local = () => {
         <main className="flex flex-col gap-20pxr mt-20pxr">
           <section className="flex flex-col border-b px-30pxr pb-20pxr gap-15pxr border-GRAY_30">
             <Input
-              className="w-full h-42pxr"
+              className="w-full h-42pxr INPUT-FIELD2"
               size="large"
               label=""
               placeholder="테마나 장소를 검색해보세요."

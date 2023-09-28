@@ -18,8 +18,8 @@ const LocalHeader = () => {
             <ICON_SEARCH />
           </Link>
 
-          <ICON_NOTIFICATIONS1 />
-          <ICON_CHAT />
+          <ICON_NOTIFICATIONS1 className="opacity-40" />
+          <ICON_CHAT className="opacity-40" />
         </AppBar.RightSection>
       </AppBar>
     </header>
