@@ -53,6 +53,7 @@ export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = ''
     queryFn: randomTourListQueryFn({ contentTypeId, key, count }),
     cacheTime: Infinity,
     staleTime: Infinity,
+    refetchOnMount: true,
   })
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
