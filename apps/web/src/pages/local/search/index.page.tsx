@@ -24,7 +24,7 @@ export const Local = () => {
   }
 
   // TO-DO - 가라친건데;; 전용 api 구현되면 연결
-  const FilteredData = data.filter(({ contentTypeId }) => TAG_COLOR_MAP[contentTypeId] === searchValue).slice(0, 5)
+  const FilteredData = data.filter(({ contentTypeId }) => TAG_COLOR_MAP[contentTypeId] === searchValue)
 
   return (
     <>
