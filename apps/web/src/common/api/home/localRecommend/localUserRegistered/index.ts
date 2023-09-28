@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import { getCookieHeader, InitHeaders, ROOT_URL } from '@/common/api'
 import { TAG_COLOR_MAP } from '@/common/constants'
+import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
@@ -31,7 +32,7 @@ export const getRandomLocalTourListFn =
     getRandomLocalTourList({ initHeaders })
 
 export const useRandomLocalTourListQuery = () => {
-  return useQuery({
+  const query = useQuery({
     queryKey: getRandomLocalTourListQueryKey(),
     queryFn: getRandomLocalTourListFn({}),
     staleTime: Infinity,
@@ -39,4 +40,10 @@ export const useRandomLocalTourListQuery = () => {
 
     refetchOnMount: true,
   })
+
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
+    queryKey: getRandomLocalTourListQueryKey(),
+  })
+
+  return { ...query, handleOptimisticRecommendToggle }
 }

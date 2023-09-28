@@ -4,7 +4,7 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { useRandomLocalTourListQuery } from '@/common/api/home/localRecommend/localUserRegistered'
 
 const LocalRecommendSection = () => {
-  const { data, refetch } = useRandomLocalTourListQuery()
+  const { data, refetch, handleOptimisticRecommendToggle } = useRandomLocalTourListQuery()
 
   return (
     <section className="my-10pxr">
@@ -35,7 +35,11 @@ const LocalRecommendSection = () => {
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 15).slice(0, 5) as ItemType[]}
                 >
-                  <MenuList.MediumMenuItem onRecommendButtonClicked={() => {}} />
+                  <MenuList.MediumMenuItem
+                    onRecommendButtonClicked={(id) => {
+                      handleOptimisticRecommendToggle({ id })
+                    }}
+                  />
                 </MenuList>
               </div>
             ),
@@ -49,7 +53,11 @@ const LocalRecommendSection = () => {
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 12).slice(0, 5) as ItemType[]}
                 >
-                  <MenuList.MediumMenuItem onRecommendButtonClicked={() => {}} />
+                  <MenuList.MediumMenuItem
+                    onRecommendButtonClicked={(id) => {
+                      handleOptimisticRecommendToggle({ id })
+                    }}
+                  />
                 </MenuList>
               </div>
             ),
@@ -63,7 +71,11 @@ const LocalRecommendSection = () => {
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 39).slice(0, 5) as ItemType[]}
                 >
-                  <MenuList.MediumMenuItem onRecommendButtonClicked={() => {}} />
+                  <MenuList.MediumMenuItem
+                    onRecommendButtonClicked={(id) => {
+                      handleOptimisticRecommendToggle({ id })
+                    }}
+                  />
                 </MenuList>
               </div>
             ),
@@ -78,7 +90,11 @@ const LocalRecommendSection = () => {
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 14).slice(0, 5) as ItemType[]}
                 >
-                  <MenuList.MediumMenuItem onRecommendButtonClicked={() => {}} />
+                  <MenuList.MediumMenuItem
+                    onRecommendButtonClicked={(id) => {
+                      handleOptimisticRecommendToggle({ id })
+                    }}
+                  />
                 </MenuList>
               </div>
             ),

@@ -32,7 +32,6 @@ const MyllRecommendSection = () => {
               <MenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
                 <MenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
-                    console.log(id)
                     handleOptimisticRecommendToggle1({ id })
                   }}
                 />
