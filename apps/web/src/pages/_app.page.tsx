@@ -13,7 +13,16 @@ interface Props {
 }
 
 const App = ({ Component, pageProps }: Props) => {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            initialData: [],
+          },
+        },
+      }),
+  )
 
   return (
     <>
