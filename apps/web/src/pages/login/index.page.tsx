@@ -2,48 +2,33 @@
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import nookies, { setCookie } from 'nookies'
 import { useEffect, useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import useTokenStore from '@/stores/useTokenStore'
 
 export const Login = () => {
-  const [email, setEmail] = useState<string>('')
+  const { setAccessToken, setEmail } = useTokenStore()
+
+  const [userEmail, setUserEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
     isVisible: false,
   })
 
-  const router = useRouter()
-
   // 토큰 만료 전일 경우
   useEffect(() => {
-    const { accessToken } = nookies.get()
-
-    if (accessToken) {
-      // 홈페이지로 이동
-      console.log('There is token')
-      router.push('/home')
-    }
-
     // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleEmailLogin = async () => {
     try {
-      const response = await UserLogin(email, password)
-      setCookie(null, 'accessToken', response.data.accessToken, {
-        path: '/',
-        maxAge: 72000, // ms
-      })
-      setCookie(null, 'userEmail', email, {
-        path: '/',
-        maxAge: 72000,
-      })
+      const response = await UserLogin(userEmail, password)
+      setAccessToken(response.data.accessToken)
+      setEmail(userEmail)
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
@@ -58,10 +43,10 @@ export const Login = () => {
 
         <Input
           size="large"
-          value={email}
+          value={userEmail}
           placeholder="이메일을 입력해주세요"
           inputMode="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUserEmail(e.target.value)}
         />
         <Input
           size="large"
