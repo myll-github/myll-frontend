@@ -13,7 +13,7 @@ export const getCookieHeader = (context: any = undefined) => {
   const token = cookies.accessToken || ''
 
   const header = {
-    Authorization: `${token}`,
+    Authorization: token ? `${token}` : undefined,
   }
   return header
 }
