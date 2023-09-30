@@ -1,11 +1,11 @@
 {
   "name": "web",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "main": "./src/pages/index.page.tsx",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export -o out",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests"
