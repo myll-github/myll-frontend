@@ -3,6 +3,10 @@ import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
 import { getCookieHeader } from '@/common/api'
 import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
+import {
+  getRandomLocalTourListFn,
+  getRandomLocalTourListQueryKey,
+} from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { HOME_LOCALRECOMMANDSECTION_MAP, HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 
@@ -34,17 +38,22 @@ export const getServerSideProps = async (context) => {
   const initHeaders = getCookieHeader(context)
 
   await Promise.all([
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: getRandomLocalTourListQueryKey(),
+      queryFn: getRandomLocalTourListFn({ initHeaders }),
     }),
   ])
 

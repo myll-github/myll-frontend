@@ -35,7 +35,7 @@ export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
 
-  await queryClient.fetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: getLocalMenuListQueryKey(),
     queryFn: getLocalMenuListFn({ initHeaders }),
     staleTime: Infinity,

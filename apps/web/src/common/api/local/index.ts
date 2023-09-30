@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
 import { TAG_COLOR_MAP } from '@/common/constants'
+import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 import { getCookieHeader, InitHeaders, ROOT_URL } from '..'
 
@@ -62,7 +63,7 @@ export const getLocalMenuListFn =
     getLocal({ initHeaders })
 
 export const useLocalMenuListQuery = () => {
-  return useQuery({
+  const query = useQuery({
     queryKey: getLocalMenuListQueryKey(),
     queryFn: getLocalMenuListFn({}),
     staleTime: 0,
@@ -70,4 +71,8 @@ export const useLocalMenuListQuery = () => {
 
     refetchOnMount: true,
   })
+
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({ queryKey: getLocalMenuListQueryKey() })
+
+  return { ...query, handleOptimisticRecommendToggle }
 }

@@ -4,8 +4,16 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { useRandomTourListQuery } from '@/common/api/home/localRecommend'
 
 const MyllRecommendSection = () => {
-  const { data: data1 } = useRandomTourListQuery({ contentTypeId: 'all', key: 1, count: 6 })
-  const { data: data2 } = useRandomTourListQuery({ contentTypeId: 'all', key: 2, count: 6 })
+  const { data: data1, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle1 } = useRandomTourListQuery({
+    contentTypeId: 'all',
+    key: 1,
+    count: 6,
+  })
+  const { data: data2, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } = useRandomTourListQuery({
+    contentTypeId: 'all',
+    key: 2,
+    count: 6,
+  })
 
   return (
     <section className="my-10pxr">
@@ -16,13 +24,17 @@ const MyllRecommendSection = () => {
       <Tab
         tabBarGutter={20}
         size="small"
-        className="mt-24pxr"
+        className="home-myllrecommend mt-24pxr"
         defaultActiveKey="1"
         items={[
           {
             children: (
               <MenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
-                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+                <MenuList.LargeMenuItem
+                  onRecommendButtonClicked={(id) => {
+                    handleOptimisticRecommendToggle1({ id })
+                  }}
+                />
               </MenuList>
             ),
             key: '1',
@@ -40,7 +52,11 @@ const MyllRecommendSection = () => {
           {
             children: (
               <MenuList itemLayout="vertical" onChange={() => {}} data={data2 as ItemType[]}>
-                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+                <MenuList.LargeMenuItem
+                  onRecommendButtonClicked={(id) => {
+                    handleOptimisticRecommendToggle2({ id })
+                  }}
+                />
               </MenuList>
             ),
             key: '3',

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 import { HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
+import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 import { getCookieHeader, ROOT_URL } from '../..'
 
@@ -26,6 +27,7 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
   return data.data.map((ele, id) => {
     return {
       ...ele,
+      id,
       key: id,
       img: ele.firstimage,
       mainTitle: ele.title,
@@ -35,22 +37,28 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
   })
 }
 
-export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) => [
-  'tour-theme',
-  key,
-  contentTypeId ?? 'all',
-]
+export const randomTourListQueryKey = ({ contentTypeId = '', key = '' }: any) => {
+  return ['randomTourListQuery', key, contentTypeId ?? 'all']
+}
 export const randomTourListQueryFn =
   ({ initHeaders, contentTypeId = '', count = 6 }: randomTourListApiType) =>
-  () =>
-    getRandomTourList({ initHeaders, contentTypeId, count })
+  () => {
+    return getRandomTourList({ initHeaders, contentTypeId, count })
+  }
 
 export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = '' }: randomTourListApiType) => {
-  return useQuery({
+  const query = useQuery({
     // @ts-ignore
     queryKey: randomTourListQueryKey({ contentTypeId, key }),
-    queryFn: randomTourListQueryFn({ contentTypeId, key, count })(),
-    staleTime: Infinity,
+    queryFn: randomTourListQueryFn({ contentTypeId, key, count }),
     cacheTime: Infinity,
+    staleTime: Infinity,
+    refetchOnMount: true,
   })
+
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
+    queryKey: randomTourListQueryKey({ contentTypeId, key }),
+  })
+
+  return { ...query, handleOptimisticRecommendToggle }
 }
