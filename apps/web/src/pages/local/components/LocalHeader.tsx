@@ -1,4 +1,5 @@
 import { AppBar } from 'myll-ui'
+import Link from 'next/link'
 import { ICON_CHAT, ICON_EXPAND_MORE, ICON_NOTIFICATIONS1, ICON_SEARCH } from 'shared'
 
 const LocalHeader = () => {
@@ -13,9 +14,12 @@ const LocalHeader = () => {
           </button>
         </AppBar.LeftSection>
         <AppBar.RightSection className="flex gap-3 text-GRAY_60">
-          <ICON_SEARCH />
-          <ICON_NOTIFICATIONS1 />
-          <ICON_CHAT />
+          <Link href="/local/search">
+            <ICON_SEARCH />
+          </Link>
+
+          <ICON_NOTIFICATIONS1 className="opacity-40" />
+          <ICON_CHAT className="opacity-40" />
         </AppBar.RightSection>
       </AppBar>
     </header>
