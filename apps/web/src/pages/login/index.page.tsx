@@ -51,7 +51,7 @@ export const Login = () => {
 
   return (
     <DefaultLayout>
-      <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr">
+      <div className="w-full h-screen flex flex-col pl-30pxr pr-30pxr">
         <div className="HEADER-H1 break-keep text-center mb-30pxr">
           마일 여행자이시라면 <span className="text-PRIMARY_BLUE">로그인</span> 해주세요
         </div>
@@ -73,7 +73,7 @@ export const Login = () => {
 
         <div className="flex flex-col gap-10pxr mt-30pxr">
           <Button variant="large" color="primary" type="button" onClick={handleEmailLogin}>
-            이메일로 로그인
+            로그인
           </Button>
           <div className="w-full flex justify-center items-center h-30pxr">
             <Button color="text" variant="medium" type="button">
@@ -86,7 +86,7 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10pxr mt-auto mb-30pxr INPUT-LABEL2 text-left text-GRAY_70">
+        <div className="flex flex-col gap-10pxr mt-auto mb-0 INPUT-LABEL2 text-left text-GRAY_70">
           SNS 계정 회원가입
           <div className="flex w-full justify-center cursor-pointer">
             <Link
@@ -95,13 +95,9 @@ export const Login = () => {
                 `scope=profile_nickname age_range`
               }
             >
-              <Image width={265} height={40} src="/kakao_login_medium_wide.png" alt="no img" />
+              <Image width={265} height={40} src="/kakao_start.png" alt="no img" />
             </Link>
           </div>
-          이메일로 회원가입
-          <Button type="button" variant="medium" color="secondary">
-            초보 여행자에요
-          </Button>
           <Alert
             isVisible={openAlert.isVisible}
             onVisibleChange={(flag) => {
