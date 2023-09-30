@@ -2,7 +2,7 @@
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
@@ -17,12 +17,6 @@ export const Login = () => {
   const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
     isVisible: false,
   })
-
-  // 토큰 만료 전일 경우
-  useEffect(() => {
-    // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const handleEmailLogin = async () => {
     try {
