@@ -14,10 +14,13 @@ import PlanHeader from './section/PlanHeader'
 import SimpleList from './section/SimpleList'
 
 export const Book = () => {
-  const { data } = useFavoritePlaceQuery()
+  const { data, refetch } = useFavoritePlaceQuery()
   const { setPlanInfo, setRecommendedPlaceMap } = useBookPageStore()
 
   useEffect(() => {
+    if (data && data.length === 0) {
+      refetch()
+    }
     const recommendList: ItemType[] = data.map((d) => ({
       ...d,
       img: d.firstimage ? d.firstimage : d.firstimage2,
@@ -32,7 +35,7 @@ export const Book = () => {
     })
 
     setRecommendedPlaceMap(recommendPlaceMap)
-  }, [data])
+  }, [data, refetch, setRecommendedPlaceMap])
 
   // 일정 등록
   const [openRangePicker, setOpenRangePicker] = useState<boolean>(false)
@@ -60,7 +63,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const queryClient = new QueryClient()
   setContext(context)
   await Promise.all([
-    queryClient.fetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
+    queryClient.prefetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
