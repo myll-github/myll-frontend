@@ -1,27 +1,29 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { ROOT_URL } from '../index'
+import { api, ROOT_URL } from '../index'
 
-export const getFavoritePlace = async (header: any) => {
-  const data = await axios(`${ROOT_URL}/random-tour-list`, {
-    headers: header,
-  })
+export const getFavoritePlace = async () => {
+  try {
+    const data = await api.get(`${ROOT_URL}/random-tour-list`)
 
-  return data.data.map((ele, id) => {
-    return {
-      id: ele.contentid,
-      mainTitle: ele.title,
-      alt: ele.title,
-      subTitle: '',
-      url: ele.firstimage,
-      ...ele,
-    }
-  })
+    return data.data.map((ele, id) => {
+      return {
+        id: ele.contentid,
+        mainTitle: ele.title,
+        alt: ele.title,
+        subTitle: '',
+        url: ele.firstimage,
+        ...ele,
+      }
+    })
+  } catch (e) {
+    return []
+  }
 }
 
 export const FavoritePlaceQueryKey = ['favoritePlace']
-export const FavoritePlaceQueryFn = (header: any) => getFavoritePlace(header)
+export const FavoritePlaceQueryFn = () => getFavoritePlace()
 
 export const useFavoritePlaceQuery = () => {
   return useQuery({

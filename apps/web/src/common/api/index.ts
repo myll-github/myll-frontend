@@ -111,6 +111,18 @@ const refreshToken = async (originError: AxiosError) => {
   }
 }
 
+// header에 accessToken 넘겨주기 로직 자동화
+api.interceptors.request.use((config) => {
+  if (accessToken) {
+    config.headers.Authorization = `${accessToken}`
+  }
+
+  if (isServer() && context?.req?.headers?.cookies) {
+    config.headers.Cookie = context.req.headers.cookies
+  }
+  return config
+})
+
 api.interceptors.response.use(
   (response) => {
     return response

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 import { getCookieHeader, ROOT_URL } from '../..'
