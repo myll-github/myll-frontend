@@ -19,6 +19,9 @@ const App = ({ Component, pageProps }: Props) => {
         defaultOptions: {
           queries: {
             initialData: [],
+            refetchOnWindowFocus: true,
+            refetchInterval: false,
+            refetchIntervalInBackground: false,
           },
         },
       }),
