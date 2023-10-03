@@ -9,11 +9,7 @@ interface UseOptimisticRecommendArgs {
   onAddRecommend: OnCommand
 }
 
-const useOptimisticRecommend = ({
-  queryKey,
-  onRemoveRecommend = noop as unknown as OnCommand,
-  onAddRecommend = noop as unknown as OnCommand,
-}: UseOptimisticRecommendArgs) => {
+const useOptimisticRecommend = ({ queryKey, onRemoveRecommend, onAddRecommend }: UseOptimisticRecommendArgs) => {
   const queryClient = useQueryClient()
 
   const handleOptimisticRecommendToggle = async ({ id }: { id: number }) => {
