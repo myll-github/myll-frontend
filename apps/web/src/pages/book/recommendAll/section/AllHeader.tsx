@@ -9,7 +9,7 @@ const AllHeader = () => {
           <AppBar.FallbackButton />
         </AppBar.LeftSection>
         <div className="w-full h-36pxr flex items-center">
-          <AppBar.MiddleSection>내 취향에 맞는 추천</AppBar.MiddleSection>
+          <AppBar.MiddleSection className="SUBTITLE-T3">내 취향에 맞는 추천</AppBar.MiddleSection>
           <AppBar.RightSection>
             <span className="flex h-full gap-10pxr items-center">
               <ICON_NOTIFICATION />
