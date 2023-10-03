@@ -2,16 +2,14 @@
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
+import { setCookie } from 'nookies'
 import { useState } from 'react'
 
 import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
-import useTokenStore from '@/stores/useTokenStore'
 
 export const Login = () => {
-  const { setAccessToken, setEmail } = useTokenStore()
-
-  const [userEmail, setUserEmail] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
@@ -20,9 +18,16 @@ export const Login = () => {
 
   const handleEmailLogin = async () => {
     try {
-      const response = await UserLogin(userEmail, password)
-      setAccessToken(response.data.accessToken)
-      setEmail(userEmail)
+      const response = await UserLogin(email, password)
+      setCookie(null, 'accessToken', response.data.accessToken, {
+        path: '/',
+        maxAge: 10000, // ms
+      })
+      // 나중에 store email에 넣어야 해
+      setCookie(null, 'userEmail', email, {
+        path: '/',
+        maxAge: 1000000,
+      })
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
@@ -37,10 +42,10 @@ export const Login = () => {
 
         <Input
           size="large"
-          value={userEmail}
+          value={email}
           placeholder="이메일을 입력해주세요"
           inputMode="email"
-          onChange={(e) => setUserEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           size="large"
