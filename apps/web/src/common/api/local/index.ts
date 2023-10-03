@@ -22,7 +22,7 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
   return data.data.map((ele, index) => {
     return {
       ...ele,
-      id: index,
+
       img: '',
       href: '',
       mainTitle: ele.title,
@@ -62,6 +62,26 @@ export const getLocalMenuListFn =
   () =>
     getLocal({ initHeaders })
 
+const addListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const useLocalMenuListQuery = () => {
   const query = useQuery({
     queryKey: getLocalMenuListQueryKey(),
@@ -72,7 +92,11 @@ export const useLocalMenuListQuery = () => {
     refetchOnMount: true,
   })
 
-  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({ queryKey: getLocalMenuListQueryKey() })
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
+    queryKey: getLocalMenuListQueryKey(),
+    onRemoveRecommend: removeListLike,
+    onAddRecommend: addListLike,
+  })
 
   return { ...query, handleOptimisticRecommendToggle }
 }
