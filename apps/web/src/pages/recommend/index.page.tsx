@@ -1,9 +1,7 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Tab } from 'myll-ui'
-import { GetServerSideProps } from 'next'
 import nookies from 'nookies'
 import { Suspense } from 'react'
-import { CompoundProvider, noop } from 'shared'
 
 import {
   FavoriteActivityFn,
@@ -70,7 +68,7 @@ export const getServerSideProps = async (context) => {
   }
 
   await Promise.all([
-    queryClient.fetchQuery(FavoritePlaceQueryKey, () => FavoritePlaceQueryFn(headers), {
+    queryClient.fetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
