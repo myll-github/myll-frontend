@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from 'next'
 import Router from 'next/router'
 import nookies, { setCookie } from 'nookies'
 
-export const ROOT_URL = 'http://localhost:8080'
+export const ROOT_URL = process.env.NEXT_PUBLIC_API_URL
 
 export interface InitHeaders {
   initHeaders?: {
