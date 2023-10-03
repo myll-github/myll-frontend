@@ -1,20 +1,25 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { setCookie } from 'nookies'
+import { useCallback, useEffect } from 'react'
 
-import { getCookieHeader } from '@/common/api'
+import { RefreshAccessToken } from '@/common/api/token/RefreshAccessToken'
 
 const Page = () => {
   const router = useRouter()
-  useEffect(() => {
-    const { Authorization } = getCookieHeader()
-    if (Authorization) {
-      // 토큰이 있으면
+
+  const refreshAccessToken = useCallback(async () => {
+    try {
+      const newAccessToken = await RefreshAccessToken()
+      setCookie(null, 'accessToken', newAccessToken)
       router.replace('/home')
-    } else {
-      // 토큰이 없으면
+    } catch (e) {
       router.replace('/login')
     }
   }, [router])
+
+  useEffect(() => {
+    refreshAccessToken()
+  }, [refreshAccessToken])
   return null
 }
 

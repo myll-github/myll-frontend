@@ -2,9 +2,11 @@
 import { Alert, Button, Divider, Input } from 'myll-ui'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
+import { RefreshAccessToken } from '@/common/api/token/RefreshAccessToken'
 import { UserLogin } from '@/common/api/user-login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
@@ -15,6 +17,22 @@ export const Login = () => {
   const [openAlert, setOpenAlert] = useState<{ isVisible: boolean; type?: 'success' | 'error'; message?: string }>({
     isVisible: false,
   })
+
+  const router = useRouter()
+
+  const refreshAccessToken = useCallback(async () => {
+    try {
+      const newAccessToken = await RefreshAccessToken()
+      setCookie(null, 'accessToken', newAccessToken)
+      router.replace('/home')
+    } catch (e) {
+      console.log(e)
+    }
+  }, [router])
+
+  useEffect(() => {
+    refreshAccessToken()
+  }, [refreshAccessToken])
 
   const handleEmailLogin = async () => {
     try {
@@ -28,6 +46,8 @@ export const Login = () => {
         path: '/',
         maxAge: 1000000,
       })
+
+      router.push('/home')
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
