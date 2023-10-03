@@ -27,7 +27,7 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
   return data.data.map((ele, id) => {
     return {
       ...ele,
-      id,
+      id: ele.contentid,
       key: id,
       img: ele.firstimage,
       mainTitle: ele.title,
@@ -46,6 +46,26 @@ export const randomTourListQueryFn =
     return getRandomTourList({ initHeaders, contentTypeId, count })
   }
 
+const addListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.post(`${ROOT_URL}/recommend`, { contentId }, { headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.delete(`${ROOT_URL}/recommend`, { data: { contentId }, headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = '' }: randomTourListApiType) => {
   const query = useQuery({
     // @ts-ignore
@@ -58,6 +78,8 @@ export const useRandomTourListQuery = ({ contentTypeId = '', count = 6, key = ''
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
     queryKey: randomTourListQueryKey({ contentTypeId, key }),
+    onRemoveRecommend: removeListLike,
+    onAddRecommend: addListLike,
   })
 
   return { ...query, handleOptimisticRecommendToggle }

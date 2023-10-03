@@ -12,7 +12,7 @@ export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   return data.data.map((ele, index) => {
     return {
       ...ele,
-      id: index,
+      id: ele.id,
       img: '',
       href: '',
       mainTitle: ele.title,
@@ -31,6 +31,26 @@ export const getRandomLocalTourListFn =
   () =>
     getRandomLocalTourList({ initHeaders })
 
+const addListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await axios.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const useRandomLocalTourListQuery = () => {
   const query = useQuery({
     queryKey: getRandomLocalTourListQueryKey(),
@@ -43,6 +63,8 @@ export const useRandomLocalTourListQuery = () => {
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
     queryKey: getRandomLocalTourListQueryKey(),
+    onAddRecommend: addListLike,
+    onRemoveRecommend: removeListLike,
   })
 
   return { ...query, handleOptimisticRecommendToggle }
