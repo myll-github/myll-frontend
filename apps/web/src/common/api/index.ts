@@ -118,6 +118,19 @@ api.interceptors.request.use((config) => {
   }
 
   if (isServer() && context?.req?.headers?.cookies) {
+    const { cookies } = context.req.headers
+    if (typeof cookies === 'string') {
+      // 쿠키에 값이 하나일 때
+      if (cookies.includes('accessToken')) {
+        config.headers.Authorization = cookies.split('=')[1] || ''
+      }
+    } else {
+      // 쿠키에 값이 두 개 이상일 때
+      const cookieArr = context.req.headers.cookies as string[]
+      const accessTokenValue = cookieArr.find((val) => val.includes('accessToken'))?.split('=')[1] || ''
+      config.headers.Authorization = accessTokenValue
+    }
+
     config.headers.Cookie = context.req.headers.cookies
   }
   return config
