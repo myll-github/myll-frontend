@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { api, ROOT_URL } from '../index'
+import { authAPI, ROOT_URL } from '../index'
 
 export const getFavoritePlace = async () => {
   try {
-    const data = await api.get(`${ROOT_URL}/random-tour-list`)
+    const data = await authAPI.get(`${ROOT_URL}/random-tour-list`)
 
     return data.data.map((ele, id) => {
       return {
