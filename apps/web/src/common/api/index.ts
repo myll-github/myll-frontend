@@ -1,7 +1,6 @@
 import axios, { AxiosError } from 'axios'
-import { GetServerSidePropsContext } from 'next'
-import Router from 'next/router'
-import nookies, { setCookie } from 'nookies'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import nookies from 'nookies'
 
 export const ROOT_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -21,129 +20,78 @@ export const getCookieHeader = (context: any = undefined) => {
   return header
 }
 
-/**
- *  401 에러로 인증 실패 시에는 access token을 재발급하여 retry 하는 로직
- */
-
-// server 측에서 실행되는 함수인가?
 const isServer = () => {
   return typeof window === 'undefined'
 }
 
-let accessToken = ''
-let context = <GetServerSidePropsContext>{}
-
-export const setAccessToken = (_accessToken: string) => {
-  accessToken = _accessToken
-}
-
-export const getAccessToken = () => accessToken
-
-export const setContext = (_context: GetServerSidePropsContext) => {
-  context = _context
-}
-
-export const api = axios.create({
+export const authAPI = axios.create({
   baseURL: ROOT_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
   withCredentials: true,
 })
 
-let isAssignToken = false
-let subscribers: ((token: string) => any)[] = []
-
-const onAccessTokenReAssigned = (token: string) => {
-  subscribers.forEach((callback) => callback(token))
-  subscribers = []
-}
-
-const addSubscriber = (callback: (token: string) => any) => {
-  subscribers.push(callback)
-}
-
-const refreshToken = async (originError: AxiosError) => {
-  try {
-    const { response } = originError
-
-    // retry request
-    const retryOriginalRequest = new Promise((resolve) => {
-      addSubscriber((token: string) => {
-        response!.config.headers.Authorization = `${token}`
-        resolve(axios(response!.config))
-      })
-    })
-
-    if (!isAssignToken) {
-      isAssignToken = true
-
-      // reassign access token
-      const { data } = await api.post('/token/refresh', undefined, {
-        // server 측에서 실행되고 있다면 쿠키를 명시적으로 넘겨줘야 함.
-        headers: isServer() ? { Cookie: context.req.headers.cookie } : undefined,
-      })
-
-      if (!isServer()) {
-        setAccessToken(data.accessToken)
-      }
-
-      // 새로운 access token 저장
-      setCookie(isServer() ? context : null, 'accessToken', data.accessToken)
-
-      // 재시도
-      onAccessTokenReAssigned(data.accessToken)
-    }
-    return retryOriginalRequest
-  } catch (error) {
-    // 로그인 페이지 이동
-    if (!isServer()) {
-      Router.push('/login')
-    }
-    if (isServer()) {
-      context.res.setHeader('location', '/login')
-      context.res.statusCode = 302
-      context.res.end()
-    }
-    return Promise.reject(originError)
-  } finally {
-    isAssignToken = false
-  }
-}
-
-// header에 accessToken 넘겨주기 로직 자동화
-api.interceptors.request.use((config) => {
-  if (accessToken) {
-    config.headers.Authorization = `${accessToken}`
-  }
-
-  if (isServer() && context?.req?.headers?.cookies) {
-    const { cookies } = context.req.headers
-    if (typeof cookies === 'string') {
-      // 쿠키에 값이 하나일 때
-      if (cookies.includes('accessToken')) {
-        config.headers.Authorization = cookies.split('=')[1] || ''
-      }
-    } else {
-      // 쿠키에 값이 두 개 이상일 때
-      const cookieArr = context.req.headers.cookies as string[]
-      const accessTokenValue = cookieArr.find((val) => val.includes('accessToken'))?.split('=')[1] || ''
-      config.headers.Authorization = accessTokenValue
-    }
-
-    config.headers.Cookie = context.req.headers.cookies
-  }
-  return config
-})
-
-api.interceptors.response.use(
+authAPI.interceptors.response.use(
   (response) => {
     return response
   },
-  (error: AxiosError) => {
-    if (error.response?.status === 401 && !error.response?.config?.url?.includes('token/refresh')) {
-      return refreshToken(error)
+  async (error: AxiosError) => {
+    if (!isServer() && error.response?.status === 401) {
+      try {
+        await axios.post('/token/refresh', undefined, {
+          baseURL: ROOT_URL,
+          withCredentials: true,
+        })
+        const { response } = error
+
+        // retry
+        const retryOriginalRequest = new Promise((resolve) => {
+          resolve(axios(response!.config))
+        })
+
+        return retryOriginalRequest
+      } catch (e) {
+        window.location.href = '/login'
+      }
     }
-    return Promise.reject(error)
+    throw error
   },
 )
+
+export const withAuth = (getServerSideProps: GetServerSideProps) => {
+  return async (context: GetServerSidePropsContext) => {
+    try {
+      // authAPI 인스턴스로 호출되는 API header에 access token 값 담아주기
+      authAPI.defaults.headers.common.Authorization = nookies.get(context).accessToken
+      const response = await getServerSideProps(context)
+      return response
+    } catch (e) {
+      const { response } = e
+
+      if (response && response.status === 401) {
+        const { res } = context
+        try {
+          // access token 재발급
+          const { data } = await axios.post('/token/refresh', undefined, {
+            baseURL: ROOT_URL,
+            headers: { Cookie: context.req.headers.cookie },
+            withCredentials: true,
+          })
+
+          // 재발급 받은 access token 쿠키 저장
+          authAPI.defaults.headers.common.Authorization = data.accessToken
+        } catch (_) {
+          // access token 재발급 실패 시 로그아웃
+          nookies.destroy(context, 'accessToken')
+          nookies.destroy(context, 'refreshToken')
+          nookies.destroy(context, 'userEmail')
+          res.writeHead(302, { Location: '/login' })
+          res.end()
+        }
+
+        // getServerSideProps 재호출
+        const newResponse = await getServerSideProps(context)
+        return newResponse
+      }
+      return e
+    }
+  }
+}

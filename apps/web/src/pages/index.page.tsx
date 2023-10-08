@@ -1,26 +1,36 @@
+import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
-import { setCookie } from 'nookies'
-import { useCallback, useEffect } from 'react'
+import nookies from 'nookies'
+import { useEffect } from 'react'
 
-import { RefreshAccessToken } from '@/common/api/token/RefreshAccessToken'
+import { LoginToken } from '@/common/interfaces'
 
-const Page = () => {
+interface PageProps {
+  token: LoginToken
+}
+
+const Page = (props: PageProps) => {
   const router = useRouter()
 
-  const refreshAccessToken = useCallback(async () => {
-    try {
-      const newAccessToken = await RefreshAccessToken()
-      setCookie(null, 'accessToken', newAccessToken)
+  useEffect(() => {
+    const { token } = props
+    if (!token.accessToken && !token.refreshToken) {
       router.replace('/home')
-    } catch (e) {
+    } else {
       router.replace('/login')
     }
-  }, [router])
-
-  useEffect(() => {
-    refreshAccessToken()
-  }, [refreshAccessToken])
+  }, [])
   return null
+}
+
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
+  const token = nookies.get(context)
+
+  return {
+    props: {
+      token,
+    },
+  }
 }
 
 export default Page

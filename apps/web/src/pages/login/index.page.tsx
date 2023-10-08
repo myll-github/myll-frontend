@@ -1,16 +1,21 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { Alert, Button, Divider, Input } from 'myll-ui'
+import { GetServerSidePropsContext } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { setCookie } from 'nookies'
-import { useCallback, useEffect, useState } from 'react'
+import nookies from 'nookies'
+import { useEffect, useState } from 'react'
 
-import { RefreshAccessToken } from '@/common/api/token/RefreshAccessToken'
-import { UserLogin } from '@/common/api/user-login/UserLogin'
+import { UserLogin } from '@/common/api/user/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { LoginToken } from '@/common/interfaces'
 
-export const Login = () => {
+interface LoginProps {
+  token: LoginToken
+}
+
+export const Login = (props: LoginProps) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -20,34 +25,17 @@ export const Login = () => {
 
   const router = useRouter()
 
-  const refreshAccessToken = useCallback(async () => {
-    try {
-      const newAccessToken = await RefreshAccessToken()
-      setCookie(null, 'accessToken', newAccessToken)
-      router.replace('/home')
-    } catch (e) {
-      console.log(e)
-    }
-  }, [router])
-
   useEffect(() => {
-    refreshAccessToken()
-  }, [refreshAccessToken])
+    const { token } = props
+    if (!token.accessToken && !token.refreshToken) {
+      router.replace('/home')
+    }
+  }, [])
 
   const handleEmailLogin = async () => {
     try {
-      const response = await UserLogin(email, password)
-      setCookie(null, 'accessToken', response.data.accessToken, {
-        path: '/',
-        maxAge: 10000, // ms
-      })
-      // 나중에 store email에 넣어야 해
-      setCookie(null, 'userEmail', email, {
-        path: '/',
-        maxAge: 1000000,
-      })
-
-      router.push('/home')
+      await UserLogin(email, password)
+      router.replace('/home')
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
@@ -114,6 +102,16 @@ export const Login = () => {
       </div>
     </DefaultLayout>
   )
+}
+
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
+  const token = nookies.get(context)
+
+  return {
+    props: {
+      token,
+    },
+  }
 }
 
 export default Login

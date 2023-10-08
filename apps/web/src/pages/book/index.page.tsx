@@ -3,7 +3,7 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 
-import { setContext } from '@/common/api'
+import { withAuth } from '@/common/api'
 import { FavoritePlaceQueryFn, FavoritePlaceQueryKey, useFavoritePlaceQuery } from '@/common/api/recommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
@@ -59,9 +59,8 @@ export const Book = () => {
   )
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
-  setContext(context)
   await Promise.all([
     queryClient.prefetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
       staleTime: Infinity,
@@ -74,6 +73,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       dehydratedState: dehydrate(queryClient),
     },
   }
-}
+})
 
 export default Book
