@@ -28,7 +28,7 @@ export const Login = (props: LoginProps) => {
   useEffect(() => {
     const { token } = props
     if (!token.accessToken && !token.refreshToken) {
-      router.replace('/home')
+      router.replace('/login')
     }
   }, [])
 
