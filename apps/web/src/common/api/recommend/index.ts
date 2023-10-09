@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { authAPI, ROOT_URL } from '../index'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
-export const getFavoritePlace = async () => {
+export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
   try {
-    const data = await authAPI.get(`${ROOT_URL}/random-tour-list`)
+    const data = await authAPI.get(`${ROOT_URL}/random-tour-list`, { headers })
 
     return data.data.map((ele, id) => {
       return {
@@ -22,15 +23,19 @@ export const getFavoritePlace = async () => {
   }
 }
 
-export const FavoritePlaceQueryKey = ['favoritePlace']
-export const FavoritePlaceQueryFn = () => getFavoritePlace()
+export const FavoritePlaceQueryKey = () => ['favoritePlace']
+export const FavoritePlaceQueryFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getFavoritePlace({ initHeaders })
 
 export const useFavoritePlaceQuery = () => {
   return useQuery({
-    queryKey: FavoritePlaceQueryKey,
-    queryFn: FavoritePlaceQueryFn,
+    queryKey: FavoritePlaceQueryKey(),
+    queryFn: FavoritePlaceQueryFn({}),
     staleTime: Infinity,
     cacheTime: Infinity,
+    refetchOnMount: true,
   })
 }
 

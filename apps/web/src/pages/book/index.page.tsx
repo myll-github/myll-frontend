@@ -3,7 +3,7 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 
-import { withAuth } from '@/common/api'
+import { getCookieHeader, withAuth } from '@/common/api'
 import { FavoritePlaceQueryFn, FavoritePlaceQueryKey, useFavoritePlaceQuery } from '@/common/api/recommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
@@ -58,12 +58,12 @@ export const Book = () => {
 
 export const getServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
-  await Promise.all([
-    queryClient.prefetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    }),
-  ])
+  const initHeaders = getCookieHeader(context)
+
+  await queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  })
 
   return {
     props: {
