@@ -3,6 +3,7 @@ import { Tab } from 'myll-ui'
 import nookies from 'nookies'
 import { Suspense } from 'react'
 
+import { getCookieHeader } from '@/common/api'
 import {
   FavoriteActivityFn,
   FavoriteActivityKey,
@@ -60,15 +61,10 @@ export const Recommend = ({ favoritePlace }: any) => {
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
 
-  const cookies = nookies.get(context)
-  const token = cookies.accessToken || ''
-
-  const headers = {
-    Authorization: `${token}`,
-  }
+  const initHeaders = getCookieHeader(context)
 
   await Promise.all([
-    queryClient.fetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
+    queryClient.fetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
