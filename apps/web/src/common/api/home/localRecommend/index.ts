@@ -18,7 +18,7 @@ export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: r
   const headers = initHeaders ?? getCookieHeader()
 
   const data = await authAPI(
-    `${ROOT_URL}/random-tour-list?${contentTypeId ? `contentTypeId=${contentTypeId}&` : ''}count=${count}`,
+    `/random-tour-list?${contentTypeId ? `contentTypeId=${contentTypeId}&` : ''}count=${count}`,
     { headers },
   )
 
@@ -48,7 +48,7 @@ const addListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.post(`${ROOT_URL}/recommend`, { contentId }, { headers })
+    const response = await authAPI.post(`/recommend`, { contentId }, { headers })
   } catch (error) {
     throw new Error(error)
   }
@@ -58,7 +58,7 @@ const removeListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.delete(`${ROOT_URL}/recommend`, { data: { contentId }, headers })
+    const response = await authAPI.delete(`/recommend`, { data: { contentId }, headers })
   } catch (error) {
     throw new Error(error)
   }
