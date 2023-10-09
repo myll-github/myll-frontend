@@ -3,19 +3,21 @@ import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
 import { useRandomTourListQuery, useRecommendedTourListQuery } from '@/common/api/home/localRecommend'
 
+import { MYLLRECOMMEND_KEY } from '../constants'
+
 const MyllRecommendSection = () => {
   const { data: data1, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle1 } = useRandomTourListQuery({
     contentTypeId: 'all',
-    key: 1,
+    key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE,
     count: 6,
   })
 
   const { data: recommendedData, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } =
-    useRecommendedTourListQuery({ key: 2 })
+    useRecommendedTourListQuery({ key: MYLLRECOMMEND_KEY.USER_RECOMMENDED })
 
   const { data: data3, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle3 } = useRandomTourListQuery({
     contentTypeId: 'all',
-    key: 3,
+    key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED,
     count: 6,
   })
 
@@ -29,7 +31,7 @@ const MyllRecommendSection = () => {
         tabBarGutter={20}
         size="small"
         className="home-myllrecommend mt-24pxr"
-        defaultActiveKey="1"
+        defaultActiveKey={MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE}
         items={[
           {
             children: (
@@ -41,7 +43,7 @@ const MyllRecommendSection = () => {
                 />
               </MenuList>
             ),
-            key: '1',
+            key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE,
             label: '부산 인기장소',
           },
           {
@@ -54,7 +56,7 @@ const MyllRecommendSection = () => {
                 />
               </MenuList>
             ),
-            key: '2',
+            key: MYLLRECOMMEND_KEY.USER_RECOMMENDED,
             label: '찜한곳',
           },
           {
@@ -67,7 +69,7 @@ const MyllRecommendSection = () => {
                 />
               </MenuList>
             ),
-            key: '3',
+            key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED,
             label: '마일이 추천해요',
           },
         ]}

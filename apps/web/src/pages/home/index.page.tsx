@@ -13,6 +13,7 @@ import {
 } from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
+import { MYLLRECOMMEND_KEY } from './constants'
 import AnotherUserPlanSection from './section/AnotherUserPlanSection'
 import HomeHeader from './section/HomeHeader'
 import LocalRecommendSection from './section/LocalRecommendSection'
@@ -42,21 +43,21 @@ export const getServerSideProps = async (context) => {
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
 
     queryClient.prefetchQuery({
-      queryKey: recommendedTourListQueryKey({ key: 2 }),
+      queryKey: recommendedTourListQueryKey({ key: MYLLRECOMMEND_KEY.USER_RECOMMENDED }),
       queryFn: recommendedTourListQueryFn({ initHeaders }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
 
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 3 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
