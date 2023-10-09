@@ -16,7 +16,7 @@ interface updateDataType {
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await authAPI(`${ROOT_URL}/local-tour-list`, { headers })
+  const data = await authAPI(`/local-tour-list`, { headers })
 
   return data.data.map((ele, index) => {
     return {
@@ -41,17 +41,12 @@ export const updateLocal = async (data: updateDataType) => {
     formData.append(key, value)
   })
 
-  await authAPI.post(
-    `${ROOT_URL}/local-tour
-  `,
-    formData,
-    {
-      headers: {
-        ...headers,
-        'Content-Type': 'multipart/form-data',
-      },
+  await authAPI.post(`/local-tour`, formData, {
+    headers: {
+      ...headers,
+      'Content-Type': 'multipart/form-data',
     },
-  )
+  })
 }
 
 export const getLocalMenuListQueryKey = () => ['localMenuList']
@@ -65,7 +60,7 @@ const addListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
+    const response = await authAPI.post(`/local-recommend`, { contentId }, { headers })
   } catch (error) {
     throw new Error(error)
   }
@@ -75,7 +70,7 @@ const removeListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
+    const response = await authAPI.delete(`/local-recommend`, { data: { contentId }, headers })
   } catch (error) {
     throw new Error(error)
   }

@@ -5,7 +5,7 @@ import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   try {
-    const data = await authAPI.get(`${ROOT_URL}/random-tour-list`, { headers })
+    const data = await authAPI.get(`/random-tour-list`, { headers })
 
     return data.data.map((ele, id) => {
       return {
@@ -39,7 +39,7 @@ export const useFavoritePlaceQuery = () => {
 }
 
 export const getTravelTheme = async () => {
-  const data = await authAPI(`${ROOT_URL}/tour-theme`)
+  const data = await authAPI(`/tour-theme`)
 
   return data.data.map((ele, id) => {
     return {
@@ -67,7 +67,7 @@ export const useTravelThemeQuery = () => {
 }
 
 export const getFavoriteActivity = async () => {
-  const data = await authAPI(`${ROOT_URL}/tour-category`)
+  const data = await authAPI(`/tour-category`)
 
   return data.data.map((ele, id) => {
     return {

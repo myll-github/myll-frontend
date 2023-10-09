@@ -6,7 +6,7 @@ import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await authAPI(`${ROOT_URL}/random-local-tour-list?count=1000`, { headers })
+  const data = await authAPI(`/random-local-tour-list?count=1000`, { headers })
 
   return data.data.map((ele, index) => {
     return {
@@ -34,7 +34,7 @@ const addListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
+    const response = await authAPI.post(`/local-recommend`, { contentId }, { headers })
   } catch (error) {
     throw new Error(error)
   }
@@ -44,7 +44,7 @@ const removeListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await authAPI.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
+    const response = await authAPI.delete(`/local-recommend`, { data: { contentId }, headers })
   } catch (error) {
     throw new Error(error)
   }
