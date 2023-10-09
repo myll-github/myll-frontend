@@ -1,10 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
 
 import { TAG_COLOR_MAP } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
-import { getCookieHeader, InitHeaders, ROOT_URL } from '..'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '..'
 
 interface updateDataType {
   title: string
@@ -17,7 +16,7 @@ interface updateDataType {
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await axios(`${ROOT_URL}/local-tour-list`, { headers })
+  const data = await authAPI(`${ROOT_URL}/local-tour-list`, { headers })
 
   return data.data.map((ele, index) => {
     return {
@@ -42,7 +41,7 @@ export const updateLocal = async (data: updateDataType) => {
     formData.append(key, value)
   })
 
-  await axios.post(
+  await authAPI.post(
     `${ROOT_URL}/local-tour
   `,
     formData,

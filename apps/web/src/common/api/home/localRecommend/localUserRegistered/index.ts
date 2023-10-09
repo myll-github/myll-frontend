@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
-import { getCookieHeader, InitHeaders, ROOT_URL } from '@/common/api'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '@/common/api'
 import { TAG_COLOR_MAP } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await axios(`${ROOT_URL}/random-local-tour-list?count=1000`, { headers })
+  const data = await authAPI(`${ROOT_URL}/random-local-tour-list?count=1000`, { headers })
 
   return data.data.map((ele, index) => {
     return {
