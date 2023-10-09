@@ -1,7 +1,7 @@
 import { MenuList, Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
-import { useRandomTourListQuery } from '@/common/api/home/localRecommend'
+import { useRandomTourListQuery, useRecommendedTourListQuery } from '@/common/api/home/localRecommend'
 
 const MyllRecommendSection = () => {
   const { data: data1, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle1 } = useRandomTourListQuery({
@@ -9,9 +9,13 @@ const MyllRecommendSection = () => {
     key: 1,
     count: 6,
   })
-  const { data: data2, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } = useRandomTourListQuery({
+
+  const { data: recommendedData, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } =
+    useRecommendedTourListQuery({ key: 2 })
+
+  const { data: data3, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle3 } = useRandomTourListQuery({
     contentTypeId: 'all',
-    key: 2,
+    key: 3,
     count: 6,
   })
 
@@ -42,8 +46,12 @@ const MyllRecommendSection = () => {
           },
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={[]}>
-                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
+              <MenuList itemLayout="vertical" onChange={() => {}} data={recommendedData}>
+                <MenuList.LargeMenuItem
+                  onRecommendButtonClicked={(id) => {
+                    handleOptimisticRecommendToggle2({ id })
+                  }}
+                />
               </MenuList>
             ),
             key: '2',
@@ -51,10 +59,10 @@ const MyllRecommendSection = () => {
           },
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={data2 as ItemType[]}>
+              <MenuList itemLayout="vertical" onChange={() => {}} data={data3 as ItemType[]}>
                 <MenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
-                    handleOptimisticRecommendToggle2({ id })
+                    handleOptimisticRecommendToggle3({ id })
                   }}
                 />
               </MenuList>

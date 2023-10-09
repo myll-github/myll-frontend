@@ -1,14 +1,17 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
 import { getCookieHeader } from '@/common/api'
-import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
+import {
+  randomTourListQueryFn,
+  randomTourListQueryKey,
+  recommendedTourListQueryFn,
+  recommendedTourListQueryKey,
+} from '@/common/api/home/localRecommend'
 import {
   getRandomLocalTourListFn,
   getRandomLocalTourListQueryKey,
 } from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { HOME_LOCALRECOMMANDSECTION_MAP, HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 
 import AnotherUserPlanSection from './section/AnotherUserPlanSection'
 import HomeHeader from './section/HomeHeader'
@@ -44,8 +47,16 @@ export const getServerSideProps = async (context) => {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
+
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
+      queryKey: recommendedTourListQueryKey({ key: 2 }),
+      queryFn: recommendedTourListQueryFn({ initHeaders }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 3 }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
