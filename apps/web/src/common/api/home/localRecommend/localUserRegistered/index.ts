@@ -34,7 +34,7 @@ const addListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await axios.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
+    const response = await authAPI.post(`${ROOT_URL}/local-recommend`, { contentId }, { headers })
   } catch (error) {
     throw new Error(error)
   }
@@ -44,7 +44,7 @@ const removeListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
-    const response = await axios.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
+    const response = await authAPI.delete(`${ROOT_URL}/local-recommend`, { data: { contentId }, headers })
   } catch (error) {
     throw new Error(error)
   }
