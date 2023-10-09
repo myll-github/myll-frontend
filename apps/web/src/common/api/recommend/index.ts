@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
 import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
@@ -40,7 +39,7 @@ export const useFavoritePlaceQuery = () => {
 }
 
 export const getTravelTheme = async () => {
-  const data = await axios(`${ROOT_URL}/tour-theme`)
+  const data = await authAPI(`${ROOT_URL}/tour-theme`)
 
   return data.data.map((ele, id) => {
     return {
@@ -68,7 +67,7 @@ export const useTravelThemeQuery = () => {
 }
 
 export const getFavoriteActivity = async () => {
-  const data = await axios(`${ROOT_URL}/tour-category`)
+  const data = await authAPI(`${ROOT_URL}/tour-category`)
 
   return data.data.map((ele, id) => {
     return {
