@@ -5,6 +5,7 @@ export const UserLogin = async (email: string, password: string) => {
     method: 'POST',
     url: `${process.env.NEXT_PUBLIC_API_URL}/login`,
     data: { email, password },
+    withCredentials: true,
   }
 
   const response = await axios(axiosConfig)

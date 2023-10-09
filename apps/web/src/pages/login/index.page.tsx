@@ -1,15 +1,21 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { Alert, Button, Divider, Input } from 'myll-ui'
+import { GetServerSidePropsContext } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import nookies, { setCookie } from 'nookies'
+import nookies from 'nookies'
 import { useEffect, useState } from 'react'
 
-import { UserLogin } from '@/common/api/user-login/UserLogin'
+import { UserLogin } from '@/common/api/user/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { LoginToken } from '@/common/interfaces'
 
-export const Login = () => {
+interface LoginProps {
+  token: LoginToken
+}
+
+export const Login = (props: LoginProps) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -19,31 +25,17 @@ export const Login = () => {
 
   const router = useRouter()
 
-  // 토큰 만료 전일 경우
   useEffect(() => {
-    const { accessToken } = nookies.get()
-
-    if (accessToken) {
-      // 홈페이지로 이동
-      console.log('There is token')
-      router.push('/home')
+    const { token } = props
+    if (!token.accessToken && !token.refreshToken) {
+      router.replace('/login')
     }
-
-    // @ESLINT_DISABLED useRouter는 내부적으로 리렌더링을 최적화 하고 있음.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleEmailLogin = async () => {
     try {
-      const response = await UserLogin(email, password)
-      setCookie(null, 'accessToken', response.data.accessToken, {
-        path: '/',
-        maxAge: 72000, // ms
-      })
-      setCookie(null, 'userEmail', email, {
-        path: '/',
-        maxAge: 72000,
-      })
+      await UserLogin(email, password)
+      router.replace('/home')
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })
     }
@@ -51,7 +43,7 @@ export const Login = () => {
 
   return (
     <DefaultLayout>
-      <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr">
+      <div className="w-full h-screen flex flex-col pl-30pxr pr-30pxr">
         <div className="HEADER-H1 break-keep text-center mb-30pxr">
           마일 여행자이시라면 <span className="text-PRIMARY_BLUE">로그인</span> 해주세요
         </div>
@@ -73,7 +65,7 @@ export const Login = () => {
 
         <div className="flex flex-col gap-10pxr mt-30pxr">
           <Button variant="large" color="primary" type="button" onClick={handleEmailLogin}>
-            이메일로 로그인
+            로그인
           </Button>
           <div className="w-full flex justify-center items-center h-30pxr">
             <Button color="text" variant="medium" type="button">
@@ -86,7 +78,7 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10pxr mt-auto mb-30pxr INPUT-LABEL2 text-left text-GRAY_70">
+        <div className="flex flex-col gap-10pxr mt-auto mb-0 INPUT-LABEL2 text-left text-GRAY_70">
           SNS 계정 회원가입
           <div className="flex w-full justify-center cursor-pointer">
             <Link
@@ -95,13 +87,9 @@ export const Login = () => {
                 `scope=profile_nickname age_range`
               }
             >
-              <Image width={265} height={40} src="/kakao_login_medium_wide.png" alt="no img" />
+              <Image width={265} height={40} src="/kakao_start.png" alt="no img" />
             </Link>
           </div>
-          이메일로 회원가입
-          <Button type="button" variant="medium" color="secondary">
-            초보 여행자에요
-          </Button>
           <Alert
             isVisible={openAlert.isVisible}
             onVisibleChange={(flag) => {
@@ -114,6 +102,16 @@ export const Login = () => {
       </div>
     </DefaultLayout>
   )
+}
+
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
+  const token = nookies.get(context)
+
+  return {
+    props: {
+      token,
+    },
+  }
 }
 
 export default Login

@@ -1,8 +1,9 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
-import nookies from 'nookies'
+import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 
+import { getCookieHeader, withAuth } from '@/common/api'
 import { FavoritePlaceQueryFn, FavoritePlaceQueryKey, useFavoritePlaceQuery } from '@/common/api/recommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
@@ -55,28 +56,20 @@ export const Book = () => {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
+  const initHeaders = getCookieHeader(context)
 
-  const cookies = nookies.get(context)
-  const token = cookies.accessToken || ''
-
-  const headers = {
-    Authorization: `${token}`,
-  }
-
-  await Promise.all([
-    queryClient.fetchQuery(FavoritePlaceQueryKey, () => FavoritePlaceQueryFn(headers), {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    }),
-  ])
+  await queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  })
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
   }
-}
+})
 
 export default Book

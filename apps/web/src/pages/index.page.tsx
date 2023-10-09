@@ -1,21 +1,36 @@
+import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
+import nookies from 'nookies'
 import { useEffect } from 'react'
 
-import { getCookieHeader } from '@/common/api'
+import { LoginToken } from '@/common/interfaces'
 
-const Page = () => {
+interface PageProps {
+  token: LoginToken
+}
+
+const Page = (props: PageProps) => {
   const router = useRouter()
+
   useEffect(() => {
-    const { Authorization } = getCookieHeader()
-    if (Authorization) {
-      // 토큰이 있으면
+    const { token } = props
+    if (!token.accessToken && !token.refreshToken) {
       router.replace('/home')
     } else {
-      // 토큰이 없으면
       router.replace('/login')
     }
-  }, [router])
+  }, [])
   return null
+}
+
+export const getServerSideProps = (context: GetServerSidePropsContext) => {
+  const token = nookies.get(context)
+
+  return {
+    props: {
+      token,
+    },
+  }
 }
 
 export default Page

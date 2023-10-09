@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
-import { HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
-import { getCookieHeader, ROOT_URL } from '../..'
+import { authAPI, getCookieHeader, ROOT_URL } from '../..'
 
 interface randomTourListApiType {
   contentTypeId?: string
@@ -19,7 +17,7 @@ interface randomTourListApiType {
 export const getRandomTourList = async ({ initHeaders, contentTypeId, count }: randomTourListApiType) => {
   const headers = initHeaders ?? getCookieHeader()
 
-  const data = await axios(
+  const data = await authAPI(
     `${ROOT_URL}/random-tour-list?${contentTypeId ? `contentTypeId=${contentTypeId}&` : ''}count=${count}`,
     { headers },
   )
