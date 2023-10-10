@@ -1,17 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
+import { getCookie } from 'cookies-next'
 import { GetServerSidePropsContext } from 'next'
-import nookies from 'nookies'
 
 import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
 export const getFavoritePlace = async (context?: GetServerSidePropsContext) => {
-  const cookies = nookies.get(context)
+  const { req, res } = context
+  const cookies = getCookie('accessToken', { req, res })
   console.log('cookies')
   console.log(cookies)
   console.log('-----')
   console.log(console.log(context.req.headers.cookie))
   try {
-    const data = await authAPI.get(`/random-tour-list`, { headers: { Authorization: cookies.accessToken } })
+    const data = await authAPI.get(`/random-tour-list`, { headers: { Authorization: cookies } })
 
     return data.data.map((ele, id) => {
       return {
