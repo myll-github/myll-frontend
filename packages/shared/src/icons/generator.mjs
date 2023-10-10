@@ -37,6 +37,8 @@ const formatIconsSVG = (svg) =>
     .replace('clip-rule', 'clipRule')
     .replace('clip-path', 'clipPath')
 
+
+    
 const formatName = (name) => name?.toUpperCase().replace(/-/g, '_') // replaces '/' by '_'
 
 const hash = (path) => path.replace(/^.*\/img\//g, '').replace(/\//g, '_')
