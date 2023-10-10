@@ -59,11 +59,12 @@ export const Book = () => {
 export const getServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
-
-  await queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn(context), {
-    staleTime: Infinity,
-    cacheTime: Infinity,
-  })
+  await Promise.all([
+    queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+  ])
 
   return {
     props: {

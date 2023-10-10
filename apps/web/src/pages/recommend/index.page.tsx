@@ -64,7 +64,7 @@ export const getServerSideProps = async (context) => {
   const initHeaders = getCookieHeader(context)
 
   await Promise.all([
-    queryClient.fetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn(context), {
+    queryClient.fetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
