@@ -1,4 +1,5 @@
-import { Button } from 'myll-ui'
+import { Button, InfiniteBanner } from 'myll-ui'
+import { shuffleArray } from 'shared'
 
 const AnotherUserPlanSection = () => {
   return (
@@ -16,10 +17,14 @@ const AnotherUserPlanSection = () => {
 
           <p className="max-w-[276px] SUBTITLE-T6">나와 관심사가 비슷한 여행자들의 여행일정을 참고해보세요!</p>
 
-          <div className="flex flex-row overflow-hidden gap-5pxr">
-            {Array.from({ length: 8 }).map((_, i) => {
-              return <img src={`/icons/Profile_Icon_${i + 1}.svg`} alt="" width="60" height="60" />
-            })}
+          <div className="flex flex-row ">
+            <InfiniteBanner
+              data={shuffleArray(
+                Array.from({ length: 8 }).map((_, i) => {
+                  return { id: String(i), img: `/icons/Profile_Icon_${i + 1}.svg` }
+                }),
+              )}
+            />
           </div>
         </div>
       </div>
