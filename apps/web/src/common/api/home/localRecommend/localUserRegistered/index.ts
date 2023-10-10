@@ -6,6 +6,7 @@ import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
+  console.log(headers)
   const data = await authAPI(`/random-local-tour-list?count=1000`, { headers })
 
   return data.data.map((ele, index) => {
