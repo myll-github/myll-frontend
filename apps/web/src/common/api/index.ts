@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import nookies from 'nookies'
 
-export const ROOT_URL = process.env.NEXT_PUBLIC_API_URL
+export const ROOT_URL = 'https://localtrip.myll.vercel.app'
 
 export interface InitHeaders {
   initHeaders?: {
@@ -37,7 +37,7 @@ authAPI.interceptors.response.use(
   async (error: AxiosError) => {
     if (!isServer() && error.response?.status === 401) {
       try {
-        await axios.post('/token/refresh', undefined, {
+        await axios.post('/auth/token/refresh', undefined, {
           baseURL: ROOT_URL,
           withCredentials: true,
         })
@@ -70,7 +70,7 @@ export const withAuth = (getServerSideProps: GetServerSideProps) => {
         const { res } = context
         try {
           // access token 재발급
-          await axios.post('/token/refresh', undefined, {
+          await axios.post('/auth/token/refresh', undefined, {
             baseURL: ROOT_URL,
             headers: { Cookie: context.req.headers.cookie },
             withCredentials: true,
