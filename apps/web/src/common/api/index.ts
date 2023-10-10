@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import nookies from 'nookies'
 
-export const ROOT_URL = 'https://localtrip.myll.vercel.app'
+export const ROOT_URL = 'https://myll-backend.com'
 
 export interface InitHeaders {
   initHeaders?: {
