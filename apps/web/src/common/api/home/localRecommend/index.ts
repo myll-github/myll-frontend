@@ -47,7 +47,7 @@ export const randomTourListQueryFn =
 export const getRecommendedTourList = async ({ initHeaders }: randomTourListApiType) => {
   const headers = initHeaders ?? getCookieHeader()
 
-  const data = await authAPI(`${ROOT_URL}/recommend-tour-list`, { headers })
+  const data = await authAPI(`/recommend-tour-list`, { headers })
 
   return data.data
     .map((ele, id) => {
