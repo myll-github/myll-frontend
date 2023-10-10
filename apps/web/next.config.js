@@ -46,34 +46,6 @@ module.exports = withPWA({
   images: {
     domains: ['', 'xsgames.co', 'tong.visitkorea.or.kr', 'localhost'],
   },
-
-  async headers() {
-    return [
-      {
-        // matching all API routes
-        source: '/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: 'https://localtrip.myll.vercel.app' },
-          { key: 'Access-Control-Allow-Methods', value: 'PUT, OPTIONS, GET, PATCH, POST, DELETE' },
-          {
-            key: 'Access-Control-Allow-Headers',
-            value:
-              'Accept, Content-Type, Authorization, User-Agent, Cookie, Set-Cookie, Cache-Control, Origin, Referer, Accept-Language',
-          },
-        ],
-      },
-    ]
-  },
-
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/auth/:path*",
-  //       destination: "https://myll-backend.com/:path*", // 실제 백엔드 API 서버 주소로 변경
-  //     },
-  //   ];
-  // },
   // async headers() {
   //   return [
   //     {
