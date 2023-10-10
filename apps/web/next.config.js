@@ -54,7 +54,7 @@ module.exports = withPWA({
         source: '/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: 'https://myll-backend.com' },
+          { key: 'Access-Control-Allow-Origin', value: 'https://localtrip.myll.vercel.app' },
           { key: 'Access-Control-Allow-Methods', value: 'PUT, OPTIONS, GET, PATCH, POST, DELETE' },
           {
             key: 'Access-Control-Allow-Headers',
