@@ -22,7 +22,7 @@ export const getCookieHeader = (context: GetServerSidePropsContext = undefined) 
   console.log('token gogo')
   console.log(token)
   const header = {
-    Authorization: token ? `${token}` : undefined,
+    Authorization: token || undefined,
   }
   return header
 }
