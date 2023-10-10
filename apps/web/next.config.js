@@ -51,7 +51,7 @@ module.exports = withPWA({
     return [
       {
         // matching all API routes
-        source: '/auth/:path*',
+        source: '/*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           { key: 'Access-Control-Allow-Origin', value: '*' },
@@ -65,14 +65,14 @@ module.exports = withPWA({
     ]
   },
 
-  async rewrites() {
-    return [
-      {
-        source: "/auth/:path*",
-        destination: "https://myll-backend.com/:path*", // 실제 백엔드 API 서버 주소로 변경
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/auth/:path*",
+  //       destination: "https://myll-backend.com/:path*", // 실제 백엔드 API 서버 주소로 변경
+  //     },
+  //   ];
+  // },
   // async headers() {
   //   return [
   //     {

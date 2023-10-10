@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
 import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
@@ -7,7 +6,7 @@ export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   console.log(headers)
   try {
-    const data = await axios.get(`/auth/random-tour-list`, { headers, withCredentials: true })
+    const data = await authAPI.get(`/random-tour-list`, { headers })
 
     return data.data.map((ele, id) => {
       return {
