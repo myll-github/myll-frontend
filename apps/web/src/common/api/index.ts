@@ -11,16 +11,10 @@ export interface InitHeaders {
 }
 
 export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
-  console.log('-----')
-  console.log(context.req.headers['x-vercel-sc-headers'])
   const cookies = nookies.get(context)
-  console.log('cookie')
-  console.log(cookies)
-  // eslint-disable-next-line no-underscore-dangle
-  const scHeaders: any = JSON.parse(context.req.headers['x-vercel-sc-headers'] as any) as any
-  const token = scHeaders.Authorization.replace(/^(Bearer )/, '') || ''
-  console.log('token gogo')
-  console.log(token)
+  console.log('cookies')
+  console.log(context.req.headers.cookie)
+  const token = cookies.accessToken || ''
   const header = {
     Authorization: token || undefined,
   }
