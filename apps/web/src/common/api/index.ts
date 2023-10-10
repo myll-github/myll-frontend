@@ -14,8 +14,8 @@ export const getCookieHeader = (context: any = undefined) => {
   const cookies = nookies.get(context)
   console.log('cookie')
   console.log(cookies)
-  const token = cookies.accessToken || ''
-
+  // eslint-disable-next-line no-underscore-dangle
+  const token = cookies._vercel_jwt || ''
   const header = {
     Authorization: token ? `${token}` : undefined,
   }
