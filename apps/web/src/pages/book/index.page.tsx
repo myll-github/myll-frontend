@@ -60,7 +60,7 @@ export const getServerSideProps = withAuth(async (context: GetServerSidePropsCon
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
 
-  await queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn({ initHeaders }), {
+  await queryClient.prefetchQuery(FavoritePlaceQueryKey(), FavoritePlaceQueryFn(context), {
     staleTime: Infinity,
     cacheTime: Infinity,
   })
