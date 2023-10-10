@@ -54,11 +54,12 @@ module.exports = withPWA({
         source: '/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: '*' },
+          { key: 'Access-Control-Allow-Origin', value: 'https://myll-backend.com' },
+          { key: 'Access-Control-Allow-Methods', value: 'PUT, OPTIONS, GET, PATCH, POST, DELETE' },
           {
             key: 'Access-Control-Allow-Headers',
-            value: '*',
+            value:
+              'Accept, Content-Type, Authorization, User-Agent, Cookie, Set-Cookie, Cache-Control, Origin, Referer, Accept-Language',
           },
         ],
       },
