@@ -17,7 +17,7 @@ export const getCookieHeader = (context: GetServerSidePropsContext = undefined) 
   console.log('cookie')
   console.log(cookies)
   // eslint-disable-next-line no-underscore-dangle
-  const scHeaders: any = context.req.headers['x-vercel-sc-headers'] as any
+  const scHeaders: any = JSON.parse(context.req.headers['x-vercel-sc-headers'] as any) as any
   const token = scHeaders.Authorization.replace(/^(Bearer )/, '') || ''
   console.log('token gogo')
   console.log(token)
