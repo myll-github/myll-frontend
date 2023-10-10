@@ -10,7 +10,10 @@ export interface InitHeaders {
   }
 }
 
-export const getCookieHeader = (context: any = undefined) => {
+export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
+  console.log(context)
+  console.log('-----')
+  console.log(context.req)
   const cookies = nookies.get(context)
   console.log('cookie')
   console.log(cookies)
