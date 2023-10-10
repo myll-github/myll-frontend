@@ -12,6 +12,8 @@ export interface InitHeaders {
 
 export const getCookieHeader = (context: any = undefined) => {
   const cookies = nookies.get(context)
+  console.log('cookie')
+  console.log(cookies)
   const token = cookies.accessToken || ''
 
   const header = {
