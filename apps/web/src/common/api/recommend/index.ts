@@ -5,6 +5,8 @@ import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   console.log(headers)
+  console.log('-----')
+  console.log(getCookieHeader())
   try {
     const data = await authAPI.get(`/random-tour-list`, { headers })
 
