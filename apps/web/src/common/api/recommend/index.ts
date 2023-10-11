@@ -1,18 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { getCookie } from 'cookies-next'
-import { GetServerSidePropsContext } from 'next'
 
 import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
-export const getFavoritePlace = async (context?: GetServerSidePropsContext) => {
-  const { req, res } = context
-  const cookies = getCookie('accessToken', { req, res })
-  console.log('cookies')
-  console.log(cookies)
-  console.log('-----')
-  console.log(console.log(context.req.headers.cookie))
+export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
+  console.log(headers)
   try {
-    const data = await authAPI.get(`/random-tour-list`, { headers: { Authorization: cookies } })
+    const data = await authAPI.get(`/random-tour-list`, { headers })
 
     return data.data.map((ele, id) => {
       return {
@@ -30,12 +24,15 @@ export const getFavoritePlace = async (context?: GetServerSidePropsContext) => {
 }
 
 export const FavoritePlaceQueryKey = () => ['favoritePlace']
-export const FavoritePlaceQueryFn = (context?: GetServerSidePropsContext) => () => getFavoritePlace(context)
+export const FavoritePlaceQueryFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getFavoritePlace({ initHeaders })
 
 export const useFavoritePlaceQuery = () => {
   return useQuery({
     queryKey: FavoritePlaceQueryKey(),
-    queryFn: FavoritePlaceQueryFn(),
+    queryFn: FavoritePlaceQueryFn({}),
     staleTime: Infinity,
     cacheTime: Infinity,
     refetchOnMount: true,
