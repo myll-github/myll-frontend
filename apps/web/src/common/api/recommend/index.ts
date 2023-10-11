@@ -6,7 +6,8 @@ export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   console.log(headers)
   try {
-    const data = await authAPI.post(`/random-tour-list`, undefined, { headers })
+    const data = await authAPI.get(`/random-tour-list`, { headers })
+
     return data.data.map((ele, id) => {
       return {
         id: ele.contentid,
