@@ -32,12 +32,12 @@ const getComponentsFromNode = (node) => {
 
 const formatIconsSVG = (svg) =>
   svg
-    .replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
     .replace('fill-rule', 'fillRule')
     .replace('clip-rule', 'clipRule')
     .replace('clip-path', 'clipPath')
+    .replace(/xlink:href/g, 'xlinkHref')
 
-const formatName = (name) => name?.toUpperCase().replace(/-/g, '_') // replaces '/' by '_'
+const formatName = (name) => name?.toUpperCase().replace(/-/g, '_').replace(/ /g, '_')  // replaces '/' by '_'
 
 const hash = (path) => path.replace(/^.*\/img\//g, '').replace(/\//g, '_')
 
