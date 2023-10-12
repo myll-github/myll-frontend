@@ -34,7 +34,10 @@ export const Login = (props: LoginProps) => {
 
   const handleEmailLogin = async () => {
     try {
-      await UserLogin(email, password)
+      const response = await UserLogin(email, password)
+      nookies.set(undefined, 'accessToken', response.data.accessToken)
+      nookies.set(undefined, 'refreshToken', response.data.refreshToken)
+      nookies.set(undefined, 'userEmail', email)
       router.replace('/home')
     } catch (error) {
       setOpenAlert({ isVisible: true, type: 'error', message: error.message })

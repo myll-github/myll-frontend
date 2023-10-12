@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import nookies from 'nookies'
 
-export const ROOT_URL = 'https://myll-backend.com'
+export const ROOT_URL = process.env.NEXT_PUBLIC_API_URL
 
 export interface InitHeaders {
   initHeaders?: {
@@ -13,7 +13,6 @@ export interface InitHeaders {
 export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
   const cookies = nookies.get(context)
   console.log('cookies')
-  console.log(context.req.headers.cookie)
   const token = cookies.accessToken || ''
   const header = {
     Authorization: token || undefined,
