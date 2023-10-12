@@ -13,7 +13,7 @@ export interface InitHeaders {
 export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
   const cookies = nookies.get(context)
   console.log('cookies')
-  console.log(context.req.headers.cookie)
+
   const token = cookies.accessToken || ''
   const header = {
     Authorization: token || undefined,

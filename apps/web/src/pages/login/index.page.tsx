@@ -43,8 +43,8 @@ export const Login = (props: LoginProps) => {
 
   return (
     <DefaultLayout>
-      <div className="w-full h-screen flex flex-col pl-30pxr pr-30pxr">
-        <div className="HEADER-H1 break-keep text-center mb-30pxr">
+      <div className="flex flex-col w-full h-screen pl-30pxr pr-30pxr">
+        <div className="text-center HEADER-H1 break-keep mb-30pxr">
           마일 여행자이시라면 <span className="text-PRIMARY_BLUE">로그인</span> 해주세요
         </div>
 
@@ -67,7 +67,7 @@ export const Login = (props: LoginProps) => {
           <Button variant="large" color="primary" type="button" onClick={handleEmailLogin}>
             로그인
           </Button>
-          <div className="w-full flex justify-center items-center h-30pxr">
+          <div className="flex items-center justify-center w-full h-30pxr">
             <Button color="text" variant="medium" type="button">
               이메일 찾기
             </Button>
@@ -78,9 +78,9 @@ export const Login = (props: LoginProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10pxr mt-auto mb-0 INPUT-LABEL2 text-left text-GRAY_70">
+        <div className="flex flex-col mt-auto mb-0 text-left gap-10pxr INPUT-LABEL2 text-GRAY_70">
           SNS 계정 회원가입
-          <div className="flex w-full justify-center cursor-pointer">
+          <div className="flex justify-center w-full cursor-pointer">
             <Link
               href={
                 `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
