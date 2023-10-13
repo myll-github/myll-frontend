@@ -1,5 +1,5 @@
 import { AppBar } from 'myll-ui'
-import { ICON_CHAT, ICON_NOTIFICATION } from 'shared'
+import { ICON_CHAT, ICON_NOTIFICATIONS1 } from 'shared'
 
 import useBookPageStore from '@/stores/useBookPageStore'
 
@@ -20,7 +20,7 @@ const AddPlanHeader = () => {
           </AppBar.MiddleSection>
           <AppBar.RightSection>
             <span className="flex h-full gap-10pxr items-center">
-              <ICON_NOTIFICATION />
+              <ICON_NOTIFICATIONS1 />
               <ICON_CHAT />
             </span>
           </AppBar.RightSection>
