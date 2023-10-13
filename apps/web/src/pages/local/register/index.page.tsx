@@ -20,17 +20,10 @@ export const Register = () => {
     handleRegisterDescription,
     handleRegisterLocation,
     handleRegisterFileList,
-    isThisTagSelected,
-    resetState,
+
     handleSubmit,
   } = useLocalRegister()
   const router = useRouter()
-
-  useEffect(() => {
-    return () => {
-      resetState()
-    }
-  }, [])
 
   return (
     <>
