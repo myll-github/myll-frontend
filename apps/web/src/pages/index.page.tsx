@@ -15,9 +15,9 @@ const Page = (props: PageProps) => {
   useEffect(() => {
     const { token } = props
     if (!token.accessToken && !token.refreshToken) {
-      router.replace('/home')
-    } else {
       router.replace('/login')
+    } else {
+      router.replace('/home')
     }
   }, [])
   return null
