@@ -32,25 +32,39 @@ const getComponentsFromNode = (node) => {
 
 const formatIconsSVG = (svg) =>
   svg
-    .replace(/fill="(?:#[a-fA-F0-9]{6}|none)"/gm, 'fill="currentColor"')
     .replace('fill-rule', 'fillRule')
     .replace('clip-rule', 'clipRule')
     .replace('clip-path', 'clipPath')
+    .replace(/xlink:href/g, 'xlinkHref')
+    .replace(/xmlns:xlink/g, 'xmlnsXlink')
 
-const formatName = (name) => name?.toUpperCase().replace(/-/g, '_') // replaces '/' by '_'
+const formatName = (name) => name?.toUpperCase().replace(/-/g, '_').replace(/ /g, '_') // replaces '/' by '_'
 
 const hash = (path) => path.replace(/^.*\/img\//g, '').replace(/\//g, '_')
 
+let fileIndex = 0
+
 const generateFiles = (ele) => {
   if (!ele) return ''
-
   const { name, fileName, svg } = ele
+
+  fileIndex += 1
+
   const component = `
   import * as React from "react";
 
   const ${name} = (props: React.SVGProps<SVGSVGElement>) => {
-    return (${svg.replace(/<svg /, '<svg {...props} ')});
-  }
+    return (${svg
+      .replace(/<svg /, '<svg {...props} ')
+      .replace(/url\(#pattern(\d+)\)/g, function (match, p1) {
+        return `url(#pattern${fileIndex})`
+      })
+      .replace(/pattern id="pattern\d+"/g, function (match, p1) {
+        return `pattern id="pattern${fileIndex}"`
+      })}
+      )
+}; 
+
 
   export default ${name};
   `
