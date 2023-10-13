@@ -16,7 +16,7 @@ interface updateDataType {
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  console.log(headers)
+
   const data = await authAPI(`/local-tour-list`, { headers })
 
   return data.data.map((ele, index) => {

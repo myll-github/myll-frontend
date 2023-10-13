@@ -1,17 +1,23 @@
 import { MenuList, Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
-import { useRandomTourListQuery } from '@/common/api/home/localRecommend'
+import { useRandomTourListQuery, useRecommendedTourListQuery } from '@/common/api/home/localRecommend'
+
+import { MYLLRECOMMEND_KEY } from '../constants'
 
 const MyllRecommendSection = () => {
   const { data: data1, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle1 } = useRandomTourListQuery({
     contentTypeId: 'all',
-    key: 1,
+    key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE,
     count: 6,
   })
-  const { data: data2, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } = useRandomTourListQuery({
+
+  const { data: recommendedData, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle2 } =
+    useRecommendedTourListQuery({ key: MYLLRECOMMEND_KEY.USER_RECOMMENDED })
+
+  const { data: data3, handleOptimisticRecommendToggle: handleOptimisticRecommendToggle3 } = useRandomTourListQuery({
     contentTypeId: 'all',
-    key: 2,
+    key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED,
     count: 6,
   })
 
@@ -25,8 +31,22 @@ const MyllRecommendSection = () => {
         tabBarGutter={20}
         size="small"
         className="home-myllrecommend mt-24pxr"
-        defaultActiveKey="1"
+        defaultActiveKey={MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE}
         items={[
+          {
+            children: (
+              <MenuList itemLayout="vertical" onChange={() => {}} data={data3 as ItemType[]}>
+                <MenuList.LargeMenuItem
+                  onRecommendButtonClicked={(id) => {
+                    handleOptimisticRecommendToggle3({ id })
+                  }}
+                />
+              </MenuList>
+            ),
+            key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED,
+            label: '마일이 추천해요',
+          },
+
           {
             children: (
               <MenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
@@ -37,21 +57,12 @@ const MyllRecommendSection = () => {
                 />
               </MenuList>
             ),
-            key: '1',
-            label: '부산 인기장소',
+            key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE,
+            label: '금강산도 식후경',
           },
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={[]}>
-                <MenuList.LargeMenuItem onRecommendButtonClicked={() => {}} />
-              </MenuList>
-            ),
-            key: '2',
-            label: '찜한곳',
-          },
-          {
-            children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={data2 as ItemType[]}>
+              <MenuList itemLayout="vertical" onChange={() => {}} data={recommendedData}>
                 <MenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
                     handleOptimisticRecommendToggle2({ id })
@@ -59,8 +70,8 @@ const MyllRecommendSection = () => {
                 />
               </MenuList>
             ),
-            key: '3',
-            label: '마일이 추천해요',
+            key: MYLLRECOMMEND_KEY.USER_RECOMMENDED,
+            label: '찜한곳',
           },
         ]}
         onChange={() => {}}
