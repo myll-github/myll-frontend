@@ -16,7 +16,8 @@
     "lint": "eslint \"**/*.ts*\"",
     "test": "jest --passWithNoTests",
     "generate:component": "turbo gen react-component",
-    "icon": "node ./src/icons/generator.mjs"
+    "icon": "node ./src/icons/generator.mjs",
+    "convert": "node ./src/icons/profiles/generator.mjs"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.21.0",

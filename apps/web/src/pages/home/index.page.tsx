@@ -1,15 +1,19 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Alert, AppBar, Button, Tab } from 'myll-ui'
 
 import { getCookieHeader } from '@/common/api'
-import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
+import {
+  randomTourListQueryFn,
+  randomTourListQueryKey,
+  recommendedTourListQueryFn,
+  recommendedTourListQueryKey,
+} from '@/common/api/home/localRecommend'
 import {
   getRandomLocalTourListFn,
   getRandomLocalTourListQueryKey,
 } from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { HOME_LOCALRECOMMANDSECTION_MAP, HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
 
+import { MYLLRECOMMEND_KEY } from './constants'
 import AnotherUserPlanSection from './section/AnotherUserPlanSection'
 import HomeHeader from './section/HomeHeader'
 import LocalRecommendSection from './section/LocalRecommendSection'
@@ -39,13 +43,21 @@ export const getServerSideProps = async (context) => {
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
+
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
+      queryKey: recommendedTourListQueryKey({ key: MYLLRECOMMEND_KEY.USER_RECOMMENDED }),
+      queryFn: recommendedTourListQueryFn({ initHeaders }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
