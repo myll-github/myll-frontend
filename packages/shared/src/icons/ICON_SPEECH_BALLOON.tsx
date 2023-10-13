@@ -9,11 +9,11 @@ const ICON_SPEECH_BALLOON = (props: React.SVGProps<SVGSVGElement>) => {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="20" height="20" fill="url(#pattern0)" />
+      <rect width="20" height="20" fill="url(#pattern54)" />
       <defs>
-        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <pattern id="pattern54" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use xlinkHref="#image0_2061_98882" transform="scale(0.00625)" />
         </pattern>
         <image
