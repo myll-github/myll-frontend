@@ -43,6 +43,8 @@ export interface MenuListProps {
 export interface MenuItemProps {
   item?: any
   isSelectedButtonNeeded?: boolean
+
+  onClick?: (item: any) => void
 }
 
 export interface MediumMenuItemProps extends MenuItemProps {

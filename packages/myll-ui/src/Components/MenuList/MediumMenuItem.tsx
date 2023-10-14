@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button as AntdButton } from 'antd'
+import { useRouter } from 'next/router'
 import { ICON_HEART_AC, ICON_HEART_IN, noop, OnToggleStatusType, useCompound } from 'shared'
 
 import CustomImage from '../Image'
