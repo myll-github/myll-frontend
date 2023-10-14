@@ -3,7 +3,7 @@ import { IconLabelContainer } from 'web'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof IconLabelContainer> = {
-  title: 'Example/IconLabelContainer',
+  title: 'Example/IconLabel/Container',
   component: IconLabelContainer,
   argTypes: {},
   args: { label: 'CAMERA' },
