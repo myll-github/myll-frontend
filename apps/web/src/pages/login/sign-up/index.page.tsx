@@ -90,84 +90,102 @@ export const SignUp = () => {
 
   return (
     <DefaultLayout>
-      <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr">
-        <div className="HEADER-H1 break-keep text-center mb-30pxr">
-          초보여행자님! <span className="text-PRIMARY_BLUE">회원가입</span>을 진행해주세요
+      <div className="w-full h-full flex flex-col justify-center pl-30pxr pr-30pxr pt-80pxr">
+        <div className="HEADER-H1 flex flex-col break-keep text-left mb-50pxr">
+          <div>초보여행자님!</div>
+          <div>
+            <span className="text-PRIMARY_BLUE">회원가입</span>을 진행해주세요
+          </div>
         </div>
 
         <div className="w-full flex flex-col gap-20pxr">
-          <Input
-            label="사용자 이름"
-            size="large"
-            value={name}
-            placeholder="한/영 15자 이내"
-            onChange={(e) => {
-              if (e.target.value.length > 15) {
-                setNameErrorMessage('한글, 영문 대소문자 15자 이내로 입력해주세요')
-              } else {
-                setNameErrorMessage('')
-              }
-
-              setName(e.target.value)
-            }}
-            errorMessage={nameErrorMessage}
-          />
-          <Input
-            label="이메일"
-            size="large"
-            value={email}
-            placeholder="이메일을 입력해주세요"
-            inputMode="email"
-            onChange={(e) => setEmail(e.target.value)}
-            errorMessage={emailErrorMessage}
-            addonAfter={
-              <Button type="button" variant="small" color="text" onClick={handleValidateEmail}>
-                인증
-              </Button>
-            }
-          />
-          {openValidation && (
+          <div className="w-full h-92pxr">
             <Input
+              label="사용자 이름"
               size="large"
-              placeholder="인증번호"
-              value={emailCode}
-              disabled={isEmailValidated}
+              value={name}
+              placeholder="한/영 15자 이내"
               onChange={(e) => {
-                if (e.target.value.length <= 6) setEmailCode(e.target.value)
+                if (e.target.value.length > 15) {
+                  setNameErrorMessage('한글, 영문 대소문자 15자 이내로 입력해주세요')
+                } else {
+                  setNameErrorMessage('')
+                }
+
+                setName(e.target.value)
               }}
-              errorMessage={validationErrorMessage}
-              addonBefore={<div className="INPUT-LABEL2">인증코드</div>}
+              errorMessage={nameErrorMessage}
+            />
+          </div>
+          <div className="w-full h-92pxr">
+            <Input
+              label="이메일"
+              size="large"
+              value={email}
+              disabled={isEmailValidated}
+              placeholder="이메일을 입력해주세요"
+              inputMode="email"
+              onChange={(e) => setEmail(e.target.value)}
+              errorMessage={emailErrorMessage}
               addonAfter={
                 <Button
                   type="button"
                   variant="small"
                   color="text"
                   disabled={isEmailValidated}
-                  onClick={handleResendEmail}
+                  onClick={handleValidateEmail}
                 >
-                  재전송
+                  인증
                 </Button>
               }
             />
-          )}
-          <Input
-            label="비밀번호"
-            size="large"
-            placeholder="8자 이상 비밀번호"
-            inputType="password"
-            value={password}
-            errorMessage={passwordErrorMessage}
-            onChange={(e) => {
-              if (e.target.value.length < 8) setPasswordErrorMessage('8글자 이상 입력하세요.')
-              else setPasswordErrorMessage('')
-              setPassword(e.target.value)
-            }}
-          />
+          </div>
+          <div className="w-full h-92pxr">
+            {openValidation && (
+              <Input
+                size="large"
+                placeholder="인증번호"
+                value={emailCode}
+                disabled={isEmailValidated}
+                onChange={(e) => {
+                  if (e.target.value.length <= 6) setEmailCode(e.target.value)
+                }}
+                errorMessage={validationErrorMessage}
+                addonBefore={<div className="INPUT-LABEL2">인증코드</div>}
+                addonAfter={
+                  <Button
+                    type="button"
+                    variant="small"
+                    color="text"
+                    disabled={isEmailValidated}
+                    onClick={handleResendEmail}
+                  >
+                    재전송
+                  </Button>
+                }
+              />
+            )}
+          </div>
+          <div className="w-full h-92pxr">
+            <Input
+              label="비밀번호"
+              size="large"
+              placeholder="8자 이상 비밀번호"
+              inputType="password"
+              value={password}
+              errorMessage={passwordErrorMessage}
+              onChange={(e) => {
+                if (e.target.value.length < 8) setPasswordErrorMessage('8글자 이상 입력하세요.')
+                else setPasswordErrorMessage('')
+                setPassword(e.target.value)
+              }}
+            />
+          </div>
         </div>
-        <div className="flex flex-col mt-auto mb-60pxr">
+        <div className="flex flex-col mt-74pxr">
           <Button
             type="button"
-            variant="medium"
+            variant="block"
             color="primary"
             disabled={
               Boolean(
@@ -175,7 +193,7 @@ export const SignUp = () => {
                   emailErrorMessage.length ||
                   validationErrorMessage.length ||
                   passwordErrorMessage.length,
-              ) || isEmailValidated
+              ) || !isEmailValidated
             }
             onClick={handleClickSignUp}
           >
