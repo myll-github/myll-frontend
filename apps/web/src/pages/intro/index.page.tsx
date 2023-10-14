@@ -1,4 +1,5 @@
 import { Button, Carousel, CustomImage } from 'myll-ui'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
@@ -65,9 +66,11 @@ export const Intro = () => {
       </Carousel>
       {isLastIndex && (
         <div className="flex flex-row justify-center w-full bottom-0pxr mb-40pxr mt-20pxr">
-          <Button color="primary" onClick={() => {}} type="button" variant="block">
-            홈으로 진입하기
-          </Button>
+          <Link href="/home">
+            <Button color="primary" type="button" variant="block">
+              홈으로 진입하기
+            </Button>
+          </Link>
         </div>
       )}
     </DefaultLayout>
