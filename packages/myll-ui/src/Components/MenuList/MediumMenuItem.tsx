@@ -64,6 +64,7 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onClick, onRecommendButt
 
 MediumMenuItem.defaultProps = {
   isSelectedButtonNeeded: false,
+  onClick: undefined,
 }
 
 export default MediumMenuItem
