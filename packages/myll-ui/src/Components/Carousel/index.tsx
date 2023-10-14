@@ -2,26 +2,18 @@
 import { Carousel as AntdCarousel } from 'antd'
 import { Children, Component, createRef, CSSProperties, ReactNode } from 'react'
 
-const defaultContentStyle: CSSProperties = {
-  margin: 0,
-  width: '100%',
-  height: '460px',
-
-  lineHeight: '160px',
-  textAlign: 'center',
-  // background: 'inherit',
-  background: 'black',
-}
-
 interface CarouselProps {
   children: ReactNode[]
   contentStyle: CSSProperties
+
+  onChange: (currentNumber: number) => void
 }
 
 export default class Carousel extends Component<CarouselProps> {
   carousel: any
   images: ReactNode[]
   contentStyle: CSSProperties
+  onChange: (currentNumber: number) => void
 
   constructor(props: CarouselProps) {
     super(props)
@@ -30,7 +22,8 @@ export default class Carousel extends Component<CarouselProps> {
     this.carousel = createRef()
 
     this.images = props.children
-    this.contentStyle = props.contentStyle ?? defaultContentStyle
+    this.contentStyle = props.contentStyle
+    this.onChange = props.onChange
   }
   next() {
     this.carousel.next()
@@ -50,11 +43,12 @@ export default class Carousel extends Component<CarouselProps> {
     return (
       <div>
         <AntdCarousel
-          style={{ ...defaultContentStyle, ...this.contentStyle }}
+          style={{ ...this.contentStyle }}
           ref={(node) => {
             this.carousel = node
             return this.carousel
           }}
+          afterChange={this.onChange}
           swipeToSlide
           draggable
           {...props}
