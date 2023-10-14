@@ -3,9 +3,9 @@ import { Alert, Button, Input } from 'myll-ui'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
-import { SendEmail } from '@/common/api/send-email/SendEmail'
-import { UserSignUp } from '@/common/api/signup/UserSignUp'
-import { Verify } from '@/common/api/verify/Verify'
+import { SendEmail } from '@/common/api/user/send-email/SendEmail'
+import { UserSignUp } from '@/common/api/user/signup/UserSignUp'
+import { Verify } from '@/common/api/user/verify/Verify'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 // @TODO debounce, useCallback 적용 및 text state 관리 로직 추가

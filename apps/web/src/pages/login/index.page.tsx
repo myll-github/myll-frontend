@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import nookies from 'nookies'
 import { useEffect, useState } from 'react'
 
-import { UserLogin } from '@/common/api/user/UserLogin'
+import { UserLogin } from '@/common/api/user/login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 import { LoginToken } from '@/common/interfaces'
 
