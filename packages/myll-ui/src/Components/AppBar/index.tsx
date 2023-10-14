@@ -32,7 +32,9 @@ LeftSection.defaultProps = {
 
 const MiddleSection = ({ className, children }: SectionProps) => {
   return (
-    <div className={`absolute flex items-center justify-center  left-1/2 transform -translate-x-1/2 ${className}`}>
+    <div
+      className={`SUBTITLE-T3 absolute flex items-center justify-center  left-1/2 transform -translate-x-1/2 ${className}`}
+    >
       {children}
     </div>
   )
