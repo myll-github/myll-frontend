@@ -7,7 +7,7 @@ const PlanHeader = () => (
       <AppBar.LeftSection>
         <AppBar.FallbackButton />
       </AppBar.LeftSection>
-      <AppBar.MiddleSection>Book</AppBar.MiddleSection>
+      <AppBar.MiddleSection>BOOK</AppBar.MiddleSection>
       <AppBar.RightSection>
         <span className="flex h-full gap-10pxr items-center">
           <ICON_NOTIFICATIONS1 />

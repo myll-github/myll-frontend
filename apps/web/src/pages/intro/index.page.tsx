@@ -2,6 +2,7 @@ import { Button, Carousel, CustomImage } from 'myll-ui'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { UserUpdate } from '@/common/api/user/update/UserUpdate'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 
 const IMAGES = [
@@ -31,6 +32,11 @@ export const Intro = () => {
 
   const handleCarouselIndex = (currentNumber: number) => {
     setCarouselIndex(currentNumber)
+  }
+
+  // @TODO 예외처리 공통화
+  const handleRedirectHome = async () => {
+    await UserUpdate({ preferenceChoice: true })
   }
 
   useEffect(() => {
@@ -67,7 +73,7 @@ export const Intro = () => {
       {isLastIndex && (
         <div className="flex flex-row justify-center w-full bottom-0pxr mb-40pxr mt-20pxr">
           <Link href="/home" className="flex flex-row justify-center w-full ">
-            <Button color="primary" type="button" variant="block">
+            <Button color="primary" type="button" variant="block" onClick={handleRedirectHome}>
               홈으로 진입하기
             </Button>
           </Link>

@@ -1,7 +1,7 @@
 import nookies from 'nookies'
 import { useEffect, useState } from 'react'
 
-import { UserLogout } from '../api/user/UserLogout'
+import { UserLogout } from '../api/user/logout/UserLogout'
 import { LoginToken } from '../interfaces'
 
 const checkIsLogout = (token: LoginToken) => !token.accessToken && !token.refreshToken
