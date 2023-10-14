@@ -48,6 +48,6 @@ export interface MenuItemProps {
 }
 
 export interface MediumMenuItemProps extends MenuItemProps {
-  onClick: (item: any) => void
+  onClick?: (item: any) => void
   onRecommendButtonClicked: (id: number) => void
 }
