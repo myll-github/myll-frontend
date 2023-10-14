@@ -169,12 +169,14 @@ export const SignUp = () => {
             type="button"
             variant="medium"
             color="primary"
-            disabled={Boolean(
-              nameErrorMessage.length ||
-                emailErrorMessage.length ||
-                validationErrorMessage.length ||
-                passwordErrorMessage.length,
-            )}
+            disabled={
+              Boolean(
+                nameErrorMessage.length ||
+                  emailErrorMessage.length ||
+                  validationErrorMessage.length ||
+                  passwordErrorMessage.length,
+              ) || isEmailValidated
+            }
             onClick={handleClickSignUp}
           >
             회원가입
