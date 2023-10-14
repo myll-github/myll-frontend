@@ -3,6 +3,8 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
 import { updateLocal } from '@/common/api/local'
+import { IconLabelDefaultJSON } from '@/common/components/IconLabel'
+import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { DEFAULT_TAG_COLOR_MAP, TAG_COLOR_MAP_REVERSE } from '@/common/constants'
 
 interface State {
@@ -12,6 +14,8 @@ interface State {
   registerDescription: string
   registerFileList: unknown[]
   selectedTagName: string
+
+  labels: IconLabelContainerType
 }
 
 interface Actions {
@@ -19,6 +23,8 @@ interface Actions {
   handleRegisterLocation: (newLocation: string) => void
   handleRegisterDescription: (newDescription: string) => void
   handleRegisterFileList: (fileList: unknown[]) => void
+
+  handleLabels: (newLabels: IconLabelContainerType) => void
 
   handleTag: (tagName: string) => (e: SyntheticEvent) => void
   isThisTagSelected: (currentTagName: string) => boolean
@@ -33,6 +39,8 @@ const initState = {
   registerDescription: '',
   registerFileList: [],
   selectedTagName: DEFAULT_TAG_COLOR_MAP,
+
+  labels: IconLabelDefaultJSON,
 }
 
 const useLocalRegister = create(
@@ -56,6 +64,12 @@ const useLocalRegister = create(
     handleRegisterDescription: (newDescription) => {
       set((state) => {
         state.registerDescription = newDescription
+      })
+    },
+
+    handleLabels: (newLabels) => {
+      set((state) => {
+        state.labels = newLabels
       })
     },
 
@@ -86,6 +100,8 @@ const useLocalRegister = create(
         address: state.registerLocation,
         introduction: state.registerDescription,
         createAt: new Date().getTime(),
+
+        labels: { ...IconLabelDefaultJSON, ...state.labels },
       }
 
       await updateLocal(requestBody)

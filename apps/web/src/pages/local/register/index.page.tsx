@@ -22,7 +22,7 @@ export const Register = () => {
     handleRegisterDescription,
     handleRegisterLocation,
     handleRegisterFileList,
-
+    handleLabels,
     handleSubmit,
   } = useLocalRegister()
   const router = useRouter()
@@ -90,7 +90,11 @@ export const Register = () => {
           <section className="flex flex-col gap-10pxr px-20pxr ">
             <p className="INPUT-LABEL2">여행자님에게 알려주고 싶어요!</p>
 
-            <IconLabelContainer onChange={() => {}} />
+            <IconLabelContainer
+              onChange={(newLabels) => {
+                handleLabels(newLabels)
+              }}
+            />
           </section>
 
           <div className="flex flex-row justify-center m-30pxr">

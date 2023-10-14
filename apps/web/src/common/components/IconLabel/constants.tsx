@@ -21,6 +21,19 @@ export const IconComponentMap = {
   CITYSCAPE: <ICON_CITYSCAPE />,
   SHOPPING_BAGS: <ICON_SHOPPING_BAGS />,
 }
+
+export const IconLabelDefaultJSON = {
+  CAMERA: false,
+  HOUSE: false,
+  BACKPACK: false,
+  OWL: false,
+  WASTEBASKET: false,
+  SHUSHING_FACE: false,
+  BALANCE_SCALE: false,
+  CITYSCAPE: false,
+  SHOPPING_BAGS: false,
+}
+
 export const IconLabelMap = {
   CAMERA: '사진촬영 금지구역이 있어요',
   HOUSE: '주거지역이에요',

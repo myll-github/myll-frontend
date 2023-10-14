@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import IconLabel from './IconLabel'
-import { IconLabelContainerType, IconLabelProps, IconLabelType } from './type'
+import { IconLabelContainerType, IconLabelType } from './type'
 
 const iconArray = [
   'CAMERA',
