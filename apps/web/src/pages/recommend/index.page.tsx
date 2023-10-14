@@ -69,14 +69,14 @@ export const getServerSideProps = async (context) => {
       cacheTime: Infinity,
     }),
     queryClient.fetchQuery({
-      queryKey: TravelThemeQueryKey,
-      queryFn: TravelThemeQueryFn,
+      queryKey: TravelThemeQueryKey(),
+      queryFn: TravelThemeQueryFn({ initHeaders }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
     queryClient.fetchQuery({
-      queryKey: FavoriteActivityKey,
-      queryFn: FavoriteActivityFn,
+      queryKey: FavoriteActivityKey(),
+      queryFn: FavoriteActivityFn({ initHeaders }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),

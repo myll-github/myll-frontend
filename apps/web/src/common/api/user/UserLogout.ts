@@ -1,13 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import { authAPI } from '..'
 
 export const UserLogout = async () => {
-  const axiosConfig: AxiosRequestConfig = {
-    method: 'DELETE',
-    url: `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-    withCredentials: true,
-  }
-
-  const response = await axios(axiosConfig)
+  const response = await authAPI({ method: 'DELETE', url: `${process.env.NEXT_PUBLIC_API_URL}/logout` })
 
   return response
 }
