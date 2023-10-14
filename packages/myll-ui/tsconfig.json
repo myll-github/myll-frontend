@@ -1,6 +1,6 @@
 {
   "extends": "tsconfig/react-library.json",
-  "include": ["."],
+  "include": [".", "../../apps/web/src/common/components/IconLabel/IconLabel", "../../apps/web/src/common/components/IconLabel/index.tsx"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
