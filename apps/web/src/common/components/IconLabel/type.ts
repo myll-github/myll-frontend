@@ -7,4 +7,5 @@ export interface IconLabelProps {
   label: IconLabelType
   isSelected: boolean
   handleToggleLabel: (label) => void
+  disabled: boolean
 }

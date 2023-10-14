@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button as AntdButton } from 'antd'
+import { useRouter } from 'next/router'
 import { ICON_HEART_AC, ICON_HEART_IN, noop, OnToggleStatusType, useCompound } from 'shared'
 
 import CustomImage from '../Image'
@@ -9,7 +10,7 @@ import { ItemType, MediumMenuItemProps, MenuItemProps } from './type'
 
 const hasHeart = (item: ItemType) => item.isRecommend !== undefined
 
-const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked }: MediumMenuItemProps) => {
+const MediumMenuItem = ({ item, isSelectedButtonNeeded, onClick, onRecommendButtonClicked }: MediumMenuItemProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCompound()
 
   return (
@@ -22,10 +23,18 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked
         className="flex-shrink-0 rounded-md w-90pxr h-90pxr mr-14pxr bg-GRAY_30"
         src={item.img}
         alt={item.mainTitle}
+        onClick={onClick}
       />
 
       <div className="relative flex flex-col justify-center w-full h-full py-4pxr">
-        <span className="w-full SUBTITLE-T2 h-40pxr min-h-[40px] line-clamp-2 text-GRAY_80">{item.mainTitle}</span>
+        <button
+          type="button"
+          onClick={onClick}
+          disabled={!onClick}
+          className="text-left SUBTITLE-T2 h-40pxr min-h-[40px] line-clamp-2 text-GRAY_80"
+        >
+          <span>{item.mainTitle}</span>
+        </button>
         <span className="w-full SUBTITLE-T8 h-21pxr min-h-[21px] text-GRAY_70">{item.subTitle}</span>
 
         {hasHeart(item) && (
@@ -56,6 +65,7 @@ const MediumMenuItem = ({ item, isSelectedButtonNeeded, onRecommendButtonClicked
 
 MediumMenuItem.defaultProps = {
   isSelectedButtonNeeded: false,
+  onClick: undefined,
 }
 
 export default MediumMenuItem
