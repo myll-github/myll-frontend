@@ -66,7 +66,7 @@ export const Intro = () => {
       </Carousel>
       {isLastIndex && (
         <div className="flex flex-row justify-center w-full bottom-0pxr mb-40pxr mt-20pxr">
-          <Link href="/home">
+          <Link href="/home" className="flex flex-row justify-center w-full ">
             <Button color="primary" type="button" variant="block">
               홈으로 진입하기
             </Button>

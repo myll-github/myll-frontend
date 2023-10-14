@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
+import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { TAG_COLOR_MAP } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
@@ -13,17 +14,7 @@ interface updateDataType {
   introduction: string
   createAt: number
 
-  labels: {
-    BACKPACK: boolean
-    HOUSE: boolean
-    CAMERA: boolean
-    OWL: boolean
-    WASTEBASKET: boolean
-    SHUSHING_FACE: boolean
-    BALANCE_SCALE: boolean
-    CITYSCAPE: boolean
-    SHOPPING_BAGS: boolean
-  }
+  labels: IconLabelContainerType
 }
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
@@ -46,7 +37,7 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
   })
 }
 
-export const updateLocal = async (data: updateDataType) => {
+export const registerLocal = async (data: updateDataType) => {
   const headers = getCookieHeader()
   const formData = new FormData()
 

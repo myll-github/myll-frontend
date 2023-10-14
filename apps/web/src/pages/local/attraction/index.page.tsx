@@ -20,9 +20,15 @@ export const Home = () => {
         </main>
       </NavLayout>
 
-      <div className="fixed left-1/2 -translate-x-1/2 bottom-118pxr flex flex-row justify-end w-screen md:w-[768px] max-h-98px px-20pxr transform">
+      <div className="fixed left-1/2 pointer-events-none  -translate-x-1/2 bottom-118pxr flex flex-row justify-end w-screen md:w-[768px] max-h-98px px-20pxr transform">
         <Link href="/local/register">
-          <Button type="button" onClick={() => {}} variant="medium" icon={<ICON_EDIT />}>
+          <Button
+            className="pointer-events-auto"
+            type="button"
+            onClick={() => {}}
+            variant="medium"
+            icon={<ICON_EDIT />}
+          >
             글쓰기
           </Button>
         </Link>
