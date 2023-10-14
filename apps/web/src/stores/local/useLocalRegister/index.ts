@@ -2,7 +2,7 @@ import { SyntheticEvent } from 'react'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { updateLocal } from '@/common/api/local'
+import { registerLocal } from '@/common/api/local'
 import { IconLabelDefaultJSON } from '@/common/components/IconLabel'
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { DEFAULT_TAG_COLOR_MAP, TAG_COLOR_MAP_REVERSE } from '@/common/constants'
@@ -104,7 +104,7 @@ const useLocalRegister = create(
         labels: { ...IconLabelDefaultJSON, ...state.labels },
       }
 
-      await updateLocal(requestBody)
+      await registerLocal(requestBody)
     },
 
     resetState: () => {

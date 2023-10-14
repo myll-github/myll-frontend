@@ -37,15 +37,13 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
   })
 }
 
-export const updateLocal = async (data: updateDataType) => {
+export const registerLocal = async (data: updateDataType) => {
   const headers = getCookieHeader()
   const formData = new FormData()
 
   Object.entries(data).forEach(([key, value]) => {
     formData.append(key, value)
   })
-
-  console.log(data, formData)
 
   await authAPI.post(`/local-tour`, formData, {
     headers: {
