@@ -5,6 +5,7 @@ import Alert from './src/Components/Alert'
 import AppBar from './src/Components/AppBar'
 import Button from './src/Components/Button/Button'
 import CardContainer from './src/Components/CardContainer'
+import Carousel from './src/Components/Carousel'
 import Collapse from './src/Components/Collapse'
 import Dropdown from './src/Components/Dropdown'
 import InfiniteBanner from './src/Components/InfiniteBanner'
@@ -29,6 +30,7 @@ export {
   AppBar,
   Button,
   CardContainer,
+  Carousel,
   Collapse,
   DatePicker,
   Divider,
