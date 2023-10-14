@@ -48,7 +48,7 @@ const FavoriteActivity = () => {
           variant="block"
           color="primary"
           onClick={() => {
-            if (!isEmpty(FavoriteActivityMap) && !isEmpty(TravelThemeMap) && isEmpty(FavoritePlaceMap))
+            if (!isEmpty(FavoriteActivityMap) && !isEmpty(TravelThemeMap) && !isEmpty(FavoritePlaceMap))
               router.push('/intro')
           }}
           disabled={!tabIndexFlag}
