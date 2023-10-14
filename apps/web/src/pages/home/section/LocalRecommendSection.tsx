@@ -1,10 +1,18 @@
 import { Button, MenuList, Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
+import { useRouter } from 'next/router'
 
 import { useRandomLocalTourListQuery } from '@/common/api/home/localRecommend/localUserRegistered'
 
 const LocalRecommendSection = () => {
   const { data, refetch, handleOptimisticRecommendToggle } = useRandomLocalTourListQuery()
+  const router = useRouter()
+
+  const handleMenuListClick = (items: any) => {
+    const { contentTypeId, id } = items
+
+    router.push(`/details/${contentTypeId}/${id}`)
+  }
 
   return (
     <section className="my-10pxr">
@@ -34,6 +42,7 @@ const LocalRecommendSection = () => {
                 <MenuList
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 15).slice(0, 5) as ItemType[]}
+                  onClick={handleMenuListClick}
                 >
                   <MenuList.MediumMenuItem
                     onRecommendButtonClicked={(id) => {
@@ -52,6 +61,7 @@ const LocalRecommendSection = () => {
                 <MenuList
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 12).slice(0, 5) as ItemType[]}
+                  onClick={handleMenuListClick}
                 >
                   <MenuList.MediumMenuItem
                     onRecommendButtonClicked={(id) => {
@@ -70,6 +80,7 @@ const LocalRecommendSection = () => {
                 <MenuList
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 39).slice(0, 5) as ItemType[]}
+                  onClick={handleMenuListClick}
                 >
                   <MenuList.MediumMenuItem
                     onRecommendButtonClicked={(id) => {
@@ -89,6 +100,7 @@ const LocalRecommendSection = () => {
                 <MenuList
                   onChange={() => {}}
                   data={data.filter((ele) => ele.contentTypeId === 14).slice(0, 5) as ItemType[]}
+                  onClick={handleMenuListClick}
                 >
                   <MenuList.MediumMenuItem
                     onRecommendButtonClicked={(id) => {

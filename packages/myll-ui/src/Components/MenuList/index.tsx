@@ -9,7 +9,7 @@ import LargeMenuItem from './LargeMenuItem'
 import MediumMenuItem from './MediumMenuItem'
 import { ItemType, MenuListProps } from './type'
 
-const MenuList = ({ data, itemLayout, onChange, children }: MenuListProps) => {
+const MenuList = ({ data, itemLayout, onChange, onClick, children }: MenuListProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCheckList({ onChange: onChange! })
 
   return (
@@ -20,7 +20,17 @@ const MenuList = ({ data, itemLayout, onChange, children }: MenuListProps) => {
         }`}
       >
         {data.map((item: ItemType) => {
-          return <>{cloneElement(children, { key: item.id, item })}</>
+          return (
+            <>
+              {cloneElement(children, {
+                key: item.id,
+                item,
+                onClick: () => {
+                  onClick?.(item)
+                },
+              })}
+            </>
+          )
         })}
       </ul>
     </CompoundProvider>

@@ -1,4 +1,6 @@
 import { MenuList } from 'myll-ui'
+import { ItemType } from 'myll-ui/src/Components/MenuList/type'
+import { useRouter } from 'next/router'
 
 import { useLocalMenuListQuery } from '@/common/api/local'
 
@@ -14,6 +16,7 @@ const COLOR_MAP = Object.keys({
 })
 
 const LocalAttractionMenuList = () => {
+  const router = useRouter()
   const { data, handleOptimisticRecommendToggle } = useLocalMenuListQuery()
 
   return (

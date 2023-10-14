@@ -33,6 +33,8 @@ export interface MenuListProps {
   /** Callback function that is fired when an item's selection status changes */
   onChange?: OnToggleStatusType<ItemType>
 
+  onClick?: (item: ItemType) => void
+
   children: ReactElement
 
   itemLayout?: 'horizontal' | 'vertical'
