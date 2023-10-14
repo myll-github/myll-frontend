@@ -1,28 +1,36 @@
-import Icon from '@ant-design/icons'
+/* eslint-disable react/no-array-index-key */
 import { Carousel as AntdCarousel } from 'antd'
-import { Component, createRef, CSSProperties, ReactNode } from 'react'
+import { Children, Component, createRef, CSSProperties, ReactNode } from 'react'
 
-const contentStyle: CSSProperties = {
+const defaultContentStyle: CSSProperties = {
   margin: 0,
   width: '100%',
-  height: '160px',
-  color: '#e11313',
+  height: '460px',
+
   lineHeight: '160px',
   textAlign: 'center',
+  // background: 'inherit',
   background: 'black',
 }
 
-interface CaroselProps {
+interface CarouselProps {
   children: ReactNode[]
+  contentStyle: CSSProperties
 }
 
-export default class Carousel extends Component {
+export default class Carousel extends Component<CarouselProps> {
   carousel: any
-  constructor(props: CaroselProps) {
+  images: ReactNode[]
+  contentStyle: CSSProperties
+
+  constructor(props: CarouselProps) {
     super(props)
     this.next = this.next.bind(this)
     this.previous = this.previous.bind(this)
     this.carousel = createRef()
+
+    this.images = props.children
+    this.contentStyle = props.contentStyle ?? defaultContentStyle
   }
   next() {
     this.carousel.next()
@@ -33,7 +41,6 @@ export default class Carousel extends Component {
 
   render() {
     const props = {
-      dots: { className: 'bg-red' },
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -42,33 +49,22 @@ export default class Carousel extends Component {
 
     return (
       <div>
-        <button type="button" onClick={this.previous}>
-          {'<'}
-        </button>
         <AntdCarousel
-          style={contentStyle}
+          style={{ ...defaultContentStyle, ...this.contentStyle }}
           ref={(node) => {
             this.carousel = node
             return this.carousel
           }}
+          swipeToSlide
+          draggable
           {...props}
         >
-          <div>
-            <h3>111</h3>
-          </div>
-          <div>
-            <h3>222</h3>
-          </div>
-          <div>
-            <h3>333</h3>
-          </div>
-          <div>
-            <h3>444</h3>
-          </div>
+          {Children.map(this.images, (child, index) => (
+            <div className="w-full h-full" key={index}>
+              {child}
+            </div>
+          ))}
         </AntdCarousel>
-        <button type="button" onClick={this.next}>
-          {'>'}
-        </button>
       </div>
     )
   }
