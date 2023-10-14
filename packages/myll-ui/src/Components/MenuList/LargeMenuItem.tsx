@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button as AntdButton } from 'antd'
-import { ICON_HEART_AC, noop, OnToggleStatusType, useCompound } from 'shared'
+import { ICON_HEART_AC, ICON_HEART_IN, noop, OnToggleStatusType, useCompound } from 'shared'
 
 import CustomImage from '../Image'
 import Tag from '../Tag'
@@ -21,10 +21,10 @@ const LargeMenuItem = ({ item, onRecommendButtonClicked }: MediumMenuItemProps) 
   return (
     <li
       style={centerAlignStyle}
-      className="relative flex-shrink-0 flex flex-col items-center justify-center border-none w-130pxr h-267pxr"
+      className="relative flex flex-col items-center justify-center flex-shrink-0 border-none w-130pxr h-267pxr"
     >
       <CustomImage
-        className="rounded-md flex-shrink-0 w-139pxr h-130pxr bg-GRAY_30"
+        className="flex-shrink-0 rounded-md w-139pxr h-130pxr bg-GRAY_30"
         src={item.img}
         alt={item.mainTitle}
       />
@@ -39,7 +39,7 @@ const LargeMenuItem = ({ item, onRecommendButtonClicked }: MediumMenuItemProps) 
             <AntdButton
               className="flex items-center justify-center border-0 mr-1pxr -ml-8pxr"
               onClick={() => onRecommendButtonClicked(item.id)}
-              icon={<ICON_HEART_AC className={`text-${item.isRecommend ? 'PRIMARY_BLUE' : 'GRAY_50'}`} />}
+              icon={item.isRecommend ? <ICON_HEART_AC /> : <ICON_HEART_IN />}
             />
             {item.recommendCount}
           </div>

@@ -12,6 +12,18 @@ interface updateDataType {
   address: string
   introduction: string
   createAt: number
+
+  labels: {
+    BACKPACK: boolean
+    HOUSE: boolean
+    CAMERA: boolean
+    OWL: boolean
+    WASTEBASKET: boolean
+    SHUSHING_FACE: boolean
+    BALANCE_SCALE: boolean
+    CITYSCAPE: boolean
+    SHOPPING_BAGS: boolean
+  }
 }
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {

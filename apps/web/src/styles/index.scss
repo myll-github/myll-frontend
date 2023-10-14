@@ -46,3 +46,14 @@
 .ant-tabs-content-holder {
   display: flex;
 }
+
+.ant-carousel .slick-dots li{
+  background: var(--sub-blue-1, #1890FF);
+  opacity: 0.3;
+
+  &.slick-active button {
+    background: var(--sub-blue-1, #1890FF);
+    opacity: 1;
+  }
+
+}
