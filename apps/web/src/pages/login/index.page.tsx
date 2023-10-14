@@ -9,7 +9,10 @@ import { useEffect, useState } from 'react'
 
 import { UserLogin } from '@/common/api/user/login/UserLogin'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
+import { SIGNUP_REDIRECT_URL } from '@/common/constants'
 import { LoginToken } from '@/common/interfaces'
+
+import KaKaoStartButton from './kakao-btn/KaKaoStartButton'
 
 interface LoginProps {
   token: LoginToken
@@ -44,14 +47,15 @@ export const Login = (props: LoginProps) => {
       if (isSetPreference) router.replace('/home')
       else router.replace('/recommend')
     } catch (error) {
-      setOpenAlert({ isVisible: true, type: 'error', message: error.message })
+      const errorMessage = error.response?.data?.message || error.message
+      setOpenAlert({ isVisible: true, type: 'error', message: errorMessage })
     }
   }
 
   return (
     <>
       <DefaultLayout>
-        <main className="flex flex-col w-full h-screen pl-30pxr pr-30pxr">
+        <main className="flex flex-col w-full h-screen pl-30pxr pr-30pxr pt-80pxr">
           <div className="text-center HEADER-H1 break-keep mb-30pxr">
             마일 여행자이시라면 <span className="text-PRIMARY_BLUE">로그인</span> 해주세요
           </div>
@@ -89,13 +93,8 @@ export const Login = (props: LoginProps) => {
           <div className="flex flex-col mt-auto mb-0 text-left gap-10pxr INPUT-LABEL2 text-GRAY_70">
             SNS 계정 회원가입
             <div className="flex justify-center w-full cursor-pointer">
-              <Link
-                href={
-                  `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_CLIENT_KEY}&redirect_uri=${process.env.KAKAO_LOGIN_REDIRECT_URL}&response_type=code&` +
-                  `scope=profile_nickname age_range`
-                }
-              >
-                <Image width={265} height={40} src="/kakao_start.png" alt="no img" />
+              <Link className="w-full" href={SIGNUP_REDIRECT_URL}>
+                <KaKaoStartButton />
               </Link>
             </div>
             <Alert
