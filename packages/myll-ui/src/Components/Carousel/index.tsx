@@ -1,18 +1,16 @@
 /* eslint-disable react/no-array-index-key */
 import { Carousel as AntdCarousel } from 'antd'
-import { Children, Component, createRef, CSSProperties, ReactNode } from 'react'
+import { Children, Component, createRef, ReactNode } from 'react'
 
 interface CarouselProps {
   children: ReactNode[]
-  contentStyle: CSSProperties
-
   onChange: (currentNumber: number) => void
 }
 
 export default class Carousel extends Component<CarouselProps> {
   carousel: any
   images: ReactNode[]
-  contentStyle: CSSProperties
+
   onChange: (currentNumber: number) => void
 
   constructor(props: CarouselProps) {
@@ -22,7 +20,7 @@ export default class Carousel extends Component<CarouselProps> {
     this.carousel = createRef()
 
     this.images = props.children
-    this.contentStyle = props.contentStyle
+
     this.onChange = props.onChange
   }
   next() {
@@ -43,7 +41,6 @@ export default class Carousel extends Component<CarouselProps> {
     return (
       <div>
         <AntdCarousel
-          style={{ ...this.contentStyle }}
           ref={(node) => {
             this.carousel = node
             return this.carousel
