@@ -16,12 +16,13 @@ const iconArray = [
 ]
 
 interface IconLabelContainerProps {
+  className?: string
   initLabels?: IconLabelContainerType
 
   onChange: (newLabel: IconLabelContainerType) => void
 }
 
-const IconLabelContainer = ({ initLabels, onChange }: IconLabelContainerProps) => {
+const IconLabelContainer = ({ className, initLabels, onChange }: IconLabelContainerProps) => {
   const [labels, setLabels] = useState(initLabels)
 
   const handleToggleLabel = (label: IconLabelType) => {
@@ -38,10 +39,11 @@ const IconLabelContainer = ({ initLabels, onChange }: IconLabelContainerProps) =
   }, [labels, onChange])
 
   return (
-    <div className="flex flex-row flex-wrap gap-4pxr">
+    <div className={`flex flex-row flex-wrap gap-x-4pxr gap-y-10pxr ${className}`}>
       {iconArray.map((iconLabel) => {
         return (
           <IconLabel
+            key={iconLabel}
             label={iconLabel as IconLabelType}
             isSelected={!!labels[iconLabel]}
             handleToggleLabel={handleToggleLabel}
@@ -54,5 +56,6 @@ const IconLabelContainer = ({ initLabels, onChange }: IconLabelContainerProps) =
 
 IconLabelContainer.defaultProps = {
   initLabels: {},
+  className: '',
 }
 export default IconLabelContainer

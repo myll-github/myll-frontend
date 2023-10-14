@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { ICON_EDIT } from 'shared'
 
+import { IconLabelContainer } from '@/common/components/IconLabel'
+import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { TAG_STRING_TO_COLOR } from '@/common/constants'
 import useLocalRegister from '@/stores/local/useLocalRegister'
@@ -84,6 +86,13 @@ export const Register = () => {
               />
             </label>
           </section>
+
+          <section className="flex flex-col gap-10pxr px-20pxr ">
+            <p className="INPUT-LABEL2">여행자님에게 알려주고 싶어요!</p>
+
+            <IconLabelContainer onChange={() => {}} />
+          </section>
+
           <div className="flex flex-row justify-center m-30pxr">
             <Button
               color="primary"
