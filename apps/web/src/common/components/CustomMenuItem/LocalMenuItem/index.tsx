@@ -8,7 +8,7 @@ const LocalMenuList = (props) => {
   const handleClick = (item) => {
     const { contentTypeId, id } = item
 
-    router.push(`/details/${contentTypeId}/${id}`)
+    router.push(`/details/local/${contentTypeId}/${id}`)
   }
 
   return <MenuList onClick={handleClick} {...props} />

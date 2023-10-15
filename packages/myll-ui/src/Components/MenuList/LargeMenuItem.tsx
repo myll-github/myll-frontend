@@ -10,7 +10,7 @@ import { ItemType, MediumMenuItemProps, MenuItemProps } from './type'
 
 const hasHeart = (item: ItemType) => item.isRecommend !== undefined
 
-const LargeMenuItem = ({ item, onRecommendButtonClicked }: MediumMenuItemProps) => {
+const LargeMenuItem = ({ item, onClick, onRecommendButtonClicked }: MediumMenuItemProps) => {
   const { checkMap, ToggleCardStatusByClick } = useCompound()
   const centerAlignStyle = {
     display: 'flex',
@@ -27,10 +27,18 @@ const LargeMenuItem = ({ item, onRecommendButtonClicked }: MediumMenuItemProps) 
         className="flex-shrink-0 rounded-md w-139pxr h-130pxr bg-GRAY_30"
         src={item.img}
         alt={item.mainTitle}
+        onClick={onClick}
       />
 
       <div className="relative flex flex-col justify-center w-full gap-y-2 py-4pxr">
-        <span className="w-full SUBTITLE-T4 h-40pxr min-h-[40px] line-clamp-2 text-GRAY_80">{item.mainTitle}</span>
+        <button
+          type="button"
+          onClick={onClick}
+          disabled={!onClick}
+          className="SUBTITLE-T4 align-top flex text-left w-full h-40pxr min-h-[40px] line-clamp-2 text-GRAY_80"
+        >
+          {item.mainTitle}
+        </button>
         <Tag contenttype={item.contenttype} />
         <span className="w-full SUBTITLE-T8 h-21pxr min-h-[21px] text-GRAY_70">{item.subTitle}</span>
 
