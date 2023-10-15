@@ -38,7 +38,7 @@ const Tab = ({ defaultActiveKey, className, activeKey, items, size, onChange, ce
       onChange={onChange}
       renderTabBar={(props, DefaultTabBar) => {
         return (
-          <DefaultTabBar {...props} className="text-GRAY_60 px-20pxr">
+          <DefaultTabBar {...props} className="justify-center text-GRAY_60 px-20pxr">
             {(node) => {
               return (
                 <>
