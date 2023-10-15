@@ -1,4 +1,4 @@
-import { Tab } from 'myll-ui'
+import { Button, Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
 import { useRandomTourListQuery, useRecommendedTourListQuery } from '@/common/api/home/localRecommend'
@@ -26,6 +26,10 @@ const MyllRecommendSection = () => {
     <section className="my-10pxr">
       <div className="flex flex-row items-start justify-between w-full HEADER-H5 text-GRAY_100 px-20pxr">
         <h2>오늘은 어디로 갈까요?</h2>
+
+        <Button color="secondary" onClick={() => {}} type="button" variant="small">
+          다른곳도 볼래요
+        </Button>
       </div>
 
       <Tab
@@ -33,6 +37,7 @@ const MyllRecommendSection = () => {
         size="small"
         className="home-myllrecommend mt-24pxr"
         defaultActiveKey={MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE}
+        centered={false}
         items={[
           {
             children: (

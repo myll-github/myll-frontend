@@ -8,12 +8,6 @@ const PlanHeader = () => (
         <AppBar.FallbackButton />
       </AppBar.LeftSection>
       <AppBar.MiddleSection>BOOK</AppBar.MiddleSection>
-      <AppBar.RightSection>
-        <span className="flex h-full gap-10pxr items-center">
-          <ICON_NOTIFICATIONS1 />
-          <ICON_CHAT />
-        </span>
-      </AppBar.RightSection>
     </AppBar>
   </header>
 )
