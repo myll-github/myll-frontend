@@ -182,7 +182,7 @@ export const SignUp = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col mt-74pxr">
+        <div className="w-full flex flex-col mt-74pxr items-center">
           <Button
             type="button"
             variant="block"
