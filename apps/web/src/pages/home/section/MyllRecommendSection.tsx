@@ -1,7 +1,8 @@
-import { MenuList, Tab } from 'myll-ui'
+import { Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
 import { useRandomTourListQuery, useRecommendedTourListQuery } from '@/common/api/home/localRecommend'
+import TourMenuList from '@/common/components/CustomMenuItem/TourMenuItem'
 
 import { MYLLRECOMMEND_KEY } from '../constants'
 
@@ -35,13 +36,13 @@ const MyllRecommendSection = () => {
         items={[
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={data3 as ItemType[]}>
-                <MenuList.LargeMenuItem
+              <TourMenuList itemLayout="vertical" onChange={() => {}} data={data3 as ItemType[]}>
+                <TourMenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
                     handleOptimisticRecommendToggle3({ id })
                   }}
                 />
-              </MenuList>
+              </TourMenuList>
             ),
             key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED,
             label: '마일이 추천해요',
@@ -49,26 +50,26 @@ const MyllRecommendSection = () => {
 
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
-                <MenuList.LargeMenuItem
+              <TourMenuList itemLayout="vertical" onChange={() => {}} data={data1 as ItemType[]}>
+                <TourMenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
                     handleOptimisticRecommendToggle1({ id })
                   }}
                 />
-              </MenuList>
+              </TourMenuList>
             ),
             key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE,
             label: '금강산도 식후경',
           },
           {
             children: (
-              <MenuList itemLayout="vertical" onChange={() => {}} data={recommendedData}>
-                <MenuList.LargeMenuItem
+              <TourMenuList itemLayout="vertical" onChange={() => {}} data={recommendedData}>
+                <TourMenuList.LargeMenuItem
                   onRecommendButtonClicked={(id) => {
                     handleOptimisticRecommendToggle2({ id })
                   }}
                 />
-              </MenuList>
+              </TourMenuList>
             ),
             key: MYLLRECOMMEND_KEY.USER_RECOMMENDED,
             label: '찜한곳',

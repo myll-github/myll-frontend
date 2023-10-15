@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const ICON_PETS = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M4.5 11.4976C5.88071 11.4976 7 10.3783 7 8.99756C7 7.61685 5.88071 6.49756 4.5 6.49756C3.11929 6.49756 2 7.61685 2 8.99756C2 10.3783 3.11929 11.4976 4.5 11.4976Z"
         fill="black"

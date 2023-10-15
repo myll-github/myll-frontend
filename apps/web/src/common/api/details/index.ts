@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
+import { isEmpty } from 'lodash'
+import { JSONstartWith } from 'shared'
 
 import { useLocalMenuListQuery } from '@/common/api/local'
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
@@ -54,6 +56,59 @@ export const getLocalMenuById = async ({ contentTypeId, contentId, initHeaders }
       recommendCount: ele.recommendCount ?? 0,
     }
   })
+}
+
+/*!
+  공공 데이터엔 가라 데이터가 많은데
+  파싱하는 로직
+*/
+export const getTourDetailById = async ({ contentTypeId, contentId, initHeaders }: InitHeadersWithId) => {
+  const headers = initHeaders ?? getCookieHeader()
+
+  const datas = await Promise.all([
+    authAPI(
+      `/tour-detail`,
+
+      {
+        params: {
+          contentTypeId,
+          contentId,
+        },
+        headers,
+      },
+    ),
+    authAPI(
+      `/tour`,
+
+      {
+        params: {
+          contentTypeId,
+          contentId,
+        },
+        headers,
+      },
+    ),
+  ])
+
+  let ele = {} as any
+
+  ele = { ...datas[0].data[0], ...datas[1].data }
+
+  return {
+    id: ele.contentid,
+    img: ele.firstimage,
+    mainTitle: ele.title,
+    contentImage: [ele.firstimage, ele.firstimage2].filter((image) => !isEmpty(image)),
+    subTitle: ele.addr1,
+    contentTypeId: ele.contenttypeid,
+
+    address: ele.addr1 || ele.addr2,
+    parking: JSONstartWith('parking', ele, 'parkingfee'),
+    infocenter: JSONstartWith('infocenter', ele),
+    open: JSONstartWith('open', ele) || JSONstartWith('usetime', ele),
+    restDate: JSONstartWith('restDate', ele),
+    usetime: JSONstartWith('usetime', ele),
+  }
 }
 
 export const getLocalMenuQueryKey = ({ contentTypeId, contentId }) => ['localMenuList', contentTypeId, contentId]

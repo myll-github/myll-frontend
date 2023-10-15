@@ -12,9 +12,9 @@ import NavLayout from '@/common/components/Layout/NavLayout'
 import { HOME_LOCALRECOMMANDSECTION_MAP } from '@/common/constants'
 import HomeHeader from '@/pages/home/section/HomeHeader'
 
-import DetailHeader from './components/DetailHeader'
-import DisplayedTags from './components/DisplayedTags'
-import Separator from './components/Separator'
+import DetailHeader from '../../../components/DetailHeader'
+import DisplayedTags from '../../../components/DisplayedTags'
+import Separator from '../../../components/Separator'
 
 const detailData = {
   id: 5,

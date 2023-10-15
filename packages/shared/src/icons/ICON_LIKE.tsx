@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const ICON_LIKE = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg {...props} width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g opacity="0.65">
         <path
           fillRule="evenodd"
