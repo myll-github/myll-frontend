@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const ICON_MYLL_INACTIVE = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg {...props} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M15.0117 17.9751C19.7992 17.9751 24.8367 20.4626 24.8367 22.0126V24.6751H5.18672V22.0126C5.18672 20.4626 10.2242 17.9751 15.0117 17.9751ZM15.0117 16.4126C11.2617 16.4126 3.76172 18.3001 3.76172 22.0376V26.2501H26.2617V22.0376C26.2617 18.3001 18.7617 16.4126 15.0117 16.4126Z"
         fill="#848E9B"
