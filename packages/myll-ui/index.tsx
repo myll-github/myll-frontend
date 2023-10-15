@@ -1,4 +1,4 @@
-import { DatePicker, Divider } from 'antd'
+import { Avatar, DatePicker, Divider } from 'antd'
 import ConfigProvider from 'antd/es/config-provider'
 
 import Alert from './src/Components/Alert'
@@ -29,6 +29,7 @@ export {
   Alert,
   AntdConfigProvider,
   AppBar,
+  Avatar,
   Button,
   CardContainer,
   Carousel,
