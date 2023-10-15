@@ -36,7 +36,7 @@ authAPI.interceptors.response.use(
   async (error: AxiosError) => {
     if (!isServer() && error.response?.status === 401) {
       try {
-        await axios.post('/auth/token/refresh', undefined, {
+        await axios.post('/token/refresh', undefined, {
           baseURL: ROOT_URL,
           withCredentials: true,
         })
