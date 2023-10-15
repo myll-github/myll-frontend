@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 
-import { getCookieHeader } from '@/common/api'
+import { getCookieHeader, withAuth } from '@/common/api'
 import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
 import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import NavLayout from '@/common/components/Layout/NavLayout'
@@ -23,7 +23,7 @@ export const Local = () => {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = withAuth(async (context) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
 
@@ -39,6 +39,6 @@ export const getServerSideProps = async (context) => {
       dehydratedState: dehydrate(queryClient),
     },
   }
-}
+})
 
 export default Local
