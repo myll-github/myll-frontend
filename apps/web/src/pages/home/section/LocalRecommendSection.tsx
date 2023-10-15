@@ -27,6 +27,7 @@ const LocalRecommendSection = () => {
         size="small"
         tabBarGutter={20}
         className="w-full mt-24pxr"
+        centered={false}
         defaultActiveKey="15"
         items={[
           {

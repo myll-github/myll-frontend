@@ -11,19 +11,13 @@ const AddPlanHeader = () => {
         <AppBar.LeftSection>
           <AppBar.FallbackButton />
         </AppBar.LeftSection>
-        <div className="w-full h-36pxr flex items-center">
+        <div className="flex items-center w-full h-36pxr">
           <AppBar.MiddleSection>
-            <div className="h-full flex flex-col ml-20pxr">
+            <div className="flex flex-col h-full ml-20pxr">
               <span className="SUBTITLE-T5">{planTitle}</span>
               <span className="SUBTITLE-T8">{`${startDate} ~ ${endDate}`}</span>
             </div>
           </AppBar.MiddleSection>
-          <AppBar.RightSection>
-            <span className="flex h-full gap-10pxr items-center">
-              <ICON_NOTIFICATIONS1 />
-              <ICON_CHAT />
-            </span>
-          </AppBar.RightSection>
         </div>
       </AppBar>
     </header>
