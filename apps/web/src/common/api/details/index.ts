@@ -95,6 +95,7 @@ export const getTourDetailById = async ({ contentTypeId, contentId, initHeaders 
   ele = { ...datas[0].data[0], ...datas[1].data }
 
   return {
+    ...ele,
     id: ele.contentid,
     img: ele.firstimage,
     mainTitle: ele.title,
