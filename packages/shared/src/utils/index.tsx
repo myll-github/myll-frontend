@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 export const noop = () => {}
 
 export const shuffleArray = <T,>(array: T[]) => {
@@ -11,15 +12,17 @@ export const shuffleArray = <T,>(array: T[]) => {
   return newArr
 }
 
-export const JSONstartWith = (target: string, jsonObject: any) => {
+export const JSONstartWith = (target: string, jsonObject: any, notTarget = '') => {
   const ObjectEntries = Object.entries(jsonObject)
 
   for (let i = 0; i < ObjectEntries.length; i += 1) {
     const [key, value] = ObjectEntries[i]
 
-    console.log(key, value, target, key.startsWith(target))
+    if (value && key.startsWith(target)) {
+      if (notTarget !== '' && key.startsWith(notTarget)) {
+        continue
+      }
 
-    if (key.startsWith(target)) {
       return value
     }
   }

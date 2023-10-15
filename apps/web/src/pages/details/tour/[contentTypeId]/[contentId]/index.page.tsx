@@ -2,7 +2,16 @@ import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Button, Carousel, CustomImage, Tag } from 'myll-ui'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ICON_HEART_AC, ICON_HEART_IN, ICON_INFO, ICON_KAKAOMAP, ICON_SUITCASE } from 'shared'
+import {
+  ICON_HEART_AC,
+  ICON_HEART_IN,
+  ICON_INFO,
+  ICON_KAKAOMAP,
+  ICON_PHONE,
+  ICON_PLACE,
+  ICON_SUITCASE,
+  ICON_TIME,
+} from 'shared'
 
 import { authAPI, getCookieHeader } from '@/common/api'
 import { getTourDetailById } from '@/common/api/details'
@@ -18,27 +27,6 @@ import DetailHeader from '../../../components/DetailHeader'
 import DisplayedTags from '../../../components/DisplayedTags'
 import Separator from '../../../components/Separator'
 
-const detailData = {
-  id: 5,
-  userEmail: 'ycp998@naver.com',
-  title: 'test4',
-  contentTypeId: 12,
-
-  contentImage: ['/pictures/Illust_Intro3.svg', '/pictures/Illust_Intro2.png'],
-
-  labels: {
-    CAMERA: false,
-    HOUSE: false,
-    BACKPACK: true,
-    OWL: false,
-    WASTEBASKET: true,
-    SHUSHING_FACE: true,
-    BALANCE_SCALE: false,
-    CITYSCAPE: false,
-    SHOPPING_BAGS: true,
-  },
-}
-
 interface DetailsProps {
   contentTypeId: number
   contentId: number
@@ -47,8 +35,6 @@ interface DetailsProps {
 }
 
 export const Details = ({ contentTypeId, contentId, tourData }: DetailsProps) => {
-  console.log(tourData)
-
   return (
     <>
       <DetailHeader />
@@ -81,18 +67,55 @@ export const Details = ({ contentTypeId, contentId, tourData }: DetailsProps) =>
               </span>
             </div>
 
+            {tourData.address && (
+              <IconDiv>
+                <IconDiv.Header>
+                  <ICON_PLACE className="w-18pxr h-18pxr text-GRAY_60 opacity-30" fill="currentColor" />
+                  {tourData.address}
+                </IconDiv.Header>
+              </IconDiv>
+            )}
+
+            {tourData.infocenter && (
+              <IconDiv>
+                <IconDiv.Header>
+                  <ICON_PHONE className="w-18pxr h-18pxr text-GRAY_60 opacity-30" fill="currentColor" />
+                  {tourData.infocenter}
+                </IconDiv.Header>
+              </IconDiv>
+            )}
+
+            {tourData.open && (
+              <IconDiv>
+                <IconDiv.Header>
+                  <ICON_TIME className="w-18pxr h-18pxr text-GRAY_60 opacity-30" fill="currentColor" />
+                  영업일
+                </IconDiv.Header>
+
+                <IconDiv.Description>
+                  <div className="flex flex-col">
+                    {tourData.open.split('<br>').map((openDate) => (
+                      <>
+                        <span>{openDate}</span>
+                      </>
+                    ))}
+                  </div>
+                </IconDiv.Description>
+
+                {tourData.restdate && <IconDiv.Description>휴무일 : {tourData.restdate}</IconDiv.Description>}
+              </IconDiv>
+            )}
+
             {tourData.parking && (
               <IconDiv>
                 <IconDiv.Header>
-                  <ICON_INFO className="w-18pxr h-18pxr text-GRAY_60" fill="currentColor" />
+                  <ICON_INFO className="w-18pxr h-18pxr text-GRAY_60 opacity-30" fill="currentColor" />
                   주차 가능 정보
                 </IconDiv.Header>
 
                 <IconDiv.Description>{tourData.parking}</IconDiv.Description>
               </IconDiv>
             )}
-
-            {JSON.stringify(tourData)}
           </section>
 
           <div className="flex flex-col items-center justify-center p-20pxr gap-4pxr">
