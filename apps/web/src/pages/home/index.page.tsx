@@ -1,6 +1,9 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
+import nookies from 'nookies'
+import { useEffect } from 'react'
 
-import { getCookieHeader } from '@/common/api'
+import { getCookieHeader, withAuth } from '@/common/api'
 import {
   randomTourListQueryFn,
   randomTourListQueryKey,
@@ -12,6 +15,7 @@ import {
   getRandomLocalTourListQueryKey,
 } from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
+import useLogout from '@/common/hooks/useLogout'
 
 import { MYLLRECOMMEND_KEY } from './constants'
 import AnotherUserPlanSection from './section/AnotherUserPlanSection'
@@ -21,6 +25,11 @@ import MyllPlanSection from './section/MyllPlanSection'
 import MyllRecommendSection from './section/MyllRecommendSection'
 
 export const Home = () => {
+  const { isLogout } = useLogout(nookies.get())
+  const router = useRouter()
+  useEffect(() => {
+    if (isLogout) router.push('/login')
+  })
   return (
     <>
       <HomeHeader />
@@ -37,7 +46,7 @@ export const Home = () => {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = withAuth(async (context) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
 
@@ -74,6 +83,6 @@ export const getServerSideProps = async (context) => {
       dehydratedState: dehydrate(queryClient),
     },
   }
-}
+})
 
 export default Home
