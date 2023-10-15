@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
+import { isEmpty } from 'lodash'
+import { JSONstartWith } from 'shared'
 
 import { useLocalMenuListQuery } from '@/common/api/local'
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
@@ -54,6 +56,70 @@ export const getLocalMenuById = async ({ contentTypeId, contentId, initHeaders }
       recommendCount: ele.recommendCount ?? 0,
     }
   })
+}
+
+const exData = async () => {
+  return {
+    contentid: '2789460',
+    contenttypeid: '12',
+    heritage1: '0',
+    heritage2: '0',
+    heritage3: '0',
+    infocenter: '강서구청 문화체육과 051-970-4062',
+    opendate: '',
+    restdate: '없음',
+    expguide: '',
+    expagerange: '',
+    accomcount: '',
+    useseason: '',
+    usetime: '10:00 ~ 20:00',
+    parking: '있음',
+    chkbabycarriage: '없음',
+    chkpet: '가능',
+    chkcreditcard: '없음',
+  }
+}
+
+export const getTourDetailById = async ({ contentTypeId, contentId, initHeaders }: InitHeadersWithId) => {
+  const headers = initHeaders ?? getCookieHeader()
+
+  const datas = await Promise.all([
+    { data: await exData() },
+
+    authAPI(
+      `/tour`,
+
+      {
+        params: {
+          contentTypeId,
+          contentId,
+        },
+        headers,
+      },
+    ),
+  ])
+
+  let ele = {} as any
+
+  datas.forEach((data) => {
+    console.log('datat', data)
+
+    ele = { ...ele, ...data.data }
+  })
+
+  console.log(ele)
+
+  return {
+    ...ele,
+    id: ele.contentid,
+    img: ele.firstimage,
+    mainTitle: ele.title,
+    contentImage: [ele.firstimage, ele.firstimage2].filter((image) => !isEmpty(image)),
+    subTitle: ele.addr1,
+    contentTypeId: ele.contenttypeid,
+
+    parking: JSONstartWith('parking', ele),
+  }
 }
 
 export const getLocalMenuQueryKey = ({ contentTypeId, contentId }) => ['localMenuList', contentTypeId, contentId]

@@ -55,7 +55,7 @@ const generateFiles = (ele) => {
 
   const ${name} = (props: React.SVGProps<SVGSVGElement>) => {
     return (${svg
-      .replace(/<svg /, '<svg {...props} ')
+      .replace(/(<svg[^>]*>)/, '$1 {...props}')
       .replace(/url\(#pattern(\d+)\)/g, function (match, p1) {
         return `url(#pattern${fileIndex})`
       })

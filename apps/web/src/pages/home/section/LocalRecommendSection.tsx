@@ -2,7 +2,7 @@ import { Button, Tab } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 
 import { useRandomLocalTourListQuery } from '@/common/api/home/localRecommend/localUserRegistered'
-import LocalMenuList from '@/common/components/LocalMenuItem'
+import LocalMenuList from '@/common/components/CustomMenuItem/LocalMenuItem'
 
 const LocalRecommendSection = () => {
   const { data, refetch, handleOptimisticRecommendToggle } = useRandomLocalTourListQuery()

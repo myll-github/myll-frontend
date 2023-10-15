@@ -10,3 +10,19 @@ export const shuffleArray = <T,>(array: T[]) => {
 
   return newArr
 }
+
+export const JSONstartWith = (target: string, jsonObject: any) => {
+  const ObjectEntries = Object.entries(jsonObject)
+
+  for (let i = 0; i < ObjectEntries.length; i += 1) {
+    const [key, value] = ObjectEntries[i]
+
+    console.log(key, value, target, key.startsWith(target))
+
+    if (key.startsWith(target)) {
+      return value
+    }
+  }
+
+  return null
+}
