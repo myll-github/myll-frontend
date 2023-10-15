@@ -69,7 +69,7 @@ export const withAuth = (getServerSideProps: GetServerSideProps) => {
         const { res } = context
         try {
           // access token 재발급
-          await axios.post('/auth/token/refresh', undefined, {
+          await axios.post('/token/refresh', undefined, {
             baseURL: ROOT_URL,
             headers: { Cookie: context.req.headers.cookie },
             withCredentials: true,
