@@ -38,12 +38,12 @@ const Tab = ({ defaultActiveKey, className, activeKey, items, size, onChange, ce
       onChange={onChange}
       renderTabBar={(props, DefaultTabBar) => {
         return (
-          <DefaultTabBar {...props} className="justify-center text-GRAY_60 px-20pxr">
+          <DefaultTabBar {...props} className=" text-GRAY_60 px-20pxr">
             {(node) => {
               return (
                 <>
                   {cloneElement(node, {
-                    className: `${node.props.className} ${
+                    className: `${node.props.className} justify-center ${
                       size === 'large' ? 'sm:w-98pxr' : ''
                     } m-0 min-w-[40px] GNB_ACTIVE`,
                   })}
