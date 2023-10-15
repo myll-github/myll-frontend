@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { useLocalMenuListQuery } from '@/common/api/local'
-import LocalMenuList from '@/common/components/LocalMenuItem'
+import LocalMenuList from '@/common/components/CustomMenuItem/LocalMenuItem'
 
 const LocalAttractionMenuList = () => {
   const { data, handleOptimisticRecommendToggle } = useLocalMenuListQuery()
