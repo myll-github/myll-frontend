@@ -1,5 +1,5 @@
 import { Input as AntdInput, InputProps as AntdInputProps } from 'antd'
-import { FC, useEffect, useState } from 'react'
+import { FC, HTMLAttributes } from 'react'
 
 /**
  * 주요 AntdInput props
@@ -33,28 +33,23 @@ const Input: FC<InputProps> = (props) => {
   const { value, label, errorMessage, inputType = 'default', theme = 'default', onValidation, ...inputProps } = props
 
   return (
-    <div className="flex flex-col gap-[8px]">
+    <div className="w-full flex flex-col gap-[8px]">
       <div className="INPUT-LABEL2">{label}</div>
       {inputType === 'default' ? (
         <AntdInput
-          bordered={!(theme === 'bottom-border')}
+          style={theme === 'bottom-border' ? { borderRadius: 0, borderRight: 0, borderLeft: 0, borderTop: 0 } : {}}
+          className={`INPUT-FIELD ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${inputProps.className}`}
           status={errorMessage && errorMessage.length > 0 ? 'error' : undefined}
           value={value}
           {...inputProps}
         />
       ) : (
         <AntdInput.Password
-          bordered={!(theme === 'bottom-border')}
+          style={theme === 'bottom-border' ? { borderRadius: 0, borderRight: 0, borderLeft: 0, borderTop: 0 } : {}}
+          className={`INPUT-FIELD ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${inputProps.className}`}
           value={value}
           status={errorMessage && errorMessage.length > 0 ? 'error' : undefined}
           {...inputProps}
-        />
-      )}
-      {theme === 'bottom-border' && (
-        <hr
-          className={`${
-            errorMessage && errorMessage.length > 0 ? 'border-ERROR focus:border-ERROR' : 'border-GRAY_50'
-          }`}
         />
       )}
       <div className="min-h-24 flex items-center text-ERROR justify-start SUBTITLE-T8">
