@@ -11,6 +11,7 @@ import { IconLabelType } from '@/common/components/IconLabel/type'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { HOME_LOCALRECOMMANDSECTION_MAP } from '@/common/constants'
+import IconDiv from '@/pages/details/components/IconDiv'
 import HomeHeader from '@/pages/home/section/HomeHeader'
 
 import DetailHeader from '../../../components/DetailHeader'
@@ -73,16 +74,23 @@ export const Details = ({ contentTypeId, contentId, tourData }: DetailsProps) =>
 
           <Separator />
 
-          <section className="flex flex-col pb-20pxr gap-4pxr">
+          <section className="flex flex-col pb-20pxr gap-10pxr">
             <div className="flex flex-row items-center justify-between w-full h-64pxr">
               <span className="flex flex-row items-center w-full border-b gap-10pxr px-20pxr py-14pxr text-GRAY_100 SUBTITLE-T3">
                 <ICON_SUITCASE className="w-18pxr h-18pxr" /> 소개 정보
               </span>
             </div>
 
-            <div>
-              <ICON_INFO className="text-GRAY_60" fill="currentColor" />
-            </div>
+            {tourData.parking && (
+              <IconDiv>
+                <IconDiv.Header>
+                  <ICON_INFO className="w-18pxr h-18pxr text-GRAY_60" fill="currentColor" />
+                  주차 가능 정보
+                </IconDiv.Header>
+
+                <IconDiv.Description>{tourData.parking}</IconDiv.Description>
+              </IconDiv>
+            )}
 
             {JSON.stringify(tourData)}
           </section>
