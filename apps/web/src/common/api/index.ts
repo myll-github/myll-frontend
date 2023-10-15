@@ -12,7 +12,6 @@ export interface InitHeaders {
 
 export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
   const cookies = nookies.get(context)
-  console.log('cookies')
   const token = cookies.accessToken || ''
   const header = {
     Authorization: token || undefined,
@@ -29,6 +28,12 @@ export const authAPI = axios.create({
   withCredentials: true,
 })
 
+authAPI.interceptors.request.use((config) => {
+  if (!isServer()) config.headers.Authorization = nookies.get()?.accessToken
+
+  return config
+})
+
 authAPI.interceptors.response.use(
   (response) => {
     return response
@@ -36,10 +41,12 @@ authAPI.interceptors.response.use(
   async (error: AxiosError) => {
     if (!isServer() && error.response?.status === 401) {
       try {
-        await axios.post('/token/refresh', undefined, {
+        const data = await axios.post('/token/refresh', undefined, {
           baseURL: ROOT_URL,
           withCredentials: true,
         })
+
+        nookies.set(undefined, 'accessToken', data.data.accessToken, { maxAge: 1800 })
         const { response } = error
 
         // retry
@@ -49,6 +56,9 @@ authAPI.interceptors.response.use(
 
         return retryOriginalRequest
       } catch (e) {
+        nookies.destroy(undefined, 'accessToken')
+        nookies.destroy(undefined, 'refreshToken')
+        nookies.destroy(undefined, 'userEmail')
         window.location.href = '/login'
       }
     }
