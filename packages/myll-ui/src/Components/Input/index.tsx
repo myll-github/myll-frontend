@@ -38,7 +38,9 @@ const Input: FC<InputProps> = (props) => {
       {inputType === 'default' ? (
         <AntdInput
           style={theme === 'bottom-border' ? { borderRadius: 0, borderRight: 0, borderLeft: 0, borderTop: 0 } : {}}
-          className={`INPUT-FIELD ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${inputProps.className}`}
+          className={`INPUT-FIELD h-40pxr ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${
+            inputProps.className
+          }`}
           status={errorMessage && errorMessage.length > 0 ? 'error' : undefined}
           value={value}
           {...inputProps}
@@ -46,7 +48,9 @@ const Input: FC<InputProps> = (props) => {
       ) : (
         <AntdInput.Password
           style={theme === 'bottom-border' ? { borderRadius: 0, borderRight: 0, borderLeft: 0, borderTop: 0 } : {}}
-          className={`INPUT-FIELD ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${inputProps.className}`}
+          className={`INPUT-FIELD h-40pxr ${theme === 'bottom-border' && 'pl-0 pb-10pxr focus:ring-0'} ${
+            inputProps.className
+          }`}
           value={value}
           status={errorMessage && errorMessage.length > 0 ? 'error' : undefined}
           {...inputProps}
