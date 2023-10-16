@@ -1,13 +1,12 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Avatar, Button, Input, Modal, Tab } from 'myll-ui'
+import { Avatar, Button, Tab } from 'myll-ui'
 import { GetServerSidePropsContext } from 'next'
 import nookies from 'nookies'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader, withAuth } from '@/common/api'
 import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
-import { UserUpdate } from '@/common/api/user/update/UserUpdate'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import InfoDrawer from './info-drawer/InfoDrawer'
@@ -46,8 +45,6 @@ export const Myll = () => {
           open={open}
           onClose={async () => {
             setOpen(false)
-            // @TODO refetch 사용하도록 변경 필요
-            window.location.reload()
           }}
         />
         <Tab

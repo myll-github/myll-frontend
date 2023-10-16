@@ -23,6 +23,7 @@ const InfoDrawer = (props: InfoDrawerProps) => {
   const handleUserInfoUpdate = async (userInfo: { nickname?: string; introduction?: string }) => {
     await UserUpdate(userInfo)
   }
+
   return (
     <Drawer open={open} height="auto" placement="bottom" mask={false} closable={false} onClose={onClose}>
       <div className="mt-30pxr w-full h-full flex flex-col gap-32pxr items-center">
@@ -48,13 +49,15 @@ const InfoDrawer = (props: InfoDrawerProps) => {
           className="mt-100pxr"
           type="button"
           variant="block"
-          disabled={!isChanged}
           onClick={async () => {
-            await handleUserInfoUpdate({ nickname: value.nickname, introduction: value.introduction })
             onClose()
+            if (isChanged) {
+              await handleUserInfoUpdate({ nickname: value.nickname, introduction: value.introduction })
+              window.location.reload()
+            }
           }}
         >
-          변경사항 저장
+          {isChanged ? '변경사항 저장' : '취소'}
         </Button>
       </div>
     </Drawer>
