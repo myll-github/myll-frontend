@@ -4,22 +4,19 @@ import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
 export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  try {
-    const data = await authAPI.get(`/random-tour-list`, { headers })
 
-    return data.data.map((ele, id) => {
-      return {
-        id: ele.contentid,
-        mainTitle: ele.title,
-        alt: ele.title,
-        subTitle: '',
-        url: ele.firstimage,
-        ...ele,
-      }
-    })
-  } catch (e) {
-    return []
-  }
+  const data = await authAPI.get(`/random-tour-list`, { headers })
+
+  return data.data.map((ele, id) => {
+    return {
+      id: ele.contentid,
+      mainTitle: ele.title,
+      alt: ele.title,
+      subTitle: '',
+      url: ele.firstimage,
+      ...ele,
+    }
+  })
 }
 
 export const FavoritePlaceQueryKey = () => ['favoritePlace']
