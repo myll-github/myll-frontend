@@ -59,16 +59,23 @@ export const Book = () => {
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
-  await queryClient.fetchQuery({
-    queryKey: FavoritePlaceQueryKey(),
-    queryFn: FavoritePlaceQueryFn({ initHeaders }),
-    staleTime: Infinity,
-    cacheTime: Infinity,
-  })
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+  try {
+    await queryClient.fetchQuery({
+      queryKey: FavoritePlaceQueryKey(),
+      queryFn: FavoritePlaceQueryFn({ initHeaders }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    })
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+      },
+    }
+  } catch (e) {
+    return {
+      props: {},
+      redirect: { statusCode: 302, destination: '/login' },
+    }
   }
 }
 
