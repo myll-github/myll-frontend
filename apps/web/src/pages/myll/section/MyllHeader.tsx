@@ -7,7 +7,7 @@ const MyllHeader = () => {
         <AppBar.LeftSection>
           <AppBar.FallbackButton />
         </AppBar.LeftSection>
-        <AppBar.MiddleSection>프로필 이미지 선택</AppBar.MiddleSection>
+        <AppBar.MiddleSection>MYLL</AppBar.MiddleSection>
       </AppBar>
     </header>
   )
