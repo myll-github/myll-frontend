@@ -10,6 +10,7 @@ import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import InfoDrawer from './info-drawer/InfoDrawer'
+import MyPlace from './like/MyPlace'
 import MyTripContent from './my-trip/MyTripContent'
 import MyllHeader from './section/MyllHeader'
 
@@ -61,7 +62,7 @@ export const Myll = () => {
               label: '마이 트립',
             },
             {
-              children: <div className="w-full">test2</div>,
+              children: <MyPlace />,
               key: '찜한 여행지',
               label: '찜한 여행지',
             },
