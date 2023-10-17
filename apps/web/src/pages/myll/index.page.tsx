@@ -6,14 +6,15 @@ import { useState } from 'react'
 import { ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader, withAuth } from '@/common/api'
+import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import InfoDrawer from './info-drawer/InfoDrawer'
 import MyPlace from './like/MyPlace'
+import MyWriting from './local/MyWriting'
 import MyTripContent from './my-trip/MyTripContent'
 import MyllHeader from './section/MyllHeader'
-import MyWriting from './writing/MyWriting'
 
 export const Myll = () => {
   const { data } = useUserInfo()
@@ -85,12 +86,20 @@ export const getServerSideProps = withAuth(async (context: GetServerSidePropsCon
   const initHeaders = getCookieHeader(context)
 
   try {
-    await queryClient.fetchQuery({
-      queryKey: userInfoKey(),
-      queryFn: userInfoFn({ initHeaders }, nookies.get(context).userEmail || ''),
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    })
+    await Promise.all([
+      queryClient.fetchQuery({
+        queryKey: userInfoKey(),
+        queryFn: userInfoFn({ initHeaders }, nookies.get(context).userEmail || ''),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+      queryClient.fetchQuery({
+        queryKey: getLocalMenuListQueryKey(),
+        queryFn: getLocalMenuListFn({ initHeaders }),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+    ])
 
     return {
       props: {
