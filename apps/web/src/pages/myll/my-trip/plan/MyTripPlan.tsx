@@ -22,7 +22,7 @@ const MyTripPlan = () => {
         지난 여행
       </div>
       <div className="w-full min-h-176pxr flex flex-col pt-20pxr justify-center items-center">
-        <ICON_COMPASS width={46} height={46} />
+        <ICON_COMPASS width={50} height={50} />
         <div className="flex flex-col items-center gap-10pxr mt-20pxr">
           <div className="SUBTITLE-T2 text-GRAY_80">{MYLL_HAS_NOT_HISTORY_MESSAGE}</div>
           <div className="SUBTITLE-T8 text-GRAY_70">{MYLL_RECOMMEND_MESSAGE}</div>
