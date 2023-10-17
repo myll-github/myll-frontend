@@ -6,10 +6,15 @@ import { useState } from 'react'
 import { ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader, withAuth } from '@/common/api'
+import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
+import { recommendPlaceFn, recommendPlaceQueryKey } from '@/common/api/recommend'
 import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import InfoDrawer from './info-drawer/InfoDrawer'
+import MyPlace from './like/MyPlace'
+import MyWriting from './local/MyWriting'
+import MyTripContent from './my-trip/MyTripContent'
 import MyllHeader from './section/MyllHeader'
 
 export const Myll = () => {
@@ -48,24 +53,24 @@ export const Myll = () => {
           }}
         />
         <Tab
-          size="large"
+          size="middle"
           tabBarGutter={60}
           className="w-full"
           centered
           defaultActiveKey="마이 트립"
           items={[
             {
-              children: <div className="w-full">test1</div>,
+              children: <MyTripContent />,
               key: '마이 트립',
               label: '마이 트립',
             },
             {
-              children: <div className="w-full">test2</div>,
+              children: <MyPlace />,
               key: '찜한 여행지',
               label: '찜한 여행지',
             },
             {
-              children: <div className="w-full">test3</div>,
+              children: <MyWriting />,
               key: '작성한 글',
               label: '작성한 글',
             },
@@ -82,12 +87,26 @@ export const getServerSideProps = withAuth(async (context: GetServerSidePropsCon
   const initHeaders = getCookieHeader(context)
 
   try {
-    await queryClient.fetchQuery({
-      queryKey: userInfoKey(),
-      queryFn: userInfoFn({ initHeaders }, nookies.get(context).userEmail || ''),
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    })
+    await Promise.all([
+      queryClient.fetchQuery({
+        queryKey: userInfoKey(),
+        queryFn: userInfoFn({ initHeaders }, nookies.get(context).userEmail || ''),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+      queryClient.fetchQuery({
+        queryKey: getLocalMenuListQueryKey(),
+        queryFn: getLocalMenuListFn({ initHeaders }),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+      queryClient.fetchQuery({
+        queryKey: recommendPlaceQueryKey(),
+        queryFn: recommendPlaceFn({ initHeaders }, nookies.get(context)?.userEmail || ''),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+    ])
 
     return {
       props: {
