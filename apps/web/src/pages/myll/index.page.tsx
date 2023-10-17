@@ -13,6 +13,7 @@ import InfoDrawer from './info-drawer/InfoDrawer'
 import MyPlace from './like/MyPlace'
 import MyTripContent from './my-trip/MyTripContent'
 import MyllHeader from './section/MyllHeader'
+import MyWriting from './writing/MyWriting'
 
 export const Myll = () => {
   const { data } = useUserInfo()
@@ -67,7 +68,7 @@ export const Myll = () => {
               label: '찜한 여행지',
             },
             {
-              children: <div className="w-full">test3</div>,
+              children: <MyWriting />,
               key: '작성한 글',
               label: '작성한 글',
             },
