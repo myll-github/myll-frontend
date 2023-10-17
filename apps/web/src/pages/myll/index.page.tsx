@@ -10,6 +10,7 @@ import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
 import NavLayout from '@/common/components/Layout/NavLayout'
 
 import InfoDrawer from './info-drawer/InfoDrawer'
+import MyTripContent from './my-trip/MyTripContent'
 import MyllHeader from './section/MyllHeader'
 
 export const Myll = () => {
@@ -48,14 +49,14 @@ export const Myll = () => {
           }}
         />
         <Tab
-          size="large"
+          size="middle"
           tabBarGutter={60}
           className="w-full"
           centered
           defaultActiveKey="마이 트립"
           items={[
             {
-              children: <div className="w-full">test1</div>,
+              children: <MyTripContent />,
               key: '마이 트립',
               label: '마이 트립',
             },
