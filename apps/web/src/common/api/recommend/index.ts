@@ -2,6 +2,28 @@ import { useQuery } from '@tanstack/react-query'
 
 import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
+export const getRecommendPlace = async ({ initHeaders }: InitHeaders, userEmail: string) => {
+  const headers = initHeaders ?? getCookieHeader()
+  const data = await authAPI.get(`/recommend/${userEmail}`, { headers, params: { userEmail } })
+  return data.data
+}
+
+export const recommendPlaceQueryKey = () => ['recommendedPlace']
+export const recommendPlaceFn =
+  ({ initHeaders }: InitHeaders, userEmail: string) =>
+  () =>
+    getRecommendPlace({ initHeaders }, userEmail)
+
+export const useRecommendPlace = () => {
+  return useQuery({
+    queryKey: recommendPlaceQueryKey(),
+    queryFn: recommendPlaceFn({}, ''),
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: true,
+  })
+}
+
 export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
 
