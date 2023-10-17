@@ -1,4 +1,5 @@
 import { Alert, Button } from 'myll-ui'
+import { useRouter } from 'next/router'
 import { ICON_COMPASS } from 'shared'
 
 import {
@@ -8,13 +9,14 @@ import {
 } from '@/common/constants/myll'
 
 const MyTripPlan = () => {
+  const router = useRouter()
   return (
     <div className="w-full">
       <div className="ml-20pxr mr-20pxr">
         <Alert isVisible message={MYLL_HAS_NOT_PLAN_MESSAGE} closable={false} onVisibleChange={() => {}} type="error" />
       </div>
       <div className="flex h-114pxr pl-30pxr pr-30pxr justify-center items-center">
-        <Button type="button" variant="block">
+        <Button type="button" variant="block" onClick={() => router.push('/book')}>
           여행일정 만들기
         </Button>
       </div>
