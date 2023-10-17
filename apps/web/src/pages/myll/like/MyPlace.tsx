@@ -5,12 +5,7 @@ import NonePage from './none/NonePage'
 
 const MyPlace = () => {
   const { data } = useRecommendPlace()
-  console.log(data)
-  return (
-    <div>
-      <LikeListPage />
-    </div>
-  )
+  return <div>{data && data.length > 0 ? <LikeListPage /> : <NonePage />}</div>
 }
 
 export default MyPlace

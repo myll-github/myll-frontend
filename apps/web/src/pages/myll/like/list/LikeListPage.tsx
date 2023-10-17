@@ -31,7 +31,7 @@ const LikeListPage = () => {
           type="button"
           variant="mini"
           color="text"
-          onClick={() => router.push('/myll/local/all')}
+          onClick={() => router.push('/myll/like/all')}
         >
           전체보기
         </Button>
