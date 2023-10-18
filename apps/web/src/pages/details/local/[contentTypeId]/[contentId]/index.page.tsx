@@ -11,15 +11,13 @@ import { IconLabelType } from '@/common/components/IconLabel/type'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { HOME_LOCALRECOMMANDSECTION_MAP } from '@/common/constants'
-import HomeHeader from '@/pages/home/section/HomeHeader'
 
 import DetailHeader from '../../../components/DetailHeader'
 import DisplayedTags from '../../../components/DisplayedTags'
 import Separator from '../../../components/Separator'
 
 export const Details = ({ contentId, contentTypeId }: { contentId: number; contentTypeId: number }) => {
-  const { data, handleOptimisticRecommendToggle } = useLocalMenuQuery({ contentTypeId, contentId })
-  const detailData = data[0]
+  const { data: detailData, handleOptimisticRecommendToggle } = useLocalMenuQuery({ contentTypeId, contentId })
 
   return (
     <>

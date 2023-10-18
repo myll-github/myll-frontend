@@ -33,34 +33,30 @@ interface UseLocalMenuListQuery {
 export const getLocalMenuById = async ({ contentTypeId, contentId, initHeaders }: InitHeadersWithId) => {
   const headers = initHeaders ?? getCookieHeader()
 
-  const data = [
-    (
-      await authAPI(
-        `/local-tour-detail`,
+  const data = await authAPI(
+    `/local-tour-detail`,
 
-        {
-          params: {
-            contentTypeId,
-            contentId,
-          },
-          headers,
-        },
-      )
-    ).data,
-  ]
+    {
+      params: {
+        contentTypeId,
+        contentId,
+      },
+      headers,
+    },
+  )
 
-  return data.map((ele, index) => {
-    return {
-      ...ele,
-      img: '',
-      href: '',
-      mainTitle: ele.title,
-      subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
-      contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
-      isRecommend: ele.isRecommend ?? false,
-      recommendCount: ele.recommendCount ?? 0,
-    }
-  })
+  const ele = data.data
+
+  return {
+    ...ele,
+    img: '',
+    href: '',
+    mainTitle: ele.title,
+    subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
+    contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
+    isRecommend: ele.isRecommend ?? false,
+    recommendCount: ele.recommendCount ?? 0,
+  }
 }
 
 /*!
