@@ -43,7 +43,7 @@ export const Details = ({ contentTypeId, contentId, tourData }: DetailsProps) =>
           <Carousel onChange={() => {}}>
             {tourData.contentImage.map((url) => (
               <div className="flex flex-col items-center w-full ">
-                <CustomImage className="w-[360px] h-[200px]" src={url} alt="" />
+                <CustomImage key={url} className="w-[360px] h-[200px]" src={url} alt="" />
               </div>
             ))}
           </Carousel>

@@ -2,9 +2,10 @@ import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Button, Carousel, CustomImage, Tag } from 'myll-ui'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ICON_HEART_AC, ICON_HEART_IN, ICON_KAKAOMAP } from 'shared'
+import { ICON_HEART_AC, ICON_HEART_IN, ICON_KAKAOMAP, ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader } from '@/common/api'
+import { getLocalMenuFn, getLocalMenuQueryKey, useLocalMenuQuery } from '@/common/api/details'
 import { IconLabel } from '@/common/components/IconLabel'
 import { IconLabelType } from '@/common/components/IconLabel/type'
 import DefaultLayout from '@/common/components/Layout/DefaultLayout'
@@ -16,33 +17,10 @@ import DetailHeader from '../../../components/DetailHeader'
 import DisplayedTags from '../../../components/DisplayedTags'
 import Separator from '../../../components/Separator'
 
-const detailData = {
-  id: 5,
-  userEmail: 'ycp998@naver.com',
-  title: 'test4',
-  contentTypeId: 12,
-  address: 'estet',
-  introduction: 'etete',
-  createAt: 1697272171457,
-  recommendCount: 0,
-  isRecommend: false,
+export const Details = ({ contentId, contentTypeId }: { contentId: number; contentTypeId: number }) => {
+  const { data, handleOptimisticRecommendToggle } = useLocalMenuQuery({ contentTypeId, contentId })
+  const detailData = data[0]
 
-  contentImage: ['/pictures/Illust_Intro3.svg', '/pictures/Illust_Intro2.png'],
-
-  labels: {
-    CAMERA: false,
-    HOUSE: false,
-    BACKPACK: true,
-    OWL: false,
-    WASTEBASKET: true,
-    SHUSHING_FACE: true,
-    BALANCE_SCALE: false,
-    CITYSCAPE: false,
-    SHOPPING_BAGS: true,
-  },
-}
-
-export const Details = ({ contentId }: { contentId: number }) => {
   return (
     <>
       <DetailHeader />
@@ -51,7 +29,7 @@ export const Details = ({ contentId }: { contentId: number }) => {
           <Carousel onChange={() => {}}>
             {detailData.contentImage.map((url) => (
               <div className="flex flex-col items-center w-full ">
-                <CustomImage className="w-[360px] h-[200px]" src={url} alt="" />
+                <CustomImage key={url} className="w-[360px] h-[200px]" src={url} alt="" />
               </div>
             ))}
           </Carousel>
@@ -75,11 +53,7 @@ export const Details = ({ contentId }: { contentId: number }) => {
           <section className="flex flex-col p-20pxr gap-4pxr">
             <div className="flex flex-row items-center justify-between w-full h-64pxr">
               <div className="flex flex-row items-center gap-10pxr ">
-                <CustomImage
-                  className="w-40pxr h-40pxr"
-                  src={`/icons/Profile_Icon_${(contentId % 8) + 1}.svg`}
-                  alt="유저 아이콘"
-                />
+                <ICON_PROFILE_14 />
 
                 <div className="flex flex-col justify-between h-40pxr">
                   <span className="SUBTITLE-T4 text-GRAY_100">{detailData.userEmail}</span>
@@ -91,6 +65,7 @@ export const Details = ({ contentId }: { contentId: number }) => {
                 <button
                   type="button"
                   className="flex items-center justify-center border-0 w-74pxr h-40pxr mr-1pxr -ml-8pxr gap-6pxr"
+                  onClick={() => handleOptimisticRecommendToggle({ id: detailData.id })}
                 >
                   {detailData.isRecommend ? <ICON_HEART_AC /> : <ICON_HEART_IN />}
 
@@ -120,19 +95,17 @@ export const getServerSideProps = async (context) => {
   const initHeaders = getCookieHeader(context)
 
   await Promise.all([
-    /*
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE }),
-      queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
+      queryKey: getLocalMenuQueryKey({ contentTypeId, contentId }),
+      queryFn: getLocalMenuFn({ contentTypeId, contentId, initHeaders }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
-
-    */
   ])
 
   return {
     props: {
+      contentTypeId,
       contentId,
       dehydratedState: dehydrate(queryClient),
     },

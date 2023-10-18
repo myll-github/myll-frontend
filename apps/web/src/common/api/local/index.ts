@@ -60,7 +60,7 @@ export const getLocalMenuListFn =
   () =>
     getLocal({ initHeaders })
 
-const addListLike = async (contentId: number) => {
+export const addMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
@@ -70,7 +70,7 @@ const addListLike = async (contentId: number) => {
   }
 }
 
-const removeListLike = async (contentId: number) => {
+export const removeMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
@@ -92,8 +92,8 @@ export const useLocalMenuListQuery = () => {
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
     queryKey: getLocalMenuListQueryKey(),
-    onRemoveRecommend: removeListLike,
-    onAddRecommend: addListLike,
+    onRemoveRecommend: removeMenuListLike,
+    onAddRecommend: addMenuListLike,
   })
 
   return { ...query, handleOptimisticRecommendToggle }
