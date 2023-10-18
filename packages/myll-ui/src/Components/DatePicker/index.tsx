@@ -28,9 +28,7 @@ const { RangePicker } = AntdDatePicker
 const DatePicker = (props: DatePickerProps) => {
   const [open, setOpen] = useState(false)
 
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
-  }
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {}
 
   const renderExtraFooter = () => <Button>오늘</Button>
 
