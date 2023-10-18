@@ -1,8 +1,8 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Button, Carousel, CustomImage, Tag } from 'myll-ui'
+import { Avatar, Button, Carousel, CustomImage, Tag } from 'myll-ui'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ICON_HEART_AC, ICON_HEART_IN, ICON_KAKAOMAP, ICON_PROFILE_14 } from 'shared'
+import { ICON_CUSTOM_LIKE, ICON_CUSTOM_UNLIKE, ICON_KAKAOMAP, ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader } from '@/common/api'
 import { getLocalMenuFn, getLocalMenuQueryKey, useLocalMenuQuery } from '@/common/api/details'
@@ -51,7 +51,7 @@ export const Details = ({ contentId, contentTypeId }: { contentId: number; conte
           <section className="flex flex-col p-20pxr gap-4pxr">
             <div className="flex flex-row items-center justify-between w-full h-64pxr">
               <div className="flex flex-row items-center gap-10pxr ">
-                <ICON_PROFILE_14 />
+                <CustomImage className="w-40pxr h-40pxr" src="/icons/Profile_Icon_14.svg" alt="유저 아이콘" />
 
                 <div className="flex flex-col justify-between h-40pxr">
                   <span className="SUBTITLE-T4 text-GRAY_100">{detailData.userEmail}</span>
@@ -65,7 +65,7 @@ export const Details = ({ contentId, contentTypeId }: { contentId: number; conte
                   className="flex items-center justify-center border-0 w-74pxr h-40pxr mr-1pxr -ml-8pxr gap-6pxr"
                   onClick={() => handleOptimisticRecommendToggle({ id: detailData.id })}
                 >
-                  {detailData.isRecommend ? <ICON_HEART_AC /> : <ICON_HEART_IN />}
+                  {detailData.isRecommend ? <ICON_CUSTOM_LIKE /> : <ICON_CUSTOM_UNLIKE />}
 
                   <span className="">{detailData.recommendCount}</span>
                 </button>
