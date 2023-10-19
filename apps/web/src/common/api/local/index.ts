@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { isArray } from 'lodash'
 
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { TAG_COLOR_MAP } from '@/common/constants'
@@ -42,6 +43,14 @@ export const registerLocal = async (data: updateDataType) => {
   const formData = new FormData()
 
   Object.entries(data).forEach(([key, value]) => {
+    if (isArray(value)) {
+      value.forEach((ele) => {
+        formData.append(key, ele)
+      })
+
+      return
+    }
+
     formData.append(key, value)
   })
 
