@@ -20,14 +20,16 @@ interface updateDataType {
 
 export interface LocalMenuListParams extends InitHeaders {
   sort?: 'ASC' | 'DESC'
+  count?: number
 }
 
-export const getLocal = async ({ initHeaders, sort }: LocalMenuListParams) => {
+export const getLocal = async ({ initHeaders, sort, count }: LocalMenuListParams) => {
   const headers = initHeaders ?? getCookieHeader()
 
   const data = await authAPI(`/local-tour-list`, {
     params: {
       sort,
+      count,
     },
     headers,
   })
@@ -74,9 +76,9 @@ export const registerLocal = async (data: updateDataType) => {
 export const getLocalMenuListQueryKey = (sort: LocalMenuListParams['sort'] = 'ASC') => ['localMenuList', sort]
 
 export const getLocalMenuListFn =
-  ({ initHeaders, sort = 'ASC' }: LocalMenuListParams) =>
+  ({ initHeaders, sort = 'ASC', count = 1000000 }: LocalMenuListParams) =>
   () =>
-    getLocal({ initHeaders, sort })
+    getLocal({ initHeaders, sort, count })
 
 export const addMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
@@ -98,10 +100,10 @@ export const removeMenuListLike = async (contentId: number) => {
   }
 }
 
-export const useLocalMenuListQuery = ({ sort }: { sort?: LocalMenuListParams['sort'] } = { sort: 'ASC' }) => {
+export const useLocalMenuListQuery = ({ sort, count }: LocalMenuListParams = { sort: 'ASC', count: 1000000 }) => {
   const query = useQuery({
     queryKey: getLocalMenuListQueryKey(sort),
-    queryFn: getLocalMenuListFn({ sort }),
+    queryFn: getLocalMenuListFn({ sort, count }),
     staleTime: 0,
     cacheTime: Infinity,
 
