@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { isArray } from 'lodash'
 
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { TAG_COLOR_MAP } from '@/common/constants'
@@ -14,7 +15,7 @@ interface updateDataType {
   introduction: string
   createAt: number
 
-  labels: IconLabelContainerType
+  labels: string
 }
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
@@ -26,7 +27,7 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
     return {
       ...ele,
 
-      img: '',
+      img: ele.contentImage?.[0] ?? '',
       href: '',
       mainTitle: ele.title,
       subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
@@ -42,6 +43,14 @@ export const registerLocal = async (data: updateDataType) => {
   const formData = new FormData()
 
   Object.entries(data).forEach(([key, value]) => {
+    if (isArray(value)) {
+      value.forEach((ele) => {
+        formData.append(key, ele)
+      })
+
+      return
+    }
+
     formData.append(key, value)
   })
 
@@ -60,7 +69,7 @@ export const getLocalMenuListFn =
   () =>
     getLocal({ initHeaders })
 
-const addListLike = async (contentId: number) => {
+export const addMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
@@ -70,7 +79,7 @@ const addListLike = async (contentId: number) => {
   }
 }
 
-const removeListLike = async (contentId: number) => {
+export const removeMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
 
   try {
@@ -92,8 +101,8 @@ export const useLocalMenuListQuery = () => {
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
     queryKey: getLocalMenuListQueryKey(),
-    onRemoveRecommend: removeListLike,
-    onAddRecommend: addListLike,
+    onRemoveRecommend: removeMenuListLike,
+    onAddRecommend: addMenuListLike,
   })
 
   return { ...query, handleOptimisticRecommendToggle }

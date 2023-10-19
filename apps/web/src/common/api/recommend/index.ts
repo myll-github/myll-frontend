@@ -61,7 +61,6 @@ export const getTravelTheme = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   const data = await authAPI.get(`/tour-theme`, { headers })
 
-  console.log(data.data)
   return data.data.map((ele, id) => {
     return {
       id,

@@ -2,13 +2,9 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { Button, Input, Tag, TextArea, UploadCard } from 'myll-ui'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { ICON_EDIT } from 'shared'
 
 import { IconLabelContainer } from '@/common/components/IconLabel'
-import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { TAG_STRING_TO_COLOR } from '@/common/constants'
 import useLocalRegister from '@/stores/local/useLocalRegister'
 
 import Separator from './components/Separator'

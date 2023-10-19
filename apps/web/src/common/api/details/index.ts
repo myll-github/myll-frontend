@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
 import { JSONstartWith } from 'shared'
 
-import { useLocalMenuListQuery } from '@/common/api/local'
+import { addMenuListLike, removeMenuListLike, useLocalMenuListQuery } from '@/common/api/local'
 import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { TAG_COLOR_MAP } from '@/common/constants'
+import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 import { authAPI, getCookieHeader, InitHeaders } from '..'
 
@@ -44,18 +45,18 @@ export const getLocalMenuById = async ({ contentTypeId, contentId, initHeaders }
     },
   )
 
-  return data.data.map((ele, index) => {
-    return {
-      ...ele,
-      img: '',
-      href: '',
-      mainTitle: ele.title,
-      subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
-      contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
-      isRecommend: ele.isRecommend ?? false,
-      recommendCount: ele.recommendCount ?? 0,
-    }
-  })
+  const ele = data.data
+
+  return {
+    ...ele,
+    img: '',
+    href: '',
+    mainTitle: ele.title,
+    subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
+    contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
+    isRecommend: ele.isRecommend ?? false,
+    recommendCount: ele.recommendCount ?? 0,
+  }
 }
 
 /*!
@@ -112,7 +113,7 @@ export const getTourDetailById = async ({ contentTypeId, contentId, initHeaders 
   }
 }
 
-export const getLocalMenuQueryKey = ({ contentTypeId, contentId }) => ['localMenuList', contentTypeId, contentId]
+export const getLocalMenuQueryKey = ({ contentTypeId, contentId }) => ['localMenuList-detail', contentTypeId, contentId]
 
 export const getLocalMenuFn =
   ({ contentTypeId, contentId, initHeaders }: InitHeadersWithId) =>
@@ -129,5 +130,11 @@ export const useLocalMenuQuery = ({ contentTypeId, contentId }: UseLocalMenuList
     refetchOnMount: true,
   })
 
-  return query
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
+    queryKey: getLocalMenuQueryKey({ contentTypeId, contentId }),
+    onRemoveRecommend: removeMenuListLike,
+    onAddRecommend: addMenuListLike,
+  })
+
+  return { ...query, handleOptimisticRecommendToggle }
 }
