@@ -27,7 +27,7 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
     return {
       ...ele,
 
-      img: '',
+      img: ele.contentImage?.[0] ?? '',
       href: '',
       mainTitle: ele.title,
       subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
