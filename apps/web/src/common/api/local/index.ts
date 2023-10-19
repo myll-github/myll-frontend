@@ -14,7 +14,7 @@ interface updateDataType {
   introduction: string
   createAt: number
 
-  labels: IconLabelContainerType
+  labels: string
 }
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
