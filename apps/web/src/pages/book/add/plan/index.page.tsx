@@ -1,7 +1,9 @@
 import moment from 'moment'
 import { Button, Collapse, Modal } from 'myll-ui'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+import { createPlan } from '@/common/api/book'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
 
@@ -22,10 +24,21 @@ const getBetweenDates = (startDate: string, endDate: string) => {
 }
 
 export const AddPlanPage = () => {
-  const { startDate, endDate } = useBookPageStore()
+  const { startDate, endDate, plans } = useBookPageStore()
+
+  const router = useRouter()
 
   const [planData, setPlanData] = useState<any[]>([])
   const [open, setOpen] = useState<boolean>(false)
+
+  const handleCreatePlan = async () => {
+    try {
+      await createPlan(plans)
+      router.replace('/book')
+    } catch (e) {
+      router.replace('/login')
+    }
+  }
 
   useEffect(() => {
     const dates = getBetweenDates(startDate, endDate)
@@ -53,7 +66,7 @@ export const AddPlanPage = () => {
           />
         </div>
         <div className="w-full flex justify-center mt-auto mb-120pxr">
-          <Button className="pl-20pxr pr-20pxr" type="button" variant="block" onClick={() => {}}>
+          <Button className="pl-20pxr pr-20pxr" type="button" variant="block" onClick={handleCreatePlan}>
             일정 등록
           </Button>
         </div>
