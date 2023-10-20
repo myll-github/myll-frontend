@@ -107,3 +107,39 @@ export const useLocalMenuListQuery = () => {
 
   return { ...query, handleOptimisticRecommendToggle }
 }
+
+export const getMyLocal = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
+
+  const data = await authAPI(`/local-my-tour-list`, { headers })
+
+  return data.data.map((ele, index) => {
+    return {
+      ...ele,
+      img: ele.contentImage?.[0] ?? '',
+      href: '',
+      mainTitle: ele.title,
+      subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,
+      contenttype: TAG_COLOR_MAP[ele.contentTypeId ?? 13] ?? 13,
+      isRecommend: ele.isRecommend ?? false,
+      recommendCount: ele.recommendCount ?? 0,
+    }
+  })
+}
+
+export const getMyLocalMenuListQueryKey = () => ['localMyMenuList']
+
+export const getMyLocalMenuListFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getMyLocal({ initHeaders })
+
+export const useMyLocalMenuListQuery = () => {
+  return useQuery({
+    queryKey: getMyLocalMenuListQueryKey(),
+    queryFn: getMyLocalMenuListFn({}),
+    staleTime: 0,
+    cacheTime: Infinity,
+    refetchOnMount: true,
+  })
+}

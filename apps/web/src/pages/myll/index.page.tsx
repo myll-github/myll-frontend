@@ -7,7 +7,7 @@ import { ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader, withAuth } from '@/common/api'
 import { getPlanFn, getPlanQuery } from '@/common/api/book'
-import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
+import { getMyLocalMenuListFn, getMyLocalMenuListQueryKey } from '@/common/api/local'
 import { recommendPlaceFn, recommendPlaceQueryKey } from '@/common/api/recommend'
 import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
 import NavLayout from '@/common/components/Layout/NavLayout'
@@ -96,8 +96,8 @@ export const getServerSideProps = withAuth(async (context: GetServerSidePropsCon
         cacheTime: Infinity,
       }),
       queryClient.fetchQuery({
-        queryKey: getLocalMenuListQueryKey(),
-        queryFn: getLocalMenuListFn({ initHeaders }),
+        queryKey: getMyLocalMenuListQueryKey(),
+        queryFn: getMyLocalMenuListFn({ initHeaders }),
         staleTime: Infinity,
         cacheTime: Infinity,
       }),
