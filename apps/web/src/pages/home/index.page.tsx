@@ -4,6 +4,7 @@ import nookies from 'nookies'
 import { useEffect } from 'react'
 
 import { getCookieHeader, withAuth } from '@/common/api'
+import { getPlanFn, getPlanQuery } from '@/common/api/book'
 import {
   randomTourListQueryFn,
   randomTourListQueryKey,
@@ -75,6 +76,13 @@ export const getServerSideProps = withAuth(async (context) => {
     queryClient.prefetchQuery({
       queryKey: getRandomLocalTourListQueryKey(),
       queryFn: getRandomLocalTourListFn({ initHeaders }),
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: getPlanQuery(),
+      queryFn: getPlanFn({ initHeaders }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
     }),
   ])
 

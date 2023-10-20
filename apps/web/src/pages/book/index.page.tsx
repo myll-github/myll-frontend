@@ -4,6 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 
 import { getCookieHeader, withAuth } from '@/common/api'
+import { getPlanFn, getPlanQuery } from '@/common/api/book'
 import { FavoritePlaceQueryFn, FavoritePlaceQueryKey, useFavoritePlaceQuery } from '@/common/api/recommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
@@ -14,10 +15,13 @@ import PlanHeader from './section/PlanHeader'
 import SimpleList from './section/SimpleList'
 
 export const Book = () => {
-  const { data } = useFavoritePlaceQuery()
+  const { data, refetch } = useFavoritePlaceQuery()
   const { setPlanInfo, setRecommendedPlaceMap } = useBookPageStore()
 
   useEffect(() => {
+    if (data && data.length === 0) {
+      refetch()
+    }
     const recommendList: ItemType[] = data.map((d) => ({
       ...d,
       img: d.firstimage ? d.firstimage : d.firstimage2,
@@ -32,7 +36,7 @@ export const Book = () => {
     })
 
     setRecommendedPlaceMap(recommendPlaceMap)
-  }, [data])
+  }, [data, refetch, setRecommendedPlaceMap])
 
   // 일정 등록
   const [openRangePicker, setOpenRangePicker] = useState<boolean>(false)
@@ -56,16 +60,24 @@ export const Book = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
   try {
-    await queryClient.fetchQuery({
-      queryKey: FavoritePlaceQueryKey(),
-      queryFn: FavoritePlaceQueryFn({ initHeaders }),
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    })
+    await Promise.all([
+      await queryClient.fetchQuery({
+        queryKey: FavoritePlaceQueryKey(),
+        queryFn: FavoritePlaceQueryFn({ initHeaders }),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+      await queryClient.fetchQuery({
+        queryKey: getPlanQuery(),
+        queryFn: getPlanFn({ initHeaders }),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+    ])
     return {
       props: {
         dehydratedState: dehydrate(queryClient),
@@ -77,6 +89,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       redirect: { statusCode: 302, destination: '/login' },
     }
   }
-}
+})
 
 export default Book

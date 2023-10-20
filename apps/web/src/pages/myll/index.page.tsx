@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ICON_PROFILE_14 } from 'shared'
 
 import { getCookieHeader, withAuth } from '@/common/api'
+import { getPlanFn, getPlanQuery } from '@/common/api/book'
 import { getLocalMenuListFn, getLocalMenuListQueryKey } from '@/common/api/local'
 import { recommendPlaceFn, recommendPlaceQueryKey } from '@/common/api/recommend'
 import { userInfoFn, userInfoKey, useUserInfo } from '@/common/api/user/info'
@@ -103,6 +104,12 @@ export const getServerSideProps = withAuth(async (context: GetServerSidePropsCon
       queryClient.fetchQuery({
         queryKey: recommendPlaceQueryKey(),
         queryFn: recommendPlaceFn({ initHeaders }, nookies.get(context)?.userEmail || ''),
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }),
+      queryClient.fetchQuery({
+        queryKey: getPlanQuery(),
+        queryFn: getPlanFn({ initHeaders }),
         staleTime: Infinity,
         cacheTime: Infinity,
       }),

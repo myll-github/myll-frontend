@@ -16,10 +16,8 @@ const AddPlaceHeader = memo(
           <AppBar.LeftSection>
             <AppBar.FallbackButton />
           </AppBar.LeftSection>
-          <div className="w-full h-36pxr flex items-center">
-            <AppBar.MiddleSection>
-              <Input value={value} onChange={onChange} />
-            </AppBar.MiddleSection>
+          <div className="ml-60pxr mr-20pxr h-36pxr flex items-center justify-end">
+            <Input value={value} onChange={onChange} />
           </div>
         </AppBar>
       </header>
