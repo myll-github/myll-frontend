@@ -1,15 +1,23 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Alert, AppBar, Button, Tab } from 'myll-ui'
+import { useRouter } from 'next/router'
+import nookies from 'nookies'
+import { useEffect } from 'react'
 
-import { getCookieHeader } from '@/common/api'
-import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
+import { getCookieHeader, withAuth } from '@/common/api'
+import {
+  randomTourListQueryFn,
+  randomTourListQueryKey,
+  recommendedTourListQueryFn,
+  recommendedTourListQueryKey,
+} from '@/common/api/home/localRecommend'
 import {
   getRandomLocalTourListFn,
   getRandomLocalTourListQueryKey,
 } from '@/common/api/home/localRecommend/localUserRegistered'
 import NavLayout from '@/common/components/Layout/NavLayout'
-import { HOME_LOCALRECOMMANDSECTION_MAP, HOME_LOCALRECOMMANDSECTION_MAP_KEY_TYPE } from '@/common/constants'
+import useLogout from '@/common/hooks/useLogout'
 
+import { MYLLRECOMMEND_KEY } from './constants'
 import AnotherUserPlanSection from './section/AnotherUserPlanSection'
 import HomeHeader from './section/HomeHeader'
 import LocalRecommendSection from './section/LocalRecommendSection'
@@ -17,6 +25,11 @@ import MyllPlanSection from './section/MyllPlanSection'
 import MyllRecommendSection from './section/MyllRecommendSection'
 
 export const Home = () => {
+  const { isLogout } = useLogout(nookies.get())
+  const router = useRouter()
+  useEffect(() => {
+    if (isLogout) router.push('/login')
+  })
   return (
     <>
       <HomeHeader />
@@ -33,19 +46,27 @@ export const Home = () => {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = withAuth(async (context) => {
   const queryClient = new QueryClient()
   const initHeaders = getCookieHeader(context)
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 1 }),
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.BUSAN_HOT_PLACE }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
     }),
+
     queryClient.prefetchQuery({
-      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: 2 }),
+      queryKey: recommendedTourListQueryKey({ key: MYLLRECOMMEND_KEY.USER_RECOMMENDED }),
+      queryFn: recommendedTourListQueryFn({ initHeaders }),
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: randomTourListQueryKey({ contentTypeId: 'all', key: MYLLRECOMMEND_KEY.MYLL_RECOMMENDED }),
       queryFn: randomTourListQueryFn({ initHeaders, count: 6 }),
       staleTime: Infinity,
       cacheTime: Infinity,
@@ -62,6 +83,6 @@ export const getServerSideProps = async (context) => {
       dehydratedState: dehydrate(queryClient),
     },
   }
-}
+})
 
 export default Home

@@ -1,18 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { getCookieHeader, InitHeaders, ROOT_URL } from '@/common/api'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '@/common/api'
 import { TAG_COLOR_MAP } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
 export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await axios(`${ROOT_URL}/random-local-tour-list?count=1000`, { headers })
+
+  const data = await authAPI(`/random-local-tour-list?count=1000`, { headers })
 
   return data.data.map((ele, index) => {
     return {
       ...ele,
-      id: index,
+      id: ele.id,
       img: '',
       href: '',
       mainTitle: ele.title,
@@ -31,6 +32,26 @@ export const getRandomLocalTourListFn =
   () =>
     getRandomLocalTourList({ initHeaders })
 
+const addListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await authAPI.post(`/local-recommend`, { contentId }, { headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await authAPI.delete(`/local-recommend`, { data: { contentId }, headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const useRandomLocalTourListQuery = () => {
   const query = useQuery({
     queryKey: getRandomLocalTourListQueryKey(),
@@ -43,6 +64,8 @@ export const useRandomLocalTourListQuery = () => {
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
     queryKey: getRandomLocalTourListQueryKey(),
+    onAddRecommend: addListLike,
+    onRemoveRecommend: removeListLike,
   })
 
   return { ...query, handleOptimisticRecommendToggle }

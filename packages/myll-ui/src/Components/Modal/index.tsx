@@ -50,9 +50,11 @@ const Modal = ({ open, onSubmit, onCancel, children, submitButtonText, cancelBut
             <Button type="button" variant="medium" color="primary" onClick={onSubmit}>
               {submitButtonText}
             </Button>
-            <Button type="button" variant="medium" color="text" onClick={onCancel}>
-              {cancelButtonText}
-            </Button>
+            {cancelButtonText.length > 0 && (
+              <Button type="button" variant="medium" color="text" onClick={onCancel}>
+                {cancelButtonText}
+              </Button>
+            )}
           </div>,
         ]}
       >

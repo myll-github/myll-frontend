@@ -1,9 +1,9 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 
-import { withAuth } from '@/common/api'
+import { getCookieHeader, withAuth } from '@/common/api'
 import { FavoritePlaceQueryFn, FavoritePlaceQueryKey, useFavoritePlaceQuery } from '@/common/api/recommend'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
@@ -59,20 +59,27 @@ export const Book = () => {
   )
 }
 
-export const getServerSideProps = withAuth(async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const queryClient = new QueryClient()
-  await Promise.all([
-    queryClient.prefetchQuery(FavoritePlaceQueryKey, FavoritePlaceQueryFn, {
+  const initHeaders = getCookieHeader(context)
+  try {
+    await queryClient.fetchQuery({
+      queryKey: FavoritePlaceQueryKey(),
+      queryFn: FavoritePlaceQueryFn({ initHeaders }),
       staleTime: Infinity,
       cacheTime: Infinity,
-    }),
-  ])
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+    })
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+      },
+    }
+  } catch (e) {
+    return {
+      props: {},
+      redirect: { statusCode: 302, destination: '/login' },
+    }
   }
-})
+}
 
 export default Book

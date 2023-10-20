@@ -1,5 +1,5 @@
 import { AppBar } from 'myll-ui'
-import { ICON_CHAT, ICON_NOTIFICATION } from 'shared'
+import { ICON_CHAT, ICON_NOTIFICATIONS1 } from 'shared'
 
 const AllHeader = () => {
   return (
@@ -8,14 +8,8 @@ const AllHeader = () => {
         <AppBar.LeftSection>
           <AppBar.FallbackButton />
         </AppBar.LeftSection>
-        <div className="w-full h-36pxr flex items-center">
-          <AppBar.MiddleSection className="SUBTITLE-T3">내 취향에 맞는 추천</AppBar.MiddleSection>
-          <AppBar.RightSection>
-            <span className="flex h-full gap-10pxr items-center">
-              <ICON_NOTIFICATION />
-              <ICON_CHAT />
-            </span>
-          </AppBar.RightSection>
+        <div className="flex items-center w-full h-36pxr">
+          <AppBar.MiddleSection>내 취향에 맞는 추천</AppBar.MiddleSection>
         </div>
       </AppBar>
     </header>

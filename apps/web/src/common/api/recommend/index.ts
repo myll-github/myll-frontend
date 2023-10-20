@@ -1,42 +1,67 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
-import { authAPI, ROOT_URL } from '../index'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '../index'
 
-export const getFavoritePlace = async () => {
-  try {
-    const data = await authAPI.get(`${ROOT_URL}/random-tour-list`)
-
-    return data.data.map((ele, id) => {
-      return {
-        id: ele.contentid,
-        mainTitle: ele.title,
-        alt: ele.title,
-        subTitle: '',
-        url: ele.firstimage,
-        ...ele,
-      }
-    })
-  } catch (e) {
-    return []
-  }
+export const getRecommendPlace = async ({ initHeaders }: InitHeaders, userEmail: string) => {
+  const headers = initHeaders ?? getCookieHeader()
+  const data = await authAPI.get(`/recommend/${userEmail}`, { headers, params: { userEmail } })
+  return data.data
 }
 
-export const FavoritePlaceQueryKey = ['favoritePlace']
-export const FavoritePlaceQueryFn = () => getFavoritePlace()
+export const recommendPlaceQueryKey = () => ['recommendedPlace']
+export const recommendPlaceFn =
+  ({ initHeaders }: InitHeaders, userEmail: string) =>
+  () =>
+    getRecommendPlace({ initHeaders }, userEmail)
 
-export const useFavoritePlaceQuery = () => {
+export const useRecommendPlace = () => {
   return useQuery({
-    queryKey: FavoritePlaceQueryKey,
-    queryFn: FavoritePlaceQueryFn,
+    queryKey: recommendPlaceQueryKey(),
+    queryFn: recommendPlaceFn({}, ''),
     staleTime: Infinity,
     cacheTime: Infinity,
+    refetchOnMount: true,
   })
 }
 
-export const getTravelTheme = async () => {
-  const data = await axios(`${ROOT_URL}/tour-theme`)
+export const getFavoritePlace = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
 
+  const data = await authAPI.get(`/random-tour-list`, { headers })
+
+  return data.data.map((ele, id) => {
+    return {
+      id: ele.contentid,
+      mainTitle: ele.title,
+      alt: ele.title,
+      subTitle: '',
+      url: ele.firstimage,
+      ...ele,
+    }
+  })
+}
+
+export const FavoritePlaceQueryKey = () => ['favoritePlace']
+export const FavoritePlaceQueryFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getFavoritePlace({ initHeaders })
+
+export const useFavoritePlaceQuery = () => {
+  return useQuery({
+    queryKey: FavoritePlaceQueryKey(),
+    queryFn: FavoritePlaceQueryFn({}),
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: true,
+  })
+}
+
+export const getTravelTheme = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
+  const data = await authAPI.get(`/tour-theme`, { headers })
+
+  console.log(data.data)
   return data.data.map((ele, id) => {
     return {
       id,
@@ -49,21 +74,25 @@ export const getTravelTheme = async () => {
   })
 }
 
-export const TravelThemeQueryKey = ['tour-theme']
-export const TravelThemeQueryFn = () => getTravelTheme()
+export const TravelThemeQueryKey = () => ['tour-theme']
+export const TravelThemeQueryFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getTravelTheme({ initHeaders })
 
 export const useTravelThemeQuery = () => {
   return useQuery({
-    queryKey: TravelThemeQueryKey,
-    queryFn: TravelThemeQueryFn,
+    queryKey: TravelThemeQueryKey(),
+    queryFn: TravelThemeQueryFn({}),
     staleTime: Infinity,
     cacheTime: Infinity,
     suspense: true,
   })
 }
 
-export const getFavoriteActivity = async () => {
-  const data = await axios(`${ROOT_URL}/tour-category`)
+export const getFavoriteActivity = async ({ initHeaders }: InitHeaders) => {
+  const headers = initHeaders ?? getCookieHeader()
+  const data = await authAPI.get(`/tour-category`, { headers })
 
   return data.data.map((ele, id) => {
     return {
@@ -76,13 +105,16 @@ export const getFavoriteActivity = async () => {
     }
   })
 }
-export const FavoriteActivityKey = ['tour-category']
-export const FavoriteActivityFn = () => getFavoriteActivity()
+export const FavoriteActivityKey = () => ['tour-category']
+export const FavoriteActivityFn =
+  ({ initHeaders }: InitHeaders) =>
+  () =>
+    getFavoriteActivity({ initHeaders })
 
 export const useFavoriteActivityQuery = () => {
   return useQuery({
-    queryKey: FavoriteActivityKey,
-    queryFn: FavoriteActivityFn,
+    queryKey: FavoriteActivityKey(),
+    queryFn: FavoriteActivityFn({}),
     staleTime: Infinity,
     cacheTime: Infinity,
     suspense: true,

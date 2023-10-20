@@ -1,4 +1,6 @@
+import { isEmpty } from 'lodash'
 import { Button, CardContainer } from 'myll-ui'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useCompound } from 'shared'
 
@@ -6,10 +8,7 @@ import { useFavoriteActivityQuery, useTravelThemeQuery } from '@/common/api/reco
 import { useRecommendPageStore } from '@/stores'
 
 const FavoriteActivity = () => {
-  const [{ flag, message }, setSubmitUserRecommendList] = useState({
-    flag: false,
-    message: '선호하는 활동을 선택해주세요',
-  })
+  const router = useRouter()
 
   const { data } = useFavoriteActivityQuery()
   const {
@@ -49,7 +48,8 @@ const FavoriteActivity = () => {
           variant="block"
           color="primary"
           onClick={() => {
-            console.log(FavoriteActivityMap, TravelThemeMap, FavoritePlaceMap)
+            if (!isEmpty(FavoriteActivityMap) && !isEmpty(TravelThemeMap) && !isEmpty(FavoritePlaceMap))
+              router.push('/intro')
           }}
           disabled={!tabIndexFlag}
         >

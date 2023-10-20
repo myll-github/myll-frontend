@@ -14,20 +14,22 @@ interface Props extends AntTabProps {
 
   size?: AntTabProps['size']
 
+  centered?: boolean
+
   /**  A callback function that's triggered when a tab is changed. */
   onChange: (key: string) => void
 }
 
 const { TabPane } = AntTabs
 
-const Tab = ({ defaultActiveKey, className, activeKey, items, size, onChange, ...rest }: Props) => {
+const Tab = ({ defaultActiveKey, className, activeKey, items, size, onChange, centered, ...rest }: Props) => {
   const preprocessedItems = items?.map((ele) => {
     return { ...ele, label: <div className="SUBTITLE-T5">{ele.label}</div> }
   })
 
   return (
     <AntTabs
-      centered
+      centered={centered}
       size={size}
       className={`flex justify-center w-full h-44pxr ${className}`}
       defaultActiveKey={defaultActiveKey}
@@ -36,7 +38,7 @@ const Tab = ({ defaultActiveKey, className, activeKey, items, size, onChange, ..
       onChange={onChange}
       renderTabBar={(props, DefaultTabBar) => {
         return (
-          <DefaultTabBar {...props} className="text-GRAY_60">
+          <DefaultTabBar {...props} className=" text-GRAY_60 px-20pxr">
             {(node) => {
               return (
                 <>
@@ -60,6 +62,7 @@ Tab.defaultProps = {
   activeKey: undefined,
   className: '',
   size: 'large',
+  centered: true,
 }
 
 export default Tab

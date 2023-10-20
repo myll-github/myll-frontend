@@ -66,17 +66,17 @@ FooterNav.BookIcon = ({ isActive = false }: { isActive: boolean }) => (
   </div>
 )
 
-FooterNav.LocalIcon = ({ isActive = false }: { isActive: boolean }) => (
+FooterNav.MyllIcon = ({ isActive = false }: { isActive: boolean }) => (
   <div className={`${BaseIconStyle} ${isActive ? 'text-GRAY_90' : 'text-GRAY_70'}`}>
     <ToggleIcon isActive={isActive} IconActive={ICON_MYLL_ACTIVE} IconInactive={ICON_MYLL_INACTIVE} />
-    LOCAL
+    MYLL
   </div>
 )
 
-FooterNav.MyllIcon = ({ isActive = false }: { isActive: boolean }) => (
+FooterNav.LocalIcon = ({ isActive = false }: { isActive: boolean }) => (
   <div className={`${BaseIconStyle} ${isActive ? 'text-GRAY_90' : 'text-GRAY_70'}`}>
     <ToggleIcon isActive={isActive} IconActive={ICON_LOCAL_ACTIVE} IconInactive={ICON_LOCAL_INACTIVE} />
-    MYLL
+    LOCAL
   </div>
 )
 

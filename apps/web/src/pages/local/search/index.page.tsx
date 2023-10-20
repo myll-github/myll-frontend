@@ -1,10 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { Input, MenuList, Tag } from 'myll-ui'
+import { Input, Tag } from 'myll-ui'
 import { useState } from 'react'
 
 import { getCookieHeader } from '@/common/api'
 import { randomTourListQueryFn, randomTourListQueryKey } from '@/common/api/home/localRecommend'
 import { getLocalMenuListFn, getLocalMenuListQueryKey, useLocalMenuListQuery } from '@/common/api/local'
+import LocalMenuList from '@/common/components/CustomMenuItem/LocalMenuItem'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import { TAG_COLOR_MAP, TAG_STRING_TO_COLOR } from '@/common/constants'
 
@@ -34,7 +35,7 @@ export const Local = () => {
       <LocalHeader />
       <NavLayout>
         <main className="flex flex-col gap-20pxr mt-20pxr">
-          <section className="flex flex-col border-b px-30pxr pb-20pxr gap-15pxr border-GRAY_30">
+          <section className="flex flex-col border-b px-30pxr pb-20pxr gap-10pxr border-GRAY_30">
             <Input
               className="w-full h-42pxr INPUT-FIELD2"
               size="large"
@@ -61,9 +62,9 @@ export const Local = () => {
           </section>
 
           <section>
-            <MenuList data={FilteredData}>
-              <MenuList.DefaultMenuItem />
-            </MenuList>
+            <LocalMenuList data={FilteredData}>
+              <LocalMenuList.DefaultMenuItem />
+            </LocalMenuList>
           </section>
         </main>
       </NavLayout>

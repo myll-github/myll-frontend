@@ -1,32 +1,51 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { noop } from 'shared'
 
-const useOptimisticRecommend = ({ queryKey, onRemoveRecommend = noop, onAddRecommend = noop }) => {
+type OnCommand = (contentId: number) => Promise<void>
+
+interface UseOptimisticRecommendArgs {
+  queryKey: unknown[]
+  onRemoveRecommend: OnCommand
+  onAddRecommend: OnCommand
+}
+
+const useOptimisticRecommend = ({ queryKey, onRemoveRecommend, onAddRecommend }: UseOptimisticRecommendArgs) => {
   const queryClient = useQueryClient()
 
   const handleOptimisticRecommendToggle = async ({ id }: { id: number }) => {
     // 낙관적 업데이트를 덮어쓰지 않기 위해 쿼리를 수동으로 삭제한다.
     await queryClient.cancelQueries(queryKey)
 
-    // 새로운 값으로 낙관적 업데이트 진행
-    queryClient.setQueryData(queryKey, (oldData: any) => {
-      return oldData.map((ele) => {
-        if (id === ele.id) {
-          const { isRecommend } = ele
+    const previousQueryData: any[] = queryClient.getQueryData(queryKey)
+    let isRecommendQueryKey
 
-          if (isRecommend) onRemoveRecommend()
-          else onAddRecommend()
+    const newQueryData = previousQueryData.map((ele) => {
+      if (id === ele.id) {
+        const { isRecommend } = ele
+        isRecommendQueryKey = isRecommend
 
-          return {
-            ...ele,
-            isRecommend: !ele.isRecommend,
-            recommendCount: !ele.isRecommend ? ele.recommendCount + 1 : ele.recommendCount - 1,
-          }
+        return {
+          ...ele,
+          isRecommend: !ele.isRecommend,
+          recommendCount: !ele.isRecommend ? ele.recommendCount + 1 : ele.recommendCount - 1,
         }
+      }
 
-        return ele
-      })
+      return ele
     })
+
+    queryClient.setQueryData(queryKey, newQueryData)
+
+    try {
+      if (typeof isRecommendQueryKey !== 'boolean') {
+        throw Error('cannot find id in list!')
+      }
+
+      if (isRecommendQueryKey) await onRemoveRecommend(id)
+      else await onAddRecommend(id)
+    } catch (err) {
+      queryClient.setQueryData(queryKey, previousQueryData)
+    }
   }
 
   return { handleOptimisticRecommendToggle }

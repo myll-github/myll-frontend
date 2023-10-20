@@ -1,5 +1,5 @@
 import { AppBar } from 'myll-ui'
-import { ICON_CHAT, ICON_NOTIFICATION } from 'shared'
+import { ICON_CHAT, ICON_NOTIFICATIONS1 } from 'shared'
 
 const PlanHeader = () => (
   <header>
@@ -7,13 +7,7 @@ const PlanHeader = () => (
       <AppBar.LeftSection>
         <AppBar.FallbackButton />
       </AppBar.LeftSection>
-      <AppBar.MiddleSection className="SUBTITLE-T3">BOOK</AppBar.MiddleSection>
-      <AppBar.RightSection>
-        <span className="flex h-full gap-10pxr items-center">
-          <ICON_NOTIFICATION />
-          <ICON_CHAT />
-        </span>
-      </AppBar.RightSection>
+      <AppBar.MiddleSection>BOOK</AppBar.MiddleSection>
     </AppBar>
   </header>
 )

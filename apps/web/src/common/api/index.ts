@@ -10,12 +10,11 @@ export interface InitHeaders {
   }
 }
 
-export const getCookieHeader = (context: any = undefined) => {
+export const getCookieHeader = (context: GetServerSidePropsContext = undefined) => {
   const cookies = nookies.get(context)
   const token = cookies.accessToken || ''
-
   const header = {
-    Authorization: token ? `${token}` : undefined,
+    Authorization: token || undefined,
   }
   return header
 }
@@ -29,6 +28,12 @@ export const authAPI = axios.create({
   withCredentials: true,
 })
 
+authAPI.interceptors.request.use((config) => {
+  if (!isServer()) config.headers.Authorization = nookies.get()?.accessToken
+
+  return config
+})
+
 authAPI.interceptors.response.use(
   (response) => {
     return response
@@ -36,10 +41,12 @@ authAPI.interceptors.response.use(
   async (error: AxiosError) => {
     if (!isServer() && error.response?.status === 401) {
       try {
-        await axios.post('/token/refresh', undefined, {
+        const data = await axios.post('/token/refresh', undefined, {
           baseURL: ROOT_URL,
           withCredentials: true,
         })
+
+        nookies.set(undefined, 'accessToken', data.data.accessToken, { maxAge: 1800 })
         const { response } = error
 
         // retry
@@ -49,6 +56,9 @@ authAPI.interceptors.response.use(
 
         return retryOriginalRequest
       } catch (e) {
+        nookies.destroy(undefined, 'accessToken')
+        nookies.destroy(undefined, 'refreshToken')
+        nookies.destroy(undefined, 'userEmail')
         window.location.href = '/login'
       }
     }
@@ -60,7 +70,6 @@ export const withAuth = (getServerSideProps: GetServerSideProps) => {
   return async (context: GetServerSidePropsContext) => {
     try {
       // authAPI 인스턴스로 호출되는 API header에 access token 값 담아주기
-      authAPI.defaults.headers.common.Authorization = nookies.get(context).accessToken
       const response = await getServerSideProps(context)
       return response
     } catch (e) {
@@ -70,14 +79,11 @@ export const withAuth = (getServerSideProps: GetServerSideProps) => {
         const { res } = context
         try {
           // access token 재발급
-          const { data } = await axios.post('/token/refresh', undefined, {
+          await axios.post('/token/refresh', undefined, {
             baseURL: ROOT_URL,
             headers: { Cookie: context.req.headers.cookie },
             withCredentials: true,
           })
-
-          // 재발급 받은 access token 쿠키 저장
-          authAPI.defaults.headers.common.Authorization = data.accessToken
         } catch (_) {
           // access token 재발급 실패 시 로그아웃
           nookies.destroy(context, 'accessToken')

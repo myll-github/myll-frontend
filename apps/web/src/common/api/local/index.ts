@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
 
+import { IconLabelContainerType } from '@/common/components/IconLabel/type'
 import { TAG_COLOR_MAP } from '@/common/constants'
 import useOptimisticRecommend from '@/common/hooks/useOptimisticQuery'
 
-import { getCookieHeader, InitHeaders, ROOT_URL } from '..'
+import { authAPI, getCookieHeader, InitHeaders, ROOT_URL } from '..'
 
 interface updateDataType {
   title: string
@@ -13,16 +13,19 @@ interface updateDataType {
   address: string
   introduction: string
   createAt: number
+
+  labels: IconLabelContainerType
 }
 
 export const getLocal = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
-  const data = await axios(`${ROOT_URL}/local-tour-list`, { headers })
+
+  const data = await authAPI(`/local-tour-list`, { headers })
 
   return data.data.map((ele, index) => {
     return {
       ...ele,
-      id: index,
+
       img: '',
       href: '',
       mainTitle: ele.title,
@@ -34,7 +37,7 @@ export const getLocal = async ({ initHeaders }: InitHeaders) => {
   })
 }
 
-export const updateLocal = async (data: updateDataType) => {
+export const registerLocal = async (data: updateDataType) => {
   const headers = getCookieHeader()
   const formData = new FormData()
 
@@ -42,17 +45,12 @@ export const updateLocal = async (data: updateDataType) => {
     formData.append(key, value)
   })
 
-  await axios.post(
-    `${ROOT_URL}/local-tour
-  `,
-    formData,
-    {
-      headers: {
-        ...headers,
-        'Content-Type': 'multipart/form-data',
-      },
+  await authAPI.post(`/local-tour`, formData, {
+    headers: {
+      ...headers,
+      'Content-Type': 'multipart/form-data',
     },
-  )
+  })
 }
 
 export const getLocalMenuListQueryKey = () => ['localMenuList']
@@ -61,6 +59,26 @@ export const getLocalMenuListFn =
   ({ initHeaders }: InitHeaders) =>
   () =>
     getLocal({ initHeaders })
+
+const addListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await authAPI.post(`/local-recommend`, { contentId }, { headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeListLike = async (contentId: number) => {
+  const headers = getCookieHeader()
+
+  try {
+    const response = await authAPI.delete(`/local-recommend`, { data: { contentId }, headers })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 export const useLocalMenuListQuery = () => {
   const query = useQuery({
@@ -72,7 +90,11 @@ export const useLocalMenuListQuery = () => {
     refetchOnMount: true,
   })
 
-  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({ queryKey: getLocalMenuListQueryKey() })
+  const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
+    queryKey: getLocalMenuListQueryKey(),
+    onRemoveRecommend: removeListLike,
+    onAddRecommend: addListLike,
+  })
 
   return { ...query, handleOptimisticRecommendToggle }
 }
