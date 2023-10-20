@@ -57,14 +57,14 @@ const RecommendAll = () => {
           <DefaultMenuItem isSelectedButtonNeeded />
         </MenuList>
       </div>
-
-      {isButtonVisible && (
-        <div className="fixed bottom-30pxr left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="pl-20pxr pr-20pxr pt-20pxr pb-20pxr">
+        {isButtonVisible && (
           <Button type="button" variant="block" onClick={() => setOpenModal(true)}>
             여행일정 등록하기
           </Button>
-        </div>
-      )}
+        )}
+      </div>
+
       <SetPlanInfoModal open={openModal} onClose={() => setOpenModal(false)} />
     </NavLayout>
   )

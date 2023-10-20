@@ -55,7 +55,7 @@ const SetPlanInfoModal = (props: SetPlanInfoModalProps) => {
           />
         </div>
         <DatePicker.RangePicker
-          format="YYYY년 M월 D일"
+          format="M월 D일"
           className="w-full"
           allowClear={false}
           onChange={(_, values) => {
