@@ -28,7 +28,7 @@ const PlanBodyAdd = (props: PlanBodyAddProps) => {
         카카오맵에서 여행 동선을 바로 확인하고 <br />
         가고싶은 여행지를 등록해 여행계획을 짜보세요!
       </div>
-      {data.length && (
+      {data.length > 0 ? (
         <div className="mt-20pxr">
           <MenuList
             data={data.map((one) => ({
@@ -46,7 +46,7 @@ const PlanBodyAdd = (props: PlanBodyAddProps) => {
             <DefaultMenuItem />
           </MenuList>
         </div>
-      )}
+      ) : null}
       <div className="mt-20pxr mb-20pxr">
         <Alert
           type={data.length > 0 ? 'warning' : 'info'}
