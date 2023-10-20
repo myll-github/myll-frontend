@@ -10,11 +10,11 @@ import AddPlanHeader from './section/AddPlanHeader'
 
 const getBetweenDates = (startDate: string, endDate: string) => {
   const dates = []
-  const currentDate = moment(startDate, 'YYYY년 M월 D일')
-  const finalDate = moment(endDate, 'YYYY년 M월 D일')
+  const currentDate = moment(startDate, 'M월 D일')
+  const finalDate = moment(endDate, 'M월 D일')
 
   while (currentDate <= finalDate) {
-    dates.push(currentDate.format('YYYY년 M월 D일'))
+    dates.push(currentDate.format('M월 D일'))
     currentDate.add(1, 'days')
   }
 
@@ -32,7 +32,7 @@ export const AddPlanPage = () => {
     const newPlanData = dates.map((date, index) => ({
       key: `Day${index + 1}`,
       mainTitle: `Day${index + 1}`,
-      subTitle: moment(date, 'YYYY년 M월 D일').format('M월 D일 (ddd)'),
+      subTitle: moment(date, 'M월 D일').format('M월 D일 (ddd)'),
       children: <AddDayPlan id={index} date={moment(date).valueOf()} />,
     }))
 
