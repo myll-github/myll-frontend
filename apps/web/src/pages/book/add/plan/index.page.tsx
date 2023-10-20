@@ -3,7 +3,7 @@ import { Button, Collapse, Modal } from 'myll-ui'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { createPlan } from '@/common/api/book'
+import { createPlan, updatePlan } from '@/common/api/book'
 import NavLayout from '@/common/components/Layout/NavLayout'
 import useBookPageStore from '@/stores/useBookPageStore'
 
@@ -26,7 +26,6 @@ const getBetweenDates = (startDate: string, endDate: string) => {
 export const AddPlanPage = () => {
   const { startDate, endDate, plans } = useBookPageStore()
 
-  console.log(plans)
   const router = useRouter()
 
   const [planData, setPlanData] = useState<any[]>([])
@@ -34,7 +33,8 @@ export const AddPlanPage = () => {
 
   const handleCreatePlan = async () => {
     try {
-      await createPlan(plans)
+      if (plans.id) await updatePlan(plans)
+      else await createPlan(plans)
       router.replace('/book')
     } catch (e) {
       router.replace('/login')

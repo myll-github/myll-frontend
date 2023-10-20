@@ -10,6 +10,12 @@ export const createPlan = async (plans: Plan) => {
   return data.data
 }
 
+export const updatePlan = async (plans: Plan) => {
+  const headers = getCookieHeader()
+  const data = await authAPI.put(`/plan`, { ...plans }, { headers })
+  return data.data
+}
+
 export const getPlan = async ({ initHeaders }: InitHeaders) => {
   const headers = initHeaders ?? getCookieHeader()
   const data = await authAPI.get(`/plan-list`, { headers })
