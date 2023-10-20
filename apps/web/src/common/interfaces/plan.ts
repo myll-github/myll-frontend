@@ -1,25 +1,19 @@
 interface DetailPlan {
-  id: number
   itemIndex: number
-  planId: number
-  contentId: number
-  contentTypeId: number
-  title: string
-  contentType: string
-  address: string
   date: number // timestamp
+  contentId: number
+  title: string
+  subtitle: string
 }
 
 interface Memo {
-  id: number
-  planId: number
   itemIndex: number
+  date: number
   memo: string
 }
 
 export interface Plan {
-  id: number // plan id
-  userEmail: string // email
+  id?: number // plan id
   title: string // plan title
   startDate: number // timestamp
   endDate: number // timestamp

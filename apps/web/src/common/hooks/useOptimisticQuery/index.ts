@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
+import { isArray } from 'lodash'
 import { noop } from 'shared'
 
 type OnCommand = (contentId: number) => Promise<void>
@@ -18,8 +19,9 @@ const useOptimisticRecommend = ({ queryKey, onRemoveRecommend, onAddRecommend }:
 
     const previousQueryData: any[] = queryClient.getQueryData(queryKey)
     let isRecommendQueryKey
+    let newQueryData
 
-    const newQueryData = previousQueryData.map((ele) => {
+    const getPreviousQueryData = ({ ele }) => {
       if (id === ele.id) {
         const { isRecommend } = ele
         isRecommendQueryKey = isRecommend
@@ -32,7 +34,13 @@ const useOptimisticRecommend = ({ queryKey, onRemoveRecommend, onAddRecommend }:
       }
 
       return ele
-    })
+    }
+
+    if (isArray(previousQueryData)) {
+      newQueryData = previousQueryData.map((ele) => getPreviousQueryData({ ele }))
+    } else {
+      newQueryData = getPreviousQueryData({ ele: previousQueryData })
+    }
 
     queryClient.setQueryData(queryKey, newQueryData)
 

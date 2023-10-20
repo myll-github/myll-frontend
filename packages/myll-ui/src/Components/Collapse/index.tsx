@@ -11,7 +11,7 @@ const genExtra = (onExtraButtonClick: MouseEventHandler<HTMLButtonElement>) => {
 
   return (
     <>
-      <Button type="button" color="secondary" onClickCapture={handleButtonClick} variant="mini">
+      <Button type="button" color="text" onClickCapture={handleButtonClick} variant="mini">
         편집
       </Button>
     </>
@@ -53,7 +53,7 @@ const Collapse = ({ items, onChange, onExtraButtonClick, ...rest }: CustomCollap
           key={ele.key!}
           header={
             <div className="flex flex-row">
-              <span className="SUBTITLE-T4 text-GRAY_80 mr-10pxr">{ele.mainTitle}</span>
+              <span className="SUBTITLE-T5 text-GRAY_80 mr-10pxr">{ele.mainTitle}</span>
               <span className="SUBTITLE-T6 text-GRAY_70">{ele.subTitle}</span>
             </div>
           }

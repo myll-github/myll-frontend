@@ -4,6 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-steps-item-title {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+  font-family: 'Pretendard';
+  color: #202020 !important;
+}
+
+.ant-steps-item-description {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+  font-family: 'Pretendard';
+  color: #848E9B !important;
+}
+
 .ant-picker-panels > *:first-child button.ant-picker-header-next-btn {
   visibility: visible !important;
 }
@@ -31,7 +49,6 @@
 }
 
 .home-myllrecommend {
-  
   & .ant-tabs-content-holder {
     display: flex;
     justify-content: center;
@@ -47,13 +64,12 @@
   display: flex;
 }
 
-.ant-carousel .slick-dots li{
-  background: var(--sub-blue-1, #1890FF);
+.ant-carousel .slick-dots li {
+  background: var(--sub-blue-1, #1890ff);
   opacity: 0.3;
 
   &.slick-active button {
-    background: var(--sub-blue-1, #1890FF);
+    background: var(--sub-blue-1, #1890ff);
     opacity: 1;
   }
-
 }

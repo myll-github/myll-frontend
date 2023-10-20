@@ -14,7 +14,7 @@ export const getRandomLocalTourList = async ({ initHeaders }: InitHeaders) => {
     return {
       ...ele,
       id: ele.id,
-      img: '',
+      img: ele.contentImage?.[0] ?? '',
       href: '',
       mainTitle: ele.title,
       subTitle: `${ele.address} • ${TAG_COLOR_MAP[ele.contentTypeId ?? 13]}` ?? 13,

@@ -95,13 +95,13 @@ const useLocalRegister = create(
 
       const requestBody = {
         title: state.registerTitle,
-        contentImage: state.registerFileList,
+        contentImage: state.registerFileList ?? [],
         contentTypeId: TAG_COLOR_MAP_REVERSE[state.selectedTagName],
         address: state.registerLocation,
         introduction: state.registerDescription,
         createAt: new Date().getTime(),
 
-        labels: { ...IconLabelDefaultJSON, ...state.labels },
+        labels: JSON.stringify({ ...IconLabelDefaultJSON, ...state.labels }),
       }
 
       await registerLocal(requestBody)

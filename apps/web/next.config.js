@@ -44,7 +44,7 @@ module.exports = withPWA({
 
   crossOrigin: 'anonymous',
   images: {
-    domains: ['', 'xsgames.co', 'tong.visitkorea.or.kr', 'localhost'],
+    domains: ['', 'myll-backend.com', 'xsgames.co', 'tong.visitkorea.or.kr', 'localhost'],
   },
   // async headers() {
   //   return [

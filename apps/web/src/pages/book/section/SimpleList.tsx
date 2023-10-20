@@ -19,7 +19,7 @@ const SimpleList = () => {
           전체 보기
         </Button>
       </div>
-      <div className="pr-20pxr">
+      <div>
         <MenuList data={data} onChange={(selectedPlaceMap) => setSelectedPlaceMap(selectedPlaceMap)}>
           <DefaultMenuItem isSelectedButtonNeeded />
         </MenuList>

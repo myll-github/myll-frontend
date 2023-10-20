@@ -6,31 +6,30 @@ import useBookPageStore from '@/stores/useBookPageStore'
 interface SetPlanMemoModalProps {
   id: number
   open: boolean
+  date: number
   onClose: () => void
 }
 
 const SetPlanMemoModal = (props: SetPlanMemoModalProps) => {
-  const { id, open, onClose } = props
+  const { id, date, open, onClose } = props
 
-  const { planDetail, setPlanDetail } = useBookPageStore()
-
+  const { plans, setPlans } = useBookPageStore()
+  console.log(plans)
   const [text, setText] = useState<string>('')
 
   const handleSubmit = () => {
-    onClose()
-    setPlanDetail({
-      ...planDetail,
-      memos: planDetail.memos.map((memo) => {
-        if (memo.id === id) {
-          return {
-            ...memo,
-            memo: text,
-          }
-        }
-
-        return memo
-      }),
+    setPlans({
+      ...plans,
+      memos: [
+        ...plans.memos.filter((memo) => memo.date !== date),
+        {
+          date,
+          itemIndex: id,
+          memo: text,
+        },
+      ],
     })
+    onClose()
   }
 
   return (
