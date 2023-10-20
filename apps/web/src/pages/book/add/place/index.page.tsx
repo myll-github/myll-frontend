@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Button } from 'myll-ui'
 import { ItemType } from 'myll-ui/src/Components/MenuList/type'
 import { useRouter } from 'next/router'
@@ -12,14 +13,13 @@ import SimpleAddList from './section/SimpleAddList'
 
 const AddPlanPage = () => {
   const router = useRouter()
-  const { selectedPlaceMap, planDetail, setPlanDetail } = useBookPageStore()
-
-  const { id, date } = router.query
+  const { selectedPlaceMap, plans, setPlans } = useBookPageStore()
+  console.log(plans)
+  const { date } = router.query
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value, 500)
 
   const [selectedPlace, setSelectedPlace] = useState<any>([])
-
   const isVisibleButton = selectedPlace.length > 0
 
   const data =
@@ -28,20 +28,20 @@ const AddPlanPage = () => {
       : Array.from(selectedPlaceMap.values()).filter((d) => partialSearch(debouncedValue, d.mainTitle))
 
   const handleAdd = () => {
-    setPlanDetail({
-      ...planDetail,
-      planDetails: selectedPlace.map((selected, index) => ({
-        id: selected.id,
-        itemIndex: index,
-        address: selected.addr1,
-        date: parseInt(date as string, 10),
-        title: selected.mainTitle,
-        planId: planDetail.id,
-        contentType: selected.contenttype,
-        contentId: selected.contentid,
-        contentTypeId: selected.contenttype,
-      })),
+    setPlans({
+      ...plans,
+      planDetails: [
+        ...plans.planDetails,
+        ...selectedPlace.map((selected, index) => ({
+          date: parseInt(date as string, 10),
+          contentId: parseInt(selected.id, 10),
+          itemIndex: index,
+          title: selected.mainTitle,
+          subtitle: selected.contenttype,
+        })),
+      ],
     })
+
     router.push('/book/add/plan')
   }
 
