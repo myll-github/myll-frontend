@@ -4,12 +4,12 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { ICON_EXPAND_MORE_ACTIVE } from 'shared'
 
-import { useLocalMenuListQuery } from '@/common/api/local'
+import { useMyLocalMenuListQuery } from '@/common/api/local'
 
 import MyllAllLocalHeader from './section/MyllAllLocalHeader'
 
 const MyllAllLocal = () => {
-  const { data } = useLocalMenuListQuery()
+  const { data } = useMyLocalMenuListQuery()
   const router = useRouter()
 
   const [open, setOpen] = useState<boolean>(false)

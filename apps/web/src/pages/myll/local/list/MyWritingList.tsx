@@ -2,10 +2,10 @@ import { Button, MenuList } from 'myll-ui'
 import DefaultMenuItem from 'myll-ui/src/Components/MenuList/DefaultMenuItem'
 import { useRouter } from 'next/router'
 
-import { useLocalMenuListQuery } from '@/common/api/local'
+import { useMyLocalMenuListQuery } from '@/common/api/local'
 
 const MyWritingList = () => {
-  const { data } = useLocalMenuListQuery()
+  const { data } = useMyLocalMenuListQuery()
   const router = useRouter()
   const handleClick = (item) => {
     const { contentTypeId, id } = item
