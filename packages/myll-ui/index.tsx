@@ -1,4 +1,4 @@
-import { Avatar, DatePicker, Divider, Drawer } from 'antd'
+import { Avatar, DatePicker, Divider, Drawer, Steps } from 'antd'
 import ConfigProvider from 'antd/es/config-provider'
 
 import Alert from './src/Components/Alert'
@@ -43,6 +43,7 @@ export {
   Input,
   MenuList,
   Modal,
+  Steps,
   Tab,
   Tag,
   TextArea,
