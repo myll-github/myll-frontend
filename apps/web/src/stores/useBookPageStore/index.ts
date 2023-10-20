@@ -12,12 +12,11 @@ interface State {
   recommendedPlaceMap: Map<number, ItemType>
   selectedPlaceMap: Map<number, ItemType>
 
-  // planDetail 추가로 필요
-  planDetail?: Plan
+  plans?: Plan
 }
 
 interface Actions {
-  setPlanDetail: (planDetail: Plan) => void
+  setPlans: (plans: Plan) => void
 
   setPlanInfo: (planInfo: { planTitle: string; startDate: string; endDate: string }) => void
 
@@ -34,9 +33,9 @@ const useBookPageStore = create(
     recommendedPlaceMap: new Map<number, ItemType>(),
     selectedPlaceMap: new Map<number, ItemType>(),
 
-    setPlanDetail: (planDetail: Plan) => {
+    setPlans: (plans: Plan) => {
       set((state) => {
-        state.planDetail = planDetail
+        state.plans = plans
       })
     },
 
