@@ -26,6 +26,7 @@ const getBetweenDates = (startDate: string, endDate: string) => {
 export const AddPlanPage = () => {
   const { startDate, endDate, plans } = useBookPageStore()
 
+  console.log(plans)
   const router = useRouter()
 
   const [planData, setPlanData] = useState<any[]>([])
@@ -46,11 +47,11 @@ export const AddPlanPage = () => {
       key: `Day${index + 1}`,
       mainTitle: `Day${index + 1}`,
       subTitle: moment(date, 'M월 D일').format('M월 D일 (ddd)'),
-      children: <AddDayPlan date={moment(date, 'M월 D일').valueOf()} itemIndex={index} />,
+      children: <AddDayPlan plans={plans} date={moment(date, 'M월 D일').valueOf()} itemIndex={index} />,
     }))
 
     setPlanData(newPlanData)
-  }, [startDate, endDate])
+  }, [startDate, endDate, plans])
 
   return (
     <NavLayout>

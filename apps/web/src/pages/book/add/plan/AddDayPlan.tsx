@@ -2,6 +2,7 @@ import { Alert, Button, Steps } from 'myll-ui'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
+import { Plan } from '@/common/interfaces'
 import useBookPageStore from '@/stores/useBookPageStore'
 
 import SetPlanMemoModal from '../../modal/SetPlanMemoModal'
@@ -9,15 +10,16 @@ import SetPlanMemoModal from '../../modal/SetPlanMemoModal'
 interface AddDayPlanProps {
   itemIndex: number
   date: number
+  plans: Plan
 }
 
 const AddDayPlan = (props: AddDayPlanProps) => {
-  const { date, itemIndex } = props
+  const { date, itemIndex, plans } = props
   const [openMemo, setOpenMemo] = useState<boolean>(false)
 
-  const { plans } = useBookPageStore()
-  const currentData = plans.planDetails.filter((detail) => detail.date === date)
-  const currentMemos = plans.memos.filter((memo) => memo.date === date)
+  console.log(plans)
+  const currentData = plans?.planDetails ? plans.planDetails.filter((detail) => detail.date === date) : []
+  const currentMemos = plans?.memos ? plans.memos.filter((memo) => memo.date === date) : []
 
   const router = useRouter()
   return (
