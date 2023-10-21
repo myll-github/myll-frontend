@@ -18,10 +18,21 @@ interface updateDataType {
   labels: string
 }
 
-export const getLocal = async ({ initHeaders }: InitHeaders) => {
+export interface LocalMenuListParams extends InitHeaders {
+  sort?: 'ASC' | 'DESC'
+  count?: number
+}
+
+export const getLocal = async ({ initHeaders, sort, count }: LocalMenuListParams) => {
   const headers = initHeaders ?? getCookieHeader()
 
-  const data = await authAPI(`/local-tour-list`, { headers })
+  const data = await authAPI(`/local-tour-list`, {
+    params: {
+      sort,
+      count,
+    },
+    headers,
+  })
 
   return data.data.map((ele, index) => {
     return {
@@ -62,12 +73,12 @@ export const registerLocal = async (data: updateDataType) => {
   })
 }
 
-export const getLocalMenuListQueryKey = () => ['localMenuList']
+export const getLocalMenuListQueryKey = (sort: LocalMenuListParams['sort'] = 'ASC') => ['localMenuList', sort]
 
 export const getLocalMenuListFn =
-  ({ initHeaders }: InitHeaders) =>
+  ({ initHeaders, sort = 'ASC', count = 1000000 }: LocalMenuListParams) =>
   () =>
-    getLocal({ initHeaders })
+    getLocal({ initHeaders, sort, count })
 
 export const addMenuListLike = async (contentId: number) => {
   const headers = getCookieHeader()
@@ -89,10 +100,10 @@ export const removeMenuListLike = async (contentId: number) => {
   }
 }
 
-export const useLocalMenuListQuery = () => {
+export const useLocalMenuListQuery = ({ sort, count }: LocalMenuListParams = { sort: 'ASC', count: 1000000 }) => {
   const query = useQuery({
-    queryKey: getLocalMenuListQueryKey(),
-    queryFn: getLocalMenuListFn({}),
+    queryKey: getLocalMenuListQueryKey(sort),
+    queryFn: getLocalMenuListFn({ sort, count }),
     staleTime: 0,
     cacheTime: Infinity,
 
@@ -100,7 +111,7 @@ export const useLocalMenuListQuery = () => {
   })
 
   const { handleOptimisticRecommendToggle } = useOptimisticRecommend({
-    queryKey: getLocalMenuListQueryKey(),
+    queryKey: getLocalMenuListQueryKey(sort),
     onRemoveRecommend: removeMenuListLike,
     onAddRecommend: addMenuListLike,
   })
